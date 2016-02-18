@@ -1,0 +1,7 @@
+# -*- mode: gitignore; -*-
+*~
+*.zip
+\#*\#
+.\#*
+build
+*.log
