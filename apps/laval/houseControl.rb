@@ -63,7 +63,12 @@ class HouseControl < Papartlib::PaperTouchScreen
       .setPosition(162.5, 135)
       .setSize(36, 22)
 
-      # @level0_toggle = @skatolo.addHoverToggle("toggle")
+    @skatolo.addHoverButton("grass")
+      .setPosition(90, 70)
+      .setSize(36, 22)
+
+
+    # @level0_toggle = @skatolo.addHoverToggle("toggle")
       #                  .setPosition(61, 220)
       #                  .setSize(36, 22)
 
@@ -87,6 +92,10 @@ class HouseControl < Papartlib::PaperTouchScreen
   end
 
 
+  def grass
+    $app.garden.reset_grass
+  end
+
   # def toggle(value)
   #   puts "toggle pressed", value
   # end
@@ -95,12 +104,16 @@ class HouseControl < Papartlib::PaperTouchScreen
   def drawOnPaper
     background 50
     updateTouch
-    drawTouch
 
 
     $touch_light.x = -1
 
     touchList.get2DTouchs.each do |touch|
+
+      if touch.position.y < drawingSize.y - @rect_offset_y - @rect_h
+        ellipse touch.position.x, touch.position.y, 15, 15
+      end
+
       next if touch.position.x < @rect_offset_x || touch.position.x > @rect_offset_x + @rect_w
       next if touch.position.y > drawingSize.y - @rect_offset_y || touch.position.y <
                                                                    drawingSize.y - @rect_offset_y - @rect_h
@@ -109,8 +122,10 @@ class HouseControl < Papartlib::PaperTouchScreen
       $touch_light.x = (touch.position.x - @rect_offset_x) / @rect_w
       $touch_light.y = (drawingSize.y - touch.position.y + @rect_offset_y) / @rect_h
 
-
-      ellipse touch.position.x, touch.position.y, 50, 50
+      # debug
+      if $app.lego_house.mode == LegoHouse::FIRST_FLOOR_LIGHT_TOUCH
+        ellipse touch.position.x, touch.position.y, 10, 10
+      end
     end
 
 
@@ -121,7 +136,7 @@ class HouseControl < Papartlib::PaperTouchScreen
     $video_capture = out
 
     # out.filter Processing::PConstants::INVERT
-    image(out, 28, 25, 16, 16) if out != nil
+    # image(out, 28, 25, 16, 16) if out != nil
 
 
   end

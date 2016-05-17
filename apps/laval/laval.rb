@@ -7,7 +7,6 @@
 ## sudo blueman-applet
 ## son avec pavucontrol
 
-
 require 'jruby_art'
 require 'jruby_art/app'
 
@@ -41,7 +40,7 @@ class Sketch < Processing::App
 
   attr_reader :papart, :paper_screen
   attr_accessor :save_house_location, :load_house_location, :move_house_location
-  attr_reader :lego_house
+  attr_reader :lego_house, :garden
 
   java_signature 'void movieEvent(processing.video.Movie)'
   def movieEvent(movie)
@@ -68,9 +67,10 @@ class Sketch < Processing::App
 
     # @color_screen = MyColorPicker.new
     #    @cinema = Cinema.new
-    @garden = Garden.new
-    @house_control = HouseControl.new
+
     @lego_house = LegoHouse.new
+    @house_control = HouseControl.new
+    @garden = Garden.new
     @papart.startTracking
 
     @projector = @papart.getDisplay
@@ -78,29 +78,30 @@ class Sketch < Processing::App
   end
 
   def draw
-
+    noCursor
     noStroke
 
     background 0
     imageMode Processing::PConstants::CENTER
 
-    # @projector.clear
+#     @projector.clear
 
     # @projector.drawScreens
     @projector.drawScreensOver
      Papartlib::DrawUtils::drawImage(self.g,
                                      @projector.render, width/2, height/2, width, height)
-
+     #p "draw hous"
     # Papartlib::DrawUtils::drawImage(self.g,
     #                                 @projector.render, 0, 0, width, height)
 
 #     p $screenPos_many.size
 
      fill 0
+     return unless defined? $screenPos_many
      $screenPos_many.each do |id|
        next if id == nil
        id.each do |pos|
-         rect(pos.x, pos.y, 12, 12)
+         rect(pos.x, pos.y, 16, 16)
          #       p pos.to_s
        end
      end
@@ -116,6 +117,10 @@ class Sketch < Processing::App
     # Key to control the house
     if key == 'a'
       @lego_house.mode = LegoHouse::FIRST_FLOOR_LIGHT
+    end
+
+    if key == 'g'
+      @garden.reset_grass
     end
 
     LegoHouse.modes.each do |mode|

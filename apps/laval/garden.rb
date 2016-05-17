@@ -3,14 +3,14 @@ class Garden < Papartlib::PaperTouchScreen
   include Lego
 
   def settings
-    @tile_width = 20
-    @tile_height = 20
+    @tile_width = 16
+    @tile_height = 12
     @tile_size = duplo_size / 1.5
     setDrawingSize @tile_width * @tile_size, @tile_height*@tile_size
     loadMarkerBoard($app.sketchPath + "/garden.svg",
                     @tile_width * @tile_size,
                     @tile_height * @tile_size)
-    setDrawAroundPaper
+    setDrawOnPaper
   end
 
   def setup
@@ -27,7 +27,7 @@ class Garden < Papartlib::PaperTouchScreen
     @grass_texture = []
     $screenPos_many = []
     @current_id = 0
-    @nb_id = 10
+    @nb_id = 5
     $screenPos_many = []
 
     @grass = Array.new(@tile_width){ Array.new(@tile_height) }
@@ -35,9 +35,11 @@ class Garden < Papartlib::PaperTouchScreen
   end
 
 
-  def drawAroundPaper
-    background 0, 0, 0
-    @nb_id = 2
+  def drawOnPaper
+    background 20
+    setDrawingFilter 100
+    setLocation 0, -200, 0
+    @nb_id = 5
     #$screenPos_many = []
 
     updateTouch  ## TODO: why is this necessary
@@ -100,10 +102,11 @@ class Garden < Papartlib::PaperTouchScreen
       end
     end
 
-    return if $screenPos.size < 5
+
     $screenPos_many[@current_id] = $screenPos
     @current_id = @current_id + 1
     @current_id = 0 if @current_id >= @nb_id
+    return if $screenPos.size < 5
     ## Draw in Projector screen Space -» Waahhahah
 
   end
@@ -129,7 +132,7 @@ class Garden < Papartlib::PaperTouchScreen
     end
   end
 
-  def reset_grass
+def reset_grass
     @grass.each_with_index do |row, x|
       row.each_with_index  do |col, y|
         @grass[x][y] = nil
@@ -349,8 +352,7 @@ class Garden < Papartlib::PaperTouchScreen
 
 #     hues = select_middle_third(hues)
     mean = hues.reduce(:+) / hues.size
-
-    #p mean
+    p mean
     nb_greens = hues.map{|c| is_green(c) ? 1 : 0 }.reduce(:+)
     green_ratio = nb_greens.to_f / colored.size.to_f
 
@@ -423,6 +425,7 @@ def check_finger(touch)
 
     colorMode Processing::PConstants::RGB, 255
 
+    #p mean
     #    p touch.touchPoint.attachedValue
     # large blue
     if is_blue(mean)
@@ -450,8 +453,8 @@ def check_finger(touch)
 
   def is_new_touch(touch) ; touch.touchPoint.attachedValue == -1 ; end
 
-  def is_blue(hsb_value); hsb_value > 190 and hsb_value < 230 ;  end
-  def is_green(hsb_value); hsb_value > 110 and hsb_value < 190 ;  end
+  def is_blue(hsb_value); hsb_value > 190 and hsb_value < 240 ;  end
+  def is_green(hsb_value); hsb_value > 140 and hsb_value < 190 ;  end
   def is_skin(hsb_value); (hsb_value > 0 and hsb_value < 48) or hsb_value < 320;  end
 
   def select_colored_pixels touch_colors, amt=100
