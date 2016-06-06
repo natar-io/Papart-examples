@@ -27,4 +27,4 @@ type of rendering.
 The resolution used is the screen resolution (see the [Resolution example](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality)).
 
 
-![HighResolution](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/SeeThroughWith3DObject/screenshopt.png "Screenshot 2D and 3D rendering.")
+![HighResolution](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/SeeThroughWith3DObject/screenshot.png "Screenshot 2D and 3D rendering.")
