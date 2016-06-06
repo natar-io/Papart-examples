@@ -14,7 +14,7 @@
    height="744.09448"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="earth.svg">
   <defs
      id="defs4" />
@@ -25,18 +25,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="650.8693"
-     inkscape:cy="362.60344"
+     inkscape:zoom="0.175"
+     inkscape:cx="-167.84279"
+     inkscape:cy="-466.27482"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
-     inkscape:window-width="1007"
-     inkscape:window-height="718"
-     inkscape:window-x="2365"
-     inkscape:window-y="184"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1280"
+     inkscape:window-height="774"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -94,16 +94,18 @@
     <image
        y="751.18097"
        x="53.149605"
-       id="image3068"
+       id="marker5"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAALElEQVQI mWNgwAP+//+PzIZwWdDkGBkZkdVh0c2EzIEw0HXATcdiAnYdaAAA3XEp4CP20e0AAAAASUVORK5C YII= "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       inkscape:label="#image3068" />
     <image
        y="449.99985"
        x="53.149605"
-       id="image3178"
+       id="marker15"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAAK0lEQVQI mWNgwAP+//+PzIZwmZDlkFXg041iAooc3BxkaUasJjAyMuK0DACltCndxQuWnQAAAABJRU5ErkJg gg== "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       inkscape:label="#image3178" />
   </g>
 </svg>

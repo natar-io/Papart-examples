@@ -14,7 +14,7 @@
    height="744.09448"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="sun.svg">
   <defs
      id="defs4" />
@@ -26,16 +26,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="504.31942"
-     inkscape:cy="381.64044"
+     inkscape:cx="522.81294"
+     inkscape:cy="-22.420575"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
      inkscape:window-width="1172"
-     inkscape:window-height="912"
-     inkscape:window-x="2255"
-     inkscape:window-y="97"
+     inkscape:window-height="800"
+     inkscape:window-x="104"
+     inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -55,12 +55,14 @@
      id="layer1"
      transform="translate(0,-308.26758)">
     <image
-       y="751.18097"
-       x="53.149605"
-       id="image3002"
+       y="53.149605"
+       x="-999.21246"
+       id="marker0"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAAKElEQVQI mWNgwAP+//+PzIZwGZElGBkZCevGqYMJmQ9RgWwlKgc/AACR0hrzbGjF5QAAAABJRU5ErkJggg== "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:label="#image3002" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3970"
@@ -90,9 +92,10 @@
     <image
        y="449.99985"
        x="53.149605"
-       id="image3156"
+       id="marker13"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAAMUlEQVQI mWNgwAP+//+PzIZwmZDl/v//z8jIiK4Jrg/CYESWg7NR9CFLYHEFPmkIAABrOiPmCXZJbgAAAABJ RU5ErkJggg== "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       inkscape:label="#image3156" />
   </g>
 </svg>

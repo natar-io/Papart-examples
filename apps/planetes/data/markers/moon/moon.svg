@@ -14,7 +14,7 @@
    height="744.09448"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="moon.svg">
   <defs
      id="defs4" />
@@ -32,11 +32,11 @@
      inkscape:current-layer="layer1"
      showgrid="false"
      units="mm"
-     inkscape:window-width="956"
-     inkscape:window-height="863"
-     inkscape:window-x="2120"
-     inkscape:window-y="200"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1280"
+     inkscape:window-height="774"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -57,10 +57,11 @@
     <image
        y="751.18097"
        x="53.149605"
-       id="image3013"
+       id="marker1"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAAKUlEQVQI mWNgwAP+//+PzIZwmdD4jIyMDJiqkLWiG4hdDqfl/2EAn2oAr7cp3K+S6SIAAAAASUVORK5CYII= "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       inkscape:label="#image3013" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3970"
@@ -105,9 +106,10 @@
     <image
        y="449.99985"
        x="53.149605"
-       id="image3101"
+       id="marker8"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAAA3NCSVQICAjb4U/gAAAAJklEQVQI mWNgwAP+//+PzEZwUTiYmuByKIowdTBhymE3Fp99EAAAHiIm3PdkpdcAAAAASUVORK5CYII= "
        height="248.03149"
-       width="248.03149" />
+       width="248.03149"
+       inkscape:label="#image3101" />
   </g>
 </svg>
