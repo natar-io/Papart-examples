@@ -19,7 +19,7 @@ public void setup() {
     // 2 is  2x2 pixels rendered for 1 pixel captured for the camera.
     // Default is 1.  Try to set less ( like 0.5f) or more (like 3.0f)
     // and resize the window
-    papart = Papart.seeThrough(this, 1f);
+    papart = Papart.seeThrough(this, 0.8f);
     papart.loadSketches();
     papart.startTracking();
 }

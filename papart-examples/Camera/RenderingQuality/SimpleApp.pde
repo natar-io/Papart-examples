@@ -15,7 +15,7 @@ public class MyApp extends PaperScreen {
         // Default is 2.0f
 
         // Try some values here.
-        setQuality(2f);
+        setQuality(0.8f);
     }
 
     void setup() {
