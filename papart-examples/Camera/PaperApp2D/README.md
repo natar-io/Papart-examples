@@ -12,7 +12,7 @@ Markers are loaded in the `settings()` method, from a SVG file using this comman
 
 Objects can be added to the PaperScreen in the `drawOnPaper()` method, such as `rect(10, 20, 100, 75);` instructions.
 
-## Example
+# Example
 
 Below are the markers you can put on any planar surface, as long as your camera can track them.
 
