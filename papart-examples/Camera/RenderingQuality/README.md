@@ -16,4 +16,8 @@ the quality, or speed up your app by decreasing the quality.
 
 ## Examples
 
+### Low Resolution Example
 ![LowResolution](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/RenderingQuality/lowQuality.jpg "Low Resolution")
+
+### High Resolution Example
+![HighResolution](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/RenderingQuality/highQuality.jpg "High Resolution")
