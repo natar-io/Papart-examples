@@ -6,9 +6,8 @@ This application uses the same logic as in [SeeThroughOnePaper](https://github.c
 
 The main file [planetes.pde](https://github.com/potioc/Papart-examples/blob/master/apps/planetes/planetes.pde) is almost the same as in SeeThroughOnePaper, plus a fiew variables for scaling the objects together. 
 
-There is also one sketch per object you want to render, for example we have here earth.pde, moon.pde and sun.pde. 
-
-They match exactly the markers we printed ; in this situation : **one object rendered equals one .svg file and one .pde file**.
+There is also one sketch per object you want to render, for example we have here `earth.pde`, `moon.pde` and `sun.pde`. 
+They match exactly the markers we printed ; in this situation : **one object rendered equals one `.svg` file and one `.pde` file**.
 
 Each sketch file contains :
 - `setup()` and `settings()` methods
