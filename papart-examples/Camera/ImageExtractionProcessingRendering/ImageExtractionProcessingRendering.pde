@@ -2,6 +2,7 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.display.*;
+import fr.inria.papart.tracking.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
@@ -21,20 +22,18 @@ public void settings(){
 
 public void setup(){
 
-    papart = new Papart(this);
-
-    papart.initCamera();
+    papart = Papart.seeThrough(this);
 
     BaseDisplay display = papart.getDisplay();
-
     // The drawing is not automatic.
     display.manualMode();
 
     cameraTracking = papart.getCameraTracking();
 
-    MarkerBoard markerBoard = new MarkerBoard
-	(Papart.markerFolder + "A3-small1.svg", (int) boardSize.x, (int) boardSize.y);
-
+    MarkerBoard markerBoard = MarkerBoardFactory.create(
+        Papart.markerFolder + "A3-small1.svg",
+        (int) boardSize.x,
+        (int) boardSize.y);
 
     // Ask the camera to track this markerboard
     cameraTracking.trackMarkerBoard(markerBoard);
@@ -49,6 +48,7 @@ public void setup(){
     boardView.setImageWidthPx(256);
     boardView.setImageHeightPx(256);
     boardView.init();
+    boardView.setBottomLeftCorner(new PVector(63, 45));
 
     // Start tracking the pieces of paper.
     cameraTracking.trackSheets(true);
@@ -58,7 +58,6 @@ public void setup(){
 PImage out = null;
 
 void draw(){
-
     background(0);
     out = boardView.getViewOf(cameraTracking);
 
