@@ -24,18 +24,18 @@ public void setup(){
     papart = new Papart(this);
 
     papart.initCamera();
-    
+
     BaseDisplay display = papart.getDisplay();
 
-    // The drawing is not automatic. 
+    // The drawing is not automatic.
     display.manualMode();
 
     cameraTracking = papart.getCameraTracking();
 
     MarkerBoard markerBoard = new MarkerBoard
-	(Papart.markerFolder + "A3-small1.cfg", (int) boardSize.x, (int) boardSize.y);
+	(Papart.markerFolder + "A3-small1.svg", (int) boardSize.x, (int) boardSize.y);
 
-					      
+
     // Ask the camera to track this markerboard
     cameraTracking.trackMarkerBoard(markerBoard);
 
@@ -43,14 +43,14 @@ public void setup(){
     markerBoard.setDrawingMode(cameraTracking, true, 10);
     markerBoard.setFiltering(cameraTracking, 30, 4);
 
-    // Create a view of part of the tracked piece of paper. 
+    // Create a view of part of the tracked piece of paper.
     // The resolution (two last arguments) should be at maximum the camera resolution.
     boardView = new TrackedView(markerBoard);
     boardView.setImageWidthPx(256);
     boardView.setImageHeightPx(256);
     boardView.init();
 
-    // Start tracking the pieces of paper. 
+    // Start tracking the pieces of paper.
     cameraTracking.trackSheets(true);
 }
 
