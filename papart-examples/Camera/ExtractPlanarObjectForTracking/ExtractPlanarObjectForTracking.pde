@@ -16,6 +16,9 @@ Camera camera;
 
 PVector[] corners = new PVector[4];
 
+int outputImageWidth = 1280;
+int outputImageHeight = 800;
+
 
 public void settings(){
     size(200, 200, P3D);
@@ -33,8 +36,8 @@ public void setup(){
 
     boardView = new TrackedView();
     //    boardView.setCaptureSizeMM(new PVector(1280, 800));
-    boardView.setImageWidthPx(1280);
-    boardView.setImageHeightPx(800);
+    boardView.setImageWidthPx(outputImageWidth);
+    boardView.setImageHeightPx(outputImageHeight);
     boardView.init();
 
     corners[0] = new PVector(100, 100);
@@ -75,8 +78,6 @@ void mouseDragged() {
   corners[currentPt] = new PVector(mouseX, mouseY);
 }
 
-
-
 PImage view = null;
 
 void keyPressed() {
@@ -97,11 +98,9 @@ void keyPressed() {
     test = !test;
 
   if (key == 's') {
-
       boardView.setCorners(corners);
       view = boardView.getViewOf(camera);
-      //      papart.saveCalibration("cameraPaperForTouch.xml", mat);
-      view.save(sketchPath("view.bmp"));
+      view.save(sketchPath("ExtractedView.bmp"));
       println("Saved");
   }
 }
