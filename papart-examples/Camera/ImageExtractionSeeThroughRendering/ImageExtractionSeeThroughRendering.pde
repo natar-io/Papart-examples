@@ -4,7 +4,7 @@ public class MyApp  extends PaperScreen {
 
     TrackedView boardView;
 
-    // 5cm  ->  50 x 50 pixels
+    // 5cm
     PVector captureSize = new PVector(50, 50);
     PVector origin = new PVector(40, 40);
     int picSize = 64; // Works better with power  of 2
