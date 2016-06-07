@@ -1,4 +1,5 @@
 // PapARt library
+import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
