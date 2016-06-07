@@ -11,28 +11,32 @@ public class MyApp  extends PaperScreen {
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(Papart.markerFolder + "A3-small1.cfg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
     }
 
     void setup() {
-
 	boardView = new TrackedView(this);
 	boardView.setCaptureSizeMM(captureSize);
 
 	boardView.setImageWidthPx(picSize);
 	boardView.setImageHeightPx(picSize);
 
-	boardView.setBottomLeftCorner(origin);
+        boardView.setTopLeftCorner(origin);
 
 	boardView.init();
     }
 
     void drawOnPaper() {
         clear();
+        setLocation(63, 45, 0);
 
-	fill(200, 100, 20);
-	rect(10, 10, 10, 10);
-	PImage out = boardView.getViewOf(cameraTracking);
+        stroke(100);
+        noFill();
+        strokeWeight(2);
+        rect((int) origin.x, (int) origin.y,
+             (int) captureSize.x, (int)captureSize.y);
+
+        PImage out = boardView.getViewOf(cameraTracking);
 
 	if(out != null){
 	    image(out, 120, 40, picSize, picSize);
