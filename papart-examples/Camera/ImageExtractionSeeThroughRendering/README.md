@@ -5,4 +5,4 @@ a 64x64pixels image.
 
 ### Screenshot
 
-![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/ImageExtractionSeeThroughRendering/sreenshot.png "Screenshot")
+![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/ImageExtractionSeeThroughRendering/screenshot.png "Screenshot")
