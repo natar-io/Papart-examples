@@ -39,4 +39,4 @@ both libraries work. Here the GUI is in screen space, Skatolo is used for GUI in
 
 # Example
 
-![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/SeeThoughGUI/screenshot.png)
+![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/SeeThroughGUI/screenshot.png)
