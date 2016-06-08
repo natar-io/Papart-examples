@@ -11,4 +11,4 @@ will shop as small spheres.
 
 ### Screenshot
 
-![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/apps/LeapMotionExample/screenshot.png "Screenshot Leap motion.")
+![Screenshot](https://raw.githubusercontent.com/potioc/Papart-examples/master/apps/LeapMotionExample/screenshot.png "Screenshot Leap motion.")
