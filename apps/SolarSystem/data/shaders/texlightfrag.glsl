@@ -1,5 +1,3 @@
-#define PROCESSING_TEXLIGHT_SHADER
-
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -15,7 +13,8 @@ varying vec4 vertTexCoord;
 void main() {
   vec3 direction = normalize(lightDir);
   vec3 normal = normalize(ecNormal);
-  float intensity = max(0.0, dot(direction, normal));
-  vec4 tintColor = vec4(intensity, intensity, intensity, 1) * vertColor;
+  float intensity = 0.1f + max(0.0, dot(direction, normal)) * 2;
+
+  vec4 tintColor = vec4(intensity, intensity, intensity, 1);
   gl_FragColor = texture2D(texture, vertTexCoord.st) * tintColor;
 }
