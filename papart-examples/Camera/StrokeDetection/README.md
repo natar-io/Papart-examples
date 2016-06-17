@@ -15,4 +15,5 @@ In the bottom right hand corner, one can see a dark blue square. This 20x20mm sq
 The ellipse in a real-time indicator that represent the color you are trying to detect.
 
 Another example of the application:
+
 ![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/StrokeDetection/strokedetection2.png)
