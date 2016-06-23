@@ -3,6 +3,9 @@ import fr.inria.papart.depthcam.analysis.*;
 import java.util.ArrayList;
 import toxi.geom.Vec3D;
 
+// Deprecated but working,
+// please use TouchPointCloud
+
 public class MyApp extends PaperTouchScreen {
 
     void settings(){
