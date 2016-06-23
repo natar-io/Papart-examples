@@ -11,7 +11,7 @@ void initGUI(){
     skatolo = new Skatolo(this, this);
 
     skatolo.setAutoDraw(false);
-    saveButton = skatolo.addButton("save")
+    saveButton = skatolo.addButton("saveButton")
         .setColorBackground(color(7, 189, 255))
         .setPosition(20, 420)
         .setSize(90, 30);
@@ -41,7 +41,7 @@ void initGUI(){
         .setPosition(0,0)
         .setSize(200,20)
         .setRange(-100,100)
-        .setValue(20)
+        .setValue(-20)
         ;
 
     // create a toggle

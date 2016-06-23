@@ -54,7 +54,10 @@ void setup(){
     papart = new Papart(this);
     papart.initKinectCamera(1);
 
-    initTouch();
+
+    //   frame.setResizable(false);
+
+   initTouch();
 
     cameraDisplay = papart.getARDisplay();
     cameraDisplay.manualMode();
@@ -150,6 +153,10 @@ void updateDepth(){
     depthAnalysis.update(depthImage, colImage, 1);
 }
 
+void saveButton(){
+    println("SaveButton");
+    toSave=  true;
+}
 
 void save(PlaneCalibration planeCalib, HomographyCalibration homography){
     // planeCalib.flipNormal();
