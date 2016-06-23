@@ -9,9 +9,6 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
 
-
-boolean useProjector = false;
-float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
@@ -19,26 +16,12 @@ void settings(){
 }
 
 void setup(){
-
-    if(useProjector){
-	papart = Papart.projection(this);
-	papart.loadTouchInput();
-    } else {
-
-        try{
-        papart = new Papart(this);
-	papart.initKinectCamera(renderQuality);
-	papart.loadTouchInputKinectOnly();
-        } catch(Exception e){
-            println("Exception " + e);
-            e.printStackTrace();
-        }
-    }
-
+    papart = new Papart(this);
+    papart.initKinectCamera(1);
+    papart.loadTouchInputKinectOnly();
     papart.loadSketches();
     papart.startTracking();
 }
-
 
 void draw(){
 }
