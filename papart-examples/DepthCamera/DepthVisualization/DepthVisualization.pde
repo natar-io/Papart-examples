@@ -2,6 +2,7 @@ import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
+import fr.inria.papart.depthcam.analysis.*;
 
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacpp.opencv_core.*;
