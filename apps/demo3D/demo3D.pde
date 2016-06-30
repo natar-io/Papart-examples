@@ -13,8 +13,6 @@ import fr.inria.skatolo.Skatolo;
 import toxi.geom.*;
 
 
-float boardResolution = 4;   //  pixels / mm
-
 boolean useProjector;
 
 // check
