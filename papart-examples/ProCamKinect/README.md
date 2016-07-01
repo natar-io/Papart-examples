@@ -1,5 +1,16 @@
-##Papart Hardware
-###Mini-Exemples (inspirés de Caen) : 
+#Papart Hardware
+##Applications
+
+- Gui
+- KinectShow
+- KinectTouch
+- KinectTouchCalibrated
+- LoadExternalLocation
+- OCR
+- TouchAR
+
+
+##Ideas, Other examples (cf Caen) : 
  - capture de couleur + reprojeté (vernis)
  - 3 zones de dessin : BD en fresque
 - Démo Lapin. 
