@@ -1,18 +1,20 @@
-##Camera + DepthCamera
+#Camera + DepthCamera
 
-- exemple simple : feuille + touch (zone réactive)  -> [TouchScreenExample](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchScreenExample)
-- Nuage de points pour les Touch [TouchPointCloud](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchPointCloud)
-- affichage de nuage de points [DepthVisualization](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/DepthVisualization)
-- Changer le plan de référence (nouvelle fonctionnalité)  [PlaneSetCalibration](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/PlaneSetCalibration)
-- Afficher l'image de profondeur colorée  [AlignedDepth](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/AlignedDepth)
-- Exemple de GUI [KinectWithGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectWithGUI)  (à approfondir)
+## Applications
+- [AlignedDepth](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/AlignedDepth) : Afficher l'image de profondeur colorée
+- [DepthVisualization](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/DepthVisualization) : affichage de nuage de points 
+- [KinectShow](ttps://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectShow) : **remplir**
+- [KinectWithGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectWithGUI) : Exemple de GUI
+- [PlaneSetCalibration](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/PlaneSetCalibration) : Changer le plan de référence (nouvelle fonctionnalité) 
+- [TouchPointCloud](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchPointCloud) : Nuage de points pour les Touch 
+- [TouchScreenExample](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchScreenExample) : exemple simple : feuille + touch (zone réactive) 
 
 
 - Démo Pong [Pong](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/Pong)
 - Démo Theremin
 - Jouer des notes : PaperTouchScreen
 
-### Intégration avec autres bibliothèques
+## Intégration avec autres bibliothèques fait / à faire
 - Skatolo pour le GUI (bouttons). 
 - Démo Pong avec JBox2D. 
 - extraction de zone + touch (lecture assistée : zoom, reconnaissance, TTS (Text-To-Speech), OCR (Optical Character Recognition), Pulse, reconnaissance d'images, etc., API Google Image ?)
