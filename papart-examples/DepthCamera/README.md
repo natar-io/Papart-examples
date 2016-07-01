@@ -11,3 +11,8 @@
 - Démo Pong [Pong](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/Pong)
 - Démo Theremin
 - Jouer des notes : PaperTouchScreen
+
+### Intégration avec autres bibliothèques
+- Skatolo pour le GUI (bouttons). 
+- Démo Pong avec JBox2D. 
+- extraction de zone + touch (lecture assistée : zoom, reconnaissance, TTS (Text-To-Speech), OCR (Optical Character Recognition), Pulse, reconnaissance d'images, etc., API Google Image ?)
