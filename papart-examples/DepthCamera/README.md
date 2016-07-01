@@ -3,7 +3,7 @@
 ## Applications
 - [AlignedDepth](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/AlignedDepth) : Afficher l'image de profondeur colorée
 - [DepthVisualization](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/DepthVisualization) : affichage de nuage de points 
-- [KinectShow](ttps://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectShow) : **remplir**
+- [KinectShow](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectShow) : **remplir**
 - [KinectWithGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectWithGUI) : Exemple de GUI
 - [PlaneSetCalibration](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/PlaneSetCalibration) : Changer le plan de référence (nouvelle fonctionnalité) 
 - [TouchPointCloud](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchPointCloud) : Nuage de points pour les Touch 
