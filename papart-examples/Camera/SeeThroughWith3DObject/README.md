@@ -13,7 +13,7 @@ It is showed at the bottom of the picture.
 The resolution used is the PaperScreen resolution (see the [Resolution example](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality)).
 
 
-### DrawOnPaper - PaperScreen3D
+### DrawAroundPaper - PaperScreen3D
 
 When you use `setDrawAroundPaper` the rendering is done in the
 global augmented reality rendering buffer. The point of view of the

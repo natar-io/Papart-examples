@@ -10,7 +10,7 @@ public class Sun extends PaperScreen {
 
   public void settings() {
     setDrawingSize( (int) boardSize.x, (int)boardSize.y);
-    loadMarkerBoard(sketchPath() + "/data/markers/sun/sun.svg", 
+    loadMarkerBoard(sketchPath() + "/data/markers/sun/sun.svg",
       boardSize.x, boardSize.y);
     setDrawAroundPaper();
   }
@@ -20,11 +20,11 @@ public class Sun extends PaperScreen {
     texlightShader = loadShader("shaders/texlightfrag.glsl", "shaders/texlightvert.glsl");
     sun = this;
   }
-  
+
   public void drawAroundPaper() {
     ambient(255);
 
-    translate(160, 60, 0);
+    setLocation(160, 60, 0);
     rotateZ( (float) millis() / 50000f);
 
     // 	diamètre Soleil : 1 392 684 km

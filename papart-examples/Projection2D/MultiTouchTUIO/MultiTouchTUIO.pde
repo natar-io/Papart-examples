@@ -12,9 +12,6 @@ TuioServer server;
 OpenKinectFrameGrabber openKinectGrabber = null;
 KinectTouchInput touchInput;
 
-int frameSizeX = 1280;
-int frameSizeY = 800;
-
 void settings(){
     size(800, 600, P3D);
 }
@@ -29,7 +26,6 @@ void setup(){
     server = new TuioServer(this, 12000, "127.0.0.1", 3333);
 }
 
-
 void draw(){
 
     background(100);
@@ -42,5 +38,5 @@ void draw(){
 	ellipse(pos.x * width,
 		pos.y * height, 20, 20);
     }
-    // TODO: text for nb points ?
+
 }

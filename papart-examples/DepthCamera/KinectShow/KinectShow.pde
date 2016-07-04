@@ -9,15 +9,13 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
 
-
-boolean useProjector = false;
-float renderQuality = 1.5f;
 Papart papart;
 
 void settings() {
   fullScreen(P3D);
 }
 
+<<<<<<< HEAD
 void setup() {
 
   if (useProjector) {
@@ -42,6 +40,17 @@ void setup() {
 
 
 void draw() {
+=======
+void setup(){
+    papart = new Papart(this);
+    papart.initKinectCamera(1);
+    papart.loadTouchInputKinectOnly();
+    papart.loadSketches();
+    papart.startTracking();
+}
+
+void draw(){
+>>>>>>> 04daeec55a745c083c145f6c5ea487c9c928e065
 }
 
 boolean test = false;

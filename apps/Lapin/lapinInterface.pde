@@ -83,7 +83,7 @@ public class LapinInterface extends PaperTouchScreen{
     }
 
     public void drawOnPaper(){
-	// setLocation(0, -90, 0);
+        setLocation(10, 10, 0);
 //	clear();
 
         try{

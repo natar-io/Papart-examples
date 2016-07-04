@@ -6,16 +6,16 @@ import toxi.geom.*;
 
 Papart papart;
 
+void settings() {
+    size(200, 200, P3D);
+}
+
 public void setup() {
   // application only using a camera
   // screen rendering
   papart = Papart.seeThrough(this);
   papart.loadSketches();
   papart.startTracking();
-}
-
-void settings() {
-  fullScreen(P3D);
 }
 
 void draw() {

@@ -40,20 +40,21 @@ public class LapinApp extends PaperTouchScreen{
     boolean isRSTBlocked = false;
 
     void drawOnPaper(){
+
+        setLocation(63, 45, 0);
         userPos = new PVector(0, 400, 900);
 
         //   screen.setDrawing(true);
         updateTouch();
 
-	if(Mode.is("light")){
-	    updateLightPos();
+        if(Mode.is("light")){
+            updateLightPos();
+        }
+
+        if(Mode.is("lock")){
 	}
 
-	if(Mode.is("lock")){
-
-	}
-
-	if(Mode.is("rotate")){
+        if(Mode.is("rotate")){
             float d = markerBoard.lastMovementDistance(cameraTracking);
 //            println("dist " + d);
 
@@ -68,8 +69,6 @@ public class LapinApp extends PaperTouchScreen{
 	background(0);
 	noStroke();
 	fill(140);
-
-
 
 	if(test){
 	    resetPos();
