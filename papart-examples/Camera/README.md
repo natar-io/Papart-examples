@@ -1,7 +1,5 @@
 **TODO** expliquer la diff entre imageExtractionProcessingRendering et SeeThrough rendering
 
-CameraTest va dans Calibration, au lieu des exemples.
-
 #Camera
 ##Image Tracking
 - [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking) : utilitaire - photos de zones arbitraires pour tracking d'image
