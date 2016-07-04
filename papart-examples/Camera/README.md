@@ -20,11 +20,13 @@
 - [ImageExtractionProcessingRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionProcessingRendering) : Processing -- extraction de zone : 1 feuille avec 1 zone de capture 
 - [ImageExtractionSeeThroughRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionSeeThroughRendering) : See Through -- extraction de zone : 1 feuille avec 1 zone de capture
 - [StrokeDetection](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/StrokeDetection) analyse de grandes zones : dessins
+ - application : [jeuTech](https://github.com/potioc/Papart-examples/tree/master/apps/jeuTech) (utilise les outils d'analyse d'image ci-dessus)
 
 
 #Intégration d'autres bibliothèques 
 Intégré :
 - Leap motion  [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
+
 A réaliser :
 - optitrack + Detection de texte
 - Graphophone
