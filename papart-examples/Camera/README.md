@@ -1,11 +1,8 @@
 **TODO** expliquer la diff entre imageExtractionProcessingRendering et SeeThrough rendering
 
-CameraTest va dans Calibration, au lieu des exemples.
-
 #Camera
 ##Image Tracking
 - [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking) : utilitaire - photos de zones arbitraires pour tracking d'image
-- [FindPlanarObjectLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/FindPlanarObjectLocation) : position manuelle des marqueurs (4 marqueurs en postés à des coins déifinissant une taille commune)
 - [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners) : exemple d'interface avec angles draggables définissant la position manuelle des marqueurs
 - [ImageBasedTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageBasedTracking) : utilisation de tracking basé Image (et pas marqueur) **non fonctionnel**
 
@@ -33,7 +30,7 @@ CameraTest va dans Calibration, au lieu des exemples.
 Intégré :
 - Leap motion  [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
 
-A réaliser :
+Possibilités :
 - optitrack + détection de texte
 - graphophone
 - programme de calibration de caméra. 
