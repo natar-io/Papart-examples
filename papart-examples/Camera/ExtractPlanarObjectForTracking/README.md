@@ -1,6 +1,8 @@
 #ExtractPlanarObjectForTracking
 
-This application extracts images defined by user and save them. The interface is a simplified version of [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners).
+This application extracts images defined by user and save them. For example here we want to extract a book cover.
+
+The interface is a simplified version of [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners).
 
 Press 1, 2, 3 or 4 and drag the selected corner to define an image to be saved.
 
