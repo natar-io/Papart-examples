@@ -14,38 +14,39 @@ boolean useProjector = false;
 float renderQuality = 1.5f;
 Papart papart;
 
-void settings(){
-    size(200, 200, P3D);
+void settings() {
+  fullScreen(P3D);
 }
 
-void setup(){
+void setup() {
 
-    if(useProjector){
-	papart = Papart.projection(this);
-	papart.loadTouchInput();
-    } else {
+  if (useProjector) {
+    papart = Papart.projection(this);
+    papart.loadTouchInput();
+  } else {
 
-        try{
-        papart = new Papart(this);
-	papart.initKinectCamera(renderQuality);
-	papart.loadTouchInputKinectOnly();
-        } catch(Exception e){
-            println("Exception " + e);
-            e.printStackTrace();
-        }
+    try {
+      papart = new Papart(this);
+      papart.initKinectCamera(renderQuality);
+      papart.loadTouchInputKinectOnly();
+    } 
+    catch(Exception e) {
+      println("Exception " + e);
+      e.printStackTrace();
     }
+  }
 
-    papart.loadSketches();
-    papart.startTracking();
+  papart.loadSketches();
+  papart.startTracking();
 }
 
 
-void draw(){
+void draw() {
 }
 
 boolean test = false;
 
 void keyPressed() {
-    if(key == 't')
-	test = !test;
+  if (key == 't')
+    test = !test;
 }
