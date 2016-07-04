@@ -3,18 +3,18 @@
 CameraTest va dans Calibration, au lieu des exemples.
 
 #Camera
-##Tracking d'image
+##Image Tracking
 - [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking) : utilitaire - photos de zones arbitraires pour tracking d'image
 - [FindPlanarObjectLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/FindPlanarObjectLocation) : position manuelle des marqueurs (4 marqueurs en postés à des coins déifinissant une taille commune)
 - [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners) : exemple d'interface avec angles draggables définissant la position manuelle des marqueurs
 - [ImageBasedTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageBasedTracking) : utilisation de tracking basé Image (et pas marqueur) **non fonctionnel**
 
-##Positions 3D
+##3D Positions
 - [LoadExternalLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/LoadExternalLocation) : permet de charger une position 3D préalablement sauvegardée
 - [RelativeLocations](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RelativeLocations) : deux rendus avec des éléments qui vont d'une feuille à l'autre. 
 - [SaveLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SaveLocation) : sauvegarde et chargement d'une position 3D de feuille (le fichier est sauvegardé dans le dossier  SavedLocations)
 
-##Rendus et qualité
+##Quality and rendering
 - [RenderingQuality](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality) : rendu des différentes tailles : qualité de projection (DrawAroundPaper), de feuille en fonction de la qualité en pixels/mm (DrawOnPaper)
 - [SeeThroughGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughGUI) : interface GUI (Graphical User Interface)
 - [SeeThroughOnePaper](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughOnePaper) : 1 feuille, 1 affichage - l'application PapART la plus simple qu'il soit.
