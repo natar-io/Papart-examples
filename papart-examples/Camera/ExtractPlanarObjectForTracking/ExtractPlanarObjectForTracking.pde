@@ -1,156 +1,124 @@
-// PapARt library
-import fr.inria.papart.procam.*;
-import org.bytedeco.javacpp.*;
-import org.reflections.*;
-import TUIO.*;
-import toxi.geom.*;
-
-import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.procam.display.*;
-
-import fr.inria.skatolo.*;
+import fr.inria.skatolo.*;  //<>//
 import fr.inria.skatolo.events.*;
 import fr.inria.skatolo.gui.controllers.*;
-import fr.inria.skatolo.gui.widgets.*;
 
-TrackedView boardView;
+import fr.inria.guimodes.Mode;
+import fr.inria.papart.procam.*;
+import fr.inria.papart.procam.display.*;
+import fr.inria.papart.procam.camera.*;
+import fr.inria.papart.drawingapp.*;
+import org.bytedeco.javacpp.*;
+import toxi.geom.*;
+import fr.inria.papart.calibration.*;
+
 Papart papart;
 ARDisplay cameraDisplay;
 Camera camera;
 
+//GUI elements
 Skatolo skatolo;
-PixelSelect origin, xAxis, yAxis, corner;
+fr.inria.skatolo.gui.group.Textarea titre;
+fr.inria.skatolo.gui.controllers.Button buttonOppositeX;
+fr.inria.skatolo.gui.controllers.Button buttonOppositeY;
 fr.inria.skatolo.gui.controllers.Button saveButton;
-PVector[] corners = new PVector[4];
+Textlabel xAxis;
+Textlabel yAxis;
+Textlabel zero;
+Textlabel labelX;
+Textlabel labelY;
+
+float objectWidth = 150;
+float objectHeight = 105;
+
+float rectAroundWidth = 20;
+
+
+PMatrix3D paperCameraTransform, pos;
+PVector object[];
+PVector image[];
+
+TrackedView boardView;
 
 int outputImageWidth = 640;
 int outputImageHeight = 320;
 
-public void settings(){
-    size(200, 200, P3D);
-}
-
-public void setup(){
-    Papart papart = Papart.seeThrough(this);
-
-
-    papart =  Papart.getPapart();
-    cameraDisplay = papart.getARDisplay();
-    cameraDisplay.manualMode();
-
-    camera = papart.getCameraTracking();
-
-    boardView = new TrackedView();
-    //    boardView.setCaptureSizeMM(new PVector(1280, 800));
-    boardView.setImageWidthPx(outputImageWidth);
-    boardView.setImageHeightPx(outputImageHeight);
-    boardView.init();
-
-    corners[0] = new PVector(100, 100);
-    corners[1] = new PVector(200, 100);
-    corners[2] = new PVector(200, 200);
-    corners[3] = new PVector(100, 200);
-
-    // cursor(CROSS);
-
-    skatolo = new Skatolo(this, this);
-
-    saveButton = skatolo.addButton("saveButton")
-        .setColorBackground(color(7, 189, 255))
-        .setPosition(20, 420)
-        .setSize(90, 30);
-
-
-    origin = skatolo.addPixelSelect("origin")
-        .setPosition(100,100)
-        .setLabel("(0, 0)")
-        ;
-
-    xAxis = skatolo.addPixelSelect("xAxis")
-        .setLabel("(x, 0)")
-        .setPosition(150,100)
-        ;
-
-    corner = skatolo.addPixelSelect("corner")
-        .setLabel("(x, y)")
-        .setPosition(150,150)
-        ;
-
-    yAxis = skatolo.addPixelSelect("yAxis")
-        .setLabel("(0, y)")
-        .setPosition(100,150)
-        ;
-
-
-}
-
-void draw(){
-
-  PImage img = camera.getImage();
-    if(img == null)
-	return;
-
-    background(0);
-    image(img, 0, 0, width, height);
-
-
-  if(view != null){
-      image(view, 0, 0, 100, 100);
-  }
-
-}
-
-boolean test = false;
-int currentPt=0;
-
-void mouseDragged() {
-  corners[currentPt] = new PVector(mouseX, mouseY);
-}
-
 PImage view = null;
 
-void updateCorners(){
-    corners[0].set(getPositionOf(origin));
-    corners[1].set(getPositionOf(xAxis));
-    corners[2].set(getPositionOf(corner));
-    corners[3].set(getPositionOf(yAxis));
+void settings() {
+  size(640, 480, P3D);
 }
 
-PVector getPositionOf(PixelSelect widget){
-    float[] pos = widget.getArrayValue();
-    return new PVector(pos[0], pos[1]);
+public void setup() {
+
+  Papart.seeThrough(this);
+
+  papart =  Papart.getPapart();
+  cameraDisplay = papart.getARDisplay();
+  cameraDisplay.manualMode();
+
+  camera = papart.getCameraTracking();
+
+  object = new PVector[4];
+  image = new PVector[4];
+
+  // 10 cm.
+  object[0] = new PVector(0, 0, 0);
+  object[1] = new PVector(objectWidth, 0, 0);
+  object[2] = new PVector(objectWidth, objectHeight, 0);
+  object[3] = new PVector(0, objectHeight, 0);
+
+  image[0] = new PVector(250, 250);
+  image[1] = new PVector(350, 250);
+  image[2] = new PVector(350, 350);
+  image[3] = new PVector(250, 350);
+
+  boardView = new TrackedView();
+  boardView.setImageWidthPx(outputImageWidth);
+  boardView.setImageHeightPx(outputImageHeight);
+  boardView.init();
+
+  skatolo = new Skatolo(this, this);
+
+  skatolo.setAutoDraw(false);
+
+  titre = skatolo.addTextarea("titre")
+    .setPosition(270, 30);
+
+  buttonOppositeX = skatolo.addButton("oppositeX")
+    .setColorBackground(color(255, 142, 2))
+    .setColorActive(color(224, 125, 18))
+    .setPosition(20, 140)
+    .setSize(90, 30)
+    .setLabel("change X Axis");
+
+  buttonOppositeY = skatolo.addButton("oppositeY")
+    .setColorBackground(color(7, 189, 255))
+    .setPosition(20, 180)
+    .setSize(90, 30)
+    .setLabel("change Y Axis");
+
+  saveButton = skatolo.addButton("save")
+    .setColorBackground(color(7, 189, 255))
+    .setPosition(20, 420)
+    .setSize(90, 30);
+
+  xAxis = skatolo.addTextlabel("x").setText("X");
+  yAxis = skatolo.addTextlabel("y").setText("Y");
+
+  labelX = skatolo.addTextlabel("maxXValue");
+  labelY = skatolo.addTextlabel("maxYValue");
+  zero = skatolo.addTextlabel("zero").setText("0,0");
+
+  Mode.add("corners");
+  setModeCorners();
 }
 
-void keyPressed() {
+public void draw() {
 
-  if (key == '1')
-    currentPt = 0;
+  PGraphicsOpenGL graphics = initDraw();
 
-  if (key == '2')
-    currentPt = 1;
+  if (Mode.is("corners"))    
+    drawCorners(graphics);    
 
-  if (key == '3')
-    currentPt = 2;
-
-  if (key == '4')
-    currentPt = 3;
-
-  if (key == 't')
-    test = !test;
-
-  if (key == 's') {
-      save();
-  }
-}
-
-void saveButton(){
-    save();
-}
-
-void save(){
-    updateCorners();
-    boardView.setCorners(corners);
-    view = boardView.getViewOf(camera);
-    view.save(sketchPath("ExtractedView.bmp"));
-    println("Saved");
+  skatolo.draw();
 }
