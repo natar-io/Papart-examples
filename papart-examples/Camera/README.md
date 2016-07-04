@@ -1,4 +1,5 @@
 **TODO** expliquer la diff entre imageExtractionProcessingRendering et SeeThrough rendering
+
 CameraTest va dans Calibration, au lieu des exemples.
 
 #Camera
