@@ -453,9 +453,9 @@ class LegoHouse < Papartlib::PaperScreen
 
 
   def init_video
-    id = ($app.random 14).to_i.to_s.rjust(2, '0')
-    id = "0" + id + ".mp4"
-    @movie = Movie.new $app, "data/videos/" + id
+    # id = ($app.random 14).to_i.to_s.rjust(2, '0')
+    # id = "0" + id + ".mp4"
+    @movie = Movie.new $app, "data/videos/video.mp4"  #id
     @movie.loop
     @movie.volume 0
     end
