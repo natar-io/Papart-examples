@@ -29,11 +29,11 @@ CameraTest va dans Calibration, au lieu des exemples.
  - application : [jeuTech](https://github.com/potioc/Papart-examples/tree/master/apps/jeuTech) (utilise les outils d'analyse d'image ci-dessus)
 
 
-#Intégration d'autres bibliothèques 
+#Intégration à d'autres bibliothèques 
 Intégré :
 - Leap motion  [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
 
 A réaliser :
-- optitrack + Detection de texte
-- Graphophone
+- optitrack + détection de texte
+- graphophone
 - programme de calibration de caméra. 
