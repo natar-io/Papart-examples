@@ -32,7 +32,7 @@ CameraTest va dans Calibration, au lieu des exemples.
 Intégré :
 - Leap motion  [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
 
-A réaliser :
+Possibilités :
 - optitrack + détection de texte
 - graphophone
 - programme de calibration de caméra. 
