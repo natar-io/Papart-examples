@@ -1,5 +1,5 @@
 #ExtractPlanarObjectForTracking
-
+##Application
 This application extracts images defined by user and save them. For example here we want to extract a book cover.
 
 The interface is a simplified version of [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners).
@@ -14,3 +14,7 @@ Below is a picture of what the application looks like.
 
 When the square is correctly formed, the user can press the save button and the image contained in the square is saved.
 
+##Result
+Image saved in the folder: ExtractedView.bmp
+
+![Result](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/ExtractPlanarObjectForTracking/ExtractedView.bmp)
