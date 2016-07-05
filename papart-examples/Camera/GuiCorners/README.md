@@ -13,12 +13,14 @@ The 1st corner is selected, and he can drag it on the corner of the real image. 
 ![Arrange the corners](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/GuiCorners/guicorners_drag.png)
 
 ## Buttons
+###Orientation
 Anytime the user can arrange the axis thus the orientation of the 3D position, by clicking on the corresponding buttons.
 
-For exemple, we can see bellow that the user wanted to have the Y-Axis going towards the top of the image, so he pressed the "Change Y Axis" button.
+For exemple, we can see bellow that the user wanted to have the Y-Axis going towards the top of the image, so he pressed the **change Y axis** button.
 
 ![Changing axis](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/GuiCorners/guicorners_axis.png)
+###Save
+When the orientation and the position of the shape is correct, the user can press the **save** button and the position is saved in the marker.xml file, contained in the solution folder.
 
-When the orientation and the position of the shape is correct, the user can press the "Save" button and the position is saved in the marker.xml file, contained in the solution folder.
-
-If he wants to change the object saved, the user can press "Change Mode" button and enter new sizes.
+###Size
+If he wants to change the object saved, the user can press **change mode** button and enter new sizes.
