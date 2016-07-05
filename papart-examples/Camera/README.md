@@ -11,7 +11,7 @@
 - [RelativeLocations](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RelativeLocations) : deux rendus avec des éléments qui vont d'une feuille à l'autre. 
 - [SaveLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SaveLocation) : sauvegarde et chargement d'une position 3D de feuille (le fichier est sauvegardé dans le dossier  SavedLocations)
 
-##Quality and rendering
+##Several rendering and quality
 - [RenderingQuality](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality) : rendu des différentes tailles : qualité de projection (DrawAroundPaper), de feuille en fonction de la qualité en pixels/mm (DrawOnPaper)
 - [SeeThroughGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughGUI) : interface GUI (Graphical User Interface)
 - [SeeThroughOnePaper](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughOnePaper) : 1 feuille, 1 affichage - l'application PapART la plus simple qu'il soit.
@@ -26,11 +26,11 @@
  - application : [jeuTech](https://github.com/potioc/Papart-examples/tree/master/apps/jeuTech) (utilise les outils d'analyse d'image ci-dessus)
 
 
-#Intégration à d'autres bibliothèques 
-Intégré :
-- Leap motion  [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
+#Libraries integration
+Done:
+- Leap motion [LeapMotionExample](https://github.com/potioc/Papart-examples/tree/master/apps/LeapMotionExample)
 
-Possibilités :
+Todo:
 - optitrack + détection de texte
 - graphophone
 - programme de calibration de caméra. 
