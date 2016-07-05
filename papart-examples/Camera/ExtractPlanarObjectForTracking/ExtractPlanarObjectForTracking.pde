@@ -21,20 +21,13 @@ fr.inria.skatolo.gui.group.Textarea titre;
 fr.inria.skatolo.gui.controllers.Button buttonOppositeX;
 fr.inria.skatolo.gui.controllers.Button buttonOppositeY;
 fr.inria.skatolo.gui.controllers.Button saveButton;
-Textlabel xAxis;
-Textlabel yAxis;
 Textlabel zero;
 Textlabel labelX;
 Textlabel labelY;
 
-float objectWidth = 150;
-float objectHeight = 105;
-
 float rectAroundWidth = 20;
 
-
-PMatrix3D paperCameraTransform, pos;
-PVector object[];
+PMatrix3D pos;
 PVector image[];
 
 TrackedView boardView;
@@ -58,14 +51,7 @@ public void setup() {
 
   camera = papart.getCameraTracking();
 
-  object = new PVector[4];
   image = new PVector[4];
-
-  // 10 cm.
-  object[0] = new PVector(0, 0, 0);
-  object[1] = new PVector(objectWidth, 0, 0);
-  object[2] = new PVector(objectWidth, objectHeight, 0);
-  object[3] = new PVector(0, objectHeight, 0);
 
   image[0] = new PVector(250, 250);
   image[1] = new PVector(350, 250);
@@ -101,9 +87,6 @@ public void setup() {
     .setColorBackground(color(7, 189, 255))
     .setPosition(20, 420)
     .setSize(90, 30);
-
-  xAxis = skatolo.addTextlabel("x").setText("X");
-  yAxis = skatolo.addTextlabel("y").setText("Y");
 
   labelX = skatolo.addTextlabel("maxXValue");
   labelY = skatolo.addTextlabel("maxYValue");

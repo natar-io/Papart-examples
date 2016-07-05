@@ -50,34 +50,27 @@ public void drawLegend() {
   if (image[3].y > image[2].y || image[2].y < image[3].y)
     label2y *= -1;
 
-  labelX.setText(objectWidth + "")
+  labelX.setText("X")
     .setPosition(image[1].x + label1x*2, image[1].y + label1y*2);
 
-  labelY.setText(objectHeight + "")
+  labelY.setText("Y")
     .setPosition(image[3].x + label2x*2, image[3].y + label2y*2);
 
   popMatrix();
 
   zero.setPosition(image[0].x + 10, image[0].y - 10);
 
-  xAxis.setPosition((image[1].x-image[0].x)/2+image[0].x, 
-    (image[1].y - image[0].y)/2 +image[0].y-10);
-  yAxis.setPosition((image[3].x-image[0].x)/2+image[0].x -10, 
-    (image[3].y - image[0].y)/2+image[0].y); 
+ 
 
   zero.bringToFront().setColor(black);
   labelX.bringToFront().setColor(black);
   labelY.bringToFront().setColor(black);
-  xAxis.bringToFront().setColor(black);
-  yAxis.bringToFront().setColor(black);
 }
 
 // hide textfields and buttons
 public void hideInputs() {  
   buttonOppositeX.setVisible(true);
   buttonOppositeY.setVisible(true);
-  xAxis.setVisible(true);
-  yAxis.setVisible(true);
   zero.setVisible(true);
   labelX.setVisible(true);
   labelY.setVisible(true);
@@ -85,10 +78,6 @@ public void hideInputs() {
 
 // draw only the rectangles
 public void drawCorners(PGraphicsOpenGL graphics) {
-  graphics.modelview.apply(paperCameraTransform);
-
-  if (saved)
-    drawRects(graphics);
 
   cameraDisplay.endDraw();
 
@@ -122,17 +111,6 @@ public void drawCorners(PGraphicsOpenGL graphics) {
   }
 }
 
-// when the 3D position is saved
-// draw a blue rectangle around the current selection
-public void drawRects(PGraphicsOpenGL graphics) {
-  graphics.fill(50, 50, 200, 100);
-
-  graphics.rect(-rectAroundWidth, 
-    -rectAroundWidth, 
-    objectWidth + rectAroundWidth*2, 
-    objectHeight + rectAroundWidth*2);
-}
-
 public PGraphicsOpenGL initDraw() {
   PImage img = camera.getImage();
   if (img == null)
@@ -140,9 +118,6 @@ public PGraphicsOpenGL initDraw() {
 
   background(0);
   image(img, 0, 0, width, height);
-
-  ProjectiveDeviceP pdp = cameraDisplay.getProjectiveDeviceP();
-  paperCameraTransform = pdp.estimateOrientation(object, image);
 
   PGraphicsOpenGL graphics = cameraDisplay.beginDraw();
 
