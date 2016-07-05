@@ -3,7 +3,7 @@
 In this example we want to save a 3D position of a planar object. The position is manually set by user.
 
 ## Inputs
-First the user enters the real size of the object in the corresponding inputs in the top left hand corner (see bellow).
+First the user enters the real size of the object in the corresponding inputs in the top left hand corner (see bellow). He has to press **change mode** button to make the changes effective.
 
 ![Setting the objects' size](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/GuiCorners/guicorners_size.png)
 
