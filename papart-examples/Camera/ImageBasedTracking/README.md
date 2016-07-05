@@ -6,6 +6,6 @@ The *physical image/planar* object you want to track must have a *digital versio
 The tracked image can be captured using the application [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking).
 
 
-Bellow we have the result shown. 
+Bellow we have the result shown. The application sets a transparent blue background and draws a green rectangle.
 
 ![ImageBasedTracking](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/ImageBasedTracking/imagebasedtracking.png).
