@@ -11,7 +11,7 @@ import processing.app.Base;
 Papart papart;
 
 void settings() {
-  size(400, 400, P3D);
+  fullScreen(P3D);
 }
 
 public void setup() {
