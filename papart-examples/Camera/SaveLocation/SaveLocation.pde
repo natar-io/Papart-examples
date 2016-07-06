@@ -11,7 +11,7 @@ import processing.app.Base;
 Papart papart;
 
 void settings() {
-  size(400, 400, P3D);
+  size(640, 480, P3D);
 }
 
 public void setup() {
@@ -26,13 +26,13 @@ void draw() {
 void keyPressed() {
 
   if (key == 's') {
-    app.saveLocationTo("loc.xml");
+    app.saveLocationTo("../SavedLocations/loc.xml");
     println("Position saved");
     app.getLocation().print();
   }
 
   if (key == 'l') {
-    app.loadLocationFrom("loc.xml");
+    app.loadLocationFrom("../SavedLocations/loc.xml");
     println("Loaded position from xml");
     app.getLocation().print();
   }
