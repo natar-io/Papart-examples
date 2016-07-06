@@ -1,5 +1,6 @@
 #Application
 This application shows how to use the height of objects.
+
 Points are greyscaled, from black = lowest point on the plan to white = heighest points that can be captured.
 
 
