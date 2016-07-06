@@ -1,4 +1,4 @@
-# Interface qui détecte les dessins d'une même couleur
+#Stroke detection using color detection
 
 This example shows how to use the color detection in a TrackedView.
 
