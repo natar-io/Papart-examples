@@ -1,4 +1,5 @@
-Plusieurs paperScreen reliés entre eux
+#Relative Locations
+##Application
 
 This example shows how to have several paperscreen linked together with objects between them.
 
@@ -10,5 +11,5 @@ We can get the position of each object and draw objects from those points.
 
 `line(v1.x, v1.y, v2.x, v2.y);`
 
-
+##Results
 ![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/RelativeLocations/relativelocations.png)
