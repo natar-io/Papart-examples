@@ -33,7 +33,7 @@ PVector image[];
 TrackedView boardView;
 
 int outputImageWidth = 640;
-int outputImageHeight = 480;
+int outputImageHeight = 320;
 
 PImage view = null;
 
