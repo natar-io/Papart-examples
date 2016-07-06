@@ -11,7 +11,7 @@ The paperscreen is divided in two parts : the right part of the screen is a trac
 On the left is a rendering screen. In this example it is used to display the pixels we have detected that fit the color detection, in the tracked view.
 
 
-In the bottom right hand corner, one can see a dark blue square. This 20x20mm square is the zone where the desired color is detected. Thus, every pixel in the tracked view that match the dark blue color is detected and displayed in red in the render screen. 
+In the bottom right hand corner, there is a dark blue square. This 20x20mm square is the zone where color is detected. Thus, every pixel in the tracked view that match the dark blue color is detected and displayed in red in the render screen. 
 The ellipse in a real-time indicator that represent the color you are trying to detect.
 
 Another example of the application:
