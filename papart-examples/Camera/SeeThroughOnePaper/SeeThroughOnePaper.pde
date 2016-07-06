@@ -15,6 +15,7 @@ public void setup() {
 }
 
 void settings() {
+  // the application will be rendered in full screen, and using a 3Dengine.
   fullScreen(P3D);
 }
 
