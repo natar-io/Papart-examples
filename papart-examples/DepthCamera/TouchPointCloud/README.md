@@ -5,6 +5,6 @@ Points are greyscaled, from black = lowest point on the plan to white = heighest
 
 
 #Results
-Here we can see that the book is drawn in white and the table in black, so the calibration seems to work!
+Here we can see that the book is drawn in light grey, the roof og the house is white and the table is black.
 
 ![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/TouchPointCloud/touchpoint.png)
