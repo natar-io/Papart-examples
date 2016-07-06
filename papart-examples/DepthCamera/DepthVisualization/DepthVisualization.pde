@@ -20,7 +20,7 @@ KinectDevice kinectDevice;
 int skip = 2;
 
 void settings() {
-  size(800, 600, OPENGL);
+    size(640, 480, P3D);
 }
 
 void setup() {
