@@ -19,45 +19,47 @@ KinectDevice kinectDevice;
 
 int skip = 2;
 
-void settings(){
-    size(640, 480, P3D);
+void settings() {
+  size(640, 480, P3D);
 }
 
-void setup(){
+void setup() {
 
-    Papart papart = new Papart(this);
-    // load the depth camera
-    papart.startDefaultKinectCamera();
+  Papart papart = new Papart(this);
+  // load the depth camera
+  papart.startDefaultKinectCamera();
 
-    kinectDevice = papart.getKinectDevice();
-    kinectAnalysis = new KinectProcessing(this, kinectDevice);
+  kinectDevice = papart.getKinectDevice();
+  kinectAnalysis = new KinectProcessing(this, kinectDevice);
 }
 
 
-void draw(){
-    background(100);
-    // retreive the camera image.
-    try {
-        kinectDevice.getCameraRGB().grab();
-        kinectDevice.getCameraDepth().grab();
-    } catch(Exception e){
-	println("Could not grab the image " + e);
-    }
+void draw() {
+  background(100);
+  // retreive the camera image.
+  try {
+    kinectDevice.getCameraRGB().grab();
+    kinectDevice.getCameraDepth().grab();
+  } 
+  catch(Exception e) {
+    println("Could not grab the image " + e);
+  }
 
-    IplImage colourImg = kinectDevice.getCameraRGB().getIplImage();
-    IplImage depthImg = kinectDevice.getCameraDepth().getIplImage();
+  IplImage colourImg = kinectDevice.getCameraRGB().getIplImage();
+  IplImage depthImg = kinectDevice.getCameraDepth().getIplImage();
 
-    if(colourImg == null || depthImg == null)
-	return;
+  if (colourImg == null || depthImg == null)
+    return;
 
-    PImage alignedImage = kinectAnalysis.update(depthImg, colourImg, skip);
+  PImage alignedImage = kinectAnalysis.update(depthImg, colourImg, skip);
 
-    image(alignedImage, 0, 0, width, height);
+  image(alignedImage, 0, 0, width, height);
 }
 
-void close(){
-    try{
-        kinectDevice.close();
-    }catch(Exception e){
-    }
+void close() {
+  try {
+    kinectDevice.close();
+  }
+  catch(Exception e) {
+  }
 }
