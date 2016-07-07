@@ -17,6 +17,4 @@ Mouse wheel can zoom-in or zoom-out.
 
 ![Moving around in the 3D space captured by the camera](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/DepthVisualization/depthvisualization.png)
 
-Another picture
-
 ![Moving around in the 3D space captured by the camera](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/DepthVisualization/depthvisualization3.png)
