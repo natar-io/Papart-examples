@@ -4,4 +4,4 @@ This application is a simple application that shows touch (2D touch) on paper an
 
 #Results
 
-![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/TouchScreen/kinectwithgui.png)
+![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/TouchScreen/touchscreen.png)
