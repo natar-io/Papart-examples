@@ -7,7 +7,7 @@
 - [KinectWithGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/KinectWithGUI) : Exemple de GUI
 - [PlaneSetCalibration](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/PlaneSetCalibration) : Changer le plan de référence (nouvelle fonctionnalité) 
 - [TouchPointCloud](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchPointCloud) : Nuage de points pour les Touch 
-- [TouchScreenExample](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchScreenExample) : exemple simple : feuille + touch (zone réactive) 
+- [TouchScreen](https://github.com/potioc/Papart-examples/tree/master/papart-examples/DepthCamera/TouchScreen) : exemple simple : feuille + touch (zone réactive) 
 
 
 
