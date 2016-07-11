@@ -1,3 +1,5 @@
+Elaborated applications:
+
 - [AugmentedMap](https://github.com/potioc/Papart-examples/tree/master/apps/AugmentedMap):
 - [Halloween](https://github.com/potioc/Papart-examples/tree/master/apps/Halloween):
 - [Halloween2](https://github.com/potioc/Papart-examples/tree/master/apps/Halloween2):
