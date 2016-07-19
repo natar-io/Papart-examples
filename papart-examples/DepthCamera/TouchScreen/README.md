@@ -1,6 +1,6 @@
 
 #Application
-This application is a simple application that shows touch (2D touch) on paper and touch in space (3D touch).
+This application is a simple application that shows touch (2D touch: purple) on paper and touch in space (3D touch: orange).
 
 #Results
 
