@@ -26,7 +26,4 @@ Below are the sheets of paper with the markers used for each object in the solar
  
 Here is the result : each sheet of paper renders its solar system object.
  
-![Solar System rendering](https://github.com/potioc/Papart-examples/blob/master/apps/SolarSystem/solar_system.jpg)
-
-
-**TODO : changer la photo une fois que le problème de lumière aura été corrigé**
+![Solar System rendering](https://github.com/potioc/Papart-examples/blob/master/apps/SolarSystem/solarsystem.png)
