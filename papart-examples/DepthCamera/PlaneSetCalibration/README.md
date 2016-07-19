@@ -31,3 +31,7 @@ Below is an example of a bad calibration: the surface is not totally red so the 
 The kinect depth mode shows the depth data coming from the kinect (with color informations added).
 
 Use the slide bar to calibrate: the proper set is when the rectangle just start to be colored (see picture above).
+
+##Saving
+
+When you are done calibrating the height of your tactile surface, you can press the SaveButton button.
