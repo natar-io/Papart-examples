@@ -6,14 +6,19 @@ This applications calibrates the kinect by setting the 3D position of the planar
 ![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/PlaneSetCalibration/planesetcalibration_interface)
 
 The interface contains a slider PlaneUP (top left), a toggle button UseAR (left) and a Save button (bottom left).
-You can also see 4 draggables items that represents the four angles of the calibrating sheet.
+You can also see 4 draggables items that should be dragged to represent the four angles of the calibration sheet.
 
-There are two modes: a mode using only the color camera feed, and a mode displaying the depth data from the kinect with color added.
+There are two modes: a mode using only the color camera feed, and a mode displaying the depth data from the kinect with color added. Use the toggle button UseAR to switch between modes.
 
-##Mode Augmented Reality
+**Important**: We recommend to choose the mode depending on physical and luminosity parameters: for example the Kinect Depth Mode is not very performant with low luminosity and black materials ; whereas the AR mode use the color camera and adds depth data above it so it can be used to set touch on black screens for example.
+
+##Augmented Reality Mode 
 
 ![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/PlaneSetCalibration/planesetcalibration_ar)
 
-##Mode Standard
+In this mode we only display the color camera feed, and the depth data inside the calibration rectangle. You can put any 3D object on the calibration sheet to compare heights between the planar surface and items above it. 
+Use the slider bar to calibrate the kinect: usually the planar surface you want to configure for tactile interaction is red, and the 3D items above it are whiter. 
+
+##Kinect Depth Mode
 
 ![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/PlaneSetCalibration/planesetcalibration_depth)
