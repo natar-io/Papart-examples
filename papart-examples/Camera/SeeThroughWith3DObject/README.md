@@ -24,7 +24,7 @@ Try to place a background()
 instruction in a `DrawAroundPaper` to see the difference with the other
 type of rendering.
 
-The resolution used is the escreen resolution (see the [Resolution example](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality)).
+The resolution used is the screen resolution (see the [Resolution example](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality)).
 
 
 ![HighResolution](https://github.com/potioc/Papart-examples/blob/master/papart-examples/Camera/SeeThroughWith3DObject/screenshot.png "Screenshot 2D and 3D rendering.")
