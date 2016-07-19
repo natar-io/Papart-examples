@@ -1,4 +1,4 @@
-# Interface avec angles draggables pour définir la position manuelle des marqueurs
+# Set the location of a 3D object from its viewed corners and size and known size.
 
 In this example we want to save a 3D position of a planar object. The position is manually set by user.
 
