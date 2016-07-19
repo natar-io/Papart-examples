@@ -12,8 +12,8 @@ You do not need to install another version of Processing, nor any other librarie
 
 ## Running 
 
-We run the application using Jruby directly, not with K9.
+Go in this folder, and type: 
 
-If you have the full PapARt hardware, you can try this example:
+``` k9 run camProjKinectExample.rb ```
 
-``` jruby camProjKinectExample.rb ```
+
