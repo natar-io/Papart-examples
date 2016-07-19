@@ -4,12 +4,6 @@ require 'jruby_art'
 require 'jruby_art/app'
 
 Processing::App::SKETCH_PATH = __FILE__
-
-# require 'ruby-processing'
-# Processing::Runner
-# Dir["#{Processing::RP_CONFIG['PROCESSING_ROOT']}/core/library/\*.jar"].each{ |jar| require jar }
-# Processing::App::SKETCH_PATH = __FILE__
-
 Processing::App::load_library :PapARt, :javacv, :toxiclibscore
 
 module Papartlib
@@ -20,13 +14,11 @@ class Sketch < Processing::App
 
   attr_reader :camera_tracking, :display, :papart, :moon
 
+  def settings
+    size 200, 200, Processing::App::P3D
+  end
+
   def setup
-
-    frameSizeX = 1280
-    frameSizeY = 800
-
-    @camera_x = 640
-    @camera_y = 480
 
     @useProjector = false
 
@@ -35,23 +27,14 @@ class Sketch < Processing::App
       @papart = PapartLib::Papart.projection(self)
       @papart.loadTouchInput()
     else
-
       @papart = Papartlib::Papart.seeThrough self
-      @papart.loadTouchInput()
-
-      # size(@camera_x, @camera_y, OPENGL)
-      # @papart = Papartlib::Papart.new self
-      # @papart.initKinectCamera(2)
-      # @papart.loadTouchInputKinectOnly()
     end
 
-    @moon = Moon.new
+    @moon = PaperTouch.new
 
     @papart.startTracking
 
-
     def draw
-
     end
   end
 end
@@ -59,18 +42,20 @@ end
 
 
 
-class Moon < Papartlib::PaperTouchScreen
+class PaperTouch < Papartlib::PaperScreen
 
-  def setup
-    setDrawingSize(297, 210);
-    loadMarkerBoard($app.sketchPath("") + "/data/A3-small1.cfg", 297, 210);
+  def settings
+    setDrawingSize 297, 210
+    loadMarkerBoard(Papartlib::Papart::markerFolder + "A3-small1.svg", 297, 210)
+    setDrawOnPaper
   end
 
-  def draw
+  def setup
+  end
+
+  def drawOnPaper
     setLocation(0, 0, 0)
-    pg = beginDraw2D
-    pg.background 40, 200, 200
-    pg.endDraw
+    background 40, 200, 200
   end
 end
 
