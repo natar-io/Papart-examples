@@ -1,6 +1,6 @@
 # War. Game. WarGame!
 
-WarGame uses colored objects to shoot particles and destroy enemy base!
+WarGame uses colored objects to shoot particles! Who will win, between attacking turrets and defending walls?
 
 # The board
 
