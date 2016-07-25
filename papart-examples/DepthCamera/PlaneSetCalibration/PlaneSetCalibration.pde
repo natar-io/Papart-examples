@@ -127,10 +127,15 @@ void draw(){
             save(planeCalib, homography);
 
     } else {
-
         //  Plane using the selected Points...
         drawCameraDepth();
         PlaneCalibration planeCalib = getPlaneFromDepth();
+
+// Check the plane orientation
+        if(!planeCalib.orientation(new Vec3D(0, 0, 0))){
+            planeCalib.flipNormal();
+        }
+
         HomographyCalibration homography = findHomographyDepth(planeCalib);
         drawValidPointsDepth(planeCalib, homography);
         if(toSave)

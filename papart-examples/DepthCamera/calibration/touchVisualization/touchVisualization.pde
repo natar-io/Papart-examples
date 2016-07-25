@@ -217,6 +217,10 @@ void keyPressed() {
 	cam.setMouseControlled(isMouseControl);
     }
 
+    if(key == 'i'){
+        planeCalibration.flipNormal();
+    }
+
     if(key == 's'){
 	if(is3D)
 	    save3D();
