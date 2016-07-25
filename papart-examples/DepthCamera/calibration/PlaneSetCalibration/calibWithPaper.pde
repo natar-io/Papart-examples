@@ -59,8 +59,8 @@ void drawValidPoints( PlaneCalibration planeCalib, HomographyCalibration homogra
                    &&
                    normalized.y > 0 && normalized.y < 1){
 
-                    fill(normalized.x * 255, normalized.y * 255, 0);
-                    rect(x, y, 1, 1);
+                    // fill(normalized.x * 255, normalized.y * 255, 0);
+                    // rect(x, y, 1, 1);
 
                     Vec3D pos = new Vec3D(loc2.x, loc2.y, loc2.z);
 
@@ -74,8 +74,8 @@ void drawValidPoints( PlaneCalibration planeCalib, HomographyCalibration homogra
                         //     rect(x, y, 1, 1);
                         // }
                     } else {
-                        fill(200, 0, 0);
-                        rect(x, y, size, size);
+                        // fill(200, 0, 0);
+                        // rect(x, y, size, size);
                     }
 
 

@@ -13,6 +13,7 @@ void initGUI(){
     skatolo.setAutoDraw(false);
     saveButton = skatolo.addButton("saveButton")
         .setColorBackground(color(7, 189, 255))
+        .setLabel("Save")
         .setPosition(20, 420)
         .setSize(90, 30);
 
@@ -48,6 +49,7 @@ void initGUI(){
     skatolo.addToggle("useAR")
         .setPosition(0,80)
         .setSize(50,20)
+        .setLabel("use Marker")
         ;
 
 
