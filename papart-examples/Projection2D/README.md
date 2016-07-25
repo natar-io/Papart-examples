@@ -1,6 +1,11 @@
-##Projection 2D
+## 2D Projection
 
-- Exemple avec juste le multi-touch affiché [MultiTouch](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Projection2D/MultiTouch)
-- MultiTouch envoyé en TUIO [MultiTouchTUIO](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Projection2D/MultiTouchTUIO)
+These examples are for touch screen like setups. 
 
-- Application du Multitouch pour [Halloween](https://github.com/potioc/Papart-examples/tree/master/apps/Halloween)
+You can create a touch surface from anything planar with PlaneSetCalibration. 
+
+
+- Touch elements displayed : [MultiTouch](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Projection2D/MultiTouch).
+- Touch elements displayed and sent through TUIO protocol: [MultiTouchTUIO](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Projection2D/MultiTouchTUIO).
+
+- Example application for [Halloween](https://github.com/potioc/Papart-examples/tree/master/apps/Halloween).
