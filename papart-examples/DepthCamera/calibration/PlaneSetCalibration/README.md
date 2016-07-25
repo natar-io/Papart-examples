@@ -3,7 +3,7 @@
 This applications calibrates the kinect by setting the 3D position of the planar surface you want to make tactile (that can be a computer screen, a desk, wall...).
 
 # How to use
-![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/PlaneSetCalibration/planesetcalibration_interface.png)
+![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_interface.png)
 
 
 The interface contains a slider `PlaneUP` (top left), a toggle button `use Marker` (left) and a `Save` button (bottom left).
