@@ -139,6 +139,7 @@ void initCameraUI() {
         .setItemWidth(20)
         .setItemHeight(20)
         .addItem("OpenCV", Camera.Type.OPENCV.ordinal())
+        .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
         .addItem("OpenCV Depth", Camera.Type.OPENCV_DEPTH.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())

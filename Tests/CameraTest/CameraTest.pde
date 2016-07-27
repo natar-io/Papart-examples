@@ -10,8 +10,8 @@ import processing.video.*;
 
 
 Camera camera;
-int resX = 1920;
-int resY = 1080;
+int resX = 5184;
+int resY = 3456;
 
 
 void settings(){
@@ -27,9 +27,11 @@ public void setup() {
 
 
     // camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0");
-    camera = CameraFactory.createCamera(Camera.Type.OPENCV, "0");
+    // camera = CameraFactory.createCamera(Camera.Type.OPENCV, "0");
     // camera = CameraFactory.createCamera(Camera.Type.PROCESSING, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FLY_CAPTURE, 0);
+
+    camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video0");
 
 
     camera.setParent(this);
