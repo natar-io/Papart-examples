@@ -10,8 +10,8 @@ import processing.video.*;
 
 
 Camera camera;
-int resX = 5184;
-int resY = 3456;
+int resX = 800;
+int resY = 600;
 
 
 void settings(){
@@ -31,7 +31,8 @@ public void setup() {
     // camera = CameraFactory.createCamera(Camera.Type.PROCESSING, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FLY_CAPTURE, 0);
 
-    camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video0");
+    // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video1");
+    camera = CameraFactory.createCamera(Camera.Type.FFMPEG, ":0.0+200,200", "x11grab");
 
 
     camera.setParent(this);
