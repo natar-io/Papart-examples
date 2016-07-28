@@ -1,4 +1,4 @@
-Textfield cameraIdText, posXText, posYText;
+Textfield cameraIdText, cameraFormatText, posXText, posYText;
 Textfield kinectIdText;
 Textfield cameraName;
 Textfield kinectName;
@@ -158,7 +158,7 @@ void initCameraUI() {
 
     loadCalibrationCamera = skatolo.addButton("loadCalibration")
         .setLabel("load calibration")
-        .setPosition(250, 397)
+        .setPosition(250, 420)
         .setSize(140,20)
         ;
 
@@ -172,6 +172,16 @@ void initCameraUI() {
     .setText(cameraConfig.getCameraName())
     .setFocus(true)
     ;
+
+    cameraFormatText = skatolo.addTextfield("CameraFormat")
+        .setPosition(250, 388)
+        .setSize(80, 20)
+        .setFont(myFont)
+        .setLabel("")
+        .setLabelVisible(false)
+        .setText(cameraConfig.getCameraFormat())
+        ;
+
 
   testCameraImg = loadImage("data/testCamera.png");
 
@@ -260,7 +270,8 @@ void updateStyles() {
   setStyle(loadCalibrationProjector);
 
     setStyle(cameraType);
-  setStyle(cameraIdText);
+    setStyle(cameraIdText);
+    setStyle(cameraFormatText);
   setStyle(startCameraButton);
   setStyle(saveDefaultCameraButton);
   setStyle(saveCameraAsButton);

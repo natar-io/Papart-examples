@@ -250,6 +250,7 @@ void saveDefaultCamera(){
 
 void saveCamera(String fileName){
     cameraConfig.setCameraName(cameraIdText.getText());
+    cameraConfig.setCameraFormat(cameraFormatText.getText());
 
     cameraConfig.saveTo(this, fileName);
     println("Camera saved.");
