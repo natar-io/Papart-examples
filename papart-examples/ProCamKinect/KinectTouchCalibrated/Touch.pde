@@ -20,7 +20,7 @@ public class MyApp extends PaperTouchScreen {
     void settings(){
         setDrawAroundPaper();
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "big-calib.svg", 297, 210);
+        loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
     }
 
     void setup() {
@@ -68,7 +68,7 @@ public class MyApp extends PaperTouchScreen {
 
                 fill(-pointPosDisplay.z * 2);
                 translate(pointPosDisplay.x , pointPosDisplay.y, pointPosDisplay.z);
-                ellipse(0, 0, 3, 3);
+                ellipse(0, 0, 2, 2);
                 popMatrix();
 	    }
 
