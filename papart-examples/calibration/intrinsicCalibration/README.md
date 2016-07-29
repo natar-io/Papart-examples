@@ -38,4 +38,4 @@ float distancePaper = 1000f;   // placed at 1 meter from the camera.
 ### Setting the optical center (projector only)
 
 You may have problems succeding in the step `3`. While you change the focal, try to set the `cy` value to match the 
-printed elements. Once it is done, sav
+printed elements. Once it is done remember to save the calibration !
