@@ -33,3 +33,9 @@ float distancePaper = 1000f;   // placed at 1 meter from the camera.
 2. Align the camera / paper so that the printed blue square is aligned with the on displayed in the calibration view. 
 3. Move the `focal` slider so that the blue and green squares displayed match the printed ones. 
 4. Hit `s` to save the focal length, it will create a `calib.yaml` file which can be used later in [PCConfiguration](https://github.com/potioc/Papart-examples/tree/master/papart-examples/calibration/PCConfiguration).
+
+
+### Setting the optical center (projector only)
+
+You may have problems succeding in the step `3`. While you change the focal, try to set the `cy` value to match the 
+printed elements. Once it is done, sav
