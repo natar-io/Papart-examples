@@ -113,6 +113,12 @@ void cameraTypeChooser(int value){
     if(value >= 0){
         cameraConfig.setCameraType(Camera.Type.values()[value]);
     }
+
+    if(value == Camera.Type.FFMPEG.ordinal()){
+        cameraFormatText.show();
+    } else {
+        cameraFormatText.hide();
+    }
 }
 
 void kinectTypeChooser(int value){
