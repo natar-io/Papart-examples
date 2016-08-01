@@ -37,7 +37,7 @@ PlaneCalibration planeCalibration;
 PlaneAndProjectionCalibration planeProjCalibration;
 
 int precision = 3;
-
+boolean is3D = false;
 
 void settings(){
     size(1200, 900, P3D);
@@ -63,7 +63,6 @@ void setup(){
     }
 
     kinectAnalysis = new KinectProcessing(this, kinectDevice);
-
     pointCloud = new KinectPointCloud(this, kinectAnalysis, 1);
 
 
@@ -84,8 +83,9 @@ void setup(){
   touchCalibration3D.loadFrom(this, Papart.touchCalib3D);
   touchDetection3D.setCalibration(touchCalibration3D);
 
-
   initGui();
+
+  loadCalibration(touchCalibration);
 
   frameRate(200);
 
@@ -107,46 +107,44 @@ Vec3D[] depthPoints;
 IplImage kinectImg;
 IplImage kinectImgDepth;
 ArrayList<TouchPoint> globalTouchList = new ArrayList<TouchPoint>();
+boolean mouseControl;
 
-
-void draw(){
-    background(0);
-    //     println("Framerate " + frameRate);
-
-    // retreive the camera image.
+void grabImages(){
     try {
 	cameraRGB.grab();
         cameraDepth.grab();
-// cameraIR.grab();
     } catch(Exception e){
-	println("Could not grab the image " + e);
+        println("Could not grab the image " + e);
     }
-
     kinectImg = cameraRGB.getIplImage();
     kinectImgDepth = cameraDepth.getIplImage();
     if(kinectImg == null || kinectImgDepth == null){
-    	println("null images..");
     	return;
     }
+}
 
-    planeCalibration.setHeight(planeHeight);
+void draw(){
+
+    grabImages();
+    cam.setMouseControlled(mouseControl);
 
     updateCalibration(is3D ? touchCalibration3D : touchCalibration);
 
-    kinectAnalysis.updateMT(kinectImgDepth, kinectImg,  planeProjCalibration,
-		    precision);
+    kinectAnalysis.updateMT(kinectImgDepth, kinectImg,
+                            planeProjCalibration,
+                            precision);
 
-     //    kinectAnalysis.update(kinectImgDepth, kinectImg, planeCalibration, precision);
+    background(0);
     draw3DPointCloud();
 
     cam.beginHUD();
-
-    text("'m' to stop the camera", 10,  30);
     skatolo.draw();
-    cam.endHUD(); // always!
+    cam.endHUD();
 }
 
 void updateCalibration(PlanarTouchCalibration calib){
+
+    planeCalibration.setHeight(planeHeight);
 
     calib.setMaximumDistance(maxDistance);
     calib.setMinimumHeight(minHeight);
@@ -159,14 +157,26 @@ void updateCalibration(PlanarTouchCalibration calib){
     calib.setTrackingMaxDistance(trackingMaxDistance);
 
     calib.setPrecision(precision);
+}
 
+void loadCalibration(PlanarTouchCalibration calib){
+
+    planeHeightSlider.setValue(planeCalibration.getHeight());
+
+    recursionSlider.setValue(calib.getMaximumRecursion());
+    searchDepthSlider.setValue(calib.getSearchDepth());
+    maxDistanceSlider.setValue(calib.getMaximumDistance());
+    minCompoSizeSlider.setValue(calib.getMinimumComponentSize());
+    minHeightSlider.setValue(calib.getMinimumHeight());
+    forgetTimeSlider.setValue(calib.getTrackingForgetTime());
+    trackingMaxDistanceSlider.setValue(calib.getTrackingMaxDistance());
+    precisionSlider.setValue(calib.getPrecision());
 }
 
 
+
 void draw3DPointCloud(){
-
     KinectDepthData depthData = kinectAnalysis.getDepthData();
-
     ArrayList<TouchPoint> touchs;
 
     if(is3D){
@@ -178,68 +188,54 @@ void draw3DPointCloud(){
     TouchPointTracker.trackPoints(globalTouchList, touchs, millis());
 
     //     pointCloud.updateWith(kinectAnalysis);
-    pointCloud.updateWith(kinectAnalysis, touchs);
+    pointCloud.updateWithFakeColors(kinectAnalysis, touchs);
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
     lights();
     stroke(200);
     fill(200);
 
-
     colorMode(HSB, 20, 100, 100);
     for(TouchPoint touchPoint : globalTouchList){
-
     	Vec3D position = touchPoint.getPositionKinect();
     	pushMatrix();
     	translate(position.x, position.y, -position.z);
-
     	fill(touchPoint.getID() % 20, 100, 100);
 	ellipse(0, 0, 3, 3);
-    	//sphere(3);
     	popMatrix();
     }
 
 }
 
-boolean is3D = false;
-boolean isMouseControl = true;
+void switch3D(){
+    globalTouchList.clear();
+    is3D = !is3D;
+    loadCalibration(is3D? touchCalibration3D : touchCalibration);
+    switchTo3DButton.setLabel("Switch to " + (is3D? "2D" : "3D"));
+}
+
+
 
 void keyPressed() {
-
-    if(key == 't'){
-	globalTouchList.clear();
-	is3D = !is3D;
-	println("Is 3D " + is3D);
-    }
-
-    if(key =='m'){
-	isMouseControl = !isMouseControl;
-	cam.setMouseControlled(isMouseControl);
-    }
 
     if(key == 'i'){
         planeCalibration.flipNormal();
     }
+}
 
-    if(key == 's'){
-	if(is3D)
-	    save3D();
-	else
-	    save();
-    }
-
-
+void saveButton(){
+    if(is3D)
+        save3D();
+    else
+        save();
 }
 
 void save3D(){
-    println("TouchCalibration3D saved.");
     touchCalibration3D.saveTo(this, Papart.touchCalib3D);
+    planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
 }
 
 void save(){
-    planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
-    // println("PlaneProj saved.");
-
-    println("TouchCalibration2D saved.");
     touchCalibration.saveTo(this, Papart.touchCalib);
+    planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
 }
