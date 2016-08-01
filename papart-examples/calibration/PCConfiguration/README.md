@@ -36,3 +36,8 @@ with the `Test the camera` button.
 ### Kinect / Depth Camera
 
 Here you can select you depth camera, and set its number which is likely to be `0` if you only one plugged. 
+
+## Screenshot
+
+
+![](https://github.com/potioc/Papart-examples/raw/master/calibration.jpg)
