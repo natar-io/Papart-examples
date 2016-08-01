@@ -2,6 +2,10 @@
 
 WarGame uses colored objects to shoot particles! Who will win, between attacking turrets and defending walls?
 
+### Dependency.
+
+Please Install `Box2D for Processing` to run this sketch.
+
 # The board
 
 The board has 2 printed sheet: `player1.svg` (left) and `game.svg` (top) - and a plastic paper.
