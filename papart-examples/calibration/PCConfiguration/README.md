@@ -35,3 +35,4 @@ with the `Test the camera` button.
 
 ### Kinect / Depth Camera
 
+Here you can select you depth camera, and set its number which is likely to be `0` if you only one plugged. 
