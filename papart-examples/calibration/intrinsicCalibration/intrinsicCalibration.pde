@@ -14,11 +14,15 @@ float focal, cx, cy;
 PMatrix3D projIntrinsics;
 
 boolean useProjector = false;
+float distancePaper = 1000f;  // in millimeter.
 
 PApplet parent;
 
 void settings(){
-    fullScreen(P3D);
+    if(useProjector)
+        fullScreen(P3D);
+    else
+        size(200, 200, P3D);
     parent = this;
 }
 
@@ -101,7 +105,7 @@ void draw() {
     }
     // g1.modelview.apply(objectArdisplayTransfo);
 
-    g1.translate(0, 0, 810);
+    g1.translate(0, 0, distancePaper);
 
     g1.fill(50, 50, 200, 150);
     g1.rect(-10, -10, 120, 120);
