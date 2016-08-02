@@ -47,7 +47,8 @@ KinectTouchInput touchInput;
 PVector image[];
 
 void settings(){
-    size(640, 480, P3D);
+    // size(640, 480, P3D);
+    size(1920, 1080, P3D);
 }
 
 void setup(){
@@ -70,7 +71,21 @@ void setup(){
 
     papart.startTracking();
     initGUI();
+
+    papart.forceDepthCameraSize();
     //    Mode.add("corners");
+}
+
+boolean isUsingAR = false;
+
+void useAR(boolean value){
+    isUsingAR = value;
+
+    if(isUsingAR){
+        papart.forceCameraSize();
+    } else {
+        papart.forceDepthCameraSize();
+    }
 }
 
 KinectDevice kinectDevice;
@@ -116,7 +131,7 @@ void draw(){
 
     updateDepth();
 
-    if(useAR){
+    if(isUsingAR){
         drawCameraAR();
         Screen screen = app.getScreen();
         screen.computeScreenPosTransform(camera);

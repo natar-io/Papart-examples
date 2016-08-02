@@ -1,5 +1,5 @@
 float planeUp;
-boolean useAR;
+
 
 void initGUI(){
     image = new PVector[4];

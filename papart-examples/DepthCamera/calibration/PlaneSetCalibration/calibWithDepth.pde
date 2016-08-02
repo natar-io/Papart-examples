@@ -77,12 +77,15 @@ void drawValidPointsDepth( PlaneCalibration planeCalib, HomographyCalibration ho
                     &&
                     normalized.y > 0 && normalized.y < 1){
 
+                     int px = (int) ((float) x / (float) w * width);
+                     int py = (int) ((float) y / (float) h * height);
+
                      if(planeCalib.hasGoodOrientation(locV)){
                          fill(normalized.x * 255, normalized.y * 255, d /100f * 255);
-                         rect(x, y, size, size);
+                         rect(px, py, size, size);
                      } else {
                          fill(255, 0, 0);
-                         rect(x, y, size, size);
+                         rect(px, py, size, size);
                      }
                  }
              }
