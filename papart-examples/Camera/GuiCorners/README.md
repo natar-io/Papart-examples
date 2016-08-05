@@ -2,6 +2,12 @@
 
 In this example we want to save a 3D position of a planar object. The position is manually set by user.
 
+### Todo:
+
+* Add a `save as` button. 
+* Better text input -> bug `4` was not working. 
+* refactor of code. 
+
 ## Inputs
 First the user enters the real size of the object in the corresponding inputs in the top left hand corner (see bellow). He has to press **change mode** button to make the changes effective.
 
