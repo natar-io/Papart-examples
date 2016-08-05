@@ -17,6 +17,7 @@ void settings(){
 }
 
  void setup(){
+     Papart.calibrationFileName = "mega-calib.svg";
      papart = Papart.projection(this);
      papart.loadSketches();
      papart.startTracking();
