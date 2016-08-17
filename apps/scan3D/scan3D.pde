@@ -40,7 +40,7 @@ public void setup(){
     PMatrix3D extrinsics = papart.loadCalibration(papart.cameraProjExtrinsics);
     projector.setExtrinsics(extrinsics);
 
-    DecodedCode decodedCode = DecodedCode.loadFrom(this, "../grayCode/grayCodeConfiguration/scan0");
+    DecodedCode decodedCode = DecodedCode.loadFrom(this, "../grayCodeConfiguration/scan0");
 
     Scanner3D scanner = new Scanner3D(cameraTracking.getProjectiveDevice(), projector);
 
