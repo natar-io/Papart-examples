@@ -12,7 +12,7 @@ This demo has three distinct spaces:
 
 ## How to run 
 
-This demo is running using JRuby and Jruby_art, see the [ruby example](https://github.com/potioc/Papart-examples/tree/master/apps/ruby) to install
+This demo is running using JRuby an [JRubyArt](https://github.com/ruby-processing/JRubyArt), see the [ruby example](https://github.com/potioc/Papart-examples/tree/master/apps/ruby) to install
 and set up the depedencies. 
 
 ``` bash
