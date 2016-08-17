@@ -8,6 +8,7 @@ This demo has three distinct spaces:
 * An interactive garden. Green objets generate grass, and a high blue object (4 duplo in height) make a fountain. 
 * A remote to control the modes in the house and reset the grass. 
 
+[![](https://github.com/potioc/Papart-examples/blob/master/apps/laval/screenshot.png?raw=true)](https://youtu.be/Jsk4eWTzzVs)
 
 ## How to run 
 
