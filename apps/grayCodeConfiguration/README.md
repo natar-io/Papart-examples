@@ -26,11 +26,11 @@ from the projector's point of view. You can save it, and it can be then converte
 
 Try to get a 3D view of your scan with this [dedicated sketch](https://github.com/potioc/Papart-examples/tree/master/apps/scan3D). 
 
-## Image of a good scan:
+#### Image of a good scan:
 
 ![](https://github.com/potioc/Papart-examples/blob/master/apps/grayCodeConfiguration/screenshot.png?raw=true) 
 
-## Recovered 3D point cloud:
+#### Recovered 3D point cloud:
 
 ![](https://github.com/potioc/Papart-examples/blob/master/apps/scan3D/screenshot.png?raw=true)
 
