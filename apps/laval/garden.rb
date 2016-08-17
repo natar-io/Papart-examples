@@ -352,7 +352,7 @@ def reset_grass
 
 #     hues = select_middle_third(hues)
     mean = hues.reduce(:+) / hues.size
-    p mean
+#    p mean
     nb_greens = hues.map{|c| is_green(c) ? 1 : 0 }.reduce(:+)
     green_ratio = nb_greens.to_f / colored.size.to_f
 

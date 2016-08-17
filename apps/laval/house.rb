@@ -89,8 +89,7 @@ class LegoHouse < Papartlib::PaperScreen
 
 
     check_location
-    setLocation 0, 0 , 0
-    useManualLocation false
+    setLocation 0, 200, 0
 
     shader @lego_shader
 
@@ -442,10 +441,12 @@ class LegoHouse < Papartlib::PaperScreen
     p "Saving house location !" if $app.save_house_location
     $app.save_house_location = false if $app.save_house_location
 
-    loadLocationFrom $app.sketchPath + "/house.xml" if $app.load_house_location
-    p "Load and fix house location !" if $app.load_house_location
-    #    useManualLocation true if $app.load_house_location
-    $app.load_house_location = false if $app.load_house_location
+    if $app.load_house_location
+      useManualLocation true
+      loadLocationFrom $app.sketchPath + "/house.xml"
+      p "Load house location !"
+      $app.load_house_location = false if $app.load_house_location
+    end
 
     useManualLocation false if $app.move_house_location
     $app.move_house_location = false if $app.move_house_location
@@ -455,7 +456,7 @@ class LegoHouse < Papartlib::PaperScreen
   def init_video
     # id = ($app.random 14).to_i.to_s.rjust(2, '0')
     # id = "0" + id + ".mp4"
-    @movie = Movie.new $app, "data/videos/video.mp4"  #id
+    @movie = Movie.new $app, "data/video.mp4"  #id
     @movie.loop
     @movie.volume 0
     end
