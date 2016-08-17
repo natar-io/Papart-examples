@@ -16,3 +16,5 @@ save in the sketch's folder.
 }
 ```
 
+
+The ruby script `player.rb` enables to use one image, or a stream of images as a webcam using Gtreamer and V4L2oopback.
