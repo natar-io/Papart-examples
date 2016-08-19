@@ -213,9 +213,10 @@ void initKinectUI() {
         currentType = 0;
     if(kinectConfig.getCameraType() == Camera.Type.KINECT2_RGB)
         currentType = 1;
-
-    if(kinectConfig.getCameraType() == Camera.Type.FAKE)
+    if(kinectConfig.getCameraType() == Camera.Type.REALSENSE)
         currentType = 2;
+    if(kinectConfig.getCameraType() == Camera.Type.FAKE)
+        currentType = 3;
 
   kinectType = skatolo.addRadioButton("kinectTypeChooser")
     .setPosition(50, 652)
@@ -223,6 +224,7 @@ void initKinectUI() {
     .setItemHeight(20)
       .addItem("Kinect 360", Camera.Type.OPEN_KINECT.ordinal())
       .addItem("Kinect One", Camera.Type.KINECT2_RGB.ordinal())
+      .addItem("RealSense", Camera.Type.REALSENSE.ordinal())
       .addItem("No Kinect", Camera.Type.FAKE.ordinal())
     .setColorLabel(color(255))
       .activate(currentType)

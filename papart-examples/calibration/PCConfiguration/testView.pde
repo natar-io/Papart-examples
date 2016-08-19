@@ -99,6 +99,11 @@ class TestView extends PApplet {
         if(kinectConfig.getCameraType() == Camera.Type.OPEN_KINECT){
             kinect = new Kinect360(this);
         }
+
+        if(kinectConfig.getCameraType() == Camera.Type.REALSENSE){
+            kinect = new RealSense(this);
+        }
+
         camera = kinect.getCameraRGB();
         camera.setThread();
 
