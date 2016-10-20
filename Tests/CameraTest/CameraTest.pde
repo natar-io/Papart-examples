@@ -6,12 +6,13 @@ import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
 
+import org.bytedeco.javacv.RealSenseFrameGrabber;
 import processing.video.*;
 
 
 Camera camera;
-int resX = 800;
-int resY = 600;
+int resX = 1920;
+int resY = 1080;
 
 
 void settings(){
@@ -25,16 +26,17 @@ public void setup() {
 	surface.setResizable(true);
     }
 
-
     // camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0");
     // camera = CameraFactory.createCamera(Camera.Type.OPENCV, "0");
     // camera = CameraFactory.createCamera(Camera.Type.PROCESSING, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FLY_CAPTURE, 0);
 
     // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video1");
-    camera = CameraFactory.createCamera(Camera.Type.FFMPEG, ":0.0+200,200", "x11grab");
+    // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, ":0.0+200,200", "x11grab");
 
 
+    camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0");
+    
     camera.setParent(this);
     camera.setSize(resX, resY);
     //    ((CameraFlyCapture) camera).setBayerDecode(true);

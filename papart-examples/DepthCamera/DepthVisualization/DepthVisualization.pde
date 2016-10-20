@@ -17,7 +17,7 @@ KinectPointCloud pointCloud;
 KinectProcessing kinectAnalysis;
 KinectDevice kinectDevice;
 
-int skip = 2;
+int skip = 1;
 
 void settings() {
     size(640, 480, P3D);
@@ -59,8 +59,12 @@ void draw() {
   if (colourImg == null || depthImg == null)
     return;
 
+  try{
   kinectAnalysis.update(depthImg, colourImg, skip);
-
+  } catch(Exception e ) {
+      println("exception " + e);
+      e.printStackTrace();
+  }
   pointCloud.updateWith(kinectAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 }

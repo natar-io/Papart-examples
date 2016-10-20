@@ -140,12 +140,11 @@ void initCameraUI() {
         .setItemHeight(20)
         .addItem("OpenCV", Camera.Type.OPENCV.ordinal())
         .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
-        .addItem("OpenCV Depth", Camera.Type.OPENCV_DEPTH.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())
         .addItem("FlyCapture", Camera.Type.FLY_CAPTURE.ordinal())
         .addItem("Kinect2RGB", Camera.Type.KINECT2_RGB.ordinal())
-        .addItem("Kinect2IR",Camera.Type.KINECT2_IR.ordinal())
+	.addItem("RealSense",Camera.Type.REALSENSE.ordinal())
         .activate(cameraConfig.getCameraType().ordinal())
         ;
 
@@ -204,8 +203,6 @@ void initCameraUI() {
     ;
 }
 
-
-
 void initKinectUI() {
 
     int currentType = 0;
@@ -224,7 +221,7 @@ void initKinectUI() {
     .setItemHeight(20)
       .addItem("Kinect 360", Camera.Type.OPEN_KINECT.ordinal())
       .addItem("Kinect One", Camera.Type.KINECT2_RGB.ordinal())
-      .addItem("RealSense", Camera.Type.REALSENSE.ordinal())
+      .addItem("RealSenseDepth", Camera.Type.REALSENSE.ordinal())
       .addItem("No Kinect", Camera.Type.FAKE.ordinal())
     .setColorLabel(color(255))
       .activate(currentType)
