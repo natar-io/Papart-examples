@@ -28,7 +28,7 @@ class TestView extends PApplet {
     }
 
     public void settings() {
-        size(640, 480, P3D);
+        size(640, 480);
         smooth();
 
     }
@@ -57,7 +57,7 @@ class TestView extends PApplet {
 
         int w = 640, h = 480;
 
-        if(cameraCalibrationOk && useCameraCalibration){
+        if(cameraCalibrationOk){
             w = cameraWidth;
             h = cameraHeight;
         }
@@ -83,7 +83,6 @@ class TestView extends PApplet {
 
 
     public void testKinect(){
-
         if(kinectConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
@@ -107,10 +106,6 @@ class TestView extends PApplet {
         this.isTestingKinect = true;
         show();
     }
-
-
-
-
 
     public void draw() {
         if(isTestingCamera || isTestingKinect)

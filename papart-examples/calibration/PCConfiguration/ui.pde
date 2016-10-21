@@ -5,22 +5,18 @@ Textfield kinectName;
 
 RadioButton screenChooser, cameraType, kinectType;
 
-Button startCameraButton, saveCameraAsButton, saveDefaultCameraButton;
-Button startKinectButton, saveKinectAsButton, saveDefaultKinectButton;
-Button initButton, saveScreenAsButton, saveDefaultScreenButton;
+Button startCameraButton, saveDefaultCameraButton;
+Button startKinectButton, saveDefaultKinectButton;
+Button initButton, saveDefaultScreenButton;
 Toggle useCalibration;
 Button loadCalibrationCamera, loadCalibrationProjector;
-
-Button switchButton;
-
+    
 PFont myFont;
 ControlFont cFont;
 CColor cColor;
 CColor cColorToggle;
 
 PImage testCameraImg;
-
-boolean useCameraCalibration;
 
 void initUI() {
 
@@ -55,12 +51,6 @@ void initUI() {
   initScreenUI();
   initCameraUI();
   initKinectUI();
-
-  switchButton = skatolo.addButton("switchToCalibration")
-      .setLabel("Switch to Calibration")
-      .setSize(200, 30)
-      .setPosition(400, 10)
-      ;
 
   updateStyles();
 }
@@ -125,11 +115,6 @@ void initScreenUI() {
     .setSize(110, 20)
     ;
 
-  saveScreenAsButton = skatolo.addButton("saveScreenAs")
-    .setPosition(611, 183)
-    .setLabel("Save screen as...")
-    .setSize(110, 20)
-    ;
 }
 
 void initCameraUI() {
@@ -147,13 +132,6 @@ void initCameraUI() {
         .addItem("Kinect2RGB", Camera.Type.KINECT2_RGB.ordinal())
         .addItem("Kinect2IR",Camera.Type.KINECT2_IR.ordinal())
         .activate(cameraConfig.getCameraType().ordinal())
-        ;
-
-    useCalibration = skatolo.addToggle("useCameraCalibration")
-        .setLabel("use calibration")
-        .setPosition(250, 457)
-        // .setSize(130,50)
-        .setState(true)
         ;
 
     loadCalibrationCamera = skatolo.addButton("loadCalibration")
@@ -186,7 +164,7 @@ void initCameraUI() {
   testCameraImg = loadImage("data/testCamera.png");
 
   startCameraButton = skatolo.addButton("testCameraButton")
-    .setPosition(611, 367)
+    .setPosition(611, 369)
     .setLabel("Test the camera")
     .setSize(110, 20)
     ;
@@ -197,11 +175,6 @@ void initCameraUI() {
     .setSize(110, 20)
     ;
 
-  saveCameraAsButton = skatolo.addButton("saveCameraAs")
-    .setPosition(611, 450)
-    .setLabel("Save camera as.")
-    .setSize(110, 20)
-    ;
 }
 
 
@@ -250,12 +223,7 @@ void initKinectUI() {
     .setLabel("Save as default")
     .setSize(110, 20)
     ;
-
-  saveKinectAsButton = skatolo.addButton("saveKinectAs")
-    .setPosition(611, 735)
-    .setLabel("Save kinect as.")
-    .setSize(110, 20)
-    ;
+  
 }
 
 
@@ -265,25 +233,21 @@ void updateStyles() {
   setStyle(posXText);
   setStyle(posYText);
   setStyle(initButton);
-  setStyle(saveScreenAsButton);
   setStyle(saveDefaultScreenButton);
   setStyle(loadCalibrationProjector);
 
-    setStyle(cameraType);
-    setStyle(cameraIdText);
-    setStyle(cameraFormatText);
+  setStyle(cameraType);
+  setStyle(cameraIdText);
+  setStyle(cameraFormatText);
   setStyle(startCameraButton);
   setStyle(saveDefaultCameraButton);
-  setStyle(saveCameraAsButton);
   setStyle(loadCalibrationCamera);
 
   setStyle(kinectType);
   setStyle(kinectIdText);
   setStyle(startKinectButton);
   setStyle(saveDefaultKinectButton);
-  setStyle(saveKinectAsButton);
 
-  setStyle(switchButton);
 }
 
 void setStyle(Controller controller) {
