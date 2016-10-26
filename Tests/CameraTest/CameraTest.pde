@@ -8,15 +8,15 @@ import toxi.geom.*;
 
 import org.bytedeco.javacv.RealSenseFrameGrabber;
 import processing.video.*;
+CameraRealSense cameraRS;
 
 
 Camera camera;
-int resX = 1920;
-int resY = 1080;
-
+int resX = 640;
+int resY = 480;
 
 void settings(){
-    size(800, 600, OPENGL);
+    size(640 * 2, 480 * 2, OPENGL);
     // size(resX, resY, OPENGL);
 }
 
@@ -34,8 +34,8 @@ public void setup() {
     // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, ":0.0+200,200", "x11grab");
 
-
-    camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0");
+     camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0");
+     cameraRS = (CameraRealSense) camera;
     
     camera.setParent(this);
     camera.setSize(resX, resY);
@@ -46,8 +46,18 @@ public void setup() {
 }
 
 void draw() {
-    PImage im = camera.getPImage();
-    if(im != null)
-	image(im, 0, 0, width, height);
 
+    PImage imRGB = cameraRS.getColorImage();
+    PImage imIR = cameraRS.getIRImage();
+    PImage imDepth = cameraRS.getDepthPImage();
+    //	PImage im = camera.getPImage();
+    if(imRGB != null){
+	image(imRGB, 0, 0, 640, 480);
+    }
+    if(imIR != null){
+	image(imIR, 640, 0, 640, 480);
+    }
+    if(imDepth != null){
+	image(imDepth, 0, 480, 640, 480);
+    }
 }
