@@ -8,16 +8,17 @@ import toxi.geom.*;
 
 import org.bytedeco.javacv.RealSenseFrameGrabber;
 import processing.video.*;
-CameraRealSense cameraRS;
-
 
 Camera camera;
+CameraRealSense cameraRS;
+CameraOpenKinect cameraK;
+
 int resX = 640;
 int resY = 480;
 
 void settings(){
-    size(640 * 2, 480 * 2, OPENGL);
-    // size(resX, resY, OPENGL);
+    // size(640 * 2, 480 * 2, OPENGL);
+    size(resX, resY, OPENGL);
 }
 
 public void setup() {
@@ -26,7 +27,7 @@ public void setup() {
 	surface.setResizable(true);
     }
 
-    // camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0");
+    camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0");
     // camera = CameraFactory.createCamera(Camera.Type.OPENCV, "0");
     // camera = CameraFactory.createCamera(Camera.Type.PROCESSING, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FLY_CAPTURE, 0);
@@ -34,8 +35,10 @@ public void setup() {
     // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video1");
     // camera = CameraFactory.createCamera(Camera.Type.FFMPEG, ":0.0+200,200", "x11grab");
 
-     camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0");
-     cameraRS = (CameraRealSense) camera;
+     // camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0");
+     // cameraRS = (CameraRealSense) camera;
+    cameraK = (CameraOpenKinect) camera;
+    cameraK.getIRVideo();
     
     camera.setParent(this);
     camera.setSize(resX, resY);
@@ -47,17 +50,24 @@ public void setup() {
 
 void draw() {
 
-    PImage imRGB = cameraRS.getColorImage();
-    PImage imIR = cameraRS.getIRImage();
-    PImage imDepth = cameraRS.getDepthPImage();
+
+    PImage im = camera.getPImage();
     //	PImage im = camera.getPImage();
-    if(imRGB != null){
-	image(imRGB, 0, 0, 640, 480);
+    if(im != null){
+	image(im, 0, 0, 640, 480);
     }
-    if(imIR != null){
-	image(imIR, 640, 0, 640, 480);
-    }
-    if(imDepth != null){
-	image(imDepth, 0, 480, 640, 480);
-    }
+    
+    // PImage imRGB = cameraRS.getColorImage();
+    // PImage imIR = cameraRS.getIRImage();
+    // PImage imDepth = cameraRS.getDepthPImage();
+    // //	PImage im = camera.getPImage();
+    // if(imRGB != null){
+    // 	image(imRGB, 0, 0, 640, 480);
+    // }
+    // if(imIR != null){
+    // 	image(imIR, 640, 0, 640, 480);
+    // }
+    // if(imDepth != null){
+    // 	image(imDepth, 0, 480, 640, 480);
+    // }
 }
