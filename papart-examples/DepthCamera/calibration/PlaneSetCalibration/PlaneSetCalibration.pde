@@ -20,6 +20,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
+import tech.lity.rea.svgextended.PShapeSVGExtended;
 
 Papart papart;
 
@@ -47,15 +48,13 @@ KinectTouchInput touchInput;
 PVector image[];
 
 void settings(){
-    // size(640, 480, P3D);
-    size(1920, 1080, P3D);
+    size(640, 480, P3D);
+    // size(1920, 1080, P3D);
 }
 
 void setup(){
     papart = new Papart(this);
     papart.initKinectCamera(1);
-
-
     //   frame.setResizable(false);
 
    initTouch();

@@ -100,7 +100,7 @@ class TestView extends PApplet {
             kinect = new Kinect360(this);
         }
 
-        if(kinectConfig.getCameraType() == Camera.Type.REALSENSE){
+        if(kinectConfig.getCameraType() == Camera.Type.REALSENSE_DEPTH){
             kinect = new RealSense(this);
         }
 
