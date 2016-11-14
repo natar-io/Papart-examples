@@ -30,7 +30,7 @@ import java.nio.channels.FileChannel;
 Skatolo skatolo;
 
 CameraConfiguration cameraConfig;
-CameraConfiguration kinectConfig;
+CameraConfiguration depthCameraConfig;
 ScreenConfiguration screenConfig;
 
 int nbScreens = 1;
@@ -45,11 +45,11 @@ TestView testView;
 void setup(){
 
     cameraConfig = new CameraConfiguration();
-    kinectConfig = new CameraConfiguration();
+    depthCameraConfig = new CameraConfiguration();
     screenConfig = new ScreenConfiguration();
 
     cameraConfig.loadFrom(this, Papart.cameraConfig);
-    kinectConfig.loadFrom(this, Papart.cameraKinectConfig);
+    depthCameraConfig.loadFrom(this, Papart.depthCameraConfig);
     screenConfig.loadFrom(this, Papart.screenConfig);
 
     initUI();
@@ -119,18 +119,31 @@ void cameraTypeChooser(int value){
     } else {
         cameraFormatText.hide();
     }
+
+    if(value == Camera.Type.REALSENSE.ordinal() ||
+       value == Camera.Type.OPEN_KINECT.ordinal() ||
+       value == Camera.Type.OPEN_KINECT_2.ordinal()){
+	cameraSubType.show();
+
+	int currentType = getDepthType(value);
+	depthCameraType.activate(currentType);
+	
+    } else {
+	cameraSubType.hide();
+    }
+
 }
 
-void kinectTypeChooser(int value){
+void depthCameraTypeChooser(int value){
     if(value >= 0){
-        kinectConfig.setCameraType(Camera.Type.values()[value]);
+        depthCameraConfig.setCameraType(Camera.Type.values()[value]);
     }
 }
 
-void testKinectButton(boolean value){
+void testDepthCameraButton(boolean value){
 
     if(value){
-	testView.testKinect();
+	testView.testDepthCamera();
     }
 
 }
@@ -256,30 +269,54 @@ void saveDefaultCamera(){
 
 void saveCamera(String fileName){
     cameraConfig.setCameraName(cameraIdText.getText());
-    cameraConfig.setCameraFormat(cameraFormatText.getText());
+    setFormat();
 
     cameraConfig.saveTo(this, fileName);
     println("Camera saved.");
 }
 
+void setFormat(){
+    if(cameraType.getValue() == Camera.Type.FFMPEG.ordinal()){
+	cameraConfig.setCameraFormat(cameraFormatText.getText());
+    }
+    
+    if(cameraType.getValue() == Camera.Type.REALSENSE.ordinal() ||
+       cameraType.getValue() == Camera.Type.OPEN_KINECT.ordinal() ||
+       cameraType.getValue() == Camera.Type.OPEN_KINECT_2.ordinal()){
+	
+	switch((int) cameraSubType.getValue()){
+	case RGB_FORMAT:
+	    cameraConfig.setCameraFormat("rgb");
+	    break;
+	case IR_FORMAT:
+	    cameraConfig.setCameraFormat("ir");
+	    break;
+	case DEPTH_FORMAT:
+	    cameraConfig.setCameraFormat("depth");
+	    break;
+	default:
+	    throw new RuntimeException("Cannot set different value");
+	}
+    }
+}
 
 // Todo: custom file chooser.
-void saveKinectAs(){
-    selectOutput("Select a file to write to:", "fileSelectedSaveKinect");
+void saveDepthCameraAs(){
+    selectOutput("Select a file to write to:", "fileSelectedSaveDepthCamera");
 }
 
-void fileSelectedSaveKinect(File selection) {
-    saveKinect(selection.getAbsolutePath());
+void fileSelectedSaveDepthCamera(File selection) {
+    saveDepthCamera(selection.getAbsolutePath());
 }
 
-void saveDefaultKinect(){
-    saveKinect(Papart.cameraKinectConfig);
+void saveDefaultDepthCamera(){
+    saveDepthCamera(Papart.depthCameraConfig);
 }
 
-void saveKinect(String fileName){
-    kinectConfig.setCameraName(kinectIdText.getText());
-    kinectConfig.saveTo(this, fileName);
-    println("Kinect saved.");
+void saveDepthCamera(String fileName){
+    depthCameraConfig.setCameraName(depthCameraIdText.getText());
+    depthCameraConfig.saveTo(this, fileName);
+    println("DepthCamera saved.");
 }
 
 
