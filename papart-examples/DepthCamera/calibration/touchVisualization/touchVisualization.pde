@@ -28,7 +28,7 @@ PeasyCam cam;
 KinectProcessing kinectAnalysis;
 KinectPointCloud pointCloud;
 
-KinectDevice kinectDevice;
+DepthCameraDevice depthCameraDevice;
 Camera cameraRGB, cameraDepth;
 
 HomographyCreator homographyCreator;
@@ -48,11 +48,11 @@ void setup(){
 
     Papart papart = new Papart(this);
 
-    kinectDevice = Papart.loadDefaultKinectDevice(this);
-     //kinectDevice = KinectDevice.createKinectOne(this);
+    depthCameraDevice = Papart.loadDefaultDepthCameraDevice(this);
+     //depthCameraDevice = DepthCameraDevice.createKinectOne(this);
 
-    cameraRGB = kinectDevice.getCameraRGB();
-    cameraDepth = kinectDevice.getCameraDepth();
+    cameraRGB = depthCameraDevice.getCameraRGB();
+    cameraDepth = depthCameraDevice.getCameraDepth();
 
     try{
 	planeProjCalibration = new  PlaneAndProjectionCalibration();
@@ -62,7 +62,7 @@ void setup(){
 	die("Impossible to load the plane calibration...");
     }
 
-    kinectAnalysis = new KinectProcessing(this, kinectDevice);
+    kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
     pointCloud = new KinectPointCloud(this, kinectAnalysis, 1);
 
 
@@ -72,13 +72,13 @@ void setup(){
   cam.setMaximumDistance(5000);
   cam.setActive(true);
 
-  touchDetection = new TouchDetectionSimple2D(kinectDevice.depthSize());
+  touchDetection = new TouchDetectionSimple2D(depthCameraDevice.depthSize());
 
   touchCalibration = new PlanarTouchCalibration();
   touchCalibration.loadFrom(this, Papart.touchCalib);
   touchDetection.setCalibration(touchCalibration);
 
-  touchDetection3D = new TouchDetectionSimple3D(kinectDevice.depthSize());
+  touchDetection3D = new TouchDetectionSimple3D(depthCameraDevice.depthSize());
   touchCalibration3D = new PlanarTouchCalibration();
   touchCalibration3D.loadFrom(this, Papart.touchCalib3D);
   touchDetection3D.setCalibration(touchCalibration3D);

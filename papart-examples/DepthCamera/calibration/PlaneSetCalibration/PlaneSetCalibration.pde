@@ -23,6 +23,7 @@ import toxi.geom.*;
 import tech.lity.rea.svgextended.PShapeSVGExtended;
 
 Papart papart;
+DepthCameraDevice depthCameraDevice;
 
 MyApp app;
 MarkerBoard board;
@@ -53,8 +54,13 @@ void settings(){
 }
 
 void setup(){
-    papart = new Papart(this);
-    papart.initKinectCamera(1);
+
+    // Here we suppose that the color camera matches the depth camera. 
+    papart = Papart.seeThrough(this);
+    depthCameraDevice = papart.loadDefaultDepthCamera();
+    
+    // todo: assert to verify that. 
+    //    papart.initKinectCamera(1);
     //   frame.setResizable(false);
 
    initTouch();
@@ -71,7 +77,7 @@ void setup(){
     papart.startTracking();
     initGUI();
 
-    papart.forceDepthCameraSize();
+    //    papart.forceDepthCameraSize();
     //    Mode.add("corners");
 }
 
@@ -80,25 +86,26 @@ boolean isUsingAR = false;
 void useAR(boolean value){
     isUsingAR = value;
 
-    if(isUsingAR){
-        papart.forceCameraSize();
-    } else {
-        papart.forceDepthCameraSize();
-    }
+    // if(isUsingAR){
+    //     papart.forceCameraSize();
+    // } else {
+    //     papart.forceDepthCameraSize();
+    // }
 }
 
-KinectDevice kinectDevice;
+
 
 void initTouch(){
-    kinectDevice = papart.getKinectDevice();
     // RGB already started by initKinectCamera()
-    kinectDevice.getCameraDepth().setThread();
+    // UPDATE: no more thread for nothing ?
+    depthCameraDevice.getDepthCamera().setThread();
 
     // set the default stereo calibration
-    kinectDevice.setStereoCalibration(Papart.kinectStereoCalib);
+    // UPDATE: automatic now
+    // depthCameraDevice.setStereoCalibration(Papart.kinectStereoCalib);
 
     // KinectProcessing provides a PImage of the coloured depth.
-    depthAnalysis = new KinectProcessing(this, kinectDevice);
+    depthAnalysis = new KinectProcessing(this, depthCameraDevice);
 
     // load the default plane calibration
     PlaneAndProjectionCalibration calibration = new PlaneAndProjectionCalibration();
@@ -106,12 +113,12 @@ void initTouch(){
 
     // initialize the touchInput
     touchInput = new KinectTouchInput(this,
-                                      kinectDevice,
+                                      depthCameraDevice,
                                       depthAnalysis,
                                       calibration);
 
     // set the automatic update of the touchInput by the camera
-    // kinectDevice.setTouch(touchInput);
+    // depthCameraDevice.setTouch(touchInput);
 
     // load the touch calibration
     touchInput.setTouchDetectionCalibration(papart.getDefaultTouchCalibration());
@@ -139,7 +146,7 @@ void draw(){
         drawValidPoints(planeCalib, homography);
         if(toSave)
             save(planeCalib, homography);
-
+	
     } else {
         //  Plane using the selected Points...
         drawCameraDepth();
@@ -154,7 +161,6 @@ void draw(){
         drawValidPointsDepth(planeCalib, homography);
         if(toSave)
             save(planeCalib, homography);
-
     }
 
     // Get a 3D plane from the screen location
@@ -162,11 +168,11 @@ void draw(){
 }
 
 void updateDepth(){
-    IplImage depthImage = kinectDevice.getCameraDepth().getIplImage();
-    IplImage colImage = kinectDevice.getCameraRGB().getIplImage();
+    IplImage depthImage = depthCameraDevice.getDepthCamera().getIplImage();
+    IplImage colImage = depthCameraDevice.getColorCamera().getIplImage();
 
     if (colImage == null || depthImage == null) {
-        System.out.println("No Image.");
+	System.out.println("No Image.");
         return;
     }
     depthAnalysis.update(depthImage, colImage, 1);

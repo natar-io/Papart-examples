@@ -4,10 +4,10 @@ void drawCameraAR(){
 
     camera = papart.getCameraTracking();
 
+    PImage camImg = camera.getPImage();
     // draw the camera image
-    if (camera != null && camera.getPImage() != null) {
-        image(camera.getPImage(), 0, 0, width, height);
-    }
+    image(camImg, 0, 0, width, height);
+
     // draw the AR
     cameraDisplay.drawImage((PGraphicsOpenGL) g, cameraDisplay.render(),
                             0, 0, width, height);

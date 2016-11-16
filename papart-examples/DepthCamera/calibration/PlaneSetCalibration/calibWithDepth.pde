@@ -26,8 +26,8 @@ PlaneCalibration getPlaneFromDepth(){
 
 
 int screenToDepth(PVector screenPos){
-    float w = kinectDevice.getCameraDepth().width();
-    float h = kinectDevice.getCameraDepth().height();
+    float w = depthCameraDevice.getDepthCamera().width();
+    float h = depthCameraDevice.getDepthCamera().height();
 
     int x = (int) (screenPos.x / (float) width * w);
     int y = (int) (screenPos.y / (float) height * h);
@@ -39,8 +39,8 @@ int screenToDepth(PVector screenPos){
 void drawValidPointsDepth( PlaneCalibration planeCalib, HomographyCalibration homography){
 
     boolean useHomography = homography != HomographyCalibration.INVALID;
-    int w = kinectDevice.getCameraDepth().width();
-    int h = kinectDevice.getCameraDepth().height();
+    int w = depthCameraDevice.getDepthCamera().width();
+    int h = depthCameraDevice.getDepthCamera().height();
 
     Vec3D[] depth = depthAnalysis.getDepthPoints();
 
