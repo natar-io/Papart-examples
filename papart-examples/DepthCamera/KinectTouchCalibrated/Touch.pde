@@ -5,6 +5,7 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.calibration.*;
 
+import tech.lity.rea.svgextended.PShapeSVGExtended;
 import fr.inria.papart.depthcam.devices.*;
 
 boolean test = false;
@@ -24,8 +25,8 @@ public class MyApp extends PaperTouchScreen {
     }
 
     void setup() {
-        KinectDevice kinect = papart.getKinectDevice();
-        kinectExtrinsics = kinect.getCameraDepth().getExtrinsics().get();
+        DepthCameraDevice detphCamera = papart.getDepthCameraDevice();
+        kinectExtrinsics = detphCamera.getDepthCamera().getExtrinsics().get();
         // kinectExtrinsics.print();
         // kinectExtrinsics.invert();
     }

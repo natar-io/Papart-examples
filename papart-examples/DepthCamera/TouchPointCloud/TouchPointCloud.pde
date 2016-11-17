@@ -6,15 +6,12 @@ import TUIO.*;
 import toxi.geom.*;
 import fr.inria.skatolo.Skatolo;
 
-Papart papart;
-
 void settings(){
     size(640, 480, P3D);
 }
 
 public void setup() {
-    papart = new Papart(this);
-    papart.initKinectCamera(1);
+    Papart papart = Papart.seeThrough(this);
     papart.loadTouchInputKinectOnly();
     papart.loadSketches();
     papart.startTracking();

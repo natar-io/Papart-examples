@@ -13,16 +13,11 @@ void settings(){
 }
 
 public void setup() {
-    papart = new Papart(this);
-    try{
-    papart.initKinectCamera(1);
+
+    papart = Papart.seeThrough(this);
     papart.loadTouchInputKinectOnly();
 
-    }catch(Exception e){
-        println("e " + e);
-        e.printStackTrace();
-    }
-   papart.loadSketches();
+    papart.loadSketches();
     papart.startTracking();
 }
 

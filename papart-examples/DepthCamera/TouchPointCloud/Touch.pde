@@ -24,8 +24,8 @@ public class MyApp extends PaperTouchScreen {
     }
 
     void setup() {
-        KinectDevice kinect = papart.getKinectDevice();
-        kinectExtrinsics = kinect.getCameraDepth().getExtrinsics().get();
+        DepthCameraDevice kinect = papart.getDepthCameraDevice();
+        kinectExtrinsics = kinect.getDepthCamera().getExtrinsics().get();
 //        kinectExtrinsics.invert();
     }
 
