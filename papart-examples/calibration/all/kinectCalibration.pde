@@ -8,7 +8,7 @@ int frameWidth, frameHeight;
 
 ProjectiveDeviceP projectorDevice, kinectProjectiveP;
 
-KinectDevice kinectDevice;
+DepthCameraDevice depthCameraDevice;
 KinectProcessing kinectAnalysis;
 PointCloudVisualization pcv;
 
@@ -27,9 +27,9 @@ ARDisplay arDisplayKinect;
 Camera cameraKinect;
 
 void checkKinectVersion(){
-    CameraConfiguration kinectConfiguration = Papart.getDefaultKinectConfiguration(this);
+    CameraConfiguration kinectConfiguration = Papart.getDefaultDepthCameraConfiguration(this);
     isKinect360 = kinectConfiguration.getCameraType() == Camera.Type.OPEN_KINECT;
-    isKinectOne = kinectConfiguration.getCameraType() == Camera.Type.KINECT2_RGB;
+    isKinectOne = kinectConfiguration.getCameraType() == Camera.Type.OPEN_KINECT_2;
 
     stereoCalib = HomographyCalibration.getMatFrom(this, Papart.kinectStereoCalib);
 }
@@ -48,7 +48,7 @@ void initKinectOne(){
     if(isKinectOneActivated)
         return;
 
-    kinectDevice = new KinectOne(this, camera);
+    depthCameraDevice = new KinectOne(this, camera);
 
     initCommonKinect();
 
@@ -62,8 +62,8 @@ void initKinectOne(){
 // To implement fully
 void initKinect360(){
 
-    kinectDevice = new Kinect360(this);
-    cameraKinect = kinectDevice.getCameraRGB();
+    depthCameraDevice = new Kinect360(this, camera);
+    cameraKinect = depthCameraDevice.getColorCamera();
 
     String ARToolkitCalib = sketchPath() + "/data/Kinect.cal";
     cameraKinect.convertARParams(this, cameraKinect.getCalibrationFile(), ARToolkitCalib);
@@ -88,9 +88,9 @@ void initKinect360(){
 
 void initCommonKinect(){
 
-    kinectDevice.getCameraDepth().setThread();
+    depthCameraDevice.getDepthCamera().setThread();
 
-    kinectAnalysis = new KinectProcessing(this, kinectDevice);
+    kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
     planeProjCalib = new PlaneAndProjectionCalibration();
     homographyCalibration = new HomographyCalibration();
     // init is done later now.

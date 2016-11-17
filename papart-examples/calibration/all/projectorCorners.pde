@@ -2,7 +2,7 @@ import java.awt.Frame;
 import java.awt.Canvas;
 import processing.awt.*;
 import processing.awt.PSurfaceAWT.*;
-import com.jogamp.newt.opengl.GLWindow;
+// import com.jogamp.newt.opengl.GLWindow;
 
 public class ProjectorCorners extends PApplet {
 

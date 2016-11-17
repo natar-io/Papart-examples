@@ -18,8 +18,8 @@ public class PointCloudVisualization extends PApplet {
 
     public void settings() {
         // todo: sizeof kinect
-        size(kinectDevice.getCameraDepth().width(),
-             kinectDevice.getCameraDepth().height(),
+        size(depthCameraDevice.getDepthCamera().width(),
+             depthCameraDevice.getDepthCamera().height(),
              P3D);
     }
 
@@ -37,8 +37,8 @@ public class PointCloudVisualization extends PApplet {
 
   public void draw() {
       background(0);
-      Camera kinectRGB = kinectDevice.getCameraRGB();
-      Camera kinectDepth = kinectDevice.getCameraDepth();
+      Camera kinectRGB = depthCameraDevice.getColorCamera();
+      Camera kinectDepth = depthCameraDevice.getDepthCamera();
 
       IplImage kinectImg = kinectRGB.getIplImage();
       IplImage kinectImgDepth = kinectDepth.getIplImage();
@@ -50,7 +50,7 @@ public class PointCloudVisualization extends PApplet {
 
       stereoCalib.m03 = kinectStereoValueX;
       stereoCalib.m13 = kinectStereoValueY;
-      kinectDevice.setStereoCalibration(stereoCalib);
+      depthCameraDevice.setStereoCalibration(stereoCalib);
 
       if(isCalibrated){
           try{

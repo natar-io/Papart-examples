@@ -228,7 +228,7 @@ public void clearCalibrations(){
 }
 
 private void calibrateKinectOne(){
-    PMatrix3D kinectExtr = kinectDevice.getStereoCalibration().get();
+    PMatrix3D kinectExtr = depthCameraDevice.getStereoCalibration().get();
     kinectExtr.invert();
 
     PMatrix3D boardViewFromDepth = camBoard();
@@ -266,7 +266,7 @@ private void calibrateKinect360(){
 
 private void calibrateKinect360Extr(){
     // Depth -> color  extrinsics
-    PMatrix3D kinectExtr = kinectDevice.getStereoCalibration().get();
+    PMatrix3D kinectExtr = depthCameraDevice.getStereoCalibration().get();
 
     // color -> depth  extrinsics
     kinectExtr.invert();
@@ -283,7 +283,7 @@ private void calibrateKinect360Extr(){
 
 private void calibrateKinect360Plane(){
     // Depth -> color  extrinsics
-    PMatrix3D kinectExtr = kinectDevice.getStereoCalibration().get();
+    PMatrix3D kinectExtr = depthCameraDevice.getStereoCalibration().get();
 
     // color -> depth  extrinsics
     kinectExtr.invert();

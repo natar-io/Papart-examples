@@ -110,7 +110,8 @@ void initNames(){
     screenOffsetY = screenConfig.getProjectionScreenOffsetY();
 
     if(isKinectOne || isKinect360){
-        CameraConfiguration config = Papart.getDefaultKinectConfiguration(this);
+	
+        CameraConfiguration config = Papart.getDefaultDepthCameraConfiguration(this);
         kinectName = config.getCameraType().name()+ " " + config.getCameraName();
     } else{
         kinectName = "No Kinect";
