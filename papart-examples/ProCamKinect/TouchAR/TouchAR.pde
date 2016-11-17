@@ -30,11 +30,9 @@ void settings(){
 	papart = Papart.projection(this);
 	papart.loadTouchInput();
     } else {
-
-	papart = new Papart(this);
-
-	papart.initKinectCamera(renderQuality);
+	papart = Papart.seeThrough(this);
 	papart.loadTouchInputKinectOnly();
+
 	BaseDisplay display = papart.getDisplay();
 	display.setDrawingSize(width, height);
     }
