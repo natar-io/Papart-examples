@@ -55,7 +55,6 @@ class TestView extends PApplet {
 	
         cameraConfig.setCameraName(cameraIdText.getText());
 	setFormat();
-	
         camera = cameraConfig.createCamera();
         camera.setParent(this);
 
@@ -75,7 +74,7 @@ class TestView extends PApplet {
         papart.forceWindowSize(w, h);
         camera.setSize(w, h);
         camera.start();
-        camera.setThread();
+	//        camera.setThread();
 
         this.isTestingCamera = true;
 
@@ -126,10 +125,10 @@ class TestView extends PApplet {
     }
 
     void drawCamera(){
+	camera.grab();
 
         PImage im = null;
 	if(isTestingDepthCamera){
-	    camera.grab();
 	    im = ((CameraRGBIRDepth)camera).getDepthCamera().getPImage();
 	} else {
 	    im = camera.getPImage();
