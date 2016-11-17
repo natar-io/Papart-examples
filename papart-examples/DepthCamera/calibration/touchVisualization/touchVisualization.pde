@@ -48,11 +48,11 @@ void setup(){
 
     Papart papart = new Papart(this);
 
-    depthCameraDevice = Papart.loadDefaultDepthCameraDevice(this);
-     //depthCameraDevice = DepthCameraDevice.createKinectOne(this);
+    depthCameraDevice = papart.loadDefaultDepthCamera();
+    //depthCameraDevice = DepthCameraDevice.createKinectOne(this);
 
-    cameraRGB = depthCameraDevice.getCameraRGB();
-    cameraDepth = depthCameraDevice.getCameraDepth();
+    cameraRGB = depthCameraDevice.getColorCamera();
+    cameraDepth = depthCameraDevice.getDepthCamera();
 
     try{
 	planeProjCalibration = new  PlaneAndProjectionCalibration();
@@ -72,13 +72,13 @@ void setup(){
   cam.setMaximumDistance(5000);
   cam.setActive(true);
 
-  touchDetection = new TouchDetectionSimple2D(depthCameraDevice.depthSize());
+  touchDetection = new TouchDetectionSimple2D(kinectAnalysis.getDepthSize());
 
   touchCalibration = new PlanarTouchCalibration();
   touchCalibration.loadFrom(this, Papart.touchCalib);
   touchDetection.setCalibration(touchCalibration);
 
-  touchDetection3D = new TouchDetectionSimple3D(depthCameraDevice.depthSize());
+  touchDetection3D = new TouchDetectionSimple3D(kinectAnalysis.getDepthSize());
   touchCalibration3D = new PlanarTouchCalibration();
   touchCalibration3D.loadFrom(this, Papart.touchCalib3D);
   touchDetection3D.setCalibration(touchCalibration3D);
@@ -111,8 +111,7 @@ boolean mouseControl;
 
 void grabImages(){
     try {
-	cameraRGB.grab();
-        cameraDepth.grab();
+	depthCameraDevice.getMainCamera().grab();
     } catch(Exception e){
         println("Could not grab the image " + e);
     }
@@ -214,10 +213,7 @@ void switch3D(){
     switchTo3DButton.setLabel("Switch to " + (is3D? "2D" : "3D"));
 }
 
-
-
 void keyPressed() {
-
     if(key == 'i'){
         planeCalibration.flipNormal();
     }
