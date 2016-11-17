@@ -15,10 +15,8 @@ void settings(){
 }
 
 void setup(){
-    Papart.projection2D(this);
 
-    Papart papart = new Papart(this);
-
+    Papart papart = Papart.projection2D(this);
     // arguments are 2D and 3D precision.
     papart.loadTouchInputKinectOnly();
     touchInput = (KinectTouchInput) papart.getTouchInput();
