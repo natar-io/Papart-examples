@@ -163,16 +163,6 @@ PVector getScreenResolution(int screenNo){
     return new PVector(displayMode.getWidth(), displayMode.getHeight());
 }
 
-public void switchToCalibration(boolean value){
-    println("Switch !");
-    Utils.runExample("calibration/all", true);
-
-    try{
-         Thread.sleep(12000);
-     }catch(Exception e){}
-    exit();
-}
-
 
 int rectSize = 30;
 
@@ -190,11 +180,11 @@ void draw(){
     image(backgroundImage, 0, 0);
 
     if(cameraCalibrationOk){
-        text("Resolution : " + cameraWidth + "x" + cameraHeight , 400, 415);
+        text("Resolution: " + cameraWidth + "x" + cameraHeight , 400, 432);
     }
 
     if(projectorCalibrationOk){
-        text("Resolution : " + projectorWidth + "x" + projectorHeight ,350, 207);
+        text("Resolution: " + projectorWidth + "x" + projectorHeight ,350, 209);
     }
 
 
@@ -203,25 +193,15 @@ void draw(){
 
 
 void keyPressed() {
-    if (key == 27) {
-	//The ASCII code for esc is 27, so therefore: 27
-     //insert your function here
-        println("Yoo");
-    }
-    if (key == ESC)
-        key=0;
+    // if (key == 27) {
+    // 	//The ASCII code for esc is 27, so therefore: 27
+    //  //insert your function here
+    // }
+    // if (key == ESC)
+    //     key=0;
+
 }
 
-
-
-// Todo: custom file chooser.
-void saveCameraAs(){
-    selectOutput("Select a file to write to:", "fileSelectedSaveCamera");
-}
-
-void fileSelectedSaveCamera(File selection) {
-    saveCamera(selection.getAbsolutePath());
-}
 
 
 void loadCalibration(){
@@ -300,10 +280,6 @@ void setFormat(){
     }
 }
 
-// Todo: custom file chooser.
-void saveDepthCameraAs(){
-    selectOutput("Select a file to write to:", "fileSelectedSaveDepthCamera");
-}
 
 void fileSelectedSaveDepthCamera(File selection) {
     saveDepthCamera(selection.getAbsolutePath());
@@ -348,15 +324,6 @@ void fileSelectedLoadProjectorCalibration(File selection){
     }
 }
 
-// Todo: custom file chooser.
-void saveScreenAs(){
-    selectOutput("Select a file to write to:", "fileSelectedSaveScreen");
-}
-
-void fileSelectedSaveScreen(File selection) {
-    saveScreen(selection.getAbsolutePath());
-}
-
 void saveDefaultScreen(){
     saveScreen(Papart.screenConfig);
 }
@@ -368,7 +335,6 @@ void updateScreenConfig(){
     }catch(java.lang.NumberFormatException e){
 	println("Invalid Position");
     }
-
 }
 
 void saveScreen(String fileName){

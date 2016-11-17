@@ -50,26 +50,19 @@ class TestView extends PApplet {
     }
 
     public void testCamera(){
-
-	// TODO: display graphical errors.
-	
         cameraConfig.setCameraName(cameraIdText.getText());
-	setFormat();
+	    setFormat();
         camera = cameraConfig.createCamera();
         camera.setParent(this);
 
         int w = 640, h = 480;
 
-        if(cameraCalibrationOk && useCameraCalibration){
+        if(cameraCalibrationOk){
             w = cameraWidth;
             h = cameraHeight;
         }
 
-	// TODO: what about this size ?
-        // if(cameraConfig.getCameraType() == Camera.Type.OPEN_KINECT_2){
-        //     w = KinectOne.CAMERA_WIDTH_RGB;
-        //     h = KinectOne.CAMERA_HEIGHT_RGB;
-        // }
+
 
         papart.forceWindowSize(w, h);
         camera.setSize(w, h);
@@ -83,7 +76,6 @@ class TestView extends PApplet {
 
 
     public void testDepthCamera(){
-
         if(depthCameraConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
@@ -111,10 +103,6 @@ class TestView extends PApplet {
         this.isTestingDepthCamera = true;
         show();
     }
-
-
-
-
 
     public void draw() {
         if(isTestingCamera || isTestingDepthCamera)

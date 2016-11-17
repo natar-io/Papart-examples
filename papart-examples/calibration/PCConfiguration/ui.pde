@@ -5,14 +5,12 @@ Textfield depthCameraName;
 
 RadioButton screenChooser, cameraType, depthCameraType, cameraSubType;
 
-Button startCameraButton, saveCameraAsButton, saveDefaultCameraButton;
-Button startDepthCameraButton, saveDepthCameraAsButton, saveDefaultDepthCameraButton;
-Button initButton, saveScreenAsButton, saveDefaultScreenButton;
+Button startCameraButton, saveDefaultCameraButton;
+Button startDepthCameraButton, saveDefaultDepthCameraButton;
+Button initButton, saveDefaultScreenButton;
 Toggle useCalibration;
 Button loadCalibrationCamera, loadCalibrationProjector;
-
-Button switchButton;
-
+    
 PFont myFont;
 ControlFont cFont;
 CColor cColor;
@@ -22,7 +20,7 @@ PImage testCameraImg;
 
 boolean useCameraCalibration;
 
-final int  RGB_FORMAT=0;
+final int RGB_FORMAT=0;
 final int IR_FORMAT=1;
 final int DEPTH_FORMAT=2;
 
@@ -59,12 +57,6 @@ void initUI() {
   initScreenUI();
   initCameraUI();
   initDepthCameraUI();
-
-  switchButton = skatolo.addButton("switchToCalibration")
-      .setLabel("Switch to Calibration")
-      .setSize(200, 30)
-      .setPosition(400, 10)
-      ;
 
   updateStyles();
 }
@@ -129,11 +121,6 @@ void initScreenUI() {
     .setSize(110, 20)
     ;
 
-  saveScreenAsButton = skatolo.addButton("saveScreenAs")
-    .setPosition(611, 183)
-    .setLabel("Save screen as...")
-    .setSize(110, 20)
-    ;
 }
 
 void initCameraUI() {
@@ -146,7 +133,7 @@ void initCameraUI() {
         .addItem("OpenCV", Camera.Type.OPENCV.ordinal())
         .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
-	.addItem("RealSense",Camera.Type.REALSENSE.ordinal())
+	    .addItem("RealSense",Camera.Type.REALSENSE.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())
         .addItem("OpenKinect2",Camera.Type.OPEN_KINECT_2.ordinal())
         .addItem("FlyCapture", Camera.Type.FLY_CAPTURE.ordinal())
@@ -160,14 +147,6 @@ void initCameraUI() {
         .addItem("rgb", RGB_FORMAT)
         .addItem("ir", IR_FORMAT)
         .addItem("depth", DEPTH_FORMAT)
-        ;
-
-    
-    useCalibration = skatolo.addToggle("useCameraCalibration")
-        .setLabel("use calibration")
-        .setPosition(250, 457)
-        // .setSize(130,50)
-        .setState(true)
         ;
 
     loadCalibrationCamera = skatolo.addButton("loadCalibration")
@@ -200,7 +179,7 @@ void initCameraUI() {
   testCameraImg = loadImage("data/testCamera.png");
 
   startCameraButton = skatolo.addButton("testCameraButton")
-    .setPosition(611, 367)
+    .setPosition(611, 369)
     .setLabel("Test the camera")
     .setSize(110, 20)
     ;
@@ -211,25 +190,7 @@ void initCameraUI() {
     .setSize(110, 20)
     ;
 
-  saveCameraAsButton = skatolo.addButton("saveCameraAs")
-    .setPosition(611, 450)
-    .setLabel("Save camera as.")
-    .setSize(110, 20)
-    ;
 }
-
-
-// int getDepthType(Camera.Type type){
-//     if(t == Camera.Type.OPEN_KINECT)
-//         return 0;
-//     if(t == Camera.Type.OPEN_KINECT_2)
-//         return 1;
-//     if(t == Camera.Type.REALSENSE)
-//         return 2;
-//     if(t == Camera.Type.FAKE)
-//         return 3;
-//     return 3;
-// }
 
 int getDepthType(int t){
     if(t == Camera.Type.REALSENSE.ordinal())
@@ -281,12 +242,7 @@ void initDepthCameraUI() {
     .setLabel("Save as default")
     .setSize(110, 20)
     ;
-
-  saveDepthCameraAsButton = skatolo.addButton("saveDepthCameraAs")
-    .setPosition(611, 735)
-    .setLabel("Save kinect as.")
-    .setSize(110, 20)
-    ;
+  
 }
 
 
@@ -296,7 +252,6 @@ void updateStyles() {
   setStyle(posXText);
   setStyle(posYText);
   setStyle(initButton);
-  setStyle(saveScreenAsButton);
   setStyle(saveDefaultScreenButton);
   setStyle(loadCalibrationProjector);
 
@@ -306,16 +261,13 @@ void updateStyles() {
     setStyle(cameraFormatText);
   setStyle(startCameraButton);
   setStyle(saveDefaultCameraButton);
-  setStyle(saveCameraAsButton);
   setStyle(loadCalibrationCamera);
 
   setStyle(depthCameraType);
   setStyle(depthCameraIdText);
   setStyle(startDepthCameraButton);
   setStyle(saveDefaultDepthCameraButton);
-  setStyle(saveDepthCameraAsButton);
 
-  setStyle(switchButton);
 }
 
 void setStyle(Controller controller) {
