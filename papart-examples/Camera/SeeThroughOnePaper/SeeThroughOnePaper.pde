@@ -3,7 +3,6 @@ import fr.inria.papart.procam.*;
 import org.bytedeco.javacpp.opencv_core;
 import org.reflections.*;
 import toxi.geom.*;
-import tech.lity.rea.svgextended.PShapeSVGExtended;
 import processing.video.*;
 
 Papart papart;

@@ -35,7 +35,8 @@ void setup() {
   // load the depth camera
   try{
       depthCameraDevice = papart.loadDefaultDepthCamera();
-
+      depthCameraDevice.getMainCamera().start();
+    
       //      depthCameraDevice.getMainCamera().setUseColor(true);
   }catch (Exception e){
       println("Cannot start the DepthCamera: " + e );
@@ -67,11 +68,16 @@ void draw() {
       return;
   }
 
+  // TODO: color image refresh is very weird: to check. 
+  // PImage colImg = depthCameraDevice.getColorCamera().getPImage();
+  // image(colImg, 0, 0, width, height);
+  
   kinectAnalysis.update(depthImg, colorImg, skip);
 
   pointCloud.updateWith(kinectAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 }
+
 
 
 void keyPressed(){

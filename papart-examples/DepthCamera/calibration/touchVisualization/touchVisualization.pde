@@ -49,8 +49,10 @@ void setup(){
     Papart papart = new Papart(this);
 
     depthCameraDevice = papart.loadDefaultDepthCamera();
-    //depthCameraDevice = DepthCameraDevice.createKinectOne(this);
-
+    // activate color, activated by default for now. 
+    //    depthCameraDevice.getMainCamera().setUseColor(true);
+    depthCameraDevice.getMainCamera().start();
+    
     cameraRGB = depthCameraDevice.getColorCamera();
     cameraDepth = depthCameraDevice.getDepthCamera();
 
