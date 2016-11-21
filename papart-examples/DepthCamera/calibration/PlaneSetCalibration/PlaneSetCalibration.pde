@@ -58,23 +58,29 @@ void setup(){
     // Here we suppose that the color camera matches the depth camera. 
     papart = Papart.seeThrough(this);
     depthCameraDevice = papart.loadDefaultDepthCamera();
-    
-    // todo: assert to verify that. 
-    //    papart.initKinectCamera(1);
-    //   frame.setResizable(false);
 
-   initTouch();
+    depthCameraDevice.getMainCamera().start();
+    depthCameraDevice.getMainCamera().setThread();
+
+    initTouch();
 
     cameraDisplay = papart.getARDisplay();
     cameraDisplay.manualMode();
-    cameraDisplay.setExtrinsics(new PMatrix3D());
+
+    // ARDisplay has no extrinisics, it is the origin. 
+    // TODO: check this for Kinect 360
+    cameraDisplay.setExtrinsics(new PMatrix3D(
+    					      1, 0, 0, 0,
+    					      0, 1, 0, 0,
+    					      0, 0, 1, 0,
+    					      0, 0, 0, 1));
 
     app = new MyApp();
 
     calibrationExtrinsic = new CalibrationExtrinsic(this);
-    calibrationExtrinsic.setDefaultKinect();
+    calibrationExtrinsic.setDefaultDepthCamera();
 
-    papart.startTracking();
+    papart.startTrackingWithoutThread();
     initGUI();
 
     //    papart.forceDepthCameraSize();
@@ -98,7 +104,7 @@ void useAR(boolean value){
 void initTouch(){
     // RGB already started by initKinectCamera()
     // UPDATE: no more thread for nothing ?
-    depthCameraDevice.getDepthCamera().setThread();
+
 
     // set the default stereo calibration
     // UPDATE: automatic now
@@ -141,14 +147,15 @@ void draw(){
         drawCameraAR();
         Screen screen = app.getScreen();
         screen.computeScreenPosTransform(camera);
-        PlaneCalibration planeCalib = getPlaneFromPaper();
-        HomographyCalibration homography = findHomographyAR(planeCalib);
-        drawValidPoints(planeCalib, homography);
+	PlaneCalibration planeCalib = getPlaneFromPaper();
+	PlaneCalibration planeCalibDepth = getPlaneFromPaperViewedByDepth();
+        HomographyCalibration homography = findHomographyAR(planeCalib); // , planeCalibDepth);
+        drawValidPoints(planeCalib, planeCalibDepth, homography);
         if(toSave)
-            save(planeCalib, homography);
+            save(planeCalibDepth, homography);
 	
     } else {
-        //  Plane using the selected Points...
+        //  Plane using the depthlected Points...
         drawCameraDepth();
         PlaneCalibration planeCalib = getPlaneFromDepth();
 
@@ -175,7 +182,12 @@ void updateDepth(){
 	System.out.println("No Image.");
         return;
     }
-    depthAnalysis.update(depthImage, colImage, 1);
+    try{
+	depthAnalysis.update(depthImage, colImage, 1);
+    }catch(Exception e)
+	{
+	    e.printStackTrace();
+	}
 }
 
 void saveButton(){
@@ -235,7 +247,8 @@ public PVector toPVector(Vec3D p) {
 }
 
 
-HomographyCalibration findHomographyAR(PlaneCalibration planeCalib){
+// PlaneCalib is with the depth camera as origin
+HomographyCalibration findHomographyAR(PlaneCalibration planeCalib) {
 
     PVector originDst = new PVector();
     PVector xAxisDst = new PVector(1, 0);
@@ -244,10 +257,11 @@ HomographyCalibration findHomographyAR(PlaneCalibration planeCalib){
 
     HomographyCreator homographyCreator = new HomographyCreator(3, 3, 4);
 
-    PVector originOnPlane = getKinectViewOf(origin, planeCalib);
-    PVector xAxisOnPlane = getKinectViewOf(xAxis, planeCalib);
-    PVector cornerOnPlane = getKinectViewOf(corner, planeCalib);
-    PVector yAxisOnPlane = getKinectViewOf(yAxis, planeCalib);
+    // all of this is with the depth as origin
+    PVector originOnPlane = getKinectViewOf(origin, planeCalib); //, planeCalibDepth);
+    PVector xAxisOnPlane = getKinectViewOf(xAxis, planeCalib); // planeCalibDepth);
+    PVector cornerOnPlane = getKinectViewOf(corner, planeCalib); // , planeCalibDepth);
+    PVector yAxisOnPlane = getKinectViewOf(yAxis, planeCalib); // planeCalibDepth);
 
     homographyCreator.addPoint(originOnPlane, originDst);
     homographyCreator.addPoint(xAxisOnPlane, xAxisDst);
@@ -261,12 +275,24 @@ HomographyCalibration findHomographyAR(PlaneCalibration planeCalib){
     }
 }
 
-PVector getKinectViewOf(PixelSelect widget, PlaneCalibration planeCalib){
+PVector getKinectViewOf(PixelSelect widget,
+			PlaneCalibration planeCalib){
+    
     PVector posOnScreen = getPositionOf(widget);
     PVector posOnPlane = cameraDisplay.getProjectedPointOnPlane(planeCalib,
                                                                 posOnScreen.x / width,
                                                                 posOnScreen.y / height);
-    return posOnPlane;
+    // return posOnPlane;
+    
+    // We have pos on plane from the camera, we convert it to plane
+    // to plane on depth.
+
+    // muliply by the extr ?
+    PVector posOnPlaneByDepth = new PVector();
+    PMatrix3D extr = depthCameraDevice.getStereoCalibrationInv();
+    extr.mult(posOnPlane, posOnPlaneByDepth);
+
+    return posOnPlaneByDepth;
 }
 
 PVector getPositionOf(PixelSelect widget){
@@ -321,7 +347,7 @@ void keyPressed() {
 
 
         try{
-            boolean working = calibrationExtrinsic.calibrateKinect360Plane(snapshots);
+            boolean working = calibrationExtrinsic.calibrateDepthCamPlane(snapshots);
             println("Calibration: " + (working? "OK": "ERROR") + " .");
         }catch(Exception e){
             e.printStackTrace();
