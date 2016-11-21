@@ -40,22 +40,34 @@ public void setup() {
     // cameraK = (CameraOpenKinect) camera;
     // cameraK.getIRVideo();
 
-    // camera = CameraFactory.createCamera(Camera.Type.REALSENSE_RGB, "0");
-    // camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT_2_RGB, "0");
-
     try{
-    camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0");
-    cameraRS = (CameraRGBIRDepth) camera;
-    camera.setParent(this);
 
-    } catch(Exception e ){
+        camera = CameraFactory.createCamera(Camera.Type.REALSENSE, "0", "");
+	// camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT, "0", "depth");
+	// camera = CameraFactory.createCamera(Camera.Type.OPEN_KINECT_2, "0", "rgb");
+
+	cameraRS = (CameraRGBIRDepth) camera;
+	//	cameraRS.actAsColorCamera();
+
+	cameraRS.setUseDepth(true);
+	cameraRS.setUseColor(true);
+	cameraRS.setUseIR(true);
+
+	cameraRS.getColorCamera().setSize(1280, 720);
+	// cameraRS.getIRCamera().setSize(640, 480);
+	
+	//	camera.setSize(640, 480);
+	//	camera.setSize(1280, 720);
+	camera.setParent(this);
+
+
+	//    ((CameraFlyCapture) camera).setBayerDecode(true);
+	camera.start();
+	//camera.setThread();
+
+        } catch(Exception e ){
 	e.printStackTrace();
     }
-
-    // camera.setSize(resX, resY);
-    //    ((CameraFlyCapture) camera).setBayerDecode(true);
-    camera.start();
-    // camera.setThread();
 
     //    videoOut = createImage(resX, resY, RGB);
     //    frameRate(1000);
@@ -65,8 +77,10 @@ PImage videoOut;
 void draw() {
 
     background(0);
+
     camera.grab();
-    
+	
+ 
     // IplImage imI = camera.getIplImage();
     // fr.inria.papart.procam.Utils.IplImageToPImage(imI, true, videoOut);
     
@@ -81,11 +95,11 @@ void draw() {
     // }catch(Exception e){
     // 	e.printStackTrace();
     // }
-    
+
     PImage imRGB = cameraRS.getColorImage();
     PImage imIR = cameraRS.getIRImage();
     PImage imDepth = cameraRS.getDepthPImage();
-
+    
     if(imRGB != null){
     	image(imRGB, 0, 0, 640, 480);
     }
@@ -94,7 +108,9 @@ void draw() {
     }
     if(imDepth != null){
     	image(imDepth, 0, 480, 640, 480);
-    } else {
-	println("Depth Image null");
     }
+
+    // } catch(Exception e ){
+    // 	e.printStackTrace();
+    // }
 }
