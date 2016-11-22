@@ -9,36 +9,18 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.skatolo.Skatolo;
 
-boolean useProjector = true;
 float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
-
-    if(useProjector){
-	fullScreen(P3D);
-    }else{
-    	size((int) (640 * renderQuality),
-	     (int) (480 * renderQuality),
-	     P3D);
-    }
+    fullScreen(P3D);
 }
 
  void setup(){
-
-    if(useProjector){
-	papart = Papart.projection(this);
-	papart.loadTouchInput();
-    } else {
-	papart = Papart.seeThrough(this);
-	papart.loadTouchInputKinectOnly();
-
-	BaseDisplay display = papart.getDisplay();
-	display.setDrawingSize(width, height);
-    }
-
-    papart.loadSketches();
-    papart.startTracking();
+     papart = Papart.projection(this);
+     papart.loadTouchInput();
+     papart.loadSketches();
+     papart.startTracking();
 }
 
 
