@@ -20,7 +20,7 @@ public class MyApp  extends PaperScreen {
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(sketchPath() + "/data/A3-small1.cfg", 297, 210);
+	loadMarkerBoard(sketchPath() + "/data/A3-small1.svg", 297, 210);
     }
 
     void setup() {
@@ -74,8 +74,8 @@ public class MyApp  extends PaperScreen {
 String str = outText.getString();
 	System.out.println("OCR output:\n" + str);
 
-fill(255);
-stroke(255);
+	fill(255);
+	stroke(255);
         textFont(myFont, 40);
 	text(str, 71, 191);
 	if(out != null){
@@ -85,8 +85,8 @@ stroke(255);
 
     void close(){
     // Destroy used object and release memory
-    api.End();
-    outText.deallocate();
+	api.End();
+	outText.deallocate();
 
     }
 
