@@ -65,6 +65,7 @@ void setup(){
     initTouch();
 
     cameraDisplay = papart.getARDisplay();
+    cameraDisplay.reloadCalibration();
     cameraDisplay.manualMode();
 
     // ARDisplay has no extrinisics, it is the origin. 
