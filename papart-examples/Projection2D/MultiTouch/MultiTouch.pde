@@ -14,16 +14,18 @@ void settings(){
 
 void setup(){
     Papart papart = Papart.projection2D(this);
-
     // arguments are 2D and 3D precision.
     papart.loadTouchInputKinectOnly();
     touchInput = (KinectTouchInput) papart.getTouchInput();
-    frameRate(200);
+    
+    papart.startDepthCameraThread();
+    
+    frameRate(60);
 }
 
 void draw(){
 
-    println("Framerate "+ frameRate);
+    //    println("Framerate "+ frameRate);
     background(100);
 
     fill(50, 50, 255);
