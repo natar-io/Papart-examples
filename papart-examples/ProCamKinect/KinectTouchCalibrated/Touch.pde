@@ -26,9 +26,6 @@ public class MyApp extends PaperTouchScreen {
     void setup() {
         DepthCameraDevice kinect = papart.getDepthCameraDevice();
         kinectExtrinsics = kinect.getDepthCamera().getExtrinsics().get();
-
-        kinectExtrinsics.print();
-        kinectExtrinsics.invert();
     }
 
 
@@ -67,8 +64,8 @@ public class MyApp extends PaperTouchScreen {
                 pushMatrix();
 
                 fill(-pointPosDisplay.z * 2);
-                translate(pointPosDisplay.x , pointPosDisplay.y, pointPosDisplay.z);
-                ellipse(0, 0, 2, 2);
+                translate(pointPosDisplay.x , pointPosDisplay.y , pointPosDisplay.z );
+                ellipse(-1, -1, 2, 2);
                 popMatrix();
 	    }
 
