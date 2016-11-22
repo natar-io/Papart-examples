@@ -11,7 +11,7 @@ import java.awt.Color;
 
 
 void settings() {
-  fullScreen(P3D);
+    size(640, 480, P3D);
 }
 
 void setup() {
