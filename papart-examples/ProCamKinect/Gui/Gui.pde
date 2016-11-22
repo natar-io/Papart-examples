@@ -12,7 +12,6 @@ void settings(){
 }
 
 public void setup() {
-
     papart = Papart.projection(this);
     papart.loadTouchInput();
 
