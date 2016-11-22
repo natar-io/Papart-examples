@@ -11,6 +11,7 @@ import fr.inria.papart.calibration.*;
 import toxi.geom.*;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.freenect;
+import org.bytedeco.javacv.RealSenseFrameGrabber;
 import org.bytedeco.javacpp.opencv_core.*;
 import java.nio.IntBuffer;
 
@@ -215,11 +216,43 @@ void switch3D(){
     switchTo3DButton.setLabel("Switch to " + (is3D? "2D" : "3D"));
 }
 
+boolean undist = true;
+
 void keyPressed() {
     if(key == 'i'){
         planeCalibration.flipNormal();
     }
+    
+    if(depthCameraDevice.type() == Camera.Type.REALSENSE){
+	setRealSenseMode();
+    }
+ }
+
+void setRealSenseMode(){
+    RealSenseFrameGrabber rs = ((RealSense)depthCameraDevice).getMainCamera().getFrameGrabber();
+	
+    if(key == '1')
+	rs.setPreset(1);
+    if(key == '2')
+	rs.setPreset(2);
+    if(key == '3')
+	rs.setPreset(3);
+    if(key == '4')
+	rs.setPreset(4);
+    if(key == '5')
+	rs.setPreset(5);
+    if(key == '6')
+	rs.setPreset(6);
+    if(key == '7')
+	rs.setPreset(7);
+    if(key == '8')
+	rs.setPreset(8);
+    if(key == '9')
+	rs.setPreset(9);
+    if(key == '0')
+	rs.setPreset(0);
 }
+
 
 void saveButton(){
     if(is3D)
