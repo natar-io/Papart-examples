@@ -30,6 +30,10 @@ void setup() {
   depthCameraDevice = papart.loadDefaultDepthCamera();
 
   kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
+  depthCameraDevice.getMainCamera().start();
+
+  // The intrinsic calibration is valid after the start() for some devices. 
+  kinectAnalysis.updateCalibrations(depthCameraDevice);
 }
 
 
@@ -42,7 +46,7 @@ void draw() {
   catch(Exception e) {
     println("Could not grab the image " + e);
   }
-
+  try{
   IplImage colourImg = depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
 
@@ -52,6 +56,9 @@ void draw() {
   PImage alignedImage = kinectAnalysis.update(depthImg, colourImg, skip);
 
   image(alignedImage, 0, 0, width, height);
+  } catch(Exception e){
+      e.printStackTrace();
+  }
 }
 
 void close() {
