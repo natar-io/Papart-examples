@@ -54,6 +54,9 @@ public class MyApp extends PaperScreen {
     PImage out = boardView.getViewOf(cameraTracking);
     PImage processed = out;
 
+    if(out == null)
+	return;
+    
     colorMode(HSB, 360, 100, 100);
 
     out.loadPixels();
