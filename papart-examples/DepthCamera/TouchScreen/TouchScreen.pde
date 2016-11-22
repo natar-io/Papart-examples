@@ -11,8 +11,7 @@ void settings(){
 
 void setup(){
     Papart papart = Papart.seeThrough(this);
-    papart.loadTouchInputKinectOnly();
-
+    papart.loadTouchInput();
     papart.loadSketches() ;
     papart.startTracking();
 }
