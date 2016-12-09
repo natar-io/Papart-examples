@@ -8,7 +8,7 @@ This code is propriety of Inria and Bordeaux University.
 
 ## Quick start guide
 
-(Work in progress) 
+#### Work in progress, links are not ready yet. 
 
 PapARt is a [Processing](http://processing.org) library, and it requires many other libraries to work. The smaller ones are included, and the heavy ones are separated.
 
