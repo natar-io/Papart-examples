@@ -1,5 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import processing.video.*;
@@ -12,12 +13,16 @@ import fr.inria.skatolo.Skatolo;
 float renderQuality = 1.5f;
 Papart papart;
 
+ String calibrationFileName = "A4-calib.svg";
+// String calibrationFileName = "A4-default.svg";
+//String calibrationFileName = "ExtractedView.bmp";
+
 void settings(){
     fullScreen(P3D);
 }
 
  void setup(){
-     Papart.calibrationFileName = "mega-calib.svg";
+     Papart.calibrationFileName = calibrationFileName;
      papart = Papart.projection(this);
      papart.loadSketches();
      papart.startTracking();
@@ -28,5 +33,5 @@ void draw(){
 
 void keyPressed() {
     if(key == 'c')
-        papart.calibration();
+        papart.calibration(app);
 }
