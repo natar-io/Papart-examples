@@ -30,12 +30,12 @@ void settings(){
 }
 
 void setup(){
-    Papart papart = Papart.projection2D(this);
-
-    // arguments are 2D and 3D precision.
-    papart.loadTouchInputKinectOnly();
+       Papart papart = Papart.projection2D(this);
+    papart.loadTouchInput();
     touchInput = (KinectTouchInput) papart.getTouchInput();
+    papart.startDepthCameraThread();
 
+    
   /* RGB colormode, with range of 0 to 400 */
   colorMode(RGB, 400);
   /* Frame rate is 30 */
