@@ -1,8 +1,8 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.drawingapp.*;
 import fr.inria.papart.multitouch.*;
-import fr.inria.papart.drawingapp.Button;
+
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import processing.opengl.*;
 import org.reflections.*;
