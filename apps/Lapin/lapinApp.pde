@@ -12,7 +12,6 @@ public class LapinApp extends PaperTouchScreen{
     PShape rabbit;
     PShape sphereM;
     PGraphicsOpenGL pg;
-    //    Button b;
     PVector lightPos = new PVector(0, 0, 600);
     TwoFingersRST rst;
 
@@ -24,9 +23,6 @@ public class LapinApp extends PaperTouchScreen{
     void setup(){
 	rabbit = loadShape("models/bun_zipper.obj");
 	sphereM = loadShape("models/sphere/sphere1.obj");
-
-	// b = new Button("pos", 30, 20, 30, 20);
-	// buttons.add(b);
 
 	rst = new TwoFingersRST(new PVector());
         rst.setFiltering(false);
