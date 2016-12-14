@@ -8,7 +8,7 @@ The `settings()` method indicates how to render your processing app. Here we ask
 The `setup()` method contains the important variable `Papart papart`, loads the other files in the solution ([MyApp2D](https://github.com/potioc/Papart-examples/edit/master/papart-examples/Camera/SeeThroughOnePaper/PaperApp2D.pde)) and starts to track markers.
  
 ##Second file: MyApp2D
-Markers are loaded in the `settings()` method, from a SVG file using this command `loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);`.
+Markers are loaded in the `settings()` method, from a SVG file using this command `loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);`.
 
 Objects can be added to the PaperScreen in the `drawOnPaper()` method, such as `rect(10, 20, 100, 75);` instructions.
  

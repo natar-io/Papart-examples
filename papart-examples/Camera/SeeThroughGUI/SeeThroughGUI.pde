@@ -2,10 +2,10 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.opencv_core;
 import org.reflections.*;
 import toxi.geom.*;
-import fr.inria.skatolo.*;
 
 import fr.inria.skatolo.*;
 import fr.inria.skatolo.events.*;
@@ -54,9 +54,9 @@ void toggleBox(){
 void draw() {
 
     // Ask the Display to be rendered offscreen.
-    // Nothing is drawn here.
-    display.drawScreensOver();
-
+    // Nothing is drawn directly here.
+    display.drawScreens();
+    
     noStroke();
 
     // draw the camera image

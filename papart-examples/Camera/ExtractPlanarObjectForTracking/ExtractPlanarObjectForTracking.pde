@@ -43,14 +43,14 @@ void settings() {
 
 public void setup() {
 
-  Papart.seeThrough(this);
+    papart = Papart.seeThrough(this);
+    cameraDisplay = papart.getARDisplay();
+    cameraDisplay.manualMode();
 
-  papart =  Papart.getPapart();
-  cameraDisplay = papart.getARDisplay();
-  cameraDisplay.manualMode();
-
-  camera = papart.getCameraTracking();
-
+    camera = papart.getCameraTracking();
+    camera.start();
+    camera.setThread();
+    
   image = new PVector[4];
 
   image[0] = new PVector(250, 250);
