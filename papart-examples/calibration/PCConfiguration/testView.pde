@@ -62,8 +62,6 @@ class TestView extends PApplet {
             h = cameraHeight;
         }
 
-
-
         papart.forceWindowSize(w, h);
         camera.setSize(w, h);
         camera.start();
