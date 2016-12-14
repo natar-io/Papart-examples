@@ -1,5 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import processing.video.*;
@@ -34,6 +35,6 @@ void keyPressed() {
 	test = !test;
 
     if(key == 'c')
-        papart.calibration();
+        papart.calibration(app);
 
 }
