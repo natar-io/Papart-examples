@@ -1,4 +1,5 @@
 import fr.inria.papart.procam.*;
+import tech.lity.rea.svgextended.*;
 import fr.inria.papart.multitouch.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;

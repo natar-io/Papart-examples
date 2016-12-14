@@ -1,5 +1,6 @@
 // PapARt library
 import fr.inria.papart.procam.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
@@ -13,7 +14,7 @@ void settings(){
 
 public void setup() {
     Papart papart = Papart.seeThrough(this);
-    papart.loadTouchInputKinectOnly();
+    papart.loadTouchInput();
 
     papart.loadSketches();
     papart.startTracking();

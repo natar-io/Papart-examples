@@ -1,3 +1,5 @@
+import tech.lity.rea.svgextended.*;
+
 void drawCameraAR(){
     cameraDisplay.drawScreens(); // offscreen rendering
     noStroke();
