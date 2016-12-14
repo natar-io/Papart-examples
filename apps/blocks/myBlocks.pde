@@ -24,7 +24,8 @@ public class MyBlocks extends PaperTouchScreen {
 
     void settings(){
 	setDrawingSize(320, 210);
-	loadMarkerBoard(sketchPath() + "/data/markers/blocks.svg", 320, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 320, 210);
+	// loadMarkerBoard(sketchPath() + "/data/markers/blocks.svg", 320, 210);
         setDrawAroundPaper();
     }
 
