@@ -13,7 +13,7 @@ public class MyApp  extends PaperTouchScreen {
 
     void settings() {
         setDrawingSize(297, 210);
-	loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
         setQuality(3f);
     }
 
@@ -28,12 +28,12 @@ public class MyApp  extends PaperTouchScreen {
 	//     ;
 
 	skatolo.addHoverButton("button")
-	    .setPosition(0, 0)
+	    .setPosition(0, 60)
 	    .setSize(60, 60)
 	    ;
 
 	skatolo.addHoverToggle("toggle")
-	    .setPosition(100, 0)
+	    .setPosition(100, 60)
 	    .setSize(60, 60)
 	    ;
 
@@ -43,15 +43,23 @@ public class MyApp  extends PaperTouchScreen {
     void button(){
         println("button pressed");
         println("Toggle value " + toggle);
+	rectColor += 30;
     }
 
+    float rectColor = 0;
+    
     void drawOnPaper(){
-          setLocation(63, 45, 0);
-        background(100, 100);
+	// setLocation(63, 45, 0);
+        background(10);
         drawTouch();
         SkatoloLink.updateTouch(touchList, skatolo);
         skatolo.draw(getGraphics());
 
+	if(toggle){
+	    fill(rectColor);
+	    rect(70, 70, 20, 20);
+	}
+	
     }
 
 }

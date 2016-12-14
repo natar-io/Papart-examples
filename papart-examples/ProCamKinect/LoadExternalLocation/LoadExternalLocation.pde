@@ -1,6 +1,7 @@
 // PapARt library
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
@@ -25,6 +26,6 @@ void draw() {
 }
 
 void keyPressed() {
-  app.loadLocationFrom(Papart.folder + "savedLocations/marker.xml");
+  app.loadLocationFrom(Papart.folder + "savedLocations/loc.xml");
   app.getLocation().print();
 }

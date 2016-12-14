@@ -20,7 +20,7 @@ public class MyApp  extends PaperScreen {
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(sketchPath() + "/data/A3-small1.svg", 297, 210);
+	loadMarkerBoard(sketchPath() + "/data/A4-default.svg", 297, 210);
     }
 
     void setup() {
