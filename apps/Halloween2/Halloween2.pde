@@ -23,12 +23,10 @@ void settings(){
 
 void setup(){
 
-    Papart.projection2D(this);
-    Papart papart = new Papart(this);
-
-    // arguments are 2D and 3D precision.
-    papart.loadTouchInputKinectOnly();
+    Papart papart = Papart.projection2D(this);
+    papart.loadTouchInput();
     touchInput = (KinectTouchInput) papart.getTouchInput();
+    papart.startDepthCameraThread();
 
     font = loadFont("WCRhesusBBta-48.vlw");
 }
