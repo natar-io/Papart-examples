@@ -5,28 +5,27 @@ import fr.inria.papart.multitouch.*;
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
 
-
-
 KinectTouchInput touchInput;
 
 void settings(){
     fullScreen(P3D);
 }
 
+// TODO: sound problem, not ready for 1.0
 
 void setup(){
     Papart papart = Papart.projection2D(this);
-
-    // arguments are 2D and 3D precision.
-    papart.loadTouchInputKinectOnly();
+    papart.loadTouchInput();
     touchInput = (KinectTouchInput) papart.getTouchInput();
+    papart.startDepthCameraThread();
+    // arguments are 2D and 3D precision.
     
-  initSound();
-  prepareGame();
-  rectMode(CENTER);
- 
-  println("Initialization OK. ");
-  frameRate(100);
+    initSound();
+    prepareGame();
+    rectMode(CENTER);
+    
+    println("Initialization OK. ");
+    frameRate(100);
 }
 
 Game game;
