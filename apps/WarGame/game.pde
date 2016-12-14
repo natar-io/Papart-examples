@@ -45,10 +45,6 @@ public class Game  extends PaperTouchScreen {
 
     void setup(){
 
-	PFont font = loadFont("AccanthisADFStd-Bold-48.vlw");
-	Button.setFont(font);
-	Button.setFontSize(20);
-
 	createCaptures();
 
 	if(DEBUG_TOUCH){

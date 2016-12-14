@@ -1,5 +1,3 @@
-import fr.inria.papart.drawingapp.Button;
-import fr.inria.papart.drawingapp.DrawUtils;
 
 int towerPowerUpThreshold = 40;
 float levelPixelRatio = 15;
