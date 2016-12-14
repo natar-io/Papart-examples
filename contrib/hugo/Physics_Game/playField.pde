@@ -13,7 +13,7 @@ public class PlayField extends PaperTouchScreen { //<>//
 
   public void settings() {
     setDrawingSize((int) paperSize.x, (int) paperSize.y);
-    loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", (int) paperSize.x, (int) paperSize.y);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", (int) paperSize.x, (int) paperSize.y);
   }
 
   public void setup() {
