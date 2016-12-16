@@ -33,8 +33,4 @@ boolean test = false;
 void keyPressed() {
     if(key == 't')
 	test = !test;
-
-    if(key == 'c')
-        papart.calibration(app);
-
 }
