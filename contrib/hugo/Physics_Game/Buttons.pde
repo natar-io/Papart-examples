@@ -3,7 +3,9 @@ import fr.inria.skatolo.events.*;
 import fr.inria.skatolo.gui.controllers.*;
 import fr.inria.skatolo.gui.Pointer;
 
-public class Buttons extends PaperTouchScreen {
+ButtonsInterface buttonsInterface;
+
+public class ButtonsInterface extends PaperTouchScreen {
 
   PVector paperSize = new PVector(160, 160);
   Skatolo skatolo;
@@ -12,15 +14,22 @@ public class Buttons extends PaperTouchScreen {
 
   public void settings() {
     setDrawingSize((int) paperSize.x, (int) paperSize.y);
-    loadMarkerBoard(sketchPath() + "/data/physicsInterface.svg", 
+
+    String file = Papart.isInria ?
+	sketchPath() + "/data/physicsInterface.svg" :
+	sketchPath() + "/data/marker1515.svg" ;
+	
+    //    loadMarkerBoard(sketchPath() + "/data/physicsInterface.svg", 
+    loadMarkerBoard(file,
       paperSize.x, paperSize.y);
   }
 
   public void setup() {
-    Mode.add("walls");
-    Mode.add("clear");
-    Mode.add("magnet");
-    createButtons();
+      buttonsInterface = this;      
+      Mode.add("walls");
+      Mode.add("clear");
+      Mode.add("magnet");
+      createButtons();
   }
 
   void createButtons() {
@@ -90,6 +99,8 @@ public class Buttons extends PaperTouchScreen {
       updateTouch();
       updateButtons();
       noStroke();
+
+      drawTouch();
     } 
     catch(Exception e) {
       println("eexception " +e );
