@@ -10,9 +10,9 @@ public class MyApp  extends PaperScreen {
     TrackedView boardView;
 
     // 5cm  ->  50 x 50 pixels
-    PVector captureSize = new PVector(200, 150);
+    PVector captureSize = new PVector(100, 50);
     PVector origin = new PVector(40, 40);
-    int picSize = 512; // Works better with power  of 2
+    int picSize = 256; // Works better with power  of 2
 
     PFont myFont;
     BytePointer outText;
@@ -20,7 +20,7 @@ public class MyApp  extends PaperScreen {
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(sketchPath() + "/data/A4-default.svg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     }
 
     void setup() {
@@ -28,7 +28,7 @@ public class MyApp  extends PaperScreen {
 	boardView.setCaptureSizeMM(captureSize);
 
 	boardView.setImageWidthPx(picSize);
-	boardView.setImageHeightPx(picSize);
+	boardView.setImageHeightPx(picSize / 2);
 
 	boardView.setBottomLeftCorner(origin);
 
@@ -48,15 +48,17 @@ public class MyApp  extends PaperScreen {
     void drawOnPaper() {
 
 	clear();
-        background(50);
-	boardView.setBottomLeftCorner(new PVector(0, 60));
+        background(0);
 
+	boardView.setBottomLeftCorner(new PVector(0, 60));
+	
 	fill(200, 100, 20);
 	// rect(10, 10, 10, 10);
 	PImage out = boardView.getViewOf(cameraTracking);
 	IplImage ipl = boardView.getIplViewOf(cameraTracking);
 
-
+	image(out, 150, 0, 100, 50);
+	
 	out.save("/dev/shm/tmp.tiff");
 	PIX image = pixRead("/dev/shm/tmp.tiff");
 

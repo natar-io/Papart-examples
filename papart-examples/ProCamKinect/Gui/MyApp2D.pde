@@ -51,9 +51,11 @@ public class MyApp  extends PaperTouchScreen {
     void drawOnPaper(){
 	// setLocation(63, 45, 0);
         background(10);
-        drawTouch();
+	SkatoloLink.addMouseTo(touchList, skatolo, this);
         SkatoloLink.updateTouch(touchList, skatolo);
-        skatolo.draw(getGraphics());
+
+        drawTouch();
+	skatolo.draw(getGraphics());
 
 	if(toggle){
 	    fill(rectColor);
