@@ -3,7 +3,6 @@ import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.calibration.*;
-import fr.inria.papart.procam.Utils;
 
 import toxi.geom.*;
 import org.bytedeco.javacpp.opencv_core.IplImage;
