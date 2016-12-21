@@ -1,7 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.display.*;
-import fr.inria.papart.drawingapp.*;
 import fr.inria.papart.scanner.*;
 
 import org.bytedeco.javacpp.*;
@@ -58,6 +57,8 @@ void setup(){
 
     papart = Papart.projection(this);
 
+    papart.startCameraThread();
+    
     cameraTracking = papart.getCameraTracking();
     cameraX = cameraTracking.width();
     cameraY = cameraTracking.height();
@@ -186,16 +187,17 @@ void tryCaptureImage(){
 
     	if(grayCodesCaptures[codeProjected] == null){
 
-	    setNextCaptureTime();
-
-	    // Create an image
-	    PImage im = cameraTracking.getPImageCopy();
-	    addCapturedImage(im);
-
-	    if(codeProjected == nbCodes){
-		grayCode.setRefImage(im);
+	    if(cameraTracking.getIplImage() != null){
+		
+		// Create an image
+		PImage im = cameraTracking.getPImageCopy();
+		setNextCaptureTime();
+		addCapturedImage(im);
+		if(codeProjected == nbCodes){
+		    grayCode.setRefImage(im);
+		}
 	    }
-    	}
+	}
     }
 }
 
