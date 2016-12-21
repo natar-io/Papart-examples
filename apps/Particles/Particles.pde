@@ -56,7 +56,7 @@ void draw() {
 
     pointers.clear();
 
-    ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints3D());
+    ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints2D());
     for(TouchPoint tp : touchs3D){
 
 	PVector pos = tp.getPosition();
@@ -69,7 +69,6 @@ void draw() {
         pointers.add(new PVector(pointerX, pointerY, pointerZ));
 
 	ellipse(pointerX, pointerY, 10, 10);
-
 	// break;
     }
 
