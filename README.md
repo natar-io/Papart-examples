@@ -2,9 +2,8 @@
 
 
 Here are the Papart examples, to show atomic features.
-
-Papart stands for PAPer Augmented Reality Toolkit.
-This code is propriety of Inria and Bordeaux University.
+Papart stands for PAPer Augmented Reality Toolkit. The core library is 
+available on this [repository](https://github.com/poqudrof/papart).
 
 ## Quick start guide
 
@@ -36,3 +35,7 @@ This library and examples are the result of research projects from Inria and Bor
 Video from the research project:
 
 [![](https://github.com/potioc/Papart-examples/blob/master/screenshot2.png?raw=true)](https://youtu.be/ZBndzLAM5I8)
+
+## Copyright
+
+This code is propriety of Inria and Bordeaux University.
