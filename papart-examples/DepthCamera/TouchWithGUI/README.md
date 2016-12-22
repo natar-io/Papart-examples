@@ -7,4 +7,4 @@ Events control is of course implemented.
 
 #Results
 
-![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/KinectWithGUI/kinectwithgui.png)
+![Screenshot](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/KinectWithGUI/screenshot.png)
