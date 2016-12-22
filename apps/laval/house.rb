@@ -20,8 +20,9 @@ class LegoHouse < Papartlib::PaperScreen
 #    setDrawingSize lego_size*32, lego_size*32
 ## Not used in drawAroundPaper
     setDrawingSize 50, 50
-    # loadMarkerBoard(Papartlib::Papart::markerFolder + "A3-small1.svg", 297, 210)
-    loadMarkerBoard($app.sketchPath + "/house.svg", 297, 210)
+
+#    loadMarkerBoard(Papartlib::Papart::markerFolder + "A4-default.svg", 297, 210)
+    loadMarkerBoard($app.sketchPath + "/markers/house.svg", 297, 210)
     setDrawAroundPaper
     @mode = FIRST_FLOOR_LIGHT
     @last_mode_change = 0
