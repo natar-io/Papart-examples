@@ -42,7 +42,8 @@ public class MyApp extends PaperTouchScreen {
 	    for(DepthDataElementKinect dde : depthDataElements){
 		try{
 		    Vec3D projPt = dde.projectedPoint;
-		    PVector v = touchInput.project(screen, getDisplay(), projPt.x, projPt.y);
+
+		    PVector v = getDisplay().project(screen, projPt.x, projPt.y);
 		    noStroke();
 		    fill(red(dde.pointColor), green(dde.pointColor), blue(dde.pointColor));
 
