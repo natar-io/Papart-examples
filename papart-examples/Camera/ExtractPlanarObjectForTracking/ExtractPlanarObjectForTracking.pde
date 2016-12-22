@@ -6,7 +6,7 @@ import fr.inria.guimodes.Mode;
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.drawingapp.*;
+import fr.inria.papart.utils.DrawUtils;
 import org.bytedeco.javacpp.*;
 import toxi.geom.*;
 import fr.inria.papart.calibration.*;

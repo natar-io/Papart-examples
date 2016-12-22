@@ -26,6 +26,7 @@ void settings(){
 
 
 void draw(){
+    background(10);
 }
 
 boolean test = false;
