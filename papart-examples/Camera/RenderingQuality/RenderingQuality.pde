@@ -1,6 +1,7 @@
 // PapARt library
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
