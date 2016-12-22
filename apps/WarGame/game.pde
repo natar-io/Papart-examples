@@ -1,6 +1,6 @@
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.ColorDetection;
-import fr.inria.papart.procam.Utils;
+import fr.inria.papart.utils.MathUtils;
 
 import java.awt.Robot;
 
@@ -250,12 +250,12 @@ public class Game  extends PaperTouchScreen {
 		    for(int x = 0; x < outputCaptureWidth; x++){
 			int offset = y * outputCaptureWidth + x;
 
-                        if(Utils.colorDist(px[offset], colorToFind, colorDistDrawing)){
+                        if(MathUtils.colorDistRGB(px[offset], colorToFind, colorDistDrawing)){
                             PVector p = pxToMM(x, y);
 			    drawnZone.add(p);
 			}
 
-			if(Utils.colorDist(px[offset], colorToFind2, colorDistDrawing)){
+			if(MathUtils.colorDistRGB(px[offset], colorToFind2, colorDistDrawing)){
 			    PVector p = pxToMM(x, y);
 			    drawnZone2.add(p);
 			}
@@ -493,7 +493,7 @@ public class Game  extends PaperTouchScreen {
 		for(ColorDetection colorDetection : colorDetections){
 		    int col = colorDetection.getColor();
 		    PVector imCoord = getCameraViewOf(t);
-		    int k = getColorOccurencesFrom(imCoord, miniatureSize, col, colorDistObject);
+		    int k = MathUtils.getColorOccurencesFrom(cameraTracking, imCoord, miniatureSize, col, colorDistObject, this);
 		    scores[c] = k;
 		    c++;
 		}

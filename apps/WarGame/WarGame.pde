@@ -5,7 +5,6 @@ import fr.inria.papart.procam.display.*;
 import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
-import TUIO.*;
 import toxi.geom.*;
 import fr.inria.skatolo.Skatolo;
 
