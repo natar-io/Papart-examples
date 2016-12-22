@@ -2,9 +2,9 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.procam.display.*;
+import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
-import TUIO.*;
 import toxi.geom.*;
 import fr.inria.skatolo.Skatolo;
 
@@ -35,11 +35,12 @@ PApplet mainApplet;
 void setup(){
     mainApplet = this;
 
+    // Debug mode is taken out for now. 
     if (noCameraMode) {
-	papart = new Papart(this);
-	papart.initNoCamera(1);
-	papart.loadTouchInputTUIO();
-	papart.getTouchInput().computeOutsiders(true);
+	// papart = new Papart(this);
+	// papart.initNoCamera(1);
+	// papart.loadTouchInputTUIO();
+	// papart.getTouchInput().computeOutsiders(true);
 
     } else {
 	if (useProjector) {
@@ -49,9 +50,8 @@ void setup(){
 
 	} else {
 //	    size(frameSizeX, frameSizeY, OPENGL);
-	    papart = new Papart(this);
-	    papart.initKinectCamera(2f);
-	    papart.loadTouchInputKinectOnly();
+	    papart = Papart.seeThrough(this);
+	    papart.loadTouchInput();
 	    BaseDisplay display = papart.getDisplay();
 	    display.setDrawingSize(width, height);
 	}

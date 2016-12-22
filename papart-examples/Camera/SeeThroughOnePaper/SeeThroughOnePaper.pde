@@ -1,8 +1,12 @@
 // PapARt library
 import fr.inria.papart.procam.*;
-import org.bytedeco.javacpp.opencv_core;
+import tech.lity.rea.svgextended.*;
+
 import org.reflections.*;
 import toxi.geom.*;
+import processing.video.*;
+
+import org.bytedeco.javacv.*;
 
 Papart papart;
 
@@ -16,7 +20,7 @@ public void setup() {
 
 void settings() {
   // the application will be rendered in full screen, and using a 3Dengine.
-  fullScreen(P3D);
+    size(640, 480, P3D);
 }
 
 void draw() {

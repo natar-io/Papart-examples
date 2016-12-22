@@ -44,6 +44,10 @@ void settings() {
   size(640, 480, P3D);
 }
 
+// TODO:
+// - replace the handles with the Skatolo handle.
+// - some refactoring/renaming
+
 public void setup() {
 
   Papart.seeThrough(this);
@@ -52,7 +56,9 @@ public void setup() {
   cameraDisplay = papart.getARDisplay();
   cameraDisplay.manualMode();
 
+  papart.startCameraThread();
   camera = papart.getCameraTracking();
+
 
   object = new PVector[4];
   image = new PVector[4];

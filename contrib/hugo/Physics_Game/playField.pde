@@ -1,3 +1,5 @@
+import fr.inria.papart.procam.utils.MathUtils;
+
 public class PlayField extends PaperTouchScreen { //<>//
 
   PVector paperSize = new PVector(420, 297);
@@ -13,7 +15,7 @@ public class PlayField extends PaperTouchScreen { //<>//
 
   public void settings() {
     setDrawingSize((int) paperSize.x, (int) paperSize.y);
-    loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", (int) paperSize.x, (int) paperSize.y);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", (int) paperSize.x, (int) paperSize.y);
   }
 
   public void setup() {
@@ -73,16 +75,9 @@ public class PlayField extends PaperTouchScreen { //<>//
     play.loadLocationFrom("loc.xml");
   }
 
-
-  public boolean isCorrectHSB(int colorToCompare, int colorFixed, int threshold) {
-    float hueC = hue(colorToCompare);
-    float hueF = hue(colorFixed);
-    if (hueC > hueF + threshold) return false;
-    if (hueC < hueF - threshold) return false;
-    if (saturation(colorToCompare) < 45) return false;
-    if (brightness(colorToCompare) < 15) return false;
-    return true;
-  }
+  public boolean isCorrectHSB(int toCompare, int fixed, float threshold){
+      return MathUtils.colorDistHSB(g, fixed, toCompare, threshold, 45, 15);
+    }
 
   public void drawOnPaper() {   
     background(0);
@@ -255,14 +250,8 @@ public class PlayField extends PaperTouchScreen { //<>//
           surfaces.addElement(new_s);
         }
         // Update Skatolo
-        if (!pointers.contains(tp.id)) {
-          skatolo.addPointer(tp.id);
-          skatolo.updatePointerPress(tp.id, true);
-          pointers.add(tp.id);
-        } else {
-          skatolo.updatePointer(tp.id, (int)(pos.x), (int)(pos.y));
-        }
-        skatolo.updatePointerPress(tp.id, true);
+	SkatoloLink.updateTouch(touchList, skatolo);
+        skatolo.draw(getGraphics());
       }
     }
 

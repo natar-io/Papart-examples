@@ -165,14 +165,12 @@ public PGraphicsOpenGL initDraw() {
   if (img == null)
     return null;
 
-  background(0);
   image(img, 0, 0, width, height);
 
   ProjectiveDeviceP pdp = cameraDisplay.getProjectiveDeviceP();
   paperCameraTransform = pdp.estimateOrientation(object, image);
 
   PGraphicsOpenGL graphics = cameraDisplay.beginDraw();
-
   graphics.clear();
   return graphics;
 }

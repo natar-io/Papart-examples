@@ -1,8 +1,7 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.drawingapp.*;
 import fr.inria.papart.multitouch.*;
-import fr.inria.papart.drawingapp.Button;
+import tech.lity.rea.svgextended.*;
 import fr.inria.guimodes.Mode;
 import org.bytedeco.javacpp.*;
 import processing.opengl.*;
@@ -75,6 +74,25 @@ public void setup() {
 void draw() {
 }
 
+// Keys that work like the buttons. 
+void keyPressed(){
+    if(key == 'l'){
+	buttonsInterface.lock();
+    }
+
+    if(key == 'm'){
+	buttonsInterface.magnet();
+    }
+
+    if(key == 'c'){
+	buttonsInterface.clear();
+    }
+    if(key == 'w'){
+	buttonsInterface.walls();
+    }
+    
+}
+
 void initPhysics() {
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
@@ -97,8 +115,8 @@ void beginContact(Contact cp) {
   Object o1 = b1.getUserData();
   Object o2 = b2.getUserData();
 
-  if (o1.getClass() == Box.class && o2.getClass() == Destructor.class) {
-    println("Contact");
+  if (o1 instanceof Box && o2 instanceof Destructor) {
+      //      println("Contact");
     Box b = (Box) o1;
     b.kill();
   }

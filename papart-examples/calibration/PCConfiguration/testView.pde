@@ -9,10 +9,10 @@ class TestView extends PApplet {
     Papart papart;
     boolean isTestingProjector = false;
     boolean isTestingCamera = false;
-    boolean isTestingKinect = false;
+    boolean isTestingDepthCamera = false;
 
     Camera camera;
-    KinectDevice kinect;
+    DepthCameraDevice depthCamera;
 
     void show(){
         this.getSurface().setVisible(true);
@@ -28,7 +28,7 @@ class TestView extends PApplet {
     }
 
     public void settings() {
-        size(640, 480);
+        size(640, 480, P3D);
         smooth();
 
     }
@@ -51,7 +51,7 @@ class TestView extends PApplet {
 
     public void testCamera(){
         cameraConfig.setCameraName(cameraIdText.getText());
-
+	    setFormat();
         camera = cameraConfig.createCamera();
         camera.setParent(this);
 
@@ -62,19 +62,10 @@ class TestView extends PApplet {
             h = cameraHeight;
         }
 
-        if(cameraConfig.getCameraType() == Camera.Type.KINECT2_RGB){
-            w = KinectOne.CAMERA_WIDTH_RGB;
-            h = KinectOne.CAMERA_HEIGHT_RGB;
-        }
-        if(cameraConfig.getCameraType() == Camera.Type.KINECT2_IR){
-            w = KinectOne.CAMERA_WIDTH;
-            h = KinectOne.CAMERA_HEIGHT;
-        }
-
         papart.forceWindowSize(w, h);
         camera.setSize(w, h);
         camera.start();
-        camera.setThread();
+	//        camera.setThread();
 
         this.isTestingCamera = true;
 
@@ -82,33 +73,37 @@ class TestView extends PApplet {
     }
 
 
-    public void testKinect(){
-        if(kinectConfig.getCameraType() == Camera.Type.FAKE){
+    public void testDepthCamera(){
+        if(depthCameraConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
-        kinectConfig.setCameraName(cameraIdText.getText());
+        depthCameraConfig.setCameraName(cameraIdText.getText());
 
-        camera = kinectConfig.createCamera();
+        camera = depthCameraConfig.createCamera();
         camera.setParent(this);
 
-        if(kinectConfig.getCameraType() == Camera.Type.KINECT2_RGB){
-            kinect = new KinectOne(this);
+        if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT_2){
+            depthCamera = new KinectOne(this, camera);
         }
 
-        if(kinectConfig.getCameraType() == Camera.Type.OPEN_KINECT){
-            kinect = new Kinect360(this);
+        if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT){
+            depthCamera = new Kinect360(this, camera);
         }
-        camera = kinect.getCameraRGB();
-        camera.setThread();
+
+        if(depthCameraConfig.getCameraType() == Camera.Type.REALSENSE){
+            depthCamera = new RealSense(this, camera);
+        }
+	((CameraRGBIRDepth)camera).actAsDepthCamera();
+	//        camera.setThread();
 
         papart.forceWindowSize(camera.width(), camera.height());
 
-        this.isTestingKinect = true;
+        this.isTestingDepthCamera = true;
         show();
     }
 
     public void draw() {
-        if(isTestingCamera || isTestingKinect)
+        if(isTestingCamera || isTestingDepthCamera)
             drawCamera();
         if(isTestingProjector){
             drawProjector();
@@ -116,7 +111,15 @@ class TestView extends PApplet {
     }
 
     void drawCamera(){
-        PImage im = camera.getPImage();
+	camera.grab();
+
+        PImage im = null;
+	if(isTestingDepthCamera){
+	    im = ((CameraRGBIRDepth)camera).getDepthCamera().getPImage();
+	} else {
+	    im = camera.getPImage();
+	}
+
         if(im != null)
             image(im, 0, 0, width, height);
     }
@@ -144,9 +147,9 @@ class TestView extends PApplet {
             if(isTestingProjector){
                 isTestingProjector = false;
             }
-            if(isTestingKinect){
+            if(isTestingDepthCamera){
                 closeCurrentStream();
-                isTestingKinect = false;
+                isTestingDepthCamera = false;
             }
 
             hide();
@@ -166,11 +169,11 @@ class TestView extends PApplet {
             println("Closed !");
         }
 
-        if(isTestingKinect){
+        if(isTestingDepthCamera){
             camera.stopThread();
-            kinect.close();
+	    //            depthCamera.close();
             camera = null;
-            kinect = null;
+            depthCamera = null;
         }
     }
 

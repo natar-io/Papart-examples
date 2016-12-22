@@ -16,7 +16,7 @@ public class MyApp extends PaperScreen {
 
   public void settings() {
     setDrawingSize(297, 210);
-    loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
   }
 
   public void setup() {
@@ -43,7 +43,7 @@ public class MyApp extends PaperScreen {
 
   public void drawOnPaper() {
     clear();
-    setLocation(63, 45, 0);
+    //    setLocation(63, 45, 0);
 
     stroke(100);
     noFill();
@@ -54,6 +54,9 @@ public class MyApp extends PaperScreen {
     PImage out = boardView.getViewOf(cameraTracking);
     PImage processed = out;
 
+    if(out == null)
+	return;
+    
     colorMode(HSB, 360, 100, 100);
 
     out.loadPixels();
@@ -101,8 +104,6 @@ public class MyApp extends PaperScreen {
 
     if (brightness(colorToCompare) < 15) return false;
 
-
-    println("true!");
     return true;
   }
 }

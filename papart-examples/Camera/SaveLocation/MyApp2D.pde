@@ -4,7 +4,7 @@ public class MyApp extends PaperScreen {
 
   public void settings() {
     setDrawingSize(297, 210);
-    loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     setDrawOnPaper();
   }
 

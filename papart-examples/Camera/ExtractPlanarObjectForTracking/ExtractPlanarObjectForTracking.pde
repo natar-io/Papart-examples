@@ -6,7 +6,7 @@ import fr.inria.guimodes.Mode;
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.drawingapp.*;
+import fr.inria.papart.utils.DrawUtils;
 import org.bytedeco.javacpp.*;
 import toxi.geom.*;
 import fr.inria.papart.calibration.*;
@@ -43,14 +43,14 @@ void settings() {
 
 public void setup() {
 
-  Papart.seeThrough(this);
+    papart = Papart.seeThrough(this);
+    cameraDisplay = papart.getARDisplay();
+    cameraDisplay.manualMode();
 
-  papart =  Papart.getPapart();
-  cameraDisplay = papart.getARDisplay();
-  cameraDisplay.manualMode();
-
-  camera = papart.getCameraTracking();
-
+    camera = papart.getCameraTracking();
+    camera.start();
+    camera.setThread();
+    
   image = new PVector[4];
 
   image[0] = new PVector(250, 250);

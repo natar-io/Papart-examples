@@ -7,7 +7,8 @@ class Garden < Papartlib::PaperTouchScreen
     @tile_height = 12
     @tile_size = duplo_size / 1.5
     setDrawingSize @tile_width * @tile_size, @tile_height*@tile_size
-    loadMarkerBoard($app.sketchPath + "/garden.svg",
+#    loadMarkerBoard(Papartlib::Papart::markerFolder + "A4-default.svg",
+    loadMarkerBoard($app.sketchPath + "/markers/garden.svg",
                     @tile_width * @tile_size,
                     @tile_height * @tile_size)
     setDrawOnPaper

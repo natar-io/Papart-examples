@@ -1,7 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.display.*;
-import fr.inria.papart.drawingapp.*;
 import fr.inria.papart.scanner.*;
 import fr.inria.papart.calibration.*;
 
@@ -28,18 +27,24 @@ PointCloud cloud;
 
 public void setup(){
 
-    Papart papart = new Papart(this);
+    // Papart papart = new Papart(this);
+    // Camera cameraTracking = CameraFactory.createCamera(papart.cameraConfig.getCameraType(),
+    //                                                    papart.cameraConfig.getCameraName());
+    // cameraTracking.setParent(this);
+    // cameraTracking.setCalibration(papart.cameraCalib);
+    // ProjectorDisplay projector = new ProjectorDisplay(this, papart.projectorCalib);
+    // PMatrix3D extrinsics = papart.loadCalibration(papart.cameraProjExtrinsics);
+    // projector.setExtrinsics(extrinsics);
 
-    Camera cameraTracking = CameraFactory.createCamera(papart.cameraConfiguration.getCameraType(),
-                                                       papart.cameraConfiguration.getCameraName());
-    cameraTracking.setParent(this);
-    cameraTracking.setCalibration(papart.cameraCalib);
 
-    ProjectorDisplay projector = new ProjectorDisplay(this, papart.projectorCalib);
+    Papart papart = Papart.projection(this);
+    ProjectorDisplay projector = (ProjectorDisplay) papart.getDisplay();
+    projector.manualMode();
 
-    PMatrix3D extrinsics = papart.loadCalibration(papart.cameraProjExtrinsics);
-    projector.setExtrinsics(extrinsics);
-
+    Camera cameraTracking = papart.getCameraTracking();
+    // start enables to load calibration from inside the device...
+    cameraTracking.start();
+    
     DecodedCode decodedCode = DecodedCode.loadFrom(this, "../grayCodeConfiguration/scan0");
 
     Scanner3D scanner = new Scanner3D(cameraTracking.getProjectiveDevice(), projector);

@@ -6,30 +6,32 @@ public class ColorApp extends PaperScreen {
     TrackedView boardView;
 
     // 5cm
-    PVector captureSize = new PVector(50, 50);
-    PVector origin = new PVector(40, 40);
+    PVector captureSize = new PVector(10, 10);
+    PVector origin = new PVector(100, 100);
     int picSize = 64; // Works better with power  of 2
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     }
 
     void setup() {
 	colorDetection = new ColorDetection((PaperScreen) this);
 	colorDetection.setPosition(origin);
+	colorDetection.setCaptureSize(captureSize);
+	colorDetection.setPicSize(picSize, picSize);
 	colorDetection.initialize();
     }
 
     void drawOnPaper() {
         clear();
-        setLocation(63, 45, 0);
-
+	//	setLocation(10, 0, 0);
+	//	colorDetection.drawSelf();
+	
         colorDetection.computeColor();
         int c = colorDetection.getColor();
         fill(c);
         rect(0, 0, 10, 10);
-
         colorDetection.drawCaptureZone();
 
     }

@@ -1,8 +1,11 @@
 public class MyApp extends PaperScreen {
 
   public void settings() {
-    setDrawingSize(297, 210);
-    loadMarkerBoard(sketchPath() + "/ExtractedView.bmp", 285, 200); // taille de l'image en mm !
+      // size of the virtual screen
+      setDrawingSize(297, 210);
+      //    loadMarkerBoard(sketchPath() + "/ExtractedView.bmp", 285, 200); 
+    // printed image size in millimeters
+      loadMarkerBoard(sketchPath() + "/ExtractedView.bmp", 90, 50);
     setDrawOnPaper();
   }
 

@@ -20,12 +20,12 @@ public class MyApp extends PaperTouchScreen {
     void settings(){
         setDrawAroundPaper();
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+        loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     }
 
     void setup() {
-        KinectDevice kinect = papart.getKinectDevice();
-        kinectExtrinsics = kinect.getCameraDepth().getExtrinsics().get();
+        DepthCameraDevice kinect = papart.getDepthCameraDevice();
+        kinectExtrinsics = kinect.getDepthCamera().getExtrinsics().get();
 //        kinectExtrinsics.invert();
     }
 

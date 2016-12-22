@@ -15,7 +15,8 @@ class HouseControl < Papartlib::PaperTouchScreen
 
   def settings
     setDrawingSize 210, 297
-    loadMarkerBoard($app.sketchPath + "/house-control.svg", 210, 297)
+    loadMarkerBoard($app.sketchPath + "/markers/house-control.svg", 210, 297)
+    #loadMarkerBoard(Papartlib::Papart::markerFolder + "A4-default.svg", 210, 297)
   end
 
   def setup

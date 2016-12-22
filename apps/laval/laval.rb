@@ -11,13 +11,14 @@ require 'jruby_art'
 require 'jruby_art/app'
 
 Processing::App::SKETCH_PATH = __FILE__
-Processing::App::load_library :PapARt, :javacv, :toxiclibscore, :skatolo, :video
+Processing::App::load_library :PapARt, :javacv, :toxiclibscore, :skatolo, :video, :SVGExtended
 
 module Papartlib
   include_package 'fr.inria.papart.procam'
   include_package 'fr.inria.papart.procam.camera'
   include_package 'fr.inria.papart.multitouch'
-  include_package 'fr.inria.papart.drawingapp'
+  include_package 'fr.inria.papart.utils'
+  include_package 'import tech.lity.rea.svgextended'
 end
 
 module Processing
@@ -63,10 +64,6 @@ class Sketch < Processing::App
     else
       @papart = Papartlib::Papart.seeThrough self
     end
-
-
-    # @color_screen = MyColorPicker.new
-    #    @cinema = Cinema.new
 
     @lego_house = LegoHouse.new
     @house_control = HouseControl.new

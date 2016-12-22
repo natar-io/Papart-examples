@@ -30,12 +30,12 @@ void settings(){
 }
 
 void setup(){
-    Papart papart = Papart.projection2D(this);
-
-    // arguments are 2D and 3D precision.
-    papart.loadTouchInputKinectOnly();
+       Papart papart = Papart.projection2D(this);
+    papart.loadTouchInput();
     touchInput = (KinectTouchInput) papart.getTouchInput();
+    papart.startDepthCameraThread();
 
+    
   /* RGB colormode, with range of 0 to 400 */
   colorMode(RGB, 400);
   /* Frame rate is 30 */
@@ -56,7 +56,7 @@ void draw() {
 
     pointers.clear();
 
-    ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints3D());
+    ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints2D());
     for(TouchPoint tp : touchs3D){
 
 	PVector pos = tp.getPosition();
@@ -69,7 +69,6 @@ void draw() {
         pointers.add(new PVector(pointerX, pointerY, pointerZ));
 
 	ellipse(pointerX, pointerY, 10, 10);
-
 	// break;
     }
 

@@ -7,16 +7,22 @@ import fr.inria.papart.depthcam.analysis.*;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacpp.opencv_core.*;
 import org.bytedeco.javacpp.freenect;
+import org.bytedeco.javacv.RealSenseFrameGrabber;
 import toxi.geom.*;
 import peasy.*;
+
 
 PeasyCam cam;
 
 KinectPointCloud pointCloud;
 
 KinectProcessing kinectAnalysis;
-KinectDevice kinectDevice;
+DepthCameraDevice depthCameraDevice;
 
+
+CameraRealSense camRS = null;
+
+// Warning non-even skip value causes a crash.
 int skip = 2;
 
 void settings() {
@@ -27,13 +33,20 @@ void setup() {
 
   Papart papart = new Papart(this);
   // load the depth camera
-  papart.startDefaultKinectCamera();
+  try{
+      depthCameraDevice = papart.loadDefaultDepthCamera();
+      depthCameraDevice.getMainCamera().start();
+    
+      //      depthCameraDevice.getMainCamera().setUseColor(true);
+  }catch (Exception e){
+      println("Cannot start the DepthCamera: " + e );
+      e.printStackTrace();
+  }
 
-  kinectDevice = papart.getKinectDevice();
-  kinectAnalysis = new KinectProcessing(this, kinectDevice);
+  kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
   pointCloud = new KinectPointCloud(this, kinectAnalysis, skip);
-
-  // Set the virtual camera
+  
+  //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
   cam.setMinimumDistance(0);
   cam.setMaximumDistance(1200);
@@ -45,30 +58,63 @@ void draw() {
   background(100);
 
   // retreive the camera image.
-  try {
-    kinectDevice.getCameraRGB().grab();
-    kinectDevice.getCameraDepth().grab();
-  } 
-  catch(Exception e) {
-    println("Could not grab the image " + e);
+  depthCameraDevice.getMainCamera().grab();
+
+  IplImage colorImg = depthCameraDevice.getColorCamera().getIplImage();
+  IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
+  
+  if (depthImg == null || colorImg == null){
+      println("No depth Image");
+      return;
   }
 
-  IplImage colourImg = kinectDevice.getCameraRGB().getIplImage();
-  IplImage depthImg = kinectDevice.getCameraDepth().getIplImage();
-
-  if (colourImg == null || depthImg == null)
-    return;
-
-  kinectAnalysis.update(depthImg, colourImg, skip);
+  // TODO: color image refresh is very weird: to check. 
+  // PImage colImg = depthCameraDevice.getColorCamera().getPImage();
+  // image(colImg, 0, 0, width, height);
+  
+  kinectAnalysis.update(depthImg, colorImg, skip);
 
   pointCloud.updateWith(kinectAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 }
 
+
+
+void keyPressed(){
+    if(depthCameraDevice.type() == Camera.Type.REALSENSE){
+	setRealSenseMode();
+    }
+}
+
+void setRealSenseMode(){
+    RealSenseFrameGrabber rs = ((RealSense)depthCameraDevice).getMainCamera().getFrameGrabber();
+	
+    if(key == '1')
+	rs.setPreset(1);
+    if(key == '2')
+	rs.setPreset(2);
+    if(key == '3')
+	rs.setPreset(3);
+    if(key == '4')
+	rs.setPreset(4);
+    if(key == '5')
+	rs.setPreset(5);
+    if(key == '6')
+	rs.setPreset(6);
+    if(key == '7')
+	rs.setPreset(7);
+    if(key == '8')
+	rs.setPreset(8);
+    if(key == '9')
+	rs.setPreset(9);
+    if(key == '0')
+	rs.setPreset(0);
+}
+
 void close() {
-  try {
-    kinectDevice.close();
-  }
-  catch(Exception e) {
-  }
+    try {
+	depthCameraDevice.close();
+    }
+    catch(Exception e) {
+    }
 }

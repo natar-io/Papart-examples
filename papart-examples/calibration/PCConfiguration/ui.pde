@@ -1,12 +1,12 @@
 Textfield cameraIdText, cameraFormatText, posXText, posYText;
-Textfield kinectIdText;
+Textfield depthCameraIdText;
 Textfield cameraName;
-Textfield kinectName;
+Textfield depthCameraName;
 
-RadioButton screenChooser, cameraType, kinectType;
+RadioButton screenChooser, cameraType, depthCameraType, cameraSubType;
 
 Button startCameraButton, saveDefaultCameraButton;
-Button startKinectButton, saveDefaultKinectButton;
+Button startDepthCameraButton, saveDefaultDepthCameraButton;
 Button initButton, saveDefaultScreenButton;
 Toggle useCalibration;
 Button loadCalibrationCamera, loadCalibrationProjector;
@@ -17,6 +17,12 @@ CColor cColor;
 CColor cColorToggle;
 
 PImage testCameraImg;
+
+boolean useCameraCalibration;
+
+final int RGB_FORMAT=0;
+final int IR_FORMAT=1;
+final int DEPTH_FORMAT=2;
 
 void initUI() {
 
@@ -50,7 +56,7 @@ void initUI() {
 
   initScreenUI();
   initCameraUI();
-  initKinectUI();
+  initDepthCameraUI();
 
   updateStyles();
 }
@@ -119,19 +125,28 @@ void initScreenUI() {
 
 void initCameraUI() {
 
+    // This follows the order in Camera.java...
     cameraType = skatolo.addRadioButton("cameraTypeChooser")
         .setPosition(50, 357)
         .setItemWidth(20)
         .setItemHeight(20)
         .addItem("OpenCV", Camera.Type.OPENCV.ordinal())
         .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
-        .addItem("OpenCV Depth", Camera.Type.OPENCV_DEPTH.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
+	    .addItem("RealSense",Camera.Type.REALSENSE.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())
+        .addItem("OpenKinect2",Camera.Type.OPEN_KINECT_2.ordinal())
         .addItem("FlyCapture", Camera.Type.FLY_CAPTURE.ordinal())
-        .addItem("Kinect2RGB", Camera.Type.KINECT2_RGB.ordinal())
-        .addItem("Kinect2IR",Camera.Type.KINECT2_IR.ordinal())
         .activate(cameraConfig.getCameraType().ordinal())
+        ;
+
+    cameraSubType = skatolo.addRadioButton("SubType")
+        .setPosition(170, 357)
+        .setItemWidth(20)
+        .setItemHeight(20)
+        .addItem("rgb", RGB_FORMAT)
+        .addItem("ir", IR_FORMAT)
+        .addItem("depth", DEPTH_FORMAT)
         ;
 
     loadCalibrationCamera = skatolo.addButton("loadCalibration")
@@ -177,48 +192,52 @@ void initCameraUI() {
 
 }
 
+int getDepthType(int t){
+    if(t == Camera.Type.REALSENSE.ordinal())
+        return 0;
+    if(t == Camera.Type.OPEN_KINECT.ordinal())
+        return 1;
+    if(t == Camera.Type.OPEN_KINECT_2.ordinal())
+        return 2;
+    if(t == Camera.Type.FAKE.ordinal())
+        return 3;
+    return 3;
+}
 
+void initDepthCameraUI() {
 
-void initKinectUI() {
+    int currentType = getDepthType(depthCameraConfig.getCameraType().ordinal());
 
-    int currentType = 0;
-    if(kinectConfig.getCameraType() == Camera.Type.OPEN_KINECT)
-        currentType = 0;
-    if(kinectConfig.getCameraType() == Camera.Type.KINECT2_RGB)
-        currentType = 1;
-
-    if(kinectConfig.getCameraType() == Camera.Type.FAKE)
-        currentType = 2;
-
-  kinectType = skatolo.addRadioButton("kinectTypeChooser")
+  depthCameraType = skatolo.addRadioButton("depthCameraTypeChooser")
     .setPosition(50, 652)
     .setItemWidth(20)
     .setItemHeight(20)
-      .addItem("Kinect 360", Camera.Type.OPEN_KINECT.ordinal())
-      .addItem("Kinect One", Camera.Type.KINECT2_RGB.ordinal())
-      .addItem("No Kinect", Camera.Type.FAKE.ordinal())
+      .addItem("RealSense (SR300)", Camera.Type.REALSENSE.ordinal())
+      .addItem("OpenKinect (xbox360)", Camera.Type.OPEN_KINECT.ordinal())
+      .addItem("OpenKinect2 (xboxOne)", Camera.Type.OPEN_KINECT_2.ordinal())
+      .addItem("No DepthCamera", Camera.Type.FAKE.ordinal())
     .setColorLabel(color(255))
       .activate(currentType)
     ;
 
 
-  kinectIdText = skatolo.addTextfield("KinectId")
+  depthCameraIdText = skatolo.addTextfield("DepthCameraId")
     .setPosition(250, 652)
     .setSize(200, 20)
     .setFont(myFont)
     .setLabel("")
     .setLabelVisible(false)
-    .setText(kinectConfig.getCameraName())
+    .setText(depthCameraConfig.getCameraName())
     .setFocus(true)
     ;
 
-  startKinectButton = skatolo.addButton("testKinectButton")
+  startDepthCameraButton = skatolo.addButton("testDepthCameraButton")
     .setPosition(611, 656)
     .setLabel("Test the kinect")
     .setSize(110, 20)
     ;
 
-  saveDefaultKinectButton = skatolo.addButton("saveDefaultKinect")
+  saveDefaultDepthCameraButton = skatolo.addButton("saveDefaultDepthCamera")
     .setPosition(611, 696)
     .setLabel("Save as default")
     .setSize(110, 20)
@@ -236,17 +255,18 @@ void updateStyles() {
   setStyle(saveDefaultScreenButton);
   setStyle(loadCalibrationProjector);
 
-  setStyle(cameraType);
-  setStyle(cameraIdText);
-  setStyle(cameraFormatText);
+    setStyle(cameraType);
+    setStyle(cameraSubType);
+    setStyle(cameraIdText);
+    setStyle(cameraFormatText);
   setStyle(startCameraButton);
   setStyle(saveDefaultCameraButton);
   setStyle(loadCalibrationCamera);
 
-  setStyle(kinectType);
-  setStyle(kinectIdText);
-  setStyle(startKinectButton);
-  setStyle(saveDefaultKinectButton);
+  setStyle(depthCameraType);
+  setStyle(depthCameraIdText);
+  setStyle(startDepthCameraButton);
+  setStyle(saveDefaultDepthCameraButton);
 
 }
 

@@ -1,6 +1,7 @@
 // Following Processing Example
 // https://github.com/processing/processing-docs/blob/master/content/examples/Basics/Shape/LoadDisplayOBJ/LoadDisplayOBJ.pde
 
+
 public class PaperScreen2D  extends PaperScreen {
 
     PShape rocket;
@@ -8,7 +9,7 @@ public class PaperScreen2D  extends PaperScreen {
 
     void settings(){
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "A3-small2.svg", 297, 210);
+        loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
         setDrawOnPaper();
     }
 

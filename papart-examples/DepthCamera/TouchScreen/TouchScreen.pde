@@ -1,4 +1,5 @@
 import fr.inria.papart.procam.*;
+import tech.lity.rea.svgextended.*;
 import fr.inria.papart.multitouch.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
@@ -10,10 +11,8 @@ void settings(){
 }
 
 void setup(){
-    Papart papart = new Papart(this);
-    papart.initKinectCamera(1);
-    papart.loadTouchInputKinectOnly();
-
+    Papart papart = Papart.seeThrough(this);
+    papart.loadTouchInput();
     papart.loadSketches() ;
     papart.startTracking();
 }

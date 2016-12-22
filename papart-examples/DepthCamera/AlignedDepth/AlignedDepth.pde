@@ -15,7 +15,7 @@ PeasyCam cam;
 KinectPointCloud pointCloud;
 
 KinectProcessing kinectAnalysis;
-KinectDevice kinectDevice;
+DepthCameraDevice depthCameraDevice;
 
 int skip = 2;
 
@@ -27,10 +27,13 @@ void setup() {
 
   Papart papart = new Papart(this);
   // load the depth camera
-  papart.startDefaultKinectCamera();
+  depthCameraDevice = papart.loadDefaultDepthCamera();
 
-  kinectDevice = papart.getKinectDevice();
-  kinectAnalysis = new KinectProcessing(this, kinectDevice);
+  kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
+  depthCameraDevice.getMainCamera().start();
+
+  // The intrinsic calibration is valid after the start() for some devices. 
+  kinectAnalysis.updateCalibrations(depthCameraDevice);
 }
 
 
@@ -38,15 +41,14 @@ void draw() {
   background(100);
   // retreive the camera image.
   try {
-    kinectDevice.getCameraRGB().grab();
-    kinectDevice.getCameraDepth().grab();
+    depthCameraDevice.getMainCamera().grab();
   } 
   catch(Exception e) {
     println("Could not grab the image " + e);
   }
-
-  IplImage colourImg = kinectDevice.getCameraRGB().getIplImage();
-  IplImage depthImg = kinectDevice.getCameraDepth().getIplImage();
+  try{
+  IplImage colourImg = depthCameraDevice.getColorCamera().getIplImage();
+  IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
 
   if (colourImg == null || depthImg == null)
     return;
@@ -54,11 +56,14 @@ void draw() {
   PImage alignedImage = kinectAnalysis.update(depthImg, colourImg, skip);
 
   image(alignedImage, 0, 0, width, height);
+  } catch(Exception e){
+      e.printStackTrace();
+  }
 }
 
 void close() {
   try {
-    kinectDevice.close();
+    depthCameraDevice.close();
   }
   catch(Exception e) {
   }

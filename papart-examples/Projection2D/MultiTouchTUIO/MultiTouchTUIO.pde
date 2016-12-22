@@ -17,13 +17,13 @@ void settings(){
 }
 
 void setup(){
-
     Papart papart = new Papart(this);
 
     // arguments are 2D and 2D precising in that order.
-    papart.loadTouchInputKinectOnly();
+    papart.loadTouchInput();
     touchInput = (KinectTouchInput) papart.getTouchInput();
     server = new TuioServer(this, 12000, "127.0.0.1", 3333);
+    papart.startDepthCameraThread();
 }
 
 void draw(){

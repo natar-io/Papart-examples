@@ -30,6 +30,7 @@ public class Player1  extends PaperTouchScreen {
 
     void settings(){
         setDrawingSize( (int) playerBoardSize.x, (int)playerBoardSize.y);
+	//	loadMarkerBoard(Papart.markerFolder + "A4-default.svg",
 	loadMarkerBoard(sketchPath() + "/data/markers/player1-big.svg",
 			playerBoardSize.x, playerBoardSize.y);
     }
@@ -87,8 +88,6 @@ public class Player1  extends PaperTouchScreen {
         }
 
 	checkTouch();
-	drawButtons();
-
     }
 
 

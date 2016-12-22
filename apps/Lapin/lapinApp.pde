@@ -4,27 +4,25 @@ import processing.opengl.PGraphicsOpenGL;
 import com.jogamp.opengl.GL;
 import fr.inria.guimodes.Mode;
 
+// Warning OpenGL is also in JavaCV !!!
+
 public class LapinApp extends PaperTouchScreen{
 
     PVector userPos = new PVector(0, 200, 700);
     PShape rabbit;
     PShape sphereM;
     PGraphicsOpenGL pg;
-    Button b;
     PVector lightPos = new PVector(0, 0, 600);
     TwoFingersRST rst;
 
     void settings(){
 	setDrawingSize(297, 210);
-	loadMarkerBoard(Papart.markerFolder + "A3-small1.svg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     }
 
     void setup(){
 	rabbit = loadShape("models/bun_zipper.obj");
 	sphereM = loadShape("models/sphere/sphere1.obj");
-
-	b = new Button("pos", 30, 20, 30, 20);
-	buttons.add(b);
 
 	rst = new TwoFingersRST(new PVector());
         rst.setFiltering(false);
@@ -41,7 +39,7 @@ public class LapinApp extends PaperTouchScreen{
 
     void drawOnPaper(){
 
-        setLocation(63, 45, 0);
+	//        setLocation(63, 45, 0);
         userPos = new PVector(0, 400, 900);
 
         //   screen.setDrawing(true);

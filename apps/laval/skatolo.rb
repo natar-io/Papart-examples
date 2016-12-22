@@ -1,5 +1,7 @@
 require 'jruby/core_ext'
 
+## WARNING -> This must be updated to the ruby gem.
+
 Processing::App.load_library :skatolo
 
 # module skatolo
