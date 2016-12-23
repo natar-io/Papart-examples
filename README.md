@@ -5,9 +5,11 @@ Here are the Papart examples, to show atomic features.
 Papart stands for PAPer Augmented Reality Toolkit. The core library is 
 available on this [repository](https://github.com/poqudrof/papart).
 
-## Quick start guide
+## PapARt 1.0 is out. 
 
-#### Work in progress, links are not ready yet. 
+The first big release is out. We look forward for feedback and issue reports. We will enhance the guides and create tutorials, and for this any help will be appreciated ! 
+
+## Quick start guide
 
 PapARt is a [Processing](http://processing.org) library, and it requires many other libraries to work. The smaller ones are included, and the heavy ones are separated.
 
@@ -18,7 +20,7 @@ Download list:
 * [smaller libs](http://jiii.fr/papart/libraries/libraries.zip): a collection of libraries for math, network, 3D, and GUI. It includes well known Processing libraries: PeasyCam, OSCP5, Video, Toxiclibs. And custom ones: SVGExtended, ProcessingTUIO, Skatolo, GuiModes, and Reflections. 
 * JavaCV, for your platform [Windows](http://jiii.fr/papart/libraries/javacv-windows-x86_64.tgz), [Linux x86_64](http://jiii.fr/papart/libraries/javacv-linux-x86_64.tgz).
 
-Unpack and install all the libraries to your sketchbook/library directory. Follow this [guide](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library) if you are not sure how to install a library. 
+Unpack and install all the libraries to your sketchbook/library directory. If you are not sure how to install a library follow this [guide](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). 
 
 It's ready to work ! You can try it with a [webcam](https://github.com/poqudrof/Papart-examples/wiki/quick%20start%20webcam) for your first use.
 
