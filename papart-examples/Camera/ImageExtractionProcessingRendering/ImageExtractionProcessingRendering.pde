@@ -54,7 +54,6 @@ public void setup(){
     // Start tracking the pieces of paper.
     cameraTracking.trackSheets(true);
 
-    papart.startCameraThread();
     papart.startTracking();
 }
 
