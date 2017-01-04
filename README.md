@@ -18,7 +18,7 @@ Current version of Processing: 3.2.3 . Any higher version of Processing 3 should
 Download list: 
 * [PapARt library](http://jiii.fr/papart/libraries/PapARt-default.tgz), or [Library with examples](http://jiii.fr/papart/libraries/PapARt-withExamples.tgz), or special version for  [Kinect](http://jiii.fr/papart/libraries/PapARt-kinect.tgz), [RealSense](http://jiii.fr/papart/libraries/PapARt-realsense.tgz), [PapartHardware2](http://jiii.fr/papart/libraries/PapARt-hardware2.tgz), and [PapartHardware3](http://jiii.fr/papart/libraries/PapARt-hardware3.tgz).
 * [smaller libs](http://jiii.fr/papart/libraries/libraries.zip): a collection of libraries for math, network, 3D, and GUI. It includes well known Processing libraries: PeasyCam, OSCP5, Video, Toxiclibs. And custom ones: SVGExtended, ProcessingTUIO, Skatolo, GuiModes, and Reflections. 
-* JavaCV, for your platform [Windows](http://jiii.fr/papart/libraries/javacv-windows-x86_64.tgz), [Linux x86_64](http://jiii.fr/papart/libraries/javacv-linux-x86_64.tgz).
+* JavaCV, for your platform [Windows](http://jiii.fr/papart/libraries/javacv-windows-x86_64.tgz), [Linux x86_64](http://jiii.fr/papart/libraries/javacv-linux-x86_64.tgz), [Mac OSX](http://jiii.fr/papart/libraries/javacv-macosx-x86_64.tgz)
 
 Unpack and install all the libraries to your sketchbook/library directory. If you are not sure how to install a library follow this [guide](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). 
 
