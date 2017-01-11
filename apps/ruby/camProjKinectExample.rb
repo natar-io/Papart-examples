@@ -4,7 +4,7 @@ require 'jruby_art'
 require 'jruby_art/app'
 
 Processing::App::SKETCH_PATH = __FILE__
-Processing::App::load_library :PapARt, :javacv, :toxiclibscore
+Processing::App::load_library :PapARt, :javacv, :toxiclibscore, :SVGExtended
 
 module Papartlib
   include_package 'fr.inria.papart.procam'
@@ -46,7 +46,7 @@ class PaperTouch < Papartlib::PaperScreen
 
   def settings
     setDrawingSize 297, 210
-    loadMarkerBoard(Papartlib::Papart::markerFolder + "A3-small1.svg", 297, 210)
+    loadMarkerBoard(Papartlib::Papart::markerFolder + "A4-default.svg", 297, 210)
     setDrawOnPaper
   end
 
@@ -54,8 +54,9 @@ class PaperTouch < Papartlib::PaperScreen
   end
 
   def drawOnPaper
+    # @r = 100
     setLocation(0, 0, 0)
-    background 40, 200, 200
+    background @r, 0, 0
   end
 end
 
