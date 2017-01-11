@@ -6,7 +6,7 @@ import fr.inria.guimodes.Mode;
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.drawingapp.*;
+import fr.inria.papart.utils.*;
 import org.bytedeco.javacpp.*;
 import toxi.geom.*;
 import fr.inria.papart.calibration.*;
@@ -81,7 +81,7 @@ public void setup() {
   titre = skatolo.addTextarea("titre")
     .setPosition(270, 30);
 
-  inputHeight = skatolo.addTextfield("height") 
+  inputHeight = skatolo.addTextfield("height")
     .setVisible(true)
     .setPosition(20, 20)
     .setSize(40, 10)
@@ -133,11 +133,11 @@ public void draw() {
 
   PGraphicsOpenGL graphics = initDraw();
 
-  if (Mode.is("changeSize"))     
+  if (Mode.is("changeSize"))
     drawChangeSize();
 
-  else if (Mode.is("corners"))    
-    drawCorners(graphics);    
+  else if (Mode.is("corners"))
+    drawCorners(graphics);
 
   skatolo.draw();
 }
