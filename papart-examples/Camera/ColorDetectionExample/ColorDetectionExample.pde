@@ -5,6 +5,7 @@ import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
+import processing.video.*;
 
 void settings(){
     size(200, 200, P3D);
