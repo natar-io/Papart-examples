@@ -9,6 +9,8 @@ available on this [repository](https://github.com/poqudrof/papart).
 
 The first big release is out. We look forward for feedback and issue reports. We will enhance the guides and create tutorials, and for this any help will be appreciated ! 
 
+**2017 update: PapARt is now working on Windows, OSX, Linux and Raspberry Pi.**
+
 ## Quick start guide
 
 PapARt is a [Processing](http://processing.org) library, and it requires many other libraries to work. The smaller ones are included, and the heavy ones are separated.
