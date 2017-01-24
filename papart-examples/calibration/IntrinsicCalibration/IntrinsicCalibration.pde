@@ -1,6 +1,6 @@
 import fr.inria.papart.procam.*;
+import fr.inria.papart.utils.*;
 import fr.inria.papart.procam.display.*;
-import fr.inria.papart.drawingapp.*;
 import org.bytedeco.javacpp.*;
 import TUIO.*;
 import toxi.geom.*;
@@ -14,7 +14,7 @@ float focal, cx, cy;
 PMatrix3D projIntrinsics;
 
 boolean useProjector = true;
-float distancePaper = 1000f;  // in millimeter.
+float distancePaper = 600f;  // in millimeter.
 
 PApplet parent;
 
@@ -28,7 +28,7 @@ void settings(){
 
 public void setup() {
 
-    // Papart.projectorCalib = "calib.xml";
+    Papart.projectorCalib = "calib.xml";
 
     if(useProjector)
 	Papart.projectionOnly(this);
