@@ -3,7 +3,7 @@
 This applications calibrates the kinect by setting the 3D position of the planar surface you want to make tactile (that can be a computer screen, a desk, wall...).
 
 # How to use
-![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_interface.png)
+![interface](https://github.com/potioc/Papart-examples/blob/master/papart/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_interface.png)
 
 
 The interface contains a slider `PlaneUP` (top left), a toggle button `use Marker` (left) and a `Save` button (bottom left).
@@ -25,7 +25,7 @@ We recommend the `Marker` moder in these cases:
 
 ##Kinect Depth Mode
 
-![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_depth.png)
+![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/calibration/PlaneSetCalibration/planesetcalibration_depth.png)
 
 The kinect depth mode shows the depth data coming from the kinect with color informations added.
 
@@ -36,7 +36,7 @@ The calibration plane is set by the points you place. It uses the depth data fro
 
 **Important**: You have to print the file: `sketchbook/libraries/PapARt/data/markers/big-calib.svg` in A3 format.
 
-![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_ar.png)
+![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/calibration/PlaneSetCalibration/planesetcalibration_ar.png)
 
 In this mode we only display the color camera feed, and the depth data inside the calibration rectangle. 
 The calibration plane is set by the A3 sheet you printed. 
@@ -46,7 +46,7 @@ Use the slide bar to calibrate the kinect: usually the planar surface you want t
 
 Below is an example of a bad calibration: the surface is not totally colored. 
 
-![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/PlaneSetCalibration/planesetcalibration_ar_bad.png)
+![interface](https://github.com/potioc/Papart-examples/blob/master/papart-examples/calibration/PlaneSetCalibration/planesetcalibration_ar_bad.png)
 
 
 ##Saving
