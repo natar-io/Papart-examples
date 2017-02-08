@@ -22,7 +22,7 @@ Download list:
 * [smaller libs](http://jiii.fr/papart/libraries/libraries.zip): a collection of libraries for math, network, 3D, and GUI. It includes well known Processing libraries: PeasyCam, OSCP5, Video, Toxiclibs. And custom ones: SVGExtended, ProcessingTUIO, Skatolo, GuiModes, and Reflections. 
 * JavaCV, for your platform [Windows](http://jiii.fr/papart/libraries/javacv-windows-x86_64.tgz), [Linux x86_64](http://jiii.fr/papart/libraries/javacv-linux-x86_64.tgz), [Mac OSX](http://jiii.fr/papart/libraries/javacv-macosx-x86_64.tgz). Experimental: [armhf / Raspberry pi](http://jiii.fr/papart/libraries/javacv-linux-armhf.tgz), [android](http://jiii.fr/papart/libraries/javacv-android-arm.tgz)
 
-Unpack and install all the libraries to your sketchbook/library directory. If you are not sure how to install a library follow this [guide](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). 
+Unpack and install all the libraries to your sketchbook/library directory. If you are not sure how to install a library follow the  [official processing guide](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). 
 
 It's ready to work ! You can try it with a [webcam](https://github.com/poqudrof/Papart-examples/wiki/quick%20start%20webcam) for your first use.
 
