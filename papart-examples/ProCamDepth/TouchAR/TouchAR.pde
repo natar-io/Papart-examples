@@ -8,7 +8,7 @@ import TUIO.*;
 import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
-import fr.inria.skatolo.Skatolo;
+import tech.lity.rea.skatolo.Skatolo;
 
 float renderQuality = 1.5f;
 Papart papart;

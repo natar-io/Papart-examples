@@ -12,7 +12,8 @@ public class MyApp  extends PaperTouchScreen {
 
     public void setup() {
 	app = this;
-	imageToPrint = loadImage("marker1515.png");
+	//	imageToPrint = loadImage("marker1515.png");
+	imageToPrint = loadImage("the.png");
     }
 
     public void drawOnPaper() {

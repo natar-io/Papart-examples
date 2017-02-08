@@ -8,7 +8,7 @@ import TUIO.*;
 import toxi.geom.*;
 import processing.video.*;
 import processing.app.Base;
-import fr.inria.skatolo.*;
+import tech.lity.rea.skatolo.*;
 
 Papart papart;
 

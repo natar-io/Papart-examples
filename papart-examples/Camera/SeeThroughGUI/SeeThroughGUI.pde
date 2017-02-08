@@ -7,9 +7,9 @@ import org.bytedeco.javacpp.opencv_core;
 import org.reflections.*;
 import toxi.geom.*;
 
-import fr.inria.skatolo.*;
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.controllers.*;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
 
 Papart papart;
 Skatolo skatolo;

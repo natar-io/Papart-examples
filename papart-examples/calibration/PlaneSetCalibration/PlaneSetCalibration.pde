@@ -8,10 +8,10 @@ import fr.inria.papart.depthcam.analysis.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.calibration.*;
 
-import fr.inria.skatolo.*;
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.controllers.*;
-import fr.inria.skatolo.gui.widgets.*;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
+import tech.lity.rea.skatolo.gui.widgets.*;
 
 import fr.inria.guimodes.Mode;
 
@@ -36,11 +36,11 @@ ArrayList<CalibrationSnapshot> snapshots = new ArrayList<CalibrationSnapshot>();
 
 // GUI
 Skatolo skatolo;
-fr.inria.skatolo.gui.group.Textarea titre;
+tech.lity.rea.skatolo.gui.group.Textarea titre;
 Textfield inputWidth;
 Textfield inputHeight;
-fr.inria.skatolo.gui.controllers.Button buttonChangeSize;
-fr.inria.skatolo.gui.controllers.Button saveButton;
+tech.lity.rea.skatolo.gui.controllers.Button buttonChangeSize;
+tech.lity.rea.skatolo.gui.controllers.Button saveButton;
 
 
 PixelSelect origin, xAxis, yAxis, corner;

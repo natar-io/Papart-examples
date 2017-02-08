@@ -10,11 +10,11 @@ import org.bytedeco.javacpp.freenect;
 import org.bytedeco.javacpp.opencv_core.*;
 
 
-import fr.inria.skatolo.*;
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.*;
-import fr.inria.skatolo.gui.group.*;
-import fr.inria.skatolo.gui.controllers.*;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.*;
+import tech.lity.rea.skatolo.gui.group.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
 
 import processing.video.*;
 

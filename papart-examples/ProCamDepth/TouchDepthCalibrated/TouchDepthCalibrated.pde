@@ -4,7 +4,7 @@ import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
-import fr.inria.skatolo.Skatolo;
+import tech.lity.rea.skatolo.Skatolo;
 
 Papart papart;
 

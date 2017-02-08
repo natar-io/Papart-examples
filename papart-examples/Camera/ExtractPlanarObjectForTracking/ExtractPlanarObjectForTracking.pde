@@ -1,6 +1,6 @@
-import fr.inria.skatolo.*;  //<>//
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.controllers.*;
+import tech.lity.rea.skatolo.*;  //<>//
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
 
 import fr.inria.guimodes.Mode;
 import fr.inria.papart.procam.*;
@@ -17,10 +17,10 @@ Camera camera;
 
 //GUI elements
 Skatolo skatolo;
-fr.inria.skatolo.gui.group.Textarea titre;
-fr.inria.skatolo.gui.controllers.Button buttonOppositeX;
-fr.inria.skatolo.gui.controllers.Button buttonOppositeY;
-fr.inria.skatolo.gui.controllers.Button saveButton;
+tech.lity.rea.skatolo.gui.group.Textarea titre;
+tech.lity.rea.skatolo.gui.controllers.Button buttonOppositeX;
+tech.lity.rea.skatolo.gui.controllers.Button buttonOppositeY;
+tech.lity.rea.skatolo.gui.controllers.Button saveButton;
 Textlabel zero;
 Textlabel labelX;
 Textlabel labelY;
