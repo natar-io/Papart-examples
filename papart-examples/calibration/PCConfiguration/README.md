@@ -3,7 +3,7 @@
 This is the sketch to set your hardware configuration. You have to run it to set your hardware 
 for the first uses and when your hardware is modified: new camera, projector, or depth camera.
 
-This is a complement to the [hardware configuration guide)[https://github.com/potioc/Papart-examples/wiki/hardware-configuration].
+### This is a complement to the [hardware configuration guide](https://github.com/potioc/Papart-examples/wiki/hardware-configuration).
 
 ### Projector
 
