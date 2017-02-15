@@ -1,29 +1,32 @@
-**TODO** expliquer la diff entre imageExtractionProcessingRendering et SeeThrough rendering
 
 #Camera
-##Image Tracking
-- [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking) : utilitaire - photos de zones arbitraires pour tracking d'image
-- [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuiCorners) : exemple d'interface avec angles draggables définissant la position manuelle des marqueurs
-- [ImageBasedTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageBasedTracking) : utilisation de tracking basé Image (et pas marqueur) **non fonctionnel**
 
-##3D Positions
-- [LoadExternalLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/LoadExternalLocation) : permet de charger une position 3D préalablement sauvegardée
-- [RelativeLocations](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RelativeLocations) : deux rendus avec des éléments qui vont d'une feuille à l'autre. 
-- [SaveLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SaveLocation) : sauvegarde et chargement d'une position 3D de feuille (le fichier est sauvegardé dans le dossier  SavedLocations)
+## First examples
+- [SeeThroughOnePaper](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughOnePaper): Simple PapARt application, on paper screen is used for 2D rendering inside it. 
+- [SeeThroughWith3DObject](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughWith3DObject): This example shows the **two types** of rendering: **DrawAroundPaper** and **DrawOnPaper**.
+- [SeeThroughGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughGUI) : the user interface is in  screen space.
+- [SeeThroughGUIInsidePaper](https://github.com/poqudrof/Papart-examples/tree/master/papart-examples/Camera/SeeThroughGUIInsidePaper): example of a user interface inside the PaperScreen. 
+- Sample application : [SolarSystem](https://github.com/potioc/Papart-examples/tree/master/apps/SolarSystem), 3 paperScreens displaying a 3D model each.
 
-##Several rendering and quality
-- [RenderingQuality](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality) : rendu des différentes tailles : qualité de projection (DrawAroundPaper), de feuille en fonction de la qualité en pixels/mm (DrawOnPaper)
-- [SeeThroughGUI](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughGUI) : interface GUI (Graphical User Interface)
-- [SeeThroughOnePaper](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughOnePaper) : 1 feuille, 1 affichage - l'application PapART la plus simple qu'il soit.
- - application : [SolarSystem](https://github.com/potioc/Papart-examples/tree/master/apps/SolarSystem) (3 feuilles, 1 objet/feuille)
-- [SeeThroughWith3DObject](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SeeThroughWith3DObject) : deux **types** de rendus, 2 feuilles = 1 PaperScreen en **DrawAroundPaper** + 1 PaperScreen en **DrawOnPaper**
+## Handling 3D locations
+- [SaveLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/SaveLocation) : Save the 3D location of a PaperScreen to a file. 
+- [LoadExternalLocation](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/LoadExternalLocation) : Set the 3D location of a markerboard from a file.
+- [RelativeLocations](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RelativeLocations) : Rendering between two PaperScreens. 
+
+## Rendering quality and performance
+- [RenderingQuality](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/RenderingQuality) : rendering quality settings explained, higher quality to remove aliasing or to take full advantage of the hardware or lower quality for better performance.
 
 ##Image Analysis Examples
-- [ColorDetectionExample](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ColorDetectionExample) : analyse de petites zones - détection de couleurs / formes
-- [ImageExtractionProcessingRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionProcessingRendering) : Processing -- extraction de zone : 1 feuille avec 1 zone de capture 
-- [ImageExtractionSeeThroughRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionSeeThroughRendering) : See Through -- extraction de zone : 1 feuille avec 1 zone de capture
-- [StrokeDetection](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/StrokeDetection) analyse de grandes zones : dessins
- - application : [jeuTech](https://github.com/potioc/Papart-examples/tree/master/apps/jeuTech) (utilise les outils d'analyse d'image ci-dessus)
+- [ImageExtractionProcessingRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionProcessingRendering) : The inside of a PaperScreen is extracted and rendered using standard Processing.
+- [ImageExtractionSeeThroughRendering](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageExtractionSeeThroughRendering) : Same as above, but rendered inside a PaperScreen.
+- [ColorDetectionExample](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ColorDetectionExample) : Select small zone and determine its color.
+- [StrokeDetection](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/StrokeDetection): color analysis of a large zone.
+- application : [jeuTech](https://github.com/potioc/Papart-examples/tree/master/apps/jeuTech), a physics-based game using touch and color tracking. 
+
+## Utilities
+- [ExtractPlanarObjectForTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ExtractPlanarObjectForTracking) : Utility to extract part of an image.
+- [GuiCorners](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/GuirCorners): find the 3D location of a 2D object by setting its corners.
+- [ImageBasedTracking](https://github.com/potioc/Papart-examples/tree/master/papart-examples/Camera/ImageBasedTracking) : Tracking using natural features instead of markers. Experimental for now. 
 
 
 #Libraries integration
