@@ -32,7 +32,7 @@ This example shows how to instanciate a camera for PapARt. Here we create a came
   }
   ```
   
-  ## Camera types
+## Camera types
   
 The camera types are discussed in the [hardware configuration](https://github.com/poqudrof/Papart-examples/wiki/hardware-configuration) wiki page. You can check out the camera types in the javadoc:
 http://jiii.fr/papart/papart/javadoc/fr/inria/papart/procam/camera/Camera.Type.html 
