@@ -133,9 +133,7 @@ void initCameraUI() {
         .addItem("OpenCV", Camera.Type.OPENCV.ordinal())
         .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
-	    .addItem("RealSense",Camera.Type.REALSENSE.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())
-        .addItem("OpenKinect2",Camera.Type.OPEN_KINECT_2.ordinal())
         .addItem("FlyCapture", Camera.Type.FLY_CAPTURE.ordinal())
         .activate(cameraConfig.getCameraType().ordinal())
         ;
@@ -193,15 +191,11 @@ void initCameraUI() {
 }
 
 int getDepthType(int t){
-    if(t == Camera.Type.REALSENSE.ordinal())
-        return 0;
     if(t == Camera.Type.OPEN_KINECT.ordinal())
-        return 1;
-    if(t == Camera.Type.OPEN_KINECT_2.ordinal())
-        return 2;
+        return 0;
     if(t == Camera.Type.FAKE.ordinal())
-        return 3;
-    return 3;
+        return 1;
+    return 1;
 }
 
 void initDepthCameraUI() {
@@ -212,9 +206,7 @@ void initDepthCameraUI() {
     .setPosition(50, 652)
     .setItemWidth(20)
     .setItemHeight(20)
-      .addItem("RealSense (SR300)", Camera.Type.REALSENSE.ordinal())
       .addItem("OpenKinect (xbox360)", Camera.Type.OPEN_KINECT.ordinal())
-      .addItem("OpenKinect2 (xboxOne)", Camera.Type.OPEN_KINECT_2.ordinal())
       .addItem("No DepthCamera", Camera.Type.FAKE.ordinal())
     .setColorLabel(color(255))
       .activate(currentType)

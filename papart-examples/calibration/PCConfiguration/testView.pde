@@ -1,4 +1,3 @@
-import fr.inria.papart.depthcam.devices.KinectOne;
 import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.procam.camera.*;
@@ -82,17 +81,10 @@ class TestView extends PApplet {
         camera = depthCameraConfig.createCamera();
         camera.setParent(this);
 
-        if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT_2){
-            depthCamera = new KinectOne(this, camera);
-        }
-
         if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT){
             depthCamera = new Kinect360(this, camera);
         }
 
-        if(depthCameraConfig.getCameraType() == Camera.Type.REALSENSE){
-            depthCamera = new RealSense(this, camera);
-        }
 	((CameraRGBIRDepth)camera).actAsDepthCamera();
 	//        camera.setThread();
 
