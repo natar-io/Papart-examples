@@ -24,7 +24,7 @@ Current version of Processing: 3.2.3 . Any higher version of Processing 3 should
 
 ### Step 2 
  
-* Get the [PapARt library](http://jiii.fr/papart/libraries/PapARt-default.tgz), or [Library with examples](http://jiii.fr/papart/libraries/PapARt-withExamples.tgz), or a special version for  [Kinect](http://jiii.fr/papart/libraries/PapARt-kinect.tgz), [RealSense](http://jiii.fr/papart/libraries/PapARt-realsense.tgz), [PapartHardware2](http://jiii.fr/papart/libraries/PapARt-hardware2.tgz), and [PapartHardware3](http://jiii.fr/papart/libraries/PapARt-hardware3.tgz).
+* Get the [PapARt library](http://jiii.fr/papart/libraries/PapARt-default.tgz), or check out our [versions list]()https://github.com/poqudrof/Papart-examples/wiki/PapARt-versions).
 * Get the [other libs](http://jiii.fr/papart/libraries/libraries.zip): a collection of libraries for math, network, 3D, and GUI. It includes well known Processing libraries: PeasyCam, OSCP5, Video, Toxiclibs. And custom ones: SVGExtended, ProcessingTUIO, Skatolo, GuiModes, and Reflections. 
 * Get JavaCV for your platform [Windows](http://jiii.fr/papart/libraries/javacv-windows-x86_64.tgz), [Linux x86_64](http://jiii.fr/papart/libraries/javacv-linux-x86_64.tgz), [Mac OSX](http://jiii.fr/papart/libraries/javacv-macosx-x86_64.tgz). Experimental: [armhf / Raspberry pi](http://jiii.fr/papart/libraries/javacv-linux-armhf.tgz), [android](http://jiii.fr/papart/libraries/javacv-android-arm.tgz)
 
