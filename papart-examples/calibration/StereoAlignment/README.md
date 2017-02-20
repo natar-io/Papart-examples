@@ -24,14 +24,14 @@ Notes:
 
 Notice the problem with the legos. Everything looks weirder. 
 
-![From depth camera point of view](https://github.com/poqudrof/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/invalid.png)
+![From depth camera point of view](https://github.com/poqudrof/Papart-examples/blob/master/papart-examples/calibration/invalid.png)
 
 
 ## Correct alignment:
 
 It is not clear, when everything works it looks good.
 
-![From my point of view](https://github.com/poqudrof/Papart-examples/blob/master/papart-examples/DepthCamera/calibration/SteroAlignment/correct.png)
+![From my point of view](https://github.com/poqudrof/Papart-examples/blob/master/papart-examples/calibration/SteroAlignment/correct.png)
 
 
 
