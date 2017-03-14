@@ -25,7 +25,7 @@ module Processing
   include_package 'processing.opengl'
   include_package 'processing.video'
   include_package 'processing.video.Movie'
-  include_package 'org.gestreamer.elements'
+  include_package 'org.gstreamer.elements'
 end
 
 # java_signature
