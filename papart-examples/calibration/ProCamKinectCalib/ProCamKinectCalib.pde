@@ -10,7 +10,7 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 
-float renderQuality = 1.5f;
+float renderQuality = 1.0f;
 Papart papart;
 
 void settings(){
@@ -22,6 +22,7 @@ void settings(){
      papart.loadTouchInput();
      papart.loadSketches();
      papart.startTracking();
+     
 }
 
 

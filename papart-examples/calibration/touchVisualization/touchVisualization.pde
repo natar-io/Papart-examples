@@ -1,7 +1,10 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
+
 import fr.inria.papart.multitouch.*;
+import fr.inria.papart.multitouch.detection.*;
+
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.depthcam.analysis.*;
@@ -64,10 +67,10 @@ void setup(){
     }catch(NullPointerException e){
 	die("Impossible to load the plane calibration...");
     }
-
+ 
     kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
     pointCloud = new KinectPointCloud(this, kinectAnalysis, 1);
-
+ 
 
   // Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
@@ -75,13 +78,13 @@ void setup(){
   cam.setMaximumDistance(5000);
   cam.setActive(true);
 
-  touchDetection = new TouchDetectionSimple2D(kinectAnalysis.getDepthSize());
+  touchDetection = new Simple2D(kinectAnalysis.getDepthSize());
 
   touchCalibration = new PlanarTouchCalibration();
   touchCalibration.loadFrom(this, Papart.touchCalib);
   touchDetection.setCalibration(touchCalibration);
 
-  touchDetection3D = new TouchDetectionSimple3D(kinectAnalysis.getDepthSize());
+  touchDetection3D = new Simple3D(kinectAnalysis.getDepthSize());
   touchCalibration3D = new PlanarTouchCalibration();
   touchCalibration3D.loadFrom(this, Papart.touchCalib3D);
   touchDetection3D.setCalibration(touchCalibration3D);
@@ -101,15 +104,15 @@ float planeHeight;
 int searchDepth, recursion, minCompoSize, forgetTime;
 float trackingMaxDistance;
 
-TouchDetectionSimple2D touchDetection;
-TouchDetectionSimple3D touchDetection3D;
+Simple2D touchDetection;
+Simple3D touchDetection3D;
 PlanarTouchCalibration touchCalibration, touchCalibration3D;
 
 
 Vec3D[] depthPoints;
 IplImage kinectImg;
 IplImage kinectImgDepth;
-ArrayList<TouchPoint> globalTouchList = new ArrayList<TouchPoint>();
+ArrayList<TrackedDepthPoint> globalTouchList = new ArrayList<TrackedDepthPoint>();
 boolean mouseControl;
 
 void grabImages(){
@@ -179,7 +182,7 @@ void loadCalibration(PlanarTouchCalibration calib){
 
 void draw3DPointCloud(){
     KinectDepthData depthData = kinectAnalysis.getDepthData();
-    ArrayList<TouchPoint> touchs;
+    ArrayList<TrackedDepthPoint> touchs;
 
     if(is3D){
 	touchs = touchDetection3D.compute(depthData);
@@ -198,7 +201,7 @@ void draw3DPointCloud(){
     fill(200);
 
     colorMode(HSB, 20, 100, 100);
-    for(TouchPoint touchPoint : globalTouchList){
+    for(TrackedDepthPoint touchPoint : globalTouchList){
     	Vec3D position = touchPoint.getPositionKinect();
     	pushMatrix();
     	translate(position.x, position.y, -position.z);
