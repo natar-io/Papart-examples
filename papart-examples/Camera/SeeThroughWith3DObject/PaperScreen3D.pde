@@ -15,8 +15,12 @@ public class PaperScreen3D  extends PaperScreen {
     }
 
     void drawAroundPaper(){
-        setLocation(63, 45, 0);
-        scale(0.5f);
+        // setLocation(63, 45, 0);
+
+	fill(0, 200, 0);
+	rect(0, 0, 40, 20);
+	
+	scale(0.5f);
         rotateX(-HALF_PI);
         rotateY((float) millis() / 1000f) ;
         shape(rocketShape);

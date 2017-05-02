@@ -19,7 +19,11 @@ public class PaperScreen2D  extends PaperScreen {
 
     void drawOnPaper(){
         background(100, 100);
-        lights();
+
+	fill(255, 0, 0);
+	rect(40, 0, 40, 20);
+	
+	lights();
 
         translate(drawingSize.x /2, drawingSize.y /2 , -200);
         rotateZ(PI);

@@ -7,7 +7,7 @@ public class ColorApp extends PaperScreen {
 
     // 5cm
     PVector captureSize = new PVector(10, 10);
-    PVector origin = new PVector(100, 100);
+    PVector origin = new PVector(0, 0);
     int picSize = 64; // Works better with power  of 2
 
     void settings(){
@@ -25,14 +25,17 @@ public class ColorApp extends PaperScreen {
 
     void drawOnPaper() {
         clear();
+
 	//	setLocation(10, 0, 0);
-	//	colorDetection.drawSelf();
+
 	
         colorDetection.computeColor();
         int c = colorDetection.getColor();
         fill(c);
-        rect(0, 0, 10, 10);
-        colorDetection.drawCaptureZone();
+	//         rect(0, 0, 10, 10);
+	//        colorDetection.drawCaptureZone();
 
+	colorDetection.drawSelf();
+	
     }
 }
