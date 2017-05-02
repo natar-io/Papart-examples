@@ -17,6 +17,7 @@ module Papartlib
   include_package 'fr.inria.papart.multitouch'
   include_package 'fr.inria.papart.utils'
   include_package 'import tech.lity.rea.svgextended'
+  # TUIO
 end
 
 class Sketch < Processing::App
@@ -29,11 +30,21 @@ class Sketch < Processing::App
   end
 
   def setup
-    @papart = Papartlib::Papart.projection(self)
-    @papart.loadTouchInput()
 
+    @debug = true
+
+    if @debug
+      @papart = Papartlib::Papart.new(self)
+      @papart.initDebug
+#      @papart.loadTouchInputTUIO
+    else 
+      
+      @papart = Papartlib::Papart.projection(self)
+      @papart.loadTouchInput()
+    end
+    
     @paper = PaperTouch.new
-    @papart.startTracking
+    @papart.startTracking if not @debug
   end
 
   def draw
@@ -41,7 +52,7 @@ class Sketch < Processing::App
 end
 
 
-class PaperTouch < Papartlib::PaperTouchScreen
+class PaperTouch < Papartlib::PaperScreen
 
   def settings
     setDrawingSize 297, 210
@@ -57,7 +68,7 @@ class PaperTouch < Papartlib::PaperTouchScreen
     # @r = 100
     setLocation(0, 0, 0)
     background 10
-    drawTouch 10
+
   end
 
 end
