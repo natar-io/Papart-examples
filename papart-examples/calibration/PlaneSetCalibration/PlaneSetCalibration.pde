@@ -61,6 +61,7 @@ void setup(){
 
     depthCameraDevice.getMainCamera().start();
     depthCameraDevice.getMainCamera().setThread();
+    depthCameraDevice.loadDataFromDevice();
 
     initTouch();
 
