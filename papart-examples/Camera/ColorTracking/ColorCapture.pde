@@ -90,7 +90,7 @@ public class MyApp extends PaperScreen {
 
     void drawCapturedImage(PImage img){
 	image(img,
-	      drawingSize.x / 2, 0,
+	      (int) origin.x, (int) origin.y, 
 	      captureSize.x, captureSize.y);
     }
 
@@ -101,6 +101,7 @@ public class MyApp extends PaperScreen {
       int hideColor = color(96, 180);
 
       capturedImage.loadPixels();
+      pushMatrix();
       translate(origin.x, origin.y);
 
       noStroke();
@@ -125,37 +126,31 @@ public class MyApp extends PaperScreen {
 	  }
       }
 
+      popMatrix();
+
       // the array is ready. let's find the components.
       ArrayList<TrackedElement> trackedElements = touchDetectionColor.compute(colorFoundArray,
 									      millis(),
 									      2);
-
       TouchPointTracker.trackPoints(trackedColors, trackedElements,
 				    millis());
-
-      
-      // fill(255, 0, 0);
-      // println("Tracked Elements found: ");
-      // for(TrackedElement te: trackedElements){
-      // 	  float x = te.getPosition().x;
-      // 	  float y = te.getPosition().y;
-	   
-      // 	  float drawX = (x / captureSizePx.x) * captureSize.x;
-      // 	  float drawY = (y / captureSizePx.y) * captureSize.y;
-      // 	  rect(drawX - 5, drawY - 5, 10, 10);
-      // 	  println(te);
-      // }
 
       fill(0, 0, 255);
       println("Tracking result: "+ trackedColors.size());
       for(TrackedElement te: trackedColors){
 	  float x = te.getPosition().x;
 	  float y = te.getPosition().y;
-	   
-	  float drawX = (x / captureSizePx.x) * captureSize.x;
-	  float drawY = (y / captureSizePx.y) * captureSize.y;
-	  rect(drawX - 5, drawY - 5, 10, 10);
 
+	  PVector p = boardView.pixelsToMM(te.getPosition());
+
+	  println(p);
+	  rect(p.x, p.y, 10, 10);
+	  
+	  // float drawX = (x / captureSizePx.x) * captureSize.x;
+	  // float drawY = (y / captureSizePx.y) * captureSize.y;
+	  // rect(drawX - 5, drawY - 5, 10, 10);
+
+	  // boardView
       }
       
 
