@@ -77,7 +77,7 @@ class TestView extends PApplet {
         if(depthCameraConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
-        depthCameraConfig.setCameraName(cameraIdText.getText());
+        depthCameraConfig.setCameraName(depthCameraIdText.getText());
 
         camera = depthCameraConfig.createCamera();
         camera.setParent(this);
