@@ -45,9 +45,9 @@ void setup() {
   // load the depth camera
   try{
       depthCameraDevice = papart.loadDefaultDepthCamera();
+      // depthCameraDevice.getMainCamera().setUseColor(true);  // enabled by default
       depthCameraDevice.getMainCamera().start();
-    
-      //      depthCameraDevice.getMainCamera().setUseColor(true);
+
   }catch (Exception e){
       println("Cannot start the DepthCamera: " + e );
       e.printStackTrace();
@@ -56,6 +56,7 @@ void setup() {
   kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
   pointCloud = new KinectPointCloud(this, kinectAnalysis, skip);
   
+
   //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
   cam.setMinimumDistance(0);
@@ -69,12 +70,20 @@ void setup() {
 }
 
 
+boolean once = false;
+
 void draw() {
   background(100);
-
+  
   // retreive the camera image.
   depthCameraDevice.getMainCamera().grab();
 
+  if( !once){
+      //    kinectAnalysis.updateCalibrations(depthCameraDevice);
+      once = true;
+  }
+
+  
   IplImage colorImg = depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
   
@@ -90,9 +99,11 @@ void draw() {
   stereoCalib.m03 = xOffset;
   depthCameraDevice.setStereoCalibration(stereoCalib);
   depthCameraDevice.getDepthCamera().setExtrinsics(depthCameraDevice.getStereoCalibration());
-  
-  kinectAnalysis.update(depthImg, colorImg, skip);
 
+  try
+      {      kinectAnalysis.update(depthImg, colorImg, skip);}
+  catch (Exception e) {e.printStackTrace();}
+  
   pointCloud.updateWith(kinectAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 

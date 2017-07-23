@@ -56,13 +56,13 @@ public class MyApp  extends PaperTouchScreen {
 	SkatoloLink.updateTouch(touchList, skatolo);
 	skatolo.draw(getGraphics());
 
-	drawTouch();
-	
-	// colorMode(HSB, 20, 100, 100);
-	// for(Touch touch : touchList){
-	//     fill(touch.id, 100, 100);
-	//     ellipse(touch.position.x, touch.position.y, 5, 5);
-	// }
+	drawFullTouch(10);
+	colorMode(HSB, 20, 100, 100);
+	for(Touch touch : touchList){
+	    fill(touch.id, 100, 100);
+	    ellipse(touch.position.x,
+		    touch.position.y, 5, 5);
+	}
 
 	if(toggle){
 	    fill(rectColor);
