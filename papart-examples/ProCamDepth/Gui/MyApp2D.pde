@@ -22,11 +22,6 @@ public class MyApp  extends PaperTouchScreen {
 	skatolo.getMousePointer().disable();
 	skatolo.setAutoDraw(false);
 
-	// skatolo.addSlider("Sliiiide")
-	//     .setPosition(0, 0)
-	//     .setSize(130, 10)
-	//     ;
-
 	skatolo.addHoverButton("button")
 	    .setPosition(0, 60)
 	    .setSize(60, 60)
