@@ -4,12 +4,14 @@ import fr.inria.papart.procam.camera.*;
 
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.multitouch.detection.*;
+import fr.inria.papart.multitouch.tracking.*;
 
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.depthcam.analysis.*;
 
 import fr.inria.papart.calibration.*;
+import fr.inria.papart.calibration.files.*;
 
 import toxi.geom.*;
 import org.bytedeco.javacpp.opencv_core.IplImage;
@@ -29,9 +31,9 @@ Skatolo skatolo;
 PeasyCam cam;
 
 
-KinectProcessing kinectAnalysis;
-KinectPointCloud pointCloud;
-KinectTouchInput touchInput;
+DepthAnalysisPImageView kinectAnalysis;
+PointCloudForDepthAnalysis pointCloud;
+DepthTouchInput touchInput;
 
 DepthCameraDevice depthCameraDevice;
 Camera cameraRGB, cameraDepth;
@@ -45,15 +47,17 @@ int precision = 3;
 boolean is3D = false;
 
 void settings(){
-    size(1200, 900, P3D);
+    size(1280, 720, P3D);
 }
 
 void setup(){
-
-
     Papart papart = new Papart(this);
 
-    depthCameraDevice = papart.loadDefaultDepthCamera();
+    try{
+	depthCameraDevice = papart.loadDefaultDepthCamera();
+    } catch(CannotCreateCameraException ccce){
+	exit();
+    }
     // activate color, activated by default for now. 
     //    depthCameraDevice.getMainCamera().setUseColor(true);
     depthCameraDevice.getMainCamera().start();
@@ -69,15 +73,11 @@ void setup(){
 	die("Impossible to load the plane calibration...");
     }
  
-    kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
-    pointCloud = new KinectPointCloud(this, kinectAnalysis, 1);
+    kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+    pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, 1);
  
 
-  // Set the virtual camera
-  cam = new PeasyCam(this, 0, 0, -800, 800);
-  cam.setMinimumDistance(100);
-  cam.setMaximumDistance(5000);
-  cam.setActive(true);
+
 
   touchDetection = new Simple2D(kinectAnalysis);
   touchDetection.setCalibration(papart.getDefaultTouchCalibration());
@@ -86,20 +86,19 @@ void setup(){
   touchDetection3D.setCalibration(papart.getDefaultTouchCalibration3D());
 
   
-  touchInput = new KinectTouchInput(this,
+  touchInput = new DepthTouchInput(this,
 				    depthCameraDevice,
 				    kinectAnalysis,
 				    planeProjCalibration);
   touchInput.setTouchDetectionCalibration(touchDetection.getCalibration());
   touchInput.setTouchDetectionCalibration3D(touchDetection3D.getCalibration());
   depthCameraDevice.setTouch(touchInput);
-  
-  initGui();
 
+  initGui();
   loadCalibrationToGui(touchDetection.getCalibration());
 
-  frameRate(200);
 
+  //  frameRate(200);
 }
 
 
@@ -133,41 +132,59 @@ void grabImages(){
     kinectImgDepth = cameraDepth.getIplImage();
 }
 
-void draw(){
+void initVirtualCamera(){
+        // Set the virtual camera
+  cam = new PeasyCam(this, 0, 0, -800, 800);
+  cam.setMinimumDistance(100);
+  cam.setMaximumDistance(5000);
+  cam.setActive(true);
+}
 
+
+void draw(){
     grabImages();
-    cam.setMouseControlled(mouseControl);
-	    
+
     updateCalibration(is3D ? touchDetection3D.getCalibration() : touchDetection.getCalibration());
 
-    // Done in the touchInput
-    // kinectAnalysis.updateMT(kinectImgDepth, kinectImg,
-    //                         planeProjCalibration,
-    //                         precision);
+
     background(0);
 
-    colorMode(RGB, 255);
+    if(mouseControl && cam == null){
+	initVirtualCamera();
+    }
+    if(cam != null){
+	cam.setMouseControlled(mouseControl);
+	cam.beginHUD();
+    }
+    skatolo.draw();
+    if(cam != null){
+	cam.endHUD();
+    }
 
-    pointCloud.updateWithFakeColors(kinectAnalysis, touchInput.getTrackedDepthPoints2D());
+    ArrayList<TrackedDepthPoint> points;
+    if(is3D){
+	points = touchInput.getTrackedDepthPoints3D();
+    } else {
+	points = touchInput.getTrackedDepthPoints2D();
+    }
+
+        colorMode(RGB, 255);
+    pointCloud.updateWithFakeColors(kinectAnalysis, points);
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
     colorMode(HSB, 20, 100, 100);
-    
-    ArrayList<TrackedDepthPoint> tracked = touchInput.getTrackedDepthPoints2D();
-    for(TrackedDepthPoint pt : tracked){
+
+    for(TrackedDepthPoint pt : points){
 	Vec3D position = pt.getPositionKinect();
     	pushMatrix();
     	translate(position.x, position.y, -position.z);
     	fill(pt.getID() % 20, 100, 100);
-    	ellipse(0, 0, 3, 3);
+    	ellipse(0, 0, 8,8);
     	popMatrix();
     }
     
     //     draw3DPointCloud();
 
-    cam.beginHUD();
-    skatolo.draw();
-    cam.endHUD();
 }
 
 void updateCalibration(PlanarTouchCalibration calib){
@@ -204,7 +221,7 @@ void loadCalibrationToGui(PlanarTouchCalibration calib){
 
 
 void draw3DPointCloud(){
-    KinectDepthData depthData = kinectAnalysis.getDepthData();
+    ProjectedDepthData depthData = kinectAnalysis.getDepthData();
     ArrayList<TrackedDepthPoint> touchs;
     ArrayList<TrackedDepthPoint> newList;
 
@@ -265,6 +282,10 @@ boolean undist = true;
 void keyPressed() {
     if(key == 'i'){
         planeCalibration.flipNormal();
+    }
+
+    if(key == 'c'){
+	initVirtualCamera();
     }
     
     if(depthCameraDevice.type() == Camera.Type.REALSENSE){

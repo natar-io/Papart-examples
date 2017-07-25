@@ -4,6 +4,7 @@ import toxi.geom.Vec3D;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.calibration.*;
+import fr.inria.papart.multitouch.tracking.*;
 
 import fr.inria.papart.depthcam.devices.*;
 
@@ -15,7 +16,7 @@ void keyPressed(){
 
 public class MyApp extends PaperTouchScreen {
 
-    PMatrix3D kinectExtrinsics;
+    PMatrix3D depthCamExtrinsics;
 
     void settings(){
         setDrawAroundPaper();
@@ -24,14 +25,18 @@ public class MyApp extends PaperTouchScreen {
     }
 
     void setup() {
-        DepthCameraDevice kinect = papart.getDepthCameraDevice();
-        kinectExtrinsics = kinect.getDepthCamera().getExtrinsics().get();
+        DepthCameraDevice depthCamera = papart.getDepthCameraDevice();
+        depthCamExtrinsics = depthCamera.getDepthCamera().getExtrinsics().get();
     }
 
 
     void drawAroundPaper(){
 
-        rect(0, 0, 100, 100);
+	// Go to the origin of the projection
+        translate(0, screen.getSize().y);
+        scale(1, -1, 1);
+	
+	rect(0, 0, 100, 100);
         float ellipseSize = 2;
 
         PMatrix3D currentLocation = getLocation().get();
@@ -41,19 +46,19 @@ public class MyApp extends PaperTouchScreen {
         for (Touch t : touchList) {
 
 	    PVector p = t.position;
-	    TouchPoint tp = t.touchPoint;
+	    TrackedDepthPoint tp = (TrackedDepthPoint) t.trackedSource();
 	    if(tp == null){
-		println("TouchPoint null, this method only works with KinectTouchInput.");
+		println("TrackedDepthPoint null, this method only works with DepthtTouchInput.");
 		continue;
 	    }
 
-	    ArrayList<DepthDataElementKinect> depthDataElements = tp.getDepthDataElements();
-	    for(DepthDataElementKinect dde : depthDataElements){
+	    ArrayList<DepthDataElementProjected> depthDataElements = tp.getDepthDataElements();
+	    for(DepthDataElementProjected dde : depthDataElements){
 
                 Vec3D depthPoint = dde.depthPoint;
                 PVector pointPosExtr = new PVector();
                 PVector pointPosDisplay = new PVector();
-                kinectExtrinsics.mult(new PVector(depthPoint.x,
+                depthCamExtrinsics.mult(new PVector(depthPoint.x,
                                                  depthPoint.y,
                                                  depthPoint.z),
                                      pointPosExtr);

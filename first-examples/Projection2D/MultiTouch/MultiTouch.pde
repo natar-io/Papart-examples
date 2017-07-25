@@ -1,12 +1,13 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.multitouch.*;
+import fr.inria.papart.multitouch.tracking.*;
 
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
 
 
-KinectTouchInput touchInput;
+DepthTouchInput touchInput;
 
 void settings(){
     fullScreen(P3D);
@@ -16,7 +17,7 @@ void setup(){
     Papart papart = Papart.projection2D(this);
     // arguments are 2D and 3D precision.
     papart.loadTouchInput();
-    touchInput = (KinectTouchInput) papart.getTouchInput();
+    touchInput = (DepthTouchInput) papart.getTouchInput();
     
     papart.startDepthCameraThread();
     
@@ -26,7 +27,8 @@ void setup(){
 void draw(){
 
     //    println("Framerate "+ frameRate);
-    background(100);
+
+    background(0, 0, 5);
 
     fill(50, 50, 255);
 

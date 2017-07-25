@@ -22,7 +22,6 @@ void settings(){
      papart.loadTouchInput();
      papart.loadSketches();
      papart.startTracking();
-     
 }
 
 

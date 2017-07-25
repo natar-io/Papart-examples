@@ -52,7 +52,14 @@ class TestView extends PApplet {
     public void testCamera(){
         cameraConfig.setCameraName(cameraIdText.getText());
 	    setFormat();
-        camera = cameraConfig.createCamera();
+
+	    try{
+	    camera = cameraConfig.createCamera();
+
+	    }catch(CannotCreateCameraException e){
+		println("Error cannot create the camera !");
+		exit();
+	    }
         camera.setParent(this);
 
         int w = 640, h = 480;
@@ -78,9 +85,16 @@ class TestView extends PApplet {
             return;
         }
         depthCameraConfig.setCameraName(cameraIdText.getText());
-
-        camera = depthCameraConfig.createCamera();
+	
+	try{
+	    camera = depthCameraConfig.createCamera();
+	}catch(CannotCreateCameraException e){
+	    println("Error cannot create the depth camera !");
+	    exit();
+	}
         camera.setParent(this);
+
+	try{
 
         if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT_2){
             depthCamera = new KinectOne(this, camera);
@@ -93,6 +107,12 @@ class TestView extends PApplet {
         if(depthCameraConfig.getCameraType() == Camera.Type.REALSENSE){
             depthCamera = new RealSense(this, camera);
         }
+
+	}catch(CannotCreateCameraException e){
+	    println("Error cannot create the depth camera !");
+	    exit();
+	}
+
 	((CameraRGBIRDepth)camera).actAsDepthCamera();
 	//        camera.setThread();
 
