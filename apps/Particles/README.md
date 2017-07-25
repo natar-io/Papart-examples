@@ -1,4 +1,4 @@
-#Particles
+# Particles
 
 Particules spread around objects that touch the table. Press 'g' to switch on/off gravity.
 
