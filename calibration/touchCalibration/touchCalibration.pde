@@ -110,8 +110,6 @@ float trackingMaxDistance;
 
 Simple2D touchDetection;
 Simple3D touchDetection3D;
-PlanarTouchCalibration touchCalibration, touchCalibration3D;
-
 
 Vec3D[] depthPoints;
 IplImage kinectImg;
@@ -327,11 +325,11 @@ void saveButton(){
 }
 
 void save3D(){
-    touchCalibration3D.saveTo(this, Papart.touchCalib3D);
+    touchDetection3D.getCalibration().saveTo(this, Papart.touchCalib3D);
     planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
 }
 
 void save(){
-    touchCalibration.saveTo(this, Papart.touchCalib);
+    touchDetection.getCalibration().saveTo(this, Papart.touchCalib);
     planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
 }
