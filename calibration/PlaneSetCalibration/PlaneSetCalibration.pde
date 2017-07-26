@@ -6,7 +6,9 @@ import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.depthcam.analysis.*;
 import fr.inria.papart.depthcam.devices.*;
+
 import fr.inria.papart.calibration.*;
+import fr.inria.papart.calibration.files.*;
 
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
@@ -31,8 +33,8 @@ Camera camera;
 ARDisplay cameraDisplay;
 
 
-CalibrationExtrinsic calibrationExtrinsic;
-ArrayList<CalibrationSnapshot> snapshots = new ArrayList<CalibrationSnapshot>();
+ExtrinsicCalibrator calibrator;
+ArrayList<ExtrinsicSnapshot> snapshots = new ArrayList<ExtrinsicSnapshot>();
 
 // GUI
 Skatolo skatolo;
@@ -44,8 +46,8 @@ tech.lity.rea.skatolo.gui.controllers.Button saveButton;
 
 
 PixelSelect origin, xAxis, yAxis, corner;
-KinectProcessing depthAnalysis;
-KinectTouchInput touchInput;
+DepthAnalysisPImageView depthAnalysis;
+DepthTouchInput touchInput;
 PVector image[];
 
 void settings(){
@@ -57,8 +59,14 @@ void setup(){
 
     // Here we suppose that the color camera matches the depth camera. 
     papart = Papart.seeThrough(this);
+
+    try{
     depthCameraDevice = papart.loadDefaultDepthCamera();
 
+    } catch(CannotCreateCameraException e){
+	println("Cannot init/start the camera");
+	exit();
+    }
     depthCameraDevice.getMainCamera().start();
     depthCameraDevice.getMainCamera().setThread();
     depthCameraDevice.loadDataFromDevice();
@@ -79,8 +87,8 @@ void setup(){
 
     app = new MyApp();
 
-    calibrationExtrinsic = new CalibrationExtrinsic(this);
-    calibrationExtrinsic.setDefaultDepthCamera();
+    calibrator = new ExtrinsicCalibrator(this);
+    calibrator.setDefaultDepthCamera();
 
     papart.startTrackingWithoutThread();
     initGUI();
@@ -112,15 +120,15 @@ void initTouch(){
     // UPDATE: automatic now
     // depthCameraDevice.setStereoCalibration(Papart.kinectStereoCalib);
 
-    // KinectProcessing provides a PImage of the coloured depth.
-    depthAnalysis = new KinectProcessing(this, depthCameraDevice);
+    // DepthAnalysisPImageView provides a PImage of the coloured depth.
+    depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
 
     // load the default plane calibration
     PlaneAndProjectionCalibration calibration = new PlaneAndProjectionCalibration();
     calibration.loadFrom(this, Papart.planeAndProjectionCalib);
 
     // initialize the touchInput
-    touchInput = new KinectTouchInput(this,
+    touchInput = new DepthTouchInput(this,
                                       depthCameraDevice,
                                       depthAnalysis,
                                       calibration);
@@ -349,7 +357,7 @@ void keyPressed() {
 
 
         try{
-            boolean working = calibrationExtrinsic.calibrateDepthCamPlane(snapshots);
+            boolean working = calibrator.calibrateDepthCamPlane(snapshots);
             println("Calibration: " + (working? "OK": "ERROR") + " .");
         }catch(Exception e){
             e.printStackTrace();
@@ -367,7 +375,7 @@ void addLocation(){
 
         println("Board " + board);
         println("cam" + camera);
-        snapshots.add(new CalibrationSnapshot(
+        snapshots.add(new ExtrinsicSnapshot(
                           null,
                           null,
                           board.getTransfoMat(camera).get()));

@@ -1,5 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.calibration.*;
+import fr.inria.papart.calibration.files.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
@@ -20,9 +21,9 @@ import tech.lity.rea.skatolo.gui.widgets.*;
 
 PeasyCam cam;
 
-KinectPointCloud pointCloud;
+PointCloudForDepthAnalysis pointCloud;
 
-KinectProcessing kinectAnalysis;
+DepthAnalysisPImageView kinectAnalysis;
 DepthCameraDevice depthCameraDevice;
 
 
@@ -53,8 +54,8 @@ void setup() {
       e.printStackTrace();
   }
 
-  kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
-  pointCloud = new KinectPointCloud(this, kinectAnalysis, skip);
+  kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+  pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
   
 
   //  Set the virtual camera

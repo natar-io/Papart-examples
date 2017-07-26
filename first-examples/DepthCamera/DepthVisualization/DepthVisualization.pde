@@ -14,9 +14,9 @@ import peasy.*;
 
 PeasyCam cam;
 
-KinectPointCloud pointCloud;
+PointCloudForDepthAnalysis pointCloud;
 
-KinectProcessing kinectAnalysis;
+DepthAnalysisPImageView kinectAnalysis;
 DepthCameraDevice depthCameraDevice;
 
 
@@ -44,8 +44,8 @@ void setup() {
       e.printStackTrace();
   }
 
-  kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
-  pointCloud = new KinectPointCloud(this, kinectAnalysis, skip);
+  kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+  pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
 
   //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
