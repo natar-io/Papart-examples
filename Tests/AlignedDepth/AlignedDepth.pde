@@ -12,9 +12,9 @@ import peasy.*;
 
 PeasyCam cam;
 
-KinectPointCloud pointCloud;
+PointCloudForDepthAnalysis pointCloud;
 
-KinectProcessing kinectAnalysis;
+DepthAnalysisPImageView kinectAnalysis;
 DepthCameraDevice depthCameraDevice;
 
 int skip = 2;
@@ -26,12 +26,17 @@ void settings() {
 void setup() {
 
   Papart papart = new Papart(this);
+
+  try{
   // load the depth camera
   depthCameraDevice = papart.loadDefaultDepthCamera();
 
-  kinectAnalysis = new KinectProcessing(this, depthCameraDevice);
+  kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   depthCameraDevice.getMainCamera().start();
-
+  } catch(CannotCreateCameraException e){
+      println("Cannot init/start the camera");
+      exit();
+  }
   // The intrinsic calibration is valid after the start() for some devices. 
   kinectAnalysis.updateCalibrations(depthCameraDevice);
 }
