@@ -2,8 +2,10 @@ import fr.inria.papart.procam.ColorDetection;
 import fr.inria.papart.utils.MathUtils;
 import fr.inria.papart.utils.*;
 import fr.inria.papart.multitouch.detection.*;
+import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.calibration.*;
+import fr.inria.papart.calibration.files.*;
 
 import java.util.Arrays;
 
