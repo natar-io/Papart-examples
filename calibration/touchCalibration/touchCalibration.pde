@@ -31,7 +31,7 @@ Skatolo skatolo;
 PeasyCam cam;
 
 
-DepthAnalysisPImageView kinectAnalysis;
+DepthAnalysisImpl kinectAnalysis;
 PointCloudForDepthAnalysis pointCloud;
 DepthTouchInput touchInput;
 
@@ -73,19 +73,16 @@ void setup(){
 	die("Impossible to load the plane calibration...");
     }
  
-    kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+    kinectAnalysis = new DepthAnalysisImpl(this, depthCameraDevice);
+    // kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
     pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, 1);
  
-
-
-
   touchDetection = new Simple2D(kinectAnalysis);
   touchDetection.setCalibration(papart.getDefaultTouchCalibration());
 
   touchDetection3D = new Simple3D(kinectAnalysis);
   touchDetection3D.setCalibration(papart.getDefaultTouchCalibration3D());
 
-  
   touchInput = new DepthTouchInput(this,
 				    depthCameraDevice,
 				    kinectAnalysis,
@@ -103,7 +100,7 @@ void setup(){
 
 
 // Inteface values
-float maxDistance, minHeight;
+float maxDistance, maxDistanceInit, minHeight;
 float planeHeight;
 int searchDepth, recursion, minCompoSize, forgetTime;
 float trackingMaxDistance;
@@ -140,6 +137,7 @@ void initVirtualCamera(){
 
 
 void draw(){
+    println("Framerate " + frameRate);
     grabImages();
 
     updateCalibration(is3D ? touchDetection3D.getCalibration() : touchDetection.getCalibration());
@@ -167,7 +165,8 @@ void draw(){
     }
 
         colorMode(RGB, 255);
-    pointCloud.updateWithFakeColors(kinectAnalysis, points);
+	// pointCloud.updateWithNormalColors(kinectAnalysis, points);
+	pointCloud.updateWithIDColors(kinectAnalysis, points);
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
     colorMode(HSB, 20, 100, 100);
@@ -177,7 +176,11 @@ void draw(){
     	pushMatrix();
     	translate(position.x, position.y, -position.z);
     	fill(pt.getID() % 20, 100, 100);
-    	ellipse(0, 0, 8,8);
+	if(pt.mainFinger){
+	    ellipse(0, 0, 20,20);
+	}else{
+	    ellipse(0, 0, 8,8);
+	}
     	popMatrix();
     }
     
@@ -190,6 +193,7 @@ void updateCalibration(PlanarTouchCalibration calib){
     planeCalibration.setHeight(planeHeight);
 
     calib.setMaximumDistance(maxDistance);
+    calib.setMaximumDistanceInit(maxDistanceInit);
     calib.setMinimumHeight(minHeight);
 
     calib.setMinimumComponentSize((int)minCompoSize);
@@ -209,6 +213,7 @@ void loadCalibrationToGui(PlanarTouchCalibration calib){
     recursionSlider.setValue(calib.getMaximumRecursion());
     searchDepthSlider.setValue(calib.getSearchDepth());
     maxDistanceSlider.setValue(calib.getMaximumDistance());
+    maxDistanceInitSlider.setValue(calib.getMaximumDistanceInit());
     minCompoSizeSlider.setValue(calib.getMinimumComponentSize());
     minHeightSlider.setValue(calib.getMinimumHeight());
     forgetTimeSlider.setValue(calib.getTrackingForgetTime());

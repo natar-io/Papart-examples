@@ -1,5 +1,5 @@
 Slider recursionSlider, searchDepthSlider;
-Slider maxDistanceSlider, minCompoSizeSlider;
+Slider maxDistanceSlider, maxDistanceInitSlider, minCompoSizeSlider;
 Slider minHeightSlider;
 Slider forgetTimeSlider;
 Slider trackingMaxDistanceSlider;
@@ -24,13 +24,17 @@ void initGui(){
 
     maxDistanceSlider = skatolo.addSlider("maxDistance")
 	.setPosition(30, 90)
-	.setRange(0, 1000)
-	.setSize(400, 12);
+	.setRange(0, 80)
+	.setSize(80, 12);
 
+    maxDistanceInitSlider = skatolo.addSlider("maxDistanceInit")
+	.setPosition(200, 90)
+	.setRange(0, 500)
+	.setSize(250, 12);
 
     minCompoSizeSlider = skatolo.addSlider("minCompoSize")
 	.setPosition(30, 110)
-	.setRange(1, 50)
+	.setRange(1, 1000)
 	.setSize(200, 12);
 
     minHeightSlider = skatolo.addSlider("minHeight")
@@ -54,7 +58,7 @@ void initGui(){
 
     planeHeightSlider = skatolo.addSlider("planeHeight")
 	.setPosition(30, 190)
-	.setRange(1, 2000)
+	.setRange(1, 150)
 	.setSize(300, 12);
 
     planeUpAmountSlider = skatolo.addSlider("planeUpAmount")
