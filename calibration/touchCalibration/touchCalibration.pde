@@ -104,6 +104,7 @@ float maxDistance, maxDistanceInit, minHeight;
 float planeHeight;
 int searchDepth, recursion, minCompoSize, forgetTime;
 float trackingMaxDistance;
+float normalFilter;
 
 Simple2D touchDetection;
 Simple3D touchDetection3D;
@@ -142,7 +143,6 @@ void draw(){
 
     updateCalibration(is3D ? touchDetection3D.getCalibration() : touchDetection.getCalibration());
 
-
     background(0);
 
     if(mouseControl && cam == null){
@@ -164,9 +164,9 @@ void draw(){
 	points = touchInput.getTrackedDepthPoints2D();
     }
 
-        colorMode(RGB, 255);
-	// pointCloud.updateWithNormalColors(kinectAnalysis, points);
-	pointCloud.updateWithIDColors(kinectAnalysis, points);
+    //    colorMode(RGB, 255);
+    pointCloud.updateWithNormalColors(kinectAnalysis, points);
+    //    pointCloud.updateWithIDColors(kinectAnalysis, points);
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
     colorMode(HSB, 20, 100, 100);
@@ -177,15 +177,14 @@ void draw(){
     	translate(position.x, position.y, -position.z);
     	fill(pt.getID() % 20, 100, 100);
 	if(pt.mainFinger){
-	    ellipse(0, 0, 20,20);
+	    ellipse(0, 0, 18,18);
 	}else{
-	    ellipse(0, 0, 8,8);
+	    ellipse(0, 0, 4,4);
 	}
     	popMatrix();
     }
     
     //     draw3DPointCloud();
-
 }
 
 void updateCalibration(PlanarTouchCalibration calib){
@@ -196,6 +195,7 @@ void updateCalibration(PlanarTouchCalibration calib){
     calib.setMaximumDistanceInit(maxDistanceInit);
     calib.setMinimumHeight(minHeight);
 
+    calib.setNormalFilter((float) normalFilter);
     calib.setMinimumComponentSize((int)minCompoSize);
     calib.setMaximumRecursion((int) recursion);
     calib.setSearchDepth((int) searchDepth);
@@ -211,6 +211,7 @@ void loadCalibrationToGui(PlanarTouchCalibration calib){
     planeHeightSlider.setValue(planeCalibration.getHeight());
 
     recursionSlider.setValue(calib.getMaximumRecursion());
+    normalSlider.setValue(calib.getNormalFilter());
     searchDepthSlider.setValue(calib.getSearchDepth());
     maxDistanceSlider.setValue(calib.getMaximumDistance());
     maxDistanceInitSlider.setValue(calib.getMaximumDistanceInit());
@@ -260,15 +261,15 @@ void draw3DPointCloud(){
     }
 
 
-    colorMode(HSB, 20, 100, 100);
-    for(TrackedDepthPoint touchPoint : newList){
-    	Vec3D position = touchPoint.getPositionKinect();
-    	pushMatrix();
-    	translate(position.x, position.y, -position.z);
-    	fill(touchPoint.getID() % 20, 100, 100);
-    	ellipse(0, 0, 3, 3);
-    	popMatrix();
-    }
+    // colorMode(HSB, 20, 100, 100);
+    // for(TrackedDepthPoint touchPoint : newList){
+    // 	Vec3D position = touchPoint.getPositionKinect();
+    // 	pushMatrix();
+    // 	translate(position.x, position.y, -position.z);
+    // 	fill(touchPoint.getID() % 20, 100, 100);
+    // 	ellipse(0, 0, 3, 3);
+    // 	popMatrix();
+    // }
 
 
 }
@@ -304,7 +305,7 @@ void setRealSenseMode(){
     if(key == '2')
 	rs.setPreset(2);
     if(key == '3')
-	rs.setPreset(3);
+	rs.setPreset(3);  // USE THIS
     if(key == '4')
 	rs.setPreset(4);
     if(key == '5')
