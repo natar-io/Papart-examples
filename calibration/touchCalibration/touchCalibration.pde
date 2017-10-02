@@ -77,23 +77,34 @@ void setup(){
     // kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
     pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, 1);
  
-  touchDetection = new Simple2D(kinectAnalysis);
-  touchDetection.setCalibration(papart.getDefaultTouchCalibration());
-
-  touchDetection3D = new Simple3D(kinectAnalysis);
-  touchDetection3D.setCalibration(papart.getDefaultTouchCalibration3D());
 
   touchInput = new DepthTouchInput(this,
 				    depthCameraDevice,
 				    kinectAnalysis,
 				    planeProjCalibration);
-  touchInput.setTouchDetectionCalibration(touchDetection.getCalibration());
-  touchInput.setTouchDetectionCalibration3D(touchDetection3D.getCalibration());
   depthCameraDevice.setTouch(touchInput);
 
-  initGui();
-  loadCalibrationToGui(touchDetection.getCalibration());
+  // touchInput.setTouchDetectionCalibration(papart.getDefaultTouchCalibration());
+  // touchInput.setTouchDetectionCalibration3D(papart.getDefaultTouchCalibration3D());
 
+  for(int i = 0; i < 3; i++){
+      touchInput.setTouchDetectionCalibration(i,
+					      papart.getTouchCalibration(i));
+  }
+  
+  // After the start() of the camera.
+  touchInput.initTouchDetections();
+
+  touchDetections = new TouchDetectionDepth[3];
+
+  for(int i = 0; i < 3; i++){
+      touchDetections[i] = touchInput.getTouchDetection(i);
+  }
+  // touchDetections[0] = touchInput.getTouchDetection2D();
+  // touchDetections[1] = touchInput.getTouchDetection3D();
+  
+  initGui();
+  loadCalibrationToGui(touchDetections[currentCalib].getCalibration());
 
   //  frameRate(200);
 }
@@ -106,8 +117,8 @@ int searchDepth, recursion, minCompoSize, forgetTime;
 float trackingMaxDistance;
 float normalFilter;
 
-Simple2D touchDetection;
-Simple3D touchDetection3D;
+int currentCalib = 0;
+TouchDetectionDepth touchDetections[]; 
 
 Vec3D[] depthPoints;
 IplImage kinectImg;
@@ -137,12 +148,12 @@ void initVirtualCamera(){
 }
 
 
+
 void draw(){
-    println("Framerate " + frameRate);
+    //    println("Framerate " + frameRate);
     grabImages();
-
-    updateCalibration(is3D ? touchDetection3D.getCalibration() : touchDetection.getCalibration());
-
+    updateCalibration();
+        
     background(0);
 
     if(mouseControl && cam == null){
@@ -158,11 +169,13 @@ void draw(){
     }
 
     ArrayList<TrackedDepthPoint> points;
-    if(is3D){
-	points = touchInput.getTrackedDepthPoints3D();
-    } else {
-	points = touchInput.getTrackedDepthPoints2D();
-    }
+
+    points = touchDetections[currentCalib].getTouchPoints();
+    // if(is3D){
+    // 	points = touchInput.getTrackedDepthPoints3D();
+    // } else {
+    // 	points = touchInput.getTrackedDepthPoints2D();
+    // }
 
     //    colorMode(RGB, 255);
     pointCloud.updateWithNormalColors(kinectAnalysis, points);
@@ -187,8 +200,10 @@ void draw(){
     //     draw3DPointCloud();
 }
 
-void updateCalibration(PlanarTouchCalibration calib){
+void updateCalibration(){
 
+    PlanarTouchCalibration calib = touchDetections[currentCalib].getCalibration();
+    
     planeCalibration.setHeight(planeHeight);
 
     calib.setMaximumDistance(maxDistance);
@@ -204,6 +219,13 @@ void updateCalibration(PlanarTouchCalibration calib){
     calib.setTrackingMaxDistance(trackingMaxDistance);
 
     calib.setPrecision(precision);
+
+    // Tests
+    calib.setTest1(test1);
+    calib.setTest2(test2);
+    calib.setTest3(test3);
+    calib.setTest4(test4);
+    calib.setTest5(test5);
 }
 
 void loadCalibrationToGui(PlanarTouchCalibration calib){
@@ -220,66 +242,16 @@ void loadCalibrationToGui(PlanarTouchCalibration calib){
     forgetTimeSlider.setValue(calib.getTrackingForgetTime());
     trackingMaxDistanceSlider.setValue(calib.getTrackingMaxDistance());
     precisionSlider.setValue(calib.getPrecision());
+
+    // Testing 
+    test1Slider.setValue(calib.getTest1());
+    test2Slider.setValue(calib.getTest2());
+    test3Slider.setValue(calib.getTest3());
+    test4Slider.setValue(calib.getTest4());
+    test5Slider.setValue(calib.getTest5());
 }
 
 
-
-void draw3DPointCloud(){
-    ProjectedDepthData depthData = kinectAnalysis.getDepthData();
-    ArrayList<TrackedDepthPoint> touchs;
-    ArrayList<TrackedDepthPoint> newList;
-
-    newList = touchDetection.compute(kinectAnalysis.getDepthData());
-    TouchPointTracker.trackPoints(globalTouchList, newList, millis());
-    
-    // if(is3D){
-    // 	touchs = touchDetection3D.compute(depthData);
-    // } else{
-    // 	touchs = touchDetection.compute(depthData);
-    // }
-
-    // TouchPointTracker.trackPoints(globalTouchList, touchs, millis());
-
-    //     pointCloud.updateWith(kinectAnalysis);
-
-    // pointCloud.updateWithFakeColors(kinectAnalysis, newList);
-    // pointCloud.drawSelf((PGraphicsOpenGL) g);
-
-    
-    lights();
-    stroke(200);
-    fill(200);
-
-    colorMode(HSB, 20, 100, 100);
-    for(TrackedDepthPoint touchPoint : globalTouchList){
-    	Vec3D position = touchPoint.getPositionKinect();
-    	pushMatrix();
-    	translate(position.x, position.y, -position.z);
-    	fill(touchPoint.getID() % 20, 100, 100);
-    	ellipse(0, 0, 3, 3);
-    	popMatrix();
-    }
-
-
-    // colorMode(HSB, 20, 100, 100);
-    // for(TrackedDepthPoint touchPoint : newList){
-    // 	Vec3D position = touchPoint.getPositionKinect();
-    // 	pushMatrix();
-    // 	translate(position.x, position.y, -position.z);
-    // 	fill(touchPoint.getID() % 20, 100, 100);
-    // 	ellipse(0, 0, 3, 3);
-    // 	popMatrix();
-    // }
-
-
-}
-
-void switch3D(){
-    globalTouchList.clear();
-    is3D = !is3D;
-    loadCalibrationToGui(is3D? touchDetection3D.getCalibration() : touchDetection.getCalibration());
-    switchTo3DButton.setLabel("Switch to " + (is3D? "2D" : "3D"));
-}
 
 boolean undist = true;
 
@@ -324,18 +296,17 @@ void setRealSenseMode(){
 
 
 void saveButton(){
-    if(is3D)
-        save3D();
-    else
-        save();
-}
-
-void save3D(){
-    touchDetection3D.getCalibration().saveTo(this, Papart.touchCalib3D);
-    planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
+    save();
 }
 
 void save(){
-    touchDetection.getCalibration().saveTo(this, Papart.touchCalib);
+
+    // Save the calibration(s).
+    for (int i = 0; i < touchDetections.length; i++) {
+	String name = Papart.touchCalibrations[i];
+	touchDetections[i].getCalibration().saveTo(this, name);
+    }
+    
+    // Save the plane.
     planeProjCalibration.saveTo(this, Papart.planeAndProjectionCalib);
 }

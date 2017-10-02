@@ -1,5 +1,9 @@
 Slider recursionSlider, searchDepthSlider;
 Slider maxDistanceSlider, maxDistanceInitSlider, minCompoSizeSlider;
+Slider normalSlider;
+
+Slider test1Slider, test2Slider, test3Slider, test4Slider, test5Slider;
+
 Slider minHeightSlider;
 Slider forgetTimeSlider;
 Slider trackingMaxDistanceSlider;
@@ -9,12 +13,40 @@ Slider planeUpAmountSlider;
 
 Button switchTo3DButton;
 
+float test1, test2, test3, test4, test5;
+
 void initGui(){
 
     skatolo = new Skatolo(this);
+
+    test1Slider = skatolo.addSlider("test1")
+	.setPosition(600, 10)
+	.setRange(1, 250)
+	.setSize(200, 12);
+    test2Slider = skatolo.addSlider("test2")
+	.setPosition(600, 30)
+	.setRange(1, 250)
+	.setSize(200, 12);
+
+    test3Slider = skatolo.addSlider("test3")
+	.setPosition(600, 50)
+	.setRange(1, 250)
+	.setSize(200, 12);
+
+    test4Slider = skatolo.addSlider("test4")
+	.setPosition(600, 70)
+	.setRange(1, 600)
+	.setSize(200, 12);
+
+    test5Slider = skatolo.addSlider("test5")
+	.setPosition(600, 90)
+	.setRange(1, 2000)
+	.setSize(200, 12);
+
+
     recursionSlider = skatolo.addSlider("recursion")
 	.setPosition(30, 50)
-	.setRange(1, 500)
+	.setRange(1, 250)
 	.setSize(200, 12);
 
     searchDepthSlider = skatolo.addSlider("searchDepth")
@@ -37,6 +69,12 @@ void initGui(){
 	.setRange(1, 1000)
 	.setSize(200, 12);
 
+    normalSlider = skatolo.addSlider("normalFilter")
+	.setPosition(410, 110)
+	.setRange(-1, 3)
+	.setSize(50, 12);
+
+    
     minHeightSlider = skatolo.addSlider("minHeight")
 	.setPosition(30, 130)
 	.setRange(0, 50)
@@ -74,10 +112,11 @@ void initGui(){
 	.setPosition(30, 270)
 	.setSize(30, 30);
 
-    switchTo3DButton = skatolo.addButton("switch3D")
-	.setPosition(30, 320)
-        .setLabel("Switch To 3D")
-	.setSize(30, 30);
+    // TODO: remove this clean. 
+    // switchTo3DButton = skatolo.addButton("switch3D")
+    // 	.setPosition(30, 320)
+    //     .setLabel("Switch To 3D")
+    // 	.setSize(30, 30);
 
     skatolo.addButton("saveButton")
 	.setPosition(90, 320)
@@ -89,11 +128,58 @@ void initGui(){
 	.setPosition(30, 370)
 	.setSize(30, 30);
 
+    radioButton = skatolo.addRadioButton("radioButton")
+	.setPosition(600,560)
+	.setSize(40,20)
+	.setColorForeground(color(120))
+	.setColorActive(color(255))
+	.setColorLabel(color(255))
+	.setItemsPerRow(5)
+	.setSpacingColumn(50)
+	.addItem("3D passe 1",0)
+	.addItem("3D passe 2",1)
+	.addItem("2D passe 1" ,2)
+	// .addItem("200",3)
+	// .addItem("250",4)
+	;
+     
+     // for(Toggle t:radioButton.getItems()) {
+     // 	 t.captionLabel().setColorBackground(color(255,80));
+     // 	 t.captionLabel().getStyle().moveMargin(-7,0,0,-3);
+     // 	 t.captionLabel().getStyle().movePadding(7,0,0,3);
+     // 	 t.captionLabel().getStyle().backgroundWidth = 45;
+     // 	 t.captionLabel().getStyle().backgroundHeight = 13;
+     // }
 
+    
     // Manual draw.
     skatolo.setAutoDraw(false);
 
     textFont(createFont("",15));
+}
+RadioButton radioButton;
+
+void controlEvent(ControlEvent theEvent) {
+  if(theEvent.isFrom(radioButton)) {
+      
+      int id = (int) theEvent.getValue();
+
+      if(id >= 1 && id <3){
+	  currentCalib = id;
+	  loadCalibrationToGui(touchDetections[id].getCalibration());
+      }
+      
+      print("got an event from "+theEvent.getName()+"\t");
+
+    for(int i=0;i<theEvent.getGroup().getArrayValue().length;i++) {
+	if(int(theEvent.getGroup().getArrayValue()[i]) == 1){
+	    println("Activation: " + i);
+	}
+	
+      print(int(theEvent.getGroup().getArrayValue()[i]));
+    }
+    println("\t "+theEvent.getValue());
+  }
 }
 
 float planeUpAmount;
