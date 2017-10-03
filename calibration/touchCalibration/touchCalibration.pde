@@ -54,6 +54,9 @@ void setup(){
     Papart papart = new Papart(this);
 
     try{
+	// Load the main camera first, or else the depth camera
+	// will default to color. (to fix).
+	papart.initCamera();
 	depthCameraDevice = papart.loadDefaultDepthCamera();
     } catch(CannotCreateCameraException ccce){
 	exit();
@@ -88,22 +91,20 @@ void setup(){
   // touchInput.setTouchDetectionCalibration3D(papart.getDefaultTouchCalibration3D());
 
   for(int i = 0; i < 3; i++){
-      touchInput.setTouchDetectionCalibration(i,
-					      papart.getTouchCalibration(i));
+      println("Setting: " + i  + " " + papart.getTouchCalibration(i));
+      touchInput.
+	  setTouchDetectionCalibration(i,papart.getTouchCalibration(i));
   }
   
   // After the start() of the camera.
   touchInput.initTouchDetections();
+  touchDetections = touchInput.getTouchDetections();
 
-  touchDetections = new TouchDetectionDepth[3];
-
-  for(int i = 0; i < 3; i++){
-      touchDetections[i] = touchInput.getTouchDetection(i);
-  }
   // touchDetections[0] = touchInput.getTouchDetection2D();
   // touchDetections[1] = touchInput.getTouchDetection3D();
   
   initGui();
+  println(touchDetections + " " + currentCalib + " " + touchDetections[currentCalib].getCalibration());
   loadCalibrationToGui(touchDetections[currentCalib].getCalibration());
 
   //  frameRate(200);
@@ -163,6 +164,21 @@ void draw(){
 	cam.setMouseControlled(mouseControl);
 	cam.beginHUD();
     }
+    // PImage img = touchInput.out;
+    // if(img != null){
+    // 	fill(255);
+    // 	noStroke();
+    // 	rect(299, 299, 202, 202);
+    // 	image(img, 300, 300, 200, 200);
+    // 	noStroke();
+    // 	for(PVector v : touchInput.contourList){
+    // 	    fill(v.z, 100, 100);
+    // 	    ellipse(v.x * 2 + 300,
+    // 		    v.y * 2 + 300,
+    // 		    1, 1);
+    // 	}
+    // }
+    colorMode(RGB, 255);
     skatolo.draw();
     if(cam != null){
 	cam.endHUD();
@@ -178,8 +194,17 @@ void draw(){
     // }
 
     //    colorMode(RGB, 255);
-    pointCloud.updateWithNormalColors(kinectAnalysis, points);
-    //    pointCloud.updateWithIDColors(kinectAnalysis, points);
+    if(depthVisuType == 0){
+	pointCloud.updateWithCamColors(kinectAnalysis, points);
+    }
+    if(depthVisuType == 1){
+	pointCloud.updateWithNormalColors(kinectAnalysis, points);
+    }
+    if(depthVisuType == 2){
+	pointCloud.updateWithIDColors(kinectAnalysis, points);
+
+    }
+    
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
     colorMode(HSB, 20, 100, 100);

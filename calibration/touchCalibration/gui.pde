@@ -13,6 +13,9 @@ Slider planeUpAmountSlider;
 
 Button switchTo3DButton;
 
+RadioButton depthAnalysisRadio;
+RadioButton depthVisuRadio;
+
 float test1, test2, test3, test4, test5;
 
 void initGui(){
@@ -30,18 +33,18 @@ void initGui(){
 
     test3Slider = skatolo.addSlider("test3")
 	.setPosition(600, 50)
-	.setRange(1, 250)
+	.setRange(1, 10000)
 	.setSize(200, 12);
 
     test4Slider = skatolo.addSlider("test4")
 	.setPosition(600, 70)
-	.setRange(1, 600)
+	.setRange(1, 10000)
 	.setSize(200, 12);
 
     test5Slider = skatolo.addSlider("test5")
 	.setPosition(600, 90)
-	.setRange(1, 2000)
-	.setSize(200, 12);
+	.setRange(1, 400)
+	.setSize(400, 12);
 
 
     recursionSlider = skatolo.addSlider("recursion")
@@ -128,7 +131,7 @@ void initGui(){
 	.setPosition(30, 370)
 	.setSize(30, 30);
 
-    radioButton = skatolo.addRadioButton("radioButton")
+    depthAnalysisRadio = skatolo.addRadioButton("depthAnalysisRadio")
 	.setPosition(600,560)
 	.setSize(40,20)
 	.setColorForeground(color(120))
@@ -142,7 +145,24 @@ void initGui(){
 	// .addItem("200",3)
 	// .addItem("250",4)
 	;
-     
+
+
+    depthVisuRadio = skatolo.addRadioButton("depthVisuType")
+	.setPosition(600,600)
+	.setSize(40,20)
+	.setColorForeground(color(120))
+	.setColorActive(color(255))
+	.setColorLabel(color(255))
+	.setItemsPerRow(5)
+	.setSpacingColumn(50)
+	.addItem("Color",0)
+	.addItem("Normal",1)
+	.addItem("ID" ,2)
+	// .addItem("200",3)
+	// .addItem("250",4)
+	;
+
+    
      // for(Toggle t:radioButton.getItems()) {
      // 	 t.captionLabel().setColorBackground(color(255,80));
      // 	 t.captionLabel().getStyle().moveMargin(-7,0,0,-3);
@@ -157,29 +177,25 @@ void initGui(){
 
     textFont(createFont("",15));
 }
-RadioButton radioButton;
+
+int depthVisuType = 0;
 
 void controlEvent(ControlEvent theEvent) {
-  if(theEvent.isFrom(radioButton)) {
-      
+  if(theEvent.isFrom(depthAnalysisRadio)) {
       int id = (int) theEvent.getValue();
-
-      if(id >= 1 && id <3){
+      if(id >= 0 && id <3){
 	  currentCalib = id;
 	  loadCalibrationToGui(touchDetections[id].getCalibration());
       }
-      
-      print("got an event from "+theEvent.getName()+"\t");
-
-    for(int i=0;i<theEvent.getGroup().getArrayValue().length;i++) {
-	if(int(theEvent.getGroup().getArrayValue()[i]) == 1){
-	    println("Activation: " + i);
-	}
-	
-      print(int(theEvent.getGroup().getArrayValue()[i]));
-    }
-    println("\t "+theEvent.getValue());
   }
+
+  if(theEvent.isFrom(depthVisuRadio)) {
+      int id = (int) theEvent.getValue();
+      if(id >= 0 && id <3){
+	  depthVisuType = id;
+      }
+  }
+
 }
 
 float planeUpAmount;
