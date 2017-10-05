@@ -43,14 +43,14 @@ void initGui(){
 
     test5Slider = skatolo.addSlider("test5")
 	.setPosition(600, 90)
-	.setRange(1, 400)
+	.setRange(-20, 60)
 	.setSize(400, 12);
 
 
     recursionSlider = skatolo.addSlider("recursion")
 	.setPosition(30, 50)
-	.setRange(1, 250)
-	.setSize(200, 12);
+	.setRange(1, 50)
+	.setSize(300, 12);
 
     searchDepthSlider = skatolo.addSlider("searchDepth")
 	.setPosition(30, 70)

@@ -164,20 +164,23 @@ void draw(){
 	cam.setMouseControlled(mouseControl);
 	cam.beginHUD();
     }
-    // PImage img = touchInput.out;
-    // if(img != null){
-    // 	fill(255);
-    // 	noStroke();
-    // 	rect(299, 299, 202, 202);
-    // 	image(img, 300, 300, 200, 200);
-    // 	noStroke();
-    // 	for(PVector v : touchInput.contourList){
-    // 	    fill(v.z, 100, 100);
-    // 	    ellipse(v.x * 2 + 300,
-    // 		    v.y * 2 + 300,
-    // 		    1, 1);
-    // 	}
-    // }
+
+
+    PImage img = ((FingerDetection) touchDetections[2]).out;
+    if(img != null){
+    	fill(255);
+    	noStroke();
+    	rect(299, 299, 202, 202);
+    	image(img, 300, 300, 200, 200);
+    	noStroke();
+    	// for(PVector v : touchInput.contourList){
+    	//     fill(v.z, 100, 100);
+    	//     ellipse(v.x * 2 + 300,
+    	// 	    v.y * 2 + 300,
+    	// 	    1, 1);
+    	// }
+    }
+
     colorMode(RGB, 255);
     skatolo.draw();
     if(cam != null){
