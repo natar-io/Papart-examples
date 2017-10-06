@@ -166,7 +166,8 @@ void draw(){
     }
 
 
-    PImage img = ((FingerDetection) touchDetections[2]).out;
+    PImage img = ((FingerDetection) touchDetections[2]).getIRImage();
+    
     if(img != null){
     	fill(255);
     	noStroke();

@@ -24,22 +24,22 @@ void initGui(){
 
     test1Slider = skatolo.addSlider("test1")
 	.setPosition(600, 10)
-	.setRange(1, 250)
-	.setSize(200, 12);
+	.setRange(1, 500)
+	.setSize(400, 12);
     test2Slider = skatolo.addSlider("test2")
 	.setPosition(600, 30)
-	.setRange(1, 250)
-	.setSize(200, 12);
+	.setRange(1, 450)
+	.setSize(300, 12);
 
     test3Slider = skatolo.addSlider("test3")
 	.setPosition(600, 50)
-	.setRange(1, 10000)
-	.setSize(200, 12);
+	.setRange(1, 8000)
+	.setSize(600, 12);
 
     test4Slider = skatolo.addSlider("test4")
 	.setPosition(600, 70)
 	.setRange(1, 10000)
-	.setSize(200, 12);
+	.setSize(600, 12);
 
     test5Slider = skatolo.addSlider("test5")
 	.setPosition(600, 90)
