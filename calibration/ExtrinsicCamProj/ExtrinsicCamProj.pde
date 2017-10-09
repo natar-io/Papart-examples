@@ -26,6 +26,7 @@ void settings(){
 
 
 void draw(){
+    //    println("Framerate: "  + frameRate);
 }
 
 boolean test = false;
@@ -35,6 +36,6 @@ void keyPressed() {
 	test = !test;
 
     if(key == 'c')
-        papart.calibration(app);
+        papart.calibration(app, calibrator);
 
 }
