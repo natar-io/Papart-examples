@@ -38,4 +38,7 @@ void keyPressed() {
     if(key == 'c')
         papart.calibration(app, calibrator);
 
+    if(key == 's')
+	papart.setTableLocation(app);
+    
 }

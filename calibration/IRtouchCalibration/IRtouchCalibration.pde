@@ -132,6 +132,10 @@ void draw(){
 	PVector position = pt.getPosition();
     	pushMatrix();
     	translate(position.x, position.y, -position.z);
+	println("Pos : " + position);
+	PVector p = ((PVector) pt.attachedObject);
+	if(p != null) {println("Pos2: " + ((PVector) pt.attachedObject).toString());}
+	    
     	fill(pt.getID() % 20, 100, 100);
 	ellipse(0, 0, 4,4);
     	popMatrix();
@@ -147,6 +151,7 @@ void grabImages(){
 	
     } catch(Exception e){
         println("Could not grab the image " + e);
+	e.printStackTrace();
     }
     kinectImg = cameraIR.getIplImage();
 }

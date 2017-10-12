@@ -10,6 +10,7 @@ public class MyApp  extends PaperTouchScreen {
 
     public void setup() {
 	app = this;
+	setDrawingFilter(0);
     }
 
     public void drawOnPaper() {

@@ -14,6 +14,6 @@ public class MyCalibrator  extends PaperTouchScreen {
     }
 
     public void drawOnPaper() {
-
+	background(255);
     }
 }
