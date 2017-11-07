@@ -61,6 +61,10 @@ void setup(){
     testView = new TestView();
 }
 
+public void dispose(){
+    testView.dispose();
+    super.dispose();
+}
 
 int cameraWidth, cameraHeight;
 int projectorWidth, projectorHeight;
