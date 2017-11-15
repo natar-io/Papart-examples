@@ -1,7 +1,9 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.calibration.*;
 import fr.inria.papart.procam.camera.*;
+import fr.inria.papart.procam.display.*;
 import fr.inria.papart.tracking.*;
+
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
@@ -24,6 +26,8 @@ import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.cvCvtColor;
 import org.bytedeco.javacpp.ARToolKitPlus;
 
+
+
 public void settings(){
     size(640, 480, OPENGL);
 }
@@ -34,13 +38,13 @@ ARToolKitPlus.MultiTracker tracker;
 IplImage grayImage;
 DetectedMarker[] markersDetected;
 MarkerList markersModel;
-GeometricCalibratorP calibrator;
+PMatrix3D pose = null;
 
 public void setup(){
     initCamera();
     initTracking();
     loadMarkerList();
-    initCalibrator();
+    initRendering();
     initGUI();
 }
 
@@ -50,15 +54,26 @@ public void draw(){
     currentImage = camera.getIplImage();
     image(camera.getPImage(),0, 0, width, height);
 
+
+    if(currentImage!= null){
+	findMarkers(currentImage);
+	estimatePose();
+    }
+    
     drawMarkerDetection();
+    drawAR();
 }
 
 
 private void initCamera(){
     try{
 	camera = CameraFactory.createCamera(Camera.Type.FFMPEG, "/dev/video0", "");
+
     	camera.setParent(this);
-    	camera.setSize(640, 480);
+	camera.setCalibration("camera1.xml");
+	//	camera.setCalibration("camera1.yaml");
+
+	//	camera.setSize(640, 480);  // -> Redundant  with setCalibration.
 	camera.start();
 	// camera.setThread();
     }catch(CannotCreateCameraException cce){
@@ -81,17 +96,18 @@ void loadMarkerList(){
     XML xml = loadXML("A4-calib.svg");
     //     XML xml = loadXML(sketchPath()+"/calibration-point.svg");
     markersModel = MarkerSvg.getMarkersFromSVG(xml);
+
+
+    
 }
 
+ARDisplay display;
 
-void initCalibrator(){
-
+void initRendering(){
     try{
-	calibrator =
-	GeometricCalibratorP.
-	createGeometricCalibrator(camera.width(),
-				  camera.height(),
-				  "camera0");
+	display = new ARDisplay(this, camera);
+	display.init(); // allocate the buffers. 
+	display.manualMode(); // rendering done in Draw()
     }catch(Exception e){
 	println("exception " + e);
 	e.printStackTrace();
@@ -111,62 +127,25 @@ void findMarkers(IplImage img){
 
 public void keyPressed(){
     if(key == 'd'){
-	tryAddMarkers();
-    }
-    
-    if(key == 'c'){
-	tryCalibrate();
-    }
-    
-    if(key == 'r'){
-	calibrator.clearMarkers();
-    }
-}
-
-void tryAddMarkers(){
-    if(currentImage != null){
+	if(currentImage != null){
 	findMarkers(currentImage);
-	println("Markers found: " + markersDetected.length);
-	
-	if(markersDetected.length > 2){
-	    println("Add markers");
-	    calibrator.addMarkers(markersModel, markersDetected);
 	}
-    }else{
-	println("No Image yet");
+    }
+    
+    if(key == 'p'){
+	estimatePose();
     }
 }
 
 
-void tryCalibrate(){
+void estimatePose(){
     if(markersDetected == null || markersDetected.length == 0){
-	println("Cannot calibrate with no markers");
+	println("Cannot estimate pose without markers");
 	return;
     }
 
-    try{
-    println("Calibrate");
-    calibrator.calibrate(false);
+    pose = DetectedMarker.compute3DPos(markersDetected, markersModel, camera);
 
-    println("Extract calibration");
-    ProjectiveDevice d = calibrator.getProjectiveDevice();
-
-    ProjectiveDeviceP pdp;
-    pdp = ProjectiveDeviceP.createSimpleDevice(1, 1,
-					       0.5f, 0.5f,
-					       camera.width(),
-					       camera.height());
-
-    ProjectiveDeviceP.loadParameters(d, pdp);
-    println("Calibration");
-    println(pdp);
-
-    pdp.saveTo(this, "camera1.yaml");
-    pdp.saveTo(this, "camera1.xml");
-    // Save...
-    }catch(Exception e){
-	e.printStackTrace();
-    }
 }
 
 Skatolo skatolo;
