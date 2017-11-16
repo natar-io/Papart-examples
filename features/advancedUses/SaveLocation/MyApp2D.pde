@@ -9,7 +9,11 @@ public class MyApp extends PaperScreen {
   }
 
   public void setup() {
-    app = this;
+      useAlt(false);
+      setLoadKey("l");
+      setSaveKey("s");
+      setTrackKey("t");
+      setSaveName("../SavedLocations/loc.xml");
   }
 
   public void drawOnPaper() {

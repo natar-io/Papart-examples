@@ -25,7 +25,3 @@ public void setup() {
 void draw() {
 }
 
-void keyPressed() {
-  app.loadLocationFrom(Papart.folder + "savedLocations/loc.xml");
-  app.getLocation().print();
-}

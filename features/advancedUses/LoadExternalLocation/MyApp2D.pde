@@ -1,5 +1,3 @@
-MyApp app;
-
 public class MyApp extends PaperScreen {
 
   public void settings() {
@@ -9,7 +7,10 @@ public class MyApp extends PaperScreen {
   }
 
   public void setup() {
-    app = this;
+      useAlt(false);
+      setLoadKey("l");
+      setTrackKey("t");
+      setSaveName("../SavedLocations/loc.xml");
   }
 
   public void drawOnPaper() {
