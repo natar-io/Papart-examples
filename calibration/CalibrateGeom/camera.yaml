@@ -1,0 +1,13 @@
+%YAML:1.0
+Cameras:
+   - Camera  0
+Camera  0:
+   imageWidth: 640
+   imageHeight: 480
+   responseGamma: 0.
+   cameraMatrix: !!opencv-matrix
+      rows: 3
+      cols: 3
+      dt: d
+      data: [676.0624, 0.0, 307.80585, 0.0, 663.96405, 265.61346, 0.0, 0.0, 1.0 ]
+
