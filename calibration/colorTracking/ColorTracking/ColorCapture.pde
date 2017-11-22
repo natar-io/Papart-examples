@@ -140,15 +140,7 @@ public class MyApp extends PaperScreen {
       float y = te.getPosition().y;
 
       PVector p = boardView.pixelsToMM(te.getPosition());
-
-      // println(p);
       rect(p.x, p.y, 10, 10);
-
-      // float drawX = (x / captureSizePx.x) * captureSize.x;
-      // float drawY = (y / captureSizePx.y) * captureSize.y;
-      // rect(drawX - 5, drawY - 5, 10, 10);
-
-      // boardView
     }
   }
 

@@ -119,12 +119,12 @@ void saveColorAndThresholds(){
     if(currentColor.equals("red")){
 	saveFile = Papart.redThresholds;
 	words = words + "red:"+  Float.toString(redThresh) + " ";
-	words = words + "col:"+  Float.toString(redColor);
+	words = words + "col:"+  Integer.toString(redColor);
     }
     if(currentColor.equals("blue")){
 	saveFile = Papart.blueThresholds;
 	words = words + "blue:"+  Float.toString(blueThresh)+ " ";
-	words = words + "col:"+  Float.toString(blueColor);
+	words = words + "col:"+  Integer.toString(blueColor);
     }
     
     String[] list = split(words, ' ');
