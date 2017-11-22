@@ -59,11 +59,17 @@ public void draw(){
 private void initCamera(){
     try{
 	cameraConfig = new CameraConfiguration();
-	cameraConfig.setCameraName("/dev/video0");
-	cameraConfig.setCameraType(Camera.Type.FFMPEG);
 
-	// Options for depth and special cameras.
-	cameraConfig.setCameraFormat("");
+	// Load from file
+	cameraConfig.loadFrom("camera-config.xml");
+
+	// // Or manually 
+	// cameraConfig.setCameraName("/dev/video0");
+	// cameraConfig.setCameraType(Camera.Type.FFMPEG);
+
+	// // Options for depth and special cameras.
+	// cameraConfig.setCameraFormat("");
+
 	camera = cameraConfig.createCamera();
 
 	// Same as this:
