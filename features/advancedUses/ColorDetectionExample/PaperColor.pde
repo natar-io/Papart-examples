@@ -26,12 +26,18 @@ public class ColorApp extends PaperScreen {
   void drawOnPaper() {
     clear();
 
+    // Compute the color from the pixels. 
     colorDetection.computeColor();
-    int c = colorDetection.getColor();
-    fill(c);
-    //         rect(0, 0, 10, 10);
-    //        colorDetection.drawCaptureZone();
 
+    // Get the result.
+    int c = colorDetection.getColor();
+
+    fill(c);
+
+    int nbfound = colorDetection.computeOccurencesOfColor(c, 10);
+    // println("We found: " + nbfound + " pixels of this color.");
+
+    // For visual debugging.
     colorDetection.drawSelf();
   }
 }

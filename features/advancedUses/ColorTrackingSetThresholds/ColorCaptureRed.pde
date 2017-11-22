@@ -42,20 +42,32 @@ public class MyApp extends PaperScreen {
 
   public void drawOnPaper() {
     background(200, 100);
-    
-    colorTracker.setThresholds(threshHue, threshSat, threshIntens);
-    colorTracker.setRedThreshold(redThresh);
 
+    colorTracker.setThresholds(threshHue, threshSat, threshIntens);
+
+
+    int detected = 0; // color detected
+    if(currentColor.equals("red")){
+	colorTracker.setRedThreshold(redThresh);
+	detected = redColor;
+    }
+    if(currentColor.equals("blue")){
+	colorTracker.setBlueThreshold(blueThresh);
+	detected = blueColor;
+    }
+    
     ArrayList<TrackedElement> te = colorTracker.
-      findColor("red", 
-      redColor, 
+      findColor(currentColor, 
+      detected, 
       millis(), erosionAmount);
 
     // Draw the Image captured. 
     // Sometimes the image is bad, it is a known bug. 
     // Change the paperScreen size or the scale of the ColorTracker to avoid it.
     PImage img = colorTracker.getTrackedImage();
-    image(img, 180, 0, 80, 40);
+
+    // DEBUG: show the captured image for tracking.
+    // image(img, 180, 0, 80, 40);
 
     TouchList touchs = colorTracker.getTouchList();
     
@@ -63,17 +75,17 @@ public class MyApp extends PaperScreen {
     fill(0, 100, 100);
     for (Touch t : touchs) {
       ellipse(t.position.x, t.position.y, 10, 10);
-     // println("ID " + t.id);
       text(t.id, t.position.x, t.position.y);
     }
 
-    
     // Add the mouse as pointer. Right click to disable
     Touch t = createTouchFromMouse();
     touchs.add(t);
-    
-    SkatoloLink.updateTouch(touchs, skatoloInside);
-    
+
+    // Feed the touchs to Skatolo
+    // Skatolo will dispatch events according to button press etc...
+    SkatoloLink.updateTouch(touchs, skatoloInside); 
+  
     // Draw the pointers known by skatolo. 
     for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
       fill(0, 200, 0);
