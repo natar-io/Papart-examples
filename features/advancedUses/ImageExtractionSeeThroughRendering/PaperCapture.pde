@@ -13,7 +13,8 @@ public class MyApp  extends PaperScreen {
 	setDrawingSize(297, 210);
 	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
 
-	setDrawAroundPaper();
+	// same with setDrawAroundPaper();
+	setDrawOnPaper();
     }
 
     void setup() {
@@ -28,15 +29,17 @@ public class MyApp  extends PaperScreen {
 	boardView.init();
     }
 
-    void drawAroundPaper() {
-	//     void drawOnPaper() {
+    // Same with drawAroundPaper().
+    void drawOnPaper() {
         clear();
 	//        setLocation(63, 45, 0);
 
         stroke(100);
         noFill();
         strokeWeight(2);
-        rect((int) origin.x, (int) origin.y,
+
+	line(0, 0, origin.x, origin.y);
+	rect((int) origin.x, (int) origin.y,
              (int) captureSize.x, (int)captureSize.y);
 
         PImage out = boardView.getViewOf(cameraTracking);
