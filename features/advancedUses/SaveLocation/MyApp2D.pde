@@ -7,13 +7,14 @@ public class MyApp extends PaperScreen {
     loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
     setDrawOnPaper();
   }
-
+    // Default keys are used explicitly.
+    // By default alt is required.
   public void setup() {
       useAlt(false);
       setLoadKey("l");
       setSaveKey("s");
       setTrackKey("t");
-      setSaveName("../SavedLocations/loc.xml");
+      setSaveName("loc.xml");
   }
 
   public void drawOnPaper() {
