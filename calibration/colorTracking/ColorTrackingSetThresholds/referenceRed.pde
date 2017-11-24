@@ -1,6 +1,8 @@
 int redColor = 0;
 int blueColor = 0;
 
+float referenceSize = 10; // in mm 
+
 // Red Detection, it outputs the redColor as a reference. 
 public class ColorReference extends PaperScreen {
 
@@ -14,12 +16,12 @@ public class ColorReference extends PaperScreen {
 
   public void setup() {
     redDetection = new ColorDetection(this);
-    redDetection.setCaptureSize(30, 30);
+    redDetection.setCaptureSize(referenceSize, referenceSize);
     redDetection.setPosition(new PVector(25, 80));
     redDetection.init();
 
     blueDetection = new ColorDetection(this);
-    blueDetection.setCaptureSize(30, 30);
+    blueDetection.setCaptureSize(referenceSize, referenceSize);
     blueDetection.setPosition(new PVector(80, 80));
     blueDetection.init();
   }
