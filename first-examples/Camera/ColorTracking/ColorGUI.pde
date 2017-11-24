@@ -47,7 +47,7 @@ public class MyApp extends PaperScreen {
 
 	SkatoloLink.updateTouch(touchs, skatoloInside); 
 	
-	// Draw the pointers known by skatolo. (debug)
+	// Draw the pointers. (debug)
 	for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
 	    fill(0, 200, 0);
 	    rect(p.getX(), p.getY(), 3, 3);
