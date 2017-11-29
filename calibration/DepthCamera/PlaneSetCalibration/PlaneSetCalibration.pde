@@ -155,9 +155,9 @@ void draw(){
 
     if(isUsingAR){
         drawCameraAR();
-        Screen screen = app.getScreen();
-        screen.computeScreenPosTransform(camera);
-	PlaneCalibration planeCalib = getPlaneFromPaper();
+        // Screen screen = app.getScreen();
+        // app.computeScreenPosTransform(camera);
+	PlaneCalibration planeCalib = new PlaneCalibration(app.getPlane(), 10);
 	PlaneCalibration planeCalibDepth = getPlaneFromPaperViewedByDepth();
         HomographyCalibration homography = findHomographyAR(planeCalib); // , planeCalibDepth);
         drawValidPoints(planeCalib, planeCalibDepth, homography);
