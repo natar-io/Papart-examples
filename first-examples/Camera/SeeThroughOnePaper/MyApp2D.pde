@@ -4,9 +4,7 @@ public class MyApp extends PaperScreen {
     // the size of the draw area is 297mm x 210mm.
     setDrawingSize(297, 210);
     // loads the marker that are actually printed and tracked by the camera.
-    //    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
-
-    loadMarkerBoard(sketchPath() + "/data/IR.svg", 297, 210);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
 
     // the application will render drawings and shapes only on the surface of the sheet of paper.
     setDrawOnPaper();
