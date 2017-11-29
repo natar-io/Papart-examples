@@ -1,7 +1,6 @@
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
-
 import java.util.ArrayList;
 import toxi.geom.Vec3D;
 import fr.inria.papart.multitouch.*;
@@ -36,7 +35,6 @@ public class MyApp  extends PaperTouchScreen {
 	    .setPosition(100, 0)
 	    .setSize(60, 60)
 	    ;
-
     }
 
     boolean toggle = false;
@@ -48,9 +46,8 @@ public class MyApp  extends PaperTouchScreen {
     void drawOnPaper(){
         background(100, 100);
         drawTouch();
-        SkatoloLink.updateTouch(touchList, skatolo);
+        SkatoloLink.updateTouch(touchList.get2DTouchs(), skatolo);
         skatolo.draw(getGraphics());
-
     }
 
 }
