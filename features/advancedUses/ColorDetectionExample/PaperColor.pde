@@ -1,5 +1,8 @@
 import fr.inria.papart.procam.ColorDetection;
 
+int ech = 512; // power of 2
+int freq = 30;
+
 public class ColorApp extends PaperScreen {
 
   ColorDetection colorDetection;
@@ -21,14 +24,37 @@ public class ColorApp extends PaperScreen {
     colorDetection.setCaptureSize(captureSize);
     colorDetection.setPicSize(picSize, picSize);
     colorDetection.init();
+
+    colorDetection.initBlinkTracker(freq, 0.25f, ech);
+
+
+    useAlt(false);
+    setLoadKey("l");
+    setSaveKey("s");
+    setTrackKey("f");
+    setSaveName("loc.xml");
   }
 
   void drawOnPaper() {
     clear();
 
+    background(100, 100);
     // Compute the color from the pixels. 
-    colorDetection.computeColor();
+    //    colorDetection.computeColor();
 
+    colorDetection.recordBlinkRate();
+
+    if(test){
+	colorDetection.findBlinkRate();
+	// re = colorDetection.re();
+	// im = colorDetection.im();
+
+	rer = colorDetection.rer();
+	imr = colorDetection.imr();
+	reg = colorDetection.reg();
+	img = colorDetection.img();
+
+    }
     // Get the result.
     int c = colorDetection.getColor();
 
