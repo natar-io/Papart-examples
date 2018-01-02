@@ -8,6 +8,8 @@ import org.reflections.*;
 import toxi.geom.*;
 import processing.video.*;
 
+import org.openni.*;
+
 void settings(){
     size(200, 200, P3D);
 }
@@ -18,7 +20,6 @@ Camera camera;
 public void setup(){
     Papart papart = Papart.seeThrough(this);
 
-
     display = papart.getARDisplay();
     // Do not draw automatically.
     display.manualMode();
@@ -26,6 +27,8 @@ public void setup(){
 
     papart.loadSketches();
     papart.startTracking();
+
+    frameRate(30);
 
 }
 
@@ -76,14 +79,12 @@ void findFreq(float[] re, float im[], String name){
 
 	float f = + (float)id / (float)ech * (float)freq * 2;
 	text(name + " " + f, 0, 0);
-	println(name+": " + id + " f: "+ f);
 
     
 }
 
 
 float[] re, im;
-
 float[] rer, imr;
 float[] reg, img;
 
