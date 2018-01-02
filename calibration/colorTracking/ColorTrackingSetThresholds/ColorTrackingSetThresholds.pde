@@ -13,6 +13,8 @@ import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 
+import org.openni.*;
+
 Papart papart;
 Skatolo skatolo;
 void settings() {
@@ -99,6 +101,11 @@ void keyPressed(){
     if(key == 'b'){
 	println("Configuration of Blue tracking color");
 	currentColor = "blue";
+    }
+
+   if(key == 'x'){
+	println("Configuration of blink color");
+	currentColor = "x";
     }
     
 }
