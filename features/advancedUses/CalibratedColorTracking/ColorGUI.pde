@@ -11,6 +11,8 @@ import org.openni.*;
 
 import java.util.Arrays;
 
+// EXPERIMENTAL
+
 public class MyApp extends PaperScreen {
 
     ColorTracker colorTracker;
@@ -28,7 +30,6 @@ public class MyApp extends PaperScreen {
     float sc = 1f;
     
     public void setup() {
-
 		calibratedColorTracker = papart.initAllTracking(this, 1f/sc);
 
 	// colorTracker = papart.initRedTracking(this, 1/sc); //0.5f);
@@ -71,7 +72,7 @@ public class MyApp extends PaperScreen {
 	pushMatrix();
 	fill(20, 255, 10, 180);
 	scale(sc);
-	colorMode(HSB, 6, 100, 100);
+	
 	for(int j = 0; j < drawingSize.y / sc; j++){
 	    for(int i = 0; i < drawingSize.x / sc; i++){
 
@@ -82,9 +83,7 @@ public class MyApp extends PaperScreen {
 		// int v = found[k++];
 		int v = found[offset];
 		if(v != -1){
-
-		    fill(v, 80, 80);
-
+		    fill(calibratedColorTracker.getReferenceColor(v));
 		    rect(i, j, 2, 2);
 		    k++;
 		}
@@ -106,8 +105,6 @@ public class MyApp extends PaperScreen {
 	SkatoloLink.updateTouch(touchs, skatoloInside); 
 
 	colorMode(RGB, 255);
-
-
 	
 	// println("Number of touchs: " + te.size());
 	// Draw the pointers. (debug)
