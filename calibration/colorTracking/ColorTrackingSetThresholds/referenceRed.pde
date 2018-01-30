@@ -1,7 +1,7 @@
 int redColor = 0;
 int blueColor = 0;
 
-float referenceSize = 10; // in mm 
+float referenceSize = 3; // in mm 
 
 // Red Detection, it outputs the redColor as a reference. 
 public class ColorReference extends PaperScreen {

@@ -66,6 +66,26 @@ public class MyApp extends PaperScreen {
     // Change the paperScreen size or the scale of the ColorTracker to avoid it.
     PImage img = colorTracker.getTrackedImage();
 
+    noStroke();
+    byte[] found = colorTracker.getColorFoundArray();
+    int k = 0;
+    pushMatrix();
+    fill(20, 255, 10, 180);
+    scale(scale);
+    for(int j = 0; j < drawingSize.y / scale; j++){
+	for(int i = 0; i < drawingSize.x / scale; i++){
+	    if(k >= found.length){
+		continue;
+	    }
+	    if(found[k++] >= 0){
+		fill(0, 100, 0, 200);
+		rect(i, j, 1, 1);
+	    }
+	}
+    }
+    popMatrix();
+
+    
     // DEBUG: show the captured image for tracking.
     // image(img, 180, 0, 80, 40);
 
@@ -74,8 +94,8 @@ public class MyApp extends PaperScreen {
     // Draw the touch found by the tracker. 
     fill(0, 100, 100);
     for (Touch t : touchs) {
-      ellipse(t.position.x, t.position.y, 10, 10);
-      text(t.id, t.position.x, t.position.y);
+      ellipse(t.position.x, t.position.y, 2, 2);
+      // text(t.id, t.position.x, t.position.y);
     }
 
     // Add the mouse as pointer. Right click to disable
@@ -89,7 +109,7 @@ public class MyApp extends PaperScreen {
     // Draw the pointers known by skatolo. 
     for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
       fill(0, 200, 0);
-      rect(p.getX(), p.getY(), 3, 3);
+      //  rect(p.getX(), p.getY(), 3, 3);
     }
 
     skatoloInside.draw(getGraphics());

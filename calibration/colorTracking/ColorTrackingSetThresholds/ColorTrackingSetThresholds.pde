@@ -45,41 +45,41 @@ void setup() {
 
   skatolo.addSlider("erosionAmount")
       .setPosition(100,0)
-      .setSize(100, 20)
+      .setSize(100, 5)
       .setRange(0,10)
       ;
 
   skatolo.addSlider("threshHue")
       .setPosition(100,50)
-      .setSize(255, 20)
+      .setSize(255, 5)
       .setValue(40)
       .setRange(0,255)
       ;
   
   skatolo.addSlider("threshSat")
       .setPosition(100,80)
-      .setSize(255, 20)
+      .setSize(255, 5)
       .setValue(50)
       .setRange(0,255)
       ;
   
   skatolo.addSlider("threshIntens")
       .setPosition(100,110)
-      .setSize(255, 20)
+      .setSize(255, 5)
       .setValue(90)
       .setRange(0,255)
       ;
   
   skatolo.addSlider("redThresh")
       .setPosition(100,170)
-      .setSize(255, 20)
+      .setSize(255, 5)
       .setValue(30)
       .setRange(0,255)
       ;
 
   skatolo.addSlider("blueThresh")
       .setPosition(100,200)
-      .setSize(255, 20)
+      .setSize(255, 5)
       .setValue(30)
       .setRange(0,255)
       ;
