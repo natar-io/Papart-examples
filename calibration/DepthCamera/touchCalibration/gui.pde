@@ -69,7 +69,7 @@ void initGui(){
 
     minCompoSizeSlider = skatolo.addSlider("minCompoSize")
 	.setPosition(30, 110)
-	.setRange(1, 1000)
+	.setRange(1, 200)
 	.setSize(200, 12);
 
     normalSlider = skatolo.addSlider("normalFilter")
