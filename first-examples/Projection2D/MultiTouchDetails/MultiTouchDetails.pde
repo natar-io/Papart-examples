@@ -6,7 +6,7 @@ import fr.inria.papart.multitouch.tracking.*;
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
 import peasy.*;
-
+import org.openni.*;
 DepthTouchInput touchInput;
 
 void settings(){
@@ -25,10 +25,14 @@ void setup(){
 
 void draw(){
 
-    background(100);
+    background(10);
 
     fill(50, 50, 255);
 
+    if(!touchInput.isReady()){
+	return;
+    }
+    
     // Get a copy, as the arrayList is constantly modified
     ArrayList<TrackedDepthPoint> touchs2D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints2D());
     for(TrackedDepthPoint tp : touchs2D){

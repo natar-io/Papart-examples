@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
+import org.openni.*;
 
 void settings(){
     size(640, 480, P3D);

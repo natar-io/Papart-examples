@@ -30,7 +30,7 @@ public class MyApp  extends PaperTouchScreen {
 	float normX = (float) mouseX / (float) width;
 	float normY = (float) mouseY / (float) height;
 	
-	PVector pointer = getDisplay().projectPointer(screen, normX, normY);
+	PVector pointer = getDisplay().projectPointer(this, normX, normY);
 	ellipse(pointer.x, pointer.y, 5, 5);
 	
     }

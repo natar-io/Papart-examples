@@ -6,6 +6,7 @@ import fr.inria.papart.multitouch.tracking.*;
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
 
+import org.openni.*;
 
 DepthTouchInput touchInput;
 

@@ -51,7 +51,7 @@ public class MyApp  extends PaperTouchScreen {
 
 	fill(200, 100, 20);
 	rect(10, 10, 100, 30);
-
+	TouchList touchList =  new TouchList();
 	SkatoloLink.addMouseTo(touchList, skatolo, this);
 	SkatoloLink.updateTouch(touchList, skatolo);
 	skatolo.draw(getGraphics());

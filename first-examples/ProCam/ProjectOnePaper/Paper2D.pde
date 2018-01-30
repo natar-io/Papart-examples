@@ -8,9 +8,8 @@ public class MyApp  extends PaperScreen {
 			//297, 210);
         setDrawOnPaper();
 
-
-	     // Test: no filtering with this tracker. 
-        markerBoard.removeFiltering(cameraTracking);
+	// Test: no filtering with this tracker. 
+        getMarkerBoard().removeFiltering(cameraTracking);
 	app = this;
     }
 

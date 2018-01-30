@@ -12,14 +12,12 @@ void settings(){
 
 public void setup(){
     Papart papart = new Papart(this);
-
     papart.initDebug();
     papart.loadTouchInputTUIO();
     papart.loadSketches();
 }
 
 void draw(){
-
 }
 
 boolean mouseSetLocation = false;

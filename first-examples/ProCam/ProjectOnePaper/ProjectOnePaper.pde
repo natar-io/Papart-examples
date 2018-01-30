@@ -8,13 +8,14 @@ import TUIO.*;
 import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
+import org.openni.*;
 import tech.lity.rea.skatolo.Skatolo;
 
 float renderQuality = 1.5f;
 Papart papart;
 
- String calibrationFileName = "A4-calib.svg";
-// String calibrationFileName = "A4-default.svg";
+// String calibrationFileName = "A4-calib.svg";
+String calibrationFileName = "A4-default.svg";
 //String calibrationFileName = "ExtractedView.bmp";
 
 void settings(){
@@ -32,6 +33,4 @@ void draw(){
 }
 
 void keyPressed() {
-    if(key == 'c')
-        papart.calibration(app);
 }
