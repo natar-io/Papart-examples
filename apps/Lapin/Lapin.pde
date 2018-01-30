@@ -6,9 +6,9 @@ import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import processing.opengl.*;
 import org.reflections.*;
-
+import org.openni.*;
 import fr.inria.papart.tracking.*;
-import fr.inria.skatolo.Skatolo;
+
 
 import toxi.geom.*;
 

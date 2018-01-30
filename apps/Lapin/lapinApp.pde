@@ -32,7 +32,7 @@ public class LapinApp extends PaperTouchScreen{
     }
 
     public void resetPos(){
-	screen.resetPos();
+	super.resetPos();
     }
 
     boolean isRSTBlocked = false;
@@ -53,7 +53,7 @@ public class LapinApp extends PaperTouchScreen{
 	}
 
         if(Mode.is("rotate")){
-            float d = markerBoard.lastMovementDistance(cameraTracking);
+            float d = getMarkerBoard().lastMovementDistance(cameraTracking);
 //            println("dist " + d);
 
             isRSTBlocked = d > 3;
@@ -79,13 +79,13 @@ public class LapinApp extends PaperTouchScreen{
 
 // 	drawTouch(3);
 
-	screen.endDrawPerspective();
+	endDrawPerspective();
 
     }
 
     void drawMono(){
 	pushMatrix();
-	screen.initDraw(cameraTracking, userPos, 20, 5000, false, false, true);
+	initDraw(cameraTracking, userPos, 20f, 5000f, false, false);
 
 	drawScene();
 	popMatrix();
@@ -94,7 +94,7 @@ public class LapinApp extends PaperTouchScreen{
     void drawAnaglyph(){
 	/////////////// Analglyph ////////////////////
 	pushMatrix();
-	screen.initDraw(cameraTracking, userPos, 20, 5000, true, false, false);
+	initDraw(cameraTracking, userPos, 20f, 5000f, true, false);
 
 
 	// pushMatrix();
@@ -111,7 +111,7 @@ public class LapinApp extends PaperTouchScreen{
 	// Clear the depth buffer, and set the other mask
 	pgl.clear( GL.GL_DEPTH_BUFFER_BIT);
 
-	screen.initDraw(cameraTracking, userPos, 20, 5000, true, true, false);
+	initDraw(cameraTracking, userPos, 20, 5000, true, true);
 
 	pgl.colorMask(false, true, true, true);
 	drawScene();
@@ -149,8 +149,8 @@ public class LapinApp extends PaperTouchScreen{
         int ellipseSize = 10;
 
         for(Touch touch : touchList2D){
-
-            if(touch.touchPoint.attachedObject != null){
+	    
+            if(touch.touchPoint != null && touch.touchPoint.attachedObject != null){
                 if(isRSTBlocked){
                     fill(255, 0, 0);
                 } else{
