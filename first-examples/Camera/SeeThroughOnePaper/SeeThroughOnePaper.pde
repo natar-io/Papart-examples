@@ -1,12 +1,16 @@
 // PapARt library
 import fr.inria.papart.procam.*;
-import tech.lity.rea.svgextended.*;
 
+// Library dependencies
+import tech.lity.rea.svgextended.*;
 import org.reflections.*;
 import toxi.geom.*;
-import processing.video.*;
-
 import org.bytedeco.javacv.*;
+
+// OpenNI for Orbbec cameras. 
+import org.openni.*;
+// Processing video for webcams
+import processing.video.*;
 
 Papart papart;
 
