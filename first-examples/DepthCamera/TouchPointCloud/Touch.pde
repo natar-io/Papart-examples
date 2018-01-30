@@ -4,7 +4,8 @@ import toxi.geom.Vec3D;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.calibration.*;
-
+import fr.inria.papart.multitouch.tracking.*;
+import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.depthcam.devices.*;
 
 boolean test = false;
@@ -15,7 +16,7 @@ void keyPressed(){
 
 public class MyApp extends PaperTouchScreen {
 
-    PMatrix3D kinectExtrinsics;
+    PMatrix3D depthCameraExtrinsics;
 
     void settings(){
         setDrawAroundPaper();
@@ -24,9 +25,8 @@ public class MyApp extends PaperTouchScreen {
     }
 
     void setup() {
-        DepthCameraDevice kinect = papart.getDepthCameraDevice();
-        kinectExtrinsics = kinect.getDepthCamera().getExtrinsics().get();
-//        kinectExtrinsics.invert();
+        DepthCameraDevice depthCamera = papart.getDepthCameraDevice();
+        depthCameraExtrinsics = depthCamera.getDepthCamera().getExtrinsics().get();
     }
 
 
@@ -38,33 +38,36 @@ public class MyApp extends PaperTouchScreen {
         PMatrix3D currentLocation = getLocation().get();
         currentLocation.invert();
 
+	// Move the paperScreen origin
+	translate(0, drawingSize.y, 0);
+	scale(1, -1, 1);
+	
         noStroke();
         for (Touch t : touchList) {
 
 	    PVector p = t.position;
-	    TouchPoint tp = t.touchPoint;
-	    if(tp == null){
-		println("TouchPoint null, this method only works with KinectTouchInput.");
+	    if(t.trackedSource == null || !(t.trackedSource instanceof TrackedDepthPoint)){
+		println("TouchPoint null, this method only works with DepthTouchInput.");
 		continue;
 	    }
 
-	    ArrayList<DepthDataElementKinect> depthDataElements = tp.getDepthDataElements();
-	    for(DepthDataElementKinect dde : depthDataElements){
+	    TrackedDepthPoint tracked = (TrackedDepthPoint) t.trackedSource;
+	    DepthElementList depthData = tracked.getDepthDataElements();
+	    for(DepthDataElementProjected dde : depthData){
 
                 Vec3D depthPoint = dde.depthPoint;
                 PVector pointPosExtr = new PVector();
                 PVector pointPosDisplay = new PVector();
-                kinectExtrinsics.mult(new PVector(depthPoint.x,
+
+		// Stereo correction
+		depthCameraExtrinsics.mult(new PVector(depthPoint.x,
                                                  depthPoint.y,
                                                  depthPoint.z),
                                      pointPosExtr);
-
                 currentLocation.mult(pointPosExtr,
                                    pointPosDisplay);
 
                 pushMatrix();
-
-
                 fill(-pointPosDisplay.z * 2);
                 translate(pointPosDisplay.x , pointPosDisplay.y, pointPosDisplay.z);
                 ellipse(0, 0, 3, 3);
@@ -72,6 +75,5 @@ public class MyApp extends PaperTouchScreen {
 	    }
 
 	}
-	endDraw();
     }
 }
