@@ -2,6 +2,7 @@ import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.procam.camera.*;
+import org.openni.*;
 
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
@@ -10,9 +11,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 Camera camera;
-
-
-KinectTouchInput touchInput;
+DepthTouchInput touchInput;
 
 PFont font;
 PGraphicsOpenGL bloodGraphics;
@@ -26,7 +25,7 @@ void setup(){
 
     Papart papart = Papart.projection2D(this);
     papart.loadTouchInput();
-    touchInput = (KinectTouchInput) papart.getTouchInput();
+    touchInput = (DepthTouchInput) papart.getTouchInput();
     papart.startDepthCameraThread();
 
     initBlood();
@@ -37,15 +36,15 @@ void setup(){
 }
 
 
-ArrayList<TouchPoint> touchs2D;
-int nTouchs;
+// ArrayList<TouchPoint> touchs2D;
+// int nTouchs;
 void draw(){
 
     //    background(0, 0, 0);
 
     // Get a copy, as the arrayList is constantly modified
-     touchs2D = new ArrayList<TouchPoint>(touchInput.getTouchPoints2D());
-     nTouchs = touchs2D.size();
+     // touchs2D = new ArrayList<TouchPoint>(touchInput.getTouchPoints2D());
+     // nTouchs = touchs2D.size();
 
      drawBlood();
 

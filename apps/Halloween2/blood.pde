@@ -1,3 +1,7 @@
+import fr.inria.papart.multitouch.tracking.*;
+import fr.inria.papart.multitouch.detection.*;
+import fr.inria.papart.depthcam.devices.*;
+
 int numDrips = 0;
 int maxPointsPerTouch = 3;
 int leap = 18; //how far the point travels each iteration also controls opacity
@@ -16,12 +20,13 @@ void drawBlood(){
 	lastShot = millis();
 	background(0);
 
-        ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints3D());
-        for(TouchPoint tp : touchs3D){
+	ArrayList<TrackedDepthPoint> touchs3D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints3D());
+	
+        for(TrackedDepthPoint tp : touchs3D){
 
-            ArrayList<DepthDataElementKinect> depthDataElements = tp.getDepthDataElements();
+	    DepthElementList depthData = tp.getDepthDataElements();
+	    for(DepthDataElementProjected dde : depthData){
 
-            for(DepthDataElementKinect dde : depthDataElements){
                 Vec3D p = dde.projectedPoint;
                 noStroke();
 

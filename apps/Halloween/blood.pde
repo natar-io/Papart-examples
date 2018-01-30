@@ -1,3 +1,7 @@
+import fr.inria.papart.procam.*;
+import fr.inria.papart.depthcam.*;
+import fr.inria.papart.multitouch.*;
+import fr.inria.papart.multitouch.tracking.*;
 
 int numDrips = 0;
 int maxPointsPerTouch = 3;
@@ -18,9 +22,10 @@ void drawBlood(){
 
     bloodGraphics.beginDraw();
 
-
-    for(TouchPoint tp : touchs2D){
-	PVector pos = tp.getPosition();
+    ArrayList<TrackedDepthPoint> touchs2D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints2D());
+    
+    for(TrackedDepthPoint t : touchs2D){
+	PVector pos = t.getPosition();
 
 	int nbPoints = (int) (maxPointsPerTouch * random(1));
 
