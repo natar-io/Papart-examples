@@ -21,8 +21,8 @@ public class MyApp extends PaperScreen {
 
     public void setup() {
 
-	colorTracker = papart.initRedTracking(this, 0.5f);
-	// colorTracker = papart.initBlueTracking(this, 0.5f);
+	// colorTracker = papart.initRedTracking(this, 0.5f);
+	colorTracker = papart.initBlueTracking(this, 0.5f);
 
 	skatoloInside = new Skatolo(parent, this);
 	skatoloInside.setAutoDraw(false);

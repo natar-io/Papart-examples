@@ -1,13 +1,10 @@
-import toxi.volume.*;
-
-// PapARt library
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.procam.*;
 import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
-import java.awt.Color;
+import org.openni.*;
 
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
