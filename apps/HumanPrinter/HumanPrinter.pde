@@ -9,6 +9,7 @@ import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
+import org.openni.*;
 
 float renderQuality = 1.5f;
 Papart papart;
@@ -33,16 +34,5 @@ boolean test = false;
 void keyPressed() {
     if(key == 't')
 	test = !test;
-
-    if(key == 's'){
-	app.saveLocationTo("loc.xml");
-    }
-    if(key == 'l'){
-	app.loadLocationFrom("loc.xml");
-    }
-
-    if(key == 'u'){
-	app.useManualLocation(false );
-    }
 
 }
