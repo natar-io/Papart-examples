@@ -5,11 +5,12 @@ import fr.inria.papart.procam.camera.*;
 import org.bytedeco.javacpp.opencv_core;
 import org.reflections.*;
 import toxi.geom.*;
-import fr.inria.skatolo.*;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
 
-import fr.inria.skatolo.*;
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.controllers.*;
+import org.openni.*;
 
 Papart papart;
 Skatolo skatolo;
@@ -20,6 +21,9 @@ Button recordButton;
 
 
 // ffmpeg -start_number 294 -i image-%3d.png out.mkv -vcodec libx264 -crf 0 -b 50M
+
+// ffmpeg -start_number 294 -e multifilesrc location image-%3d.png out.mkv -vcodec libx264 -crf 0 -b 50M
+
 
 void settings() {
     size(200, 200, P3D);
