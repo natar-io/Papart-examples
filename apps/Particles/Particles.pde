@@ -1,10 +1,11 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.multitouch.*;
-
+import fr.inria.papart.multitouch.tracking.*;
+import fr.inria.papart.multitouch.detection.*;
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
-
+import org.openni.*;
 
 /*
 boolean lines determines whether our lines for particle relationships are drawn
@@ -23,7 +24,7 @@ Particle[] particles = new Particle[particleCount+1];
 
 
 
-KinectTouchInput touchInput;
+DepthTouchInput touchInput;
 
 void settings(){
     fullScreen(P3D);
@@ -32,7 +33,7 @@ void settings(){
 void setup(){
        Papart papart = Papart.projection2D(this);
     papart.loadTouchInput();
-    touchInput = (KinectTouchInput) papart.getTouchInput();
+    touchInput = (DepthTouchInput) papart.getTouchInput();
     papart.startDepthCameraThread();
 
     
@@ -56,8 +57,8 @@ void draw() {
 
     pointers.clear();
 
-    ArrayList<TouchPoint> touchs3D = new ArrayList<TouchPoint>(touchInput.getTouchPoints2D());
-    for(TouchPoint tp : touchs3D){
+    ArrayList<TrackedDepthPoint> touchs3D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints3D());
+    for(TrackedDepthPoint tp : touchs3D){
 
 	PVector pos = tp.getPosition();
 	stroke(200);
