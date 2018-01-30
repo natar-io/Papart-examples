@@ -9,14 +9,13 @@ import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
+import org.openni.*;
 
-float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
     fullScreen(P3D);
 }
-
  void setup(){
      papart = Papart.projection(this);
      papart.loadTouchInput();

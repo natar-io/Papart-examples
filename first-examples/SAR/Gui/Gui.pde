@@ -5,11 +5,12 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
+import org.openni.*;
 
 Papart papart;
 
 void settings(){
-    size(200, 200, P3D);
+    fullScreen(P3D);
 }
 
 public void setup() {

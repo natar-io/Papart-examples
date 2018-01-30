@@ -33,7 +33,7 @@ public class MyApp extends PaperTouchScreen {
     void drawAroundPaper(){
 
 	// Go to the origin of the projection
-        translate(0, screen.getSize().y);
+        translate(0, getDrawingSize().y);
         scale(1, -1, 1);
 	
 	rect(0, 0, 100, 100);
@@ -75,6 +75,5 @@ public class MyApp extends PaperTouchScreen {
 	    }
 
 	}
-	endDraw();
     }
 }
