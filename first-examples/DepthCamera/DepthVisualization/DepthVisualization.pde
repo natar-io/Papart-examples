@@ -9,20 +9,19 @@ import org.bytedeco.javacpp.opencv_core.*;
 import org.bytedeco.javacpp.freenect;
 import org.bytedeco.javacv.RealSenseFrameGrabber;
 import toxi.geom.*;
+import org.openni.*;
 import peasy.*;
 
 
 PeasyCam cam;
-
 PointCloudForDepthAnalysis pointCloud;
-
-DepthAnalysisPImageView kinectAnalysis;
+DepthAnalysisPImageView depthAnalysis;
 DepthCameraDevice depthCameraDevice;
-
 
 CameraRealSense camRS = null;
 
-// Warning non-even skip value causes a crash.
+// Quality of depth is divided by skip in X and Y axes. 
+// Warning non-even skip value can cause a crashes.
 int skip = 2;
 
 void settings() {
@@ -44,8 +43,8 @@ void setup() {
       e.printStackTrace();
   }
 
-  kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
-  pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
+  depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+  pointCloud = new PointCloudForDepthAnalysis(this, depthAnalysis, skip);
 
   //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
@@ -69,18 +68,14 @@ void draw() {
       return;
   }
 
-  // TODO: color image refresh is very weird: to check. 
-  // PImage colImg = depthCameraDevice.getColorCamera().getPImage();
-  // image(colImg, 0, 0, width, height);
-
   try{
-  kinectAnalysis.update(depthImg, colorImg, skip);
+      depthAnalysis.update(depthImg, colorImg, skip);
   }catch(Exception e){
 
       e.printStackTrace();
   }
   
-  pointCloud.updateWith(kinectAnalysis);
+  pointCloud.updateWith(depthAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 }
 
