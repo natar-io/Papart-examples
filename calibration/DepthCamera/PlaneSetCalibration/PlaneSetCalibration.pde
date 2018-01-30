@@ -23,6 +23,7 @@ import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
 
+import org.openni.*;
 
 Papart papart;
 DepthCameraDevice depthCameraDevice;
@@ -136,9 +137,16 @@ void initTouch(){
     // set the automatic update of the touchInput by the camera
     // depthCameraDevice.setTouch(touchInput);
 
-    // load the touch calibration
-    touchInput.setTouchDetectionCalibration(papart.getDefaultTouchCalibration());
-    touchInput.setTouchDetectionCalibration3D(papart.getDefaultTouchCalibration3D());
+
+  for(int i = 0; i < 3; i++){
+      println("Setting: " + i  + " " + papart.getTouchCalibration(i));
+      touchInput.
+	  setTouchDetectionCalibration(i,papart.getTouchCalibration(i));
+  }
+    
+    // // load the touch calibration
+    // touchInput.setTouchDetectionCalibration(papart.getDefaultTouchCalibration());
+    // touchInput.setTouchDetectionCalibration3D(papart.getDefaultTouchCalibration3D());
 
     // set the rawDepth tag, to specify that there is no projector.
     touchInput.useRawDepth();

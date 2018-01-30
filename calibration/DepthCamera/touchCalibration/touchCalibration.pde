@@ -25,6 +25,8 @@ import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 import tech.lity.rea.skatolo.gui.group.*;
 
+import org.openni.*;
+
 import peasy.*;
 
 Skatolo skatolo;
@@ -132,6 +134,7 @@ void grabImages(){
     // Grab gets the images for all the sub cameras (RGB + DEPTH)
     // The touchInput gets updated with the call to grab()
     try {
+	// depthCameraDevice.grab();
 	depthCameraDevice.getMainCamera().grab();
     } catch(Exception e){
         println("Could not grab the image " + e);
@@ -151,7 +154,7 @@ void initVirtualCamera(){
 
 
 void draw(){
-    //    println("Framerate " + frameRate);
+    println("Framerate " + frameRate);
     grabImages();
     updateCalibration();
         
@@ -206,13 +209,11 @@ void draw(){
     }
     if(depthVisuType == 2){
 	pointCloud.updateWithIDColors(kinectAnalysis, points);
-
     }
-    
     pointCloud.drawSelf((PGraphicsOpenGL) g);
 
+    
     colorMode(HSB, 20, 100, 100);
-
     for(TrackedDepthPoint pt : points){
 	Vec3D position = pt.getPositionKinect();
     	pushMatrix();
@@ -225,6 +226,7 @@ void draw(){
 	}
     	popMatrix();
     }
+
     
     //     draw3DPointCloud();
 }

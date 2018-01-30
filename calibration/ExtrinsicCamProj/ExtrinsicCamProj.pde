@@ -5,6 +5,8 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import processing.video.*;
 
+import org.openni.*;
+
 import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;

@@ -5,7 +5,7 @@ import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.calibration.files.*;
-
+import org.openni.*;
 import java.util.Arrays;
 
 public class MyApp extends PaperScreen {

@@ -13,6 +13,8 @@ import org.bytedeco.javacv.RealSenseFrameGrabber;
 import toxi.geom.*;
 import peasy.*;
 
+import org.openni.*;
+
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
@@ -49,10 +51,6 @@ void setup() {
       // depthCameraDevice.getMainCamera().setUseColor(true);  // enabled by default
       depthCameraDevice.getMainCamera().start();
 
-  }catch (Exception e){
-      println("Cannot start the DepthCamera: " + e );
-      e.printStackTrace();
-  }
 
   kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
@@ -65,7 +63,12 @@ void setup() {
   cam.setActive(true);
 
   stereoCalib = HomographyCalibration.getMatFrom(this, Papart.kinectStereoCalib);
-  
+
+    }catch (Exception e){
+      println("Cannot start the DepthCamera: " + e );
+      e.printStackTrace();
+  }
+
   initGUI();
   
 }
