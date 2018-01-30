@@ -11,7 +11,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
-
+import org.openni.*;
 import fr.inria.papart.scanner.GrayCode;
 import fr.inria.papart.scanner.*;
 

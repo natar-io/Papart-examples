@@ -7,7 +7,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
-
+import org.openni.*;
 import fr.inria.guimodes.Mode;
 import fr.inria.papart.scanner.GrayCode;
 
