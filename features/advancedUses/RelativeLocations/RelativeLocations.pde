@@ -5,6 +5,7 @@ import tech.lity.rea.svgextended.*;
 import org.reflections.*;
 import toxi.geom.*;
 import fr.inria.papart.tracking.*;
+import org.openni.*;
 
 Papart papart;
 void settings() {

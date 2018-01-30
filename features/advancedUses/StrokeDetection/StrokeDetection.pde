@@ -8,7 +8,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
 import java.awt.Color;
-
+import org.openni.*;
 
 void settings() {
     size(640, 480, P3D);

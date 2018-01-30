@@ -7,11 +7,10 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
-import java.awt.Color;
-
+import org.openni.*;
 
 void settings() {
-  size(200, 200,P3D);
+    size(640, 480,P3D);
 }
 
 void setup() {

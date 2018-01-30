@@ -4,9 +4,10 @@ import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
+import org.openni.*;
 
 void settings(){
-    size(200, 200, P3D);
+    size(640, 480, P3D);
 }
 
 public void setup(){

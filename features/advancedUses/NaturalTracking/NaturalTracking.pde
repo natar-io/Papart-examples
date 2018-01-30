@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
 import processing.video.*;
+import org.openni.*;
 
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
@@ -12,14 +13,20 @@ import tech.lity.rea.skatolo.Skatolo;
 
 float renderQuality = 1.5f;
 Papart papart;
+boolean useProjector = false;
 
 void settings(){
-    fullScreen(P3D);
+    if(useProjector)
+	fullScreen(P3D);
+    else
+	size(640, 480, P3D);
 }
 
  void setup(){
-     //     papart = Papart.projection(this);
-     papart = Papart.seeThrough(this);
+     if(useProjector)
+	 papart = Papart.projection(this);
+     else
+	 papart = Papart.seeThrough(this);
      papart.loadTouchInput();
      papart.loadSketches();
      papart.startTracking();

@@ -6,6 +6,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import toxi.geom.*;
 import processing.video.*;
+import org.openni.*;
 
 Papart papart;
 

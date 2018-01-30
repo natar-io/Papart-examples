@@ -11,7 +11,7 @@ import processing.video.*;
 import org.openni.*;
 
 void settings(){
-    size(200, 200, P3D);
+    size(640, 480, P3D);
 }
 
 ARDisplay display;
