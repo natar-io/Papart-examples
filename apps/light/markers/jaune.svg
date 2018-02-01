@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r"
+   sodipodi:docname="jaune.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748738"
+     inkscape:cx="629.46066"
+     inkscape:cy="136.33275"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1302"
+     inkscape:window-height="1041"
+     inkscape:window-x="1976"
+     inkscape:window-y="6"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#f0f0f0;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -66.926664,211.90367 c 0,-1.35752 1.0928,-2.4504 2.4504,-2.4504 h 58.0992004 c 1.3575,0 2.4504,1.09288 2.4504,2.4504 v 83.09921 c 0,1.35753 -1.0929,2.4504 -2.4504,2.4504 H -64.476264 c -1.3576,0 -2.4504,-1.09286 -2.4504,-2.4504 z"
+       id="rect4600-3-2-9-6-2-9-0-1-5-7-9-1-1-70-27"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssssscc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-41.029781"
+       y="286.62592"
+       id="text4515-0-9"><tspan
+         sodipodi:role="line"
+         id="tspan4513-62-3"
+         x="-41.029781"
+         y="286.62592"
+         style="stroke-width:0.26458332">Jaune</tspan></text>
+    <rect
+       style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:0.41915762;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4517-6-6"
+       width="15.789702"
+       height="16.923632"
+       x="-62.238033"
+       y="275.36584" />
+    <image
+       y="216.00829"
+       x="-57.926662"
+       id="marker340"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEUAAAD///+l2Z/dAAAAFklE
+QVR42mNgYPBhiGCwYNAAYg4GBgAL9AFFRKuJeQAAAABJRU5ErkJggg==
+"
+       style="image-rendering:optimizeSpeed"
+       preserveAspectRatio="none"
+       height="45"
+       width="45"
+       inkscape:label="#image4619" />
+  </g>
+</svg>
