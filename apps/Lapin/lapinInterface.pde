@@ -1,11 +1,11 @@
 // TODO: change the modes to the Mode library.
 // TODO: change the Button to the "first" Skatolo buttons !
 
-
-import fr.inria.skatolo.*;
-import fr.inria.skatolo.events.*;
-import fr.inria.skatolo.gui.controllers.*;
-import fr.inria.skatolo.gui.Pointer;
+import tech.lity.rea.skatolo.Skatolo;
+import tech.lity.rea.skatolo.*;
+import tech.lity.rea.skatolo.events.*;
+import tech.lity.rea.skatolo.gui.controllers.*;
+import tech.lity.rea.skatolo.gui.Pointer;
 
 public class LapinInterface extends PaperTouchScreen{
 
@@ -78,9 +78,6 @@ public class LapinInterface extends PaperTouchScreen{
         Mode.set("lock");
     }
 
-    public void resetPos(){
-	screen.resetPos();
-    }
 
     public void drawOnPaper(){
         setLocation(10, 10, 0);
