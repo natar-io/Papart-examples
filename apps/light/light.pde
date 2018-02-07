@@ -74,7 +74,7 @@ void checkMode(){
 	//	println("Switch to ADD mode");
 	if(subSeen){
 	    Mode.set("normal");
-	    println("Switch to NORMAL (both) mode");
+	    //	    println("Switch to NORMAL (both) mode");
 	}
     } else {
 	if(subSeen){

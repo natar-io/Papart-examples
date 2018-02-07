@@ -8,8 +8,9 @@ public class BlueApp  extends PaperScreen {
 
     public void settings(){
         setDrawingSize(shapeSize, shapeSize);
-        loadMarkerBoard(sketchPath() + "/markers/bleu.svg", shapeSize, shapeSize);
-        setDrawAroundPaper();
+	loadMarkerBoard(sketchPath() + "/markers/bleu.svg", shapeSize, shapeSize);
+	setDrawAroundPaper();
+
         setQuality(1.0f);
     }
 
@@ -17,7 +18,9 @@ public class BlueApp  extends PaperScreen {
     }
     
     public void drawAroundPaper() {
-
+	// Experimental, only in DrawAroundPaperMode
+	drawOnTable();
+	
 	if(Mode.is("add")){
 	    blendMode(ADD);
 	    background(0);
@@ -31,7 +34,7 @@ public class BlueApp  extends PaperScreen {
 	    blendMode(BLEND);
 	}
 	
-	if(useDebug) setLocation(mouseX, mouseY, 0);
+	// if(useDebug) setLocation(mouseX, mouseY, 0);
 
 	fill(0, 0, 255);
 	ellipse(0, 0, shapeSize, shapeSize);

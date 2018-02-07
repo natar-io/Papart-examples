@@ -24,6 +24,7 @@ public class ColorApp extends PaperScreen{
     }
     
     public void drawAroundPaper() {
+	drawOnTable();
 	if(useDebug) setLocation(debugPosition.x, debugPosition.y, 0);
 	fill(c);
 	translate(shapeSize / 2, shapeSize/2);
