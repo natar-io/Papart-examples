@@ -37,7 +37,8 @@ public class BlueApp  extends PaperScreen {
 	// if(useDebug) setLocation(mouseX, mouseY, 0);
 
 	fill(0, 0, 255);
-	ellipse(0, 0, shapeSize, shapeSize);
+  translate(shapeSize / 2, shapeSize/2);
+  ellipse(0, 0, shapeSize, shapeSize);
 	//rect(0, 0, drawingSize.x, drawingSize.y);
 	
     }
