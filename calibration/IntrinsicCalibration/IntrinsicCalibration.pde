@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.*;
 import TUIO.*;
 import toxi.geom.*;
 
+import org.openni.*;
 
 Papart papart;
 // ProjectorDisplay ardisplay;
@@ -13,7 +14,7 @@ ARDisplay ardisplay;
 float focal, cx, cy;
 PMatrix3D projIntrinsics;
 
-boolean useProjector = true;
+boolean useProjector = false;
 float distancePaper = 600f;  // in millimeter.
 
 PApplet parent;
@@ -22,7 +23,7 @@ void settings(){
     if(useProjector)
         fullScreen(P3D);
     else
-        size(200, 200, P3D);
+        size(640, 480, P3D);
     parent = this;
 }
 
@@ -36,6 +37,7 @@ public void setup() {
 	Papart.seeThrough(this);
 
   papart =  Papart.getPapart();
+  papart.startTracking();
   ardisplay = papart.getARDisplay();
   ardisplay.manualMode();
 
@@ -97,6 +99,7 @@ void draw() {
     else
 	g1.clear();
 
+    g1.noStroke();
     // Invert some elements here if you use mirroring
     // or your projector/camera is inverted in some way
     g1.scale(1, -1, 1);
@@ -105,14 +108,19 @@ void draw() {
 
     g1.translate(0, 0, distancePaper);
 
-    g1.fill(50, 50, 200, 150);
-    g1.rect(-10, -10, 120, 120);
+    // Height of the proj...
+    //  g1.translate(0, -28, 0);
+    
+    // Height of the camera...
+       g1.translate(0, -35, 0);
+    g1.fill(50, 50, 200, 70);
+    g1.rect(-9, -9, 112, 112);
 
     fill(200, 200);
-    g1.rect(0, 0, 100, 100);
+    g1.rect(0, 0, 95, 95);
 
-    g1.fill(0, 191, 100, 200);
-    g1.rect(150, 80, 50, 50);
+    g1.fill(0, 191, 100, 60);
+    g1.rect(141, 75, 48, 48);
 
     ardisplay.endDraw();
 
