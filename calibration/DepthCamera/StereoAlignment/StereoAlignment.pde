@@ -62,7 +62,7 @@ void setup() {
   cam.setMaximumDistance(1200);
   cam.setActive(true);
 
-  stereoCalib = HomographyCalibration.getMatFrom(this, Papart.kinectStereoCalib);
+  stereoCalib = HomographyCalibration.getMatFrom(this, Papart.AstraSStereoCalib);
 
     }catch (Exception e){
       println("Cannot start the DepthCamera: " + e );
@@ -101,6 +101,7 @@ void draw() {
   // image(colImg, 0, 0, width, height);
 
   stereoCalib.m03 = xOffset;
+  stereoCalib.m13 = yOffset;
   depthCameraDevice.setStereoCalibration(stereoCalib);
   depthCameraDevice.getDepthCamera().setExtrinsics(depthCameraDevice.getStereoCalibration());
 
@@ -119,7 +120,7 @@ void draw() {
 
 void save(){
     println("Saving...");
-    HomographyCalibration.saveMatTo(this, stereoCalib, Papart.kinectStereoCalib);
+    HomographyCalibration.saveMatTo(this, stereoCalib, Papart.AstraSStereoCalib);
 }
 
 
