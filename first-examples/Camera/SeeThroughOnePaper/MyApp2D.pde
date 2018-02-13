@@ -11,6 +11,9 @@ public class MyApp extends PaperScreen {
   }
 
   public void setup() {
+     // Disable the filtering
+     setDrawingFilter(0);
+     setTrackingFilter(0, 0);
   }
 
   public void drawOnPaper() {

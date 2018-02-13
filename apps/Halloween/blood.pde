@@ -5,8 +5,8 @@ import fr.inria.papart.multitouch.tracking.*;
 
 int numDrips = 0;
 int maxPointsPerTouch = 3;
-int leap = 18; //how far the point travels each iteration also controls opacity
-int sizeMax = 40; //how far the point travels each iteration also controls opacity
+int leap = 4; //how far the point travels each iteration also controls opacity
+int sizeMax = 20; //how far the point travels each iteration also controls opacity
 
 ArrayList<Drop> drips = new ArrayList<Drop>();
 

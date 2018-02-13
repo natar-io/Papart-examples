@@ -1,4 +1,3 @@
-import fr.inria.papart.depthcam.devices.KinectOne;
 import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.procam.camera.*;
@@ -84,6 +83,13 @@ class TestView extends PApplet {
         if(depthCameraConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
+<<<<<<< HEAD:papart-examples/calibration/PCConfiguration/testView.pde
+        depthCameraConfig.setCameraName(depthCameraIdText.getText());
+
+        camera = depthCameraConfig.createCamera();
+        camera.setParent(this);
+
+=======
         depthCameraConfig.setCameraName(cameraIdText.getText());
 	
 	try{
@@ -100,10 +106,13 @@ class TestView extends PApplet {
             depthCamera = new KinectOne(this, camera);
         }
 
+>>>>>>> 1.1-rc:calibration/PCConfiguration/testView.pde
         if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT){
             depthCamera = new Kinect360(this, camera);
         }
 
+<<<<<<< HEAD:papart-examples/calibration/PCConfiguration/testView.pde
+=======
         if(depthCameraConfig.getCameraType() == Camera.Type.REALSENSE){
             depthCamera = new RealSense(this, camera);
         }
@@ -113,6 +122,7 @@ class TestView extends PApplet {
 	    exit();
 	}
 
+>>>>>>> 1.1-rc:calibration/PCConfiguration/testView.pde
 	((CameraRGBIRDepth)camera).actAsDepthCamera();
 	//        camera.setThread();
 

@@ -124,9 +124,7 @@ void cameraTypeChooser(int value){
         cameraFormatText.hide();
     }
 
-    if(value == Camera.Type.REALSENSE.ordinal() ||
-       value == Camera.Type.OPEN_KINECT.ordinal() ||
-       value == Camera.Type.OPEN_KINECT_2.ordinal()){
+    if(value == Camera.Type.OPEN_KINECT.ordinal()){
 	cameraSubType.show();
 
 	int currentType = getDepthType(value);
@@ -265,9 +263,7 @@ void setFormat(){
 	cameraConfig.setCameraFormat(cameraFormatText.getText());
     }
     
-    if(cameraType.getValue() == Camera.Type.REALSENSE.ordinal() ||
-       cameraType.getValue() == Camera.Type.OPEN_KINECT.ordinal() ||
-       cameraType.getValue() == Camera.Type.OPEN_KINECT_2.ordinal()){
+    if(cameraType.getValue() == Camera.Type.OPEN_KINECT.ordinal()){
 	
 	switch((int) cameraSubType.getValue()){
 	case RGB_FORMAT:

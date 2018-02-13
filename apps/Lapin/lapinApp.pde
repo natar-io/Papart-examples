@@ -28,7 +28,7 @@ public class LapinApp extends PaperTouchScreen{
         rst.setFiltering(false);
 	rst.setDisabledYZone(50);
 
-        setDrawingFilter(3);
+        setDrawingFilter(10);
     }
 
     public void resetPos(){
@@ -74,8 +74,8 @@ public class LapinApp extends PaperTouchScreen{
 	    test = false;
 	}
 
-//	drawMono();
-        drawAnaglyph();
+	drawMono();
+//   drawAnaglyph();
 
 // 	drawTouch(3);
 
