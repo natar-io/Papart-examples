@@ -68,12 +68,8 @@ void draw() {
       return;
   }
 
-  try{
-      depthAnalysis.update(depthImg, colorImg, skip);
-  }catch(Exception e){
 
-      e.printStackTrace();
-  }
+  depthAnalysis.update(depthImg, colorImg, skip);
   
   pointCloud.updateWith(depthAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
