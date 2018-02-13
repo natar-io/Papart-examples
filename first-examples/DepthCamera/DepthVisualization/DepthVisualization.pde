@@ -4,10 +4,11 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.depthcam.analysis.*;
 
+import tech.lity.rea.pointcloud.*;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacpp.opencv_core.*;
 import org.bytedeco.javacpp.freenect;
-import org.bytedeco.javacv.RealSenseFrameGrabber;
+import org.bytedeco.javuaacv.RealSenseFrameGrabber;
 import toxi.geom.*;
 import org.openni.*;
 import peasy.*;
@@ -42,7 +43,6 @@ void setup() {
       println("Cannot start the DepthCamera: " + e );
       e.printStackTrace();
   }
-
   depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   pointCloud = new PointCloudForDepthAnalysis(this, depthAnalysis, skip);
 
