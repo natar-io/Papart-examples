@@ -69,6 +69,10 @@ void draw() {
   }
 
   try{
+      if(!depthAnalysis.isReady()){
+	  depthAnalysis.initWithCalibrations(depthCameraDevice);
+      }
+	 
       depthAnalysis.update(depthImg, colorImg, skip);
   }catch(Exception e){
 
