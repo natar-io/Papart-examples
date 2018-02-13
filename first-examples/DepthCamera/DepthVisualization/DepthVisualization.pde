@@ -8,7 +8,7 @@ import tech.lity.rea.pointcloud.*;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacpp.opencv_core.*;
 import org.bytedeco.javacpp.freenect;
-import org.bytedeco.javuaacv.RealSenseFrameGrabber;
+import org.bytedeco.javacv.RealSenseFrameGrabber;
 import toxi.geom.*;
 import org.openni.*;
 import peasy.*;
@@ -53,6 +53,7 @@ void setup() {
   cam.setActive(true);
 }
 
+boolean first = true;
 
 void draw() {
   background(100);
@@ -67,17 +68,13 @@ void draw() {
       println("No depth Image");
       return;
   }
-
-  try{
-      if(!depthAnalysis.isReady()){
-	  depthAnalysis.initWithCalibrations(depthCameraDevice);
-      }
-	 
-      depthAnalysis.update(depthImg, colorImg, skip);
-  }catch(Exception e){
-
-      e.printStackTrace();
+  if(first){
+      depthAnalysis.initWithCalibrations(depthCameraDevice);
+      first = !first;
   }
+  //      if(!depthAnalysis.isReady()){
+  //      }
+  depthAnalysis.update(depthImg, colorImg, skip);
   
   pointCloud.updateWith(depthAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
