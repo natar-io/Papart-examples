@@ -54,9 +54,10 @@ public class MyApp extends PaperScreen {
 	// }
 	
 	// Draw the pointers. (debug)
+	rectMode(CENTER);
 	for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
 	    fill(0, 200, 0);
-	    rect(p.getX(), p.getY(), 3, 3);
+	    rect(p.getX(), p.getY(), 10, 10);
 	}
 
 	// draw the GUI.
