@@ -15,11 +15,13 @@ float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
-    fullScreen(P3D);
+    //    fullScreen(P3D);
+    size(640, 480, P3D);
 }
 
  void setup(){
-     papart = Papart.projection(this);
+     //      papart = Papart.projection(this);
+     papart = Papart.seeThrough(this);
      papart.loadTouchInput();
      papart.loadSketches();
      papart.startTracking();

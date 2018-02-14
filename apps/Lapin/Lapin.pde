@@ -24,11 +24,13 @@ MarkerBoard markerBoardDrawing ;
 Papart papart;
 
 public void settings(){
+    // size(640, 480, P3D);
     fullScreen(P3D);
 }
 
 public void setup(){
 
+    // papart = Papart.seeThrough(this);
     papart = Papart.projection(this);
     papart.loadTouchInput();
 
