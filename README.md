@@ -29,6 +29,14 @@ Video from the research project:
 
 [![](https://github.com/potioc/Papart-examples/blob/master/screenshot2.png?raw=true)](https://youtu.be/ZBndzLAM5I8)
 
+
+## What are the branches ?
+
+* **master**: stable version, with latest patches. It is compatible with 1.1, and 1.2. 
+* **1.1**: stable version for see-through augmented reality. Distributed with the PapARt community library.  
+* **1.2**: stable version for Spatial Augmented Reality. Distributed with PapARt for RealityTech hardware.
+* **Delevop**, **feature-abc***, **contrib-toto** : development branches.
+
 ## Copyright
 
 This code is free software, built for [Processing](http://processing.org) and [PapARt](https://github.com/poqudrof/papart/). It is originally propriety of Inria, Bordeaux University and RealityTech. Contributions, pull requests are welcomed if you accept to distribute it with the same open source licence: LGPL, or CeCILL-B. 
