@@ -32,7 +32,7 @@ Video from the research project:
 
 ## What are the branches ?
 
-* **master**: stable version, with latest patches. It is compatible with 1.1, and 1.2. 
+* **master**: stable version, with latest patches. It is compatible with 1.1, and 1.2. Examples are configured for “best use”, so some are switched for SAR.
 * **1.1**: stable version for see-through augmented reality. Distributed with the PapARt community library.  
 * **1.2**: stable version for Spatial Augmented Reality. Distributed with PapARt for RealityTech hardware.
 * **Delevop**, **feature-abc***, **contrib-toto** : development branches.
