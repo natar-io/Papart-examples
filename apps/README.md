@@ -5,3 +5,4 @@
 - [Human Printer](HumanPrinter): Display images at scale, with reloading the image and save/load the image location. 
 - [Lapin](Lapin): require 3D red cyan glasses. 3D model of a rabbit.
 - [Particles](Particles): particles are attracted to touch, objects. press 'g' to add/remove gravity!
+- [Light](Ligt): Learn about color with this app. You need to print the cards and cut them to try it !
