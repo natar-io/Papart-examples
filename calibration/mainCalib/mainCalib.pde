@@ -14,26 +14,17 @@ import tech.lity.rea.skatolo.Skatolo;
 
 float renderQuality = 1.0f;
 Papart papart;
-boolean useProjection = false;
 
 
 void settings(){
-    if(useProjection){
-	fullScreen(P3D);
-    }else  {
-	size(640, 480, P3D);
-    }
+    size(640, 480, P3D);
 }
 
  void setup(){
-     if(useProjection){
-	 papart = Papart.projection(this);
-     }else{
      papart = Papart.seeThrough(this);
-     }
-     
-     papart.loadTouchInput();
-     //      papart.loadSketches();
+
+     // Uncomment this line to calibrate touch 
+     // papart.loadTouchInput();
      papart.startTracking();
 }
 
