@@ -1,5 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
+import fr.inria.papart.calibration.MultiCalibrator;
 import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
@@ -12,10 +13,12 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 
+import tech.lity.rea.colorconverter.*;
+
+
 float renderQuality = 1.0f;
 Papart papart;
-boolean useProjection = false;
-
+boolean useProjection = true;
 
 void settings(){
     if(useProjection){
@@ -35,7 +38,10 @@ void settings(){
      papart.loadTouchInput();
      //      papart.loadSketches();
      papart.startTracking();
-}
+
+     MultiCalibrator.ZSHIFT = 0f;
+     MultiCalibrator.SCALE_FACTOR = 183.4f / 184.1f;
+ }
 
 
 void draw(){
