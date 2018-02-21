@@ -40,7 +40,7 @@ boolean toSave = false;
 PMatrix3D stereoCalib;
 
 void settings() {
-  size(640, 480, P3D);
+  size(800, 600, P3D);
 }
 
 void setup() {
