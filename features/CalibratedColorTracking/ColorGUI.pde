@@ -7,6 +7,8 @@ import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.calibration.*;
 import fr.inria.papart.calibration.files.*;
 
+import tech.lity.rea.colorconverter.*;
+
 import org.openni.*;
 
 import java.util.Arrays;
@@ -19,8 +21,8 @@ public class MyApp extends PaperScreen {
     CalibratedColorTracker calibratedColorTracker;
     Skatolo skatoloInside;
 
-    int w = 256;
-    int h = 256;
+    int w = 128;
+    int h = 128;
     public void settings() {
 	setDrawingSize(w, h);
 	loadMarkerBoard(Papart.markerFolder + "A4-default.svg",
@@ -30,7 +32,7 @@ public class MyApp extends PaperScreen {
     float sc = 1f;
     
     public void setup() {
-		calibratedColorTracker = papart.initAllTracking(this, 1f/sc);
+		calibratedColorTracker = papart.initAllTracking(this, 1f);
 
 	// colorTracker = papart.initRedTracking(this, 1/sc); //0.5f);
 	// colorTracker = papart.initBlueTracking(this, 0.5f);
@@ -45,7 +47,7 @@ public class MyApp extends PaperScreen {
 	    .setSize(30, 30);
     }
     
-    void hover() {
+    void hover(){ 
 	println("Hover activ");
     }
     
@@ -72,9 +74,9 @@ public class MyApp extends PaperScreen {
 	pushMatrix();
 	fill(20, 255, 10, 180);
 	scale(sc);
-	
-	for(int j = 0; j < drawingSize.y / sc; j++){
-	    for(int i = 0; i < drawingSize.x / sc; i++){
+	colorMode(RGB, 255);
+	for(int j = 0; j < drawingSize.y ; j++){
+	    for(int i = 0; i < drawingSize.x; i++){
 
 		int offset = j * (int) drawingSize.y + i;
 		// if(k >= found.length){
