@@ -33,7 +33,7 @@ DepthCameraDevice depthCameraDevice;
 CameraRealSense camRS = null;
 
 // Warning non-even skip value causes a crash.
-int skip = 2;
+int skip = 1;
 
 
 boolean toSave = false;
@@ -102,7 +102,7 @@ void draw() {
 
   stereoCalib.m03 = xOffset;
   stereoCalib.m13 = yOffset;
-  depthCameraDevice.setStereoCalibration(stereoCalib);
+  // depthCameraDevice.setStereoCalibration(stereoCalib);
   depthCameraDevice.getDepthCamera().setExtrinsics(depthCameraDevice.getStereoCalibration());
 
   try

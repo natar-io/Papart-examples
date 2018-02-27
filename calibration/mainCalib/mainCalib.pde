@@ -18,7 +18,7 @@ import tech.lity.rea.colorconverter.*;
 
 float renderQuality = 1.0f;
 Papart papart;
-boolean useProjection = true;
+boolean useProjection = false;
 
 void settings(){
     if(useProjection){
@@ -39,8 +39,8 @@ void settings(){
      //      papart.loadSketches();
      papart.startTracking();
 
-     MultiCalibrator.ZSHIFT = 0f;
-     MultiCalibrator.SCALE_FACTOR = 183.4f / 184.1f;
+     MultiCalibrator.ZSHIFT = -9f;
+     MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }
 
 

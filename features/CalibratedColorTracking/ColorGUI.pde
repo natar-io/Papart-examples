@@ -32,7 +32,7 @@ public class MyApp extends PaperScreen {
     float sc = 1f;
     
     public void setup() {
-		calibratedColorTracker = papart.initAllTracking(this, 1f);
+		calibratedColorTracker = papart.initAllTracking(this, 1.5f);
 
 	// colorTracker = papart.initRedTracking(this, 1/sc); //0.5f);
 	// colorTracker = papart.initBlueTracking(this, 0.5f);
@@ -53,10 +53,13 @@ public class MyApp extends PaperScreen {
     
     public void drawOnPaper() {
 	try{
-	// println("FrameRate" + frameRate);
+
+	    setLocation(new PVector(40, 40));
+	    // println("FrameRate" + frameRate);
 	background(200, 100);
 
 	ArrayList<TrackedElement> te = calibratedColorTracker.findColor(millis());
+	ArrayList<TrackedElement> te2 = calibratedColorTracker.smallElements();
 	TouchList touchs = calibratedColorTracker.getTouchList();
 	byte[] found = calibratedColorTracker.getColorFoundArray();
 	
@@ -76,6 +79,7 @@ public class MyApp extends PaperScreen {
 	scale(sc);
 	colorMode(RGB, 255);
 	for(int j = 0; j < drawingSize.y ; j++){
+
 	    for(int i = 0; i < drawingSize.x; i++){
 
 		int offset = j * (int) drawingSize.y + i;
@@ -99,11 +103,20 @@ public class MyApp extends PaperScreen {
 	popMatrix();
 
 	for(TrackedElement t : te){
-	    fill(t.attachedValue, 100, 100);
+	    fill(200, 150);
 	    PVector p = t.getPosition();
+	    println("Tracked Element " + p);
+	    ellipse(p.x, p.y, 50, 50);
+	}
+
+	colorMode(HSB, 8, 1, 1);
+	for(TrackedElement t : te2){
+	    fill(t.attachedValue, 1, 1);
+	    PVector p = t.getPosition();
+	    println("Tracked Element2 " + p);
 	    ellipse(p.x, p.y, 5, 5);
 	}
-	
+
 	SkatoloLink.updateTouch(touchs, skatoloInside); 
 
 	colorMode(RGB, 255);
