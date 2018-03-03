@@ -83,14 +83,7 @@ class TestView extends PApplet {
         if(depthCameraConfig.getCameraType() == Camera.Type.FAKE){
             return;
         }
-<<<<<<< HEAD:papart-examples/calibration/PCConfiguration/testView.pde
         depthCameraConfig.setCameraName(depthCameraIdText.getText());
-
-        camera = depthCameraConfig.createCamera();
-        camera.setParent(this);
-
-=======
-        depthCameraConfig.setCameraName(cameraIdText.getText());
 	
 	try{
 	    camera = depthCameraConfig.createCamera();
@@ -100,29 +93,6 @@ class TestView extends PApplet {
 	}
         camera.setParent(this);
 
-	try{
-
-        if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT_2){
-            depthCamera = new KinectOne(this, camera);
-        }
-
->>>>>>> 1.1-rc:calibration/PCConfiguration/testView.pde
-        if(depthCameraConfig.getCameraType() == Camera.Type.OPEN_KINECT){
-            depthCamera = new Kinect360(this, camera);
-        }
-
-<<<<<<< HEAD:papart-examples/calibration/PCConfiguration/testView.pde
-=======
-        if(depthCameraConfig.getCameraType() == Camera.Type.REALSENSE){
-            depthCamera = new RealSense(this, camera);
-        }
-
-	}catch(CannotCreateCameraException e){
-	    println("Error cannot create the depth camera !");
-	    exit();
-	}
-
->>>>>>> 1.1-rc:calibration/PCConfiguration/testView.pde
 	((CameraRGBIRDepth)camera).actAsDepthCamera();
 	//        camera.setThread();
 

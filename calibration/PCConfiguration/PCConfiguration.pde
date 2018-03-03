@@ -25,7 +25,7 @@ import org.bytedeco.javacv.CanvasFrame;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
-
+import org.openni.*;
 
 Skatolo skatolo;
 
@@ -124,12 +124,12 @@ void cameraTypeChooser(int value){
         cameraFormatText.hide();
     }
 
-    if(value == Camera.Type.OPEN_KINECT.ordinal()){
+    if(value == Camera.Type.OPEN_KINECT.ordinal()
+       || value == Camera.Type.OPENNI2.ordinal()
+       || value == Camera.Type.REALSENSE.ordinal()){
 	cameraSubType.show();
-
 	int currentType = getDepthType(value);
 	depthCameraType.activate(currentType);
-	
     } else {
 	cameraSubType.hide();
     }
