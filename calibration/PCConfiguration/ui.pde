@@ -20,6 +20,8 @@ PImage testCameraImg;
 
 boolean useCameraCalibration;
 
+
+
 final int RGB_FORMAT=0;
 final int IR_FORMAT=1;
 final int DEPTH_FORMAT=2;
@@ -134,6 +136,8 @@ void initCameraUI() {
         .addItem("FFMPEG", Camera.Type.FFMPEG.ordinal())
         .addItem("Processing", Camera.Type.PROCESSING.ordinal())
         .addItem("OpenKinect",Camera.Type.OPEN_KINECT.ordinal())
+	.addItem("Realsense",Camera.Type.REALSENSE.ordinal())
+	.addItem("OpenNI2",Camera.Type.OPENNI2.ordinal())
         .addItem("FlyCapture", Camera.Type.FLY_CAPTURE.ordinal())
         .activate(cameraConfig.getCameraType().ordinal())
         ;
@@ -178,7 +182,7 @@ void initCameraUI() {
 
   startCameraButton = skatolo.addButton("testCameraButton")
     .setPosition(611, 369)
-    .setLabel("Test the camera")
+    .setLabel("Test camera")
     .setSize(110, 20)
     ;
 
@@ -190,12 +194,17 @@ void initCameraUI() {
 
 }
 
+// Order of the buttons
 int getDepthType(int t){
-    if(t == Camera.Type.OPEN_KINECT.ordinal())
+    if(t == Camera.Type.OPENNI2.ordinal())
         return 0;
-    if(t == Camera.Type.FAKE.ordinal())
+    if(t == Camera.Type.REALSENSE.ordinal())
         return 1;
-    return 1;
+    if(t == Camera.Type.OPEN_KINECT.ordinal())
+        return 2;
+    if(t == Camera.Type.FAKE.ordinal())
+        return 3;
+    return 3;
 }
 
 void initDepthCameraUI() {
@@ -206,6 +215,8 @@ void initDepthCameraUI() {
     .setPosition(50, 652)
     .setItemWidth(20)
     .setItemHeight(20)
+      .addItem("OpenNI (Orbbec Astra)", Camera.Type.OPENNI2.ordinal())
+      .addItem("Realsense (SR300 - F200)", Camera.Type.REALSENSE.ordinal())
       .addItem("OpenKinect (xbox360)", Camera.Type.OPEN_KINECT.ordinal())
       .addItem("No DepthCamera", Camera.Type.FAKE.ordinal())
     .setColorLabel(color(255))
@@ -225,7 +236,7 @@ void initDepthCameraUI() {
 
   startDepthCameraButton = skatolo.addButton("testDepthCameraButton")
     .setPosition(611, 656)
-    .setLabel("Test the kinect")
+    .setLabel("Test depthcam")
     .setSize(110, 20)
     ;
 
