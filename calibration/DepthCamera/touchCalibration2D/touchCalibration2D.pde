@@ -21,6 +21,7 @@ import org.bytedeco.javacpp.opencv_core.*;
 import java.nio.IntBuffer;
 
 import tech.lity.rea.skatolo.*;
+import tech.lity.rea.pointcloud.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 import tech.lity.rea.skatolo.gui.group.*;
@@ -79,37 +80,21 @@ void setup(){
     }
  
     kinectAnalysis = new DepthAnalysisImpl(this, depthCameraDevice);
-    // kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
     pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, 1);
  
 
-  touchInput = new DepthTouchInput(this,
-				    depthCameraDevice,
-				    kinectAnalysis,
-				    planeProjCalibration);
-  depthCameraDevice.setTouch(touchInput);
+    touchInput = new DepthTouchInput(this,
+				     depthCameraDevice,
+				     kinectAnalysis,
+				     planeProjCalibration);
+    depthCameraDevice.setTouch(touchInput);
 
-  // touchInput.setTouchDetectionCalibration(papart.getDefaultTouchCalibration());
-  // touchInput.setTouchDetectionCalibration3D(papart.getDefaultTouchCalibration3D());
+    touchInput.initSimpleTouchDetection();
+    touch2D = touchInput.getSimpleDetection();
+    initGui();
+    loadCalibrationToGui(touch2D.getCalibration());
 
-  for(int i = 0; i < 3; i++){
-      println("Setting: " + i  + " " + papart.getTouchCalibration(i));
-      touchInput.
-  	  setTouchDetectionCalibration(i,papart.getTouchCalibration(i));
-  }
-
-  touchInput.
-      setSimpleTouchDetectionCalibration(papart.getDefaultTouchCalibration());
-
-
-  
-  // After the start() of the camera.
-  touchInput.initTouchDetections();
-  touch2D = touchInput.getTouchDetectionSimple2D();
-  initGui();
-  loadCalibrationToGui(touch2D.getCalibration());
-
-  //  frameRate(200);
+    //  frameRate(200);
 }
 
 
@@ -131,10 +116,9 @@ boolean mouseControl;
 
 void grabImages(){
 
-    // Grab gets the images for all the sub cameras (RGB + DEPTH)
+    // Grab ges tthe images for all the sub cameras (RGB + DEPTH)
     // The touchInput gets updated with the call to grab()
     try {
-	// depthCameraDevice.grab();
 	depthCameraDevice.getMainCamera().grab();
     } catch(Exception e){
         println("Could not grab the image " + e);
@@ -144,14 +128,12 @@ void grabImages(){
 }
 
 void initVirtualCamera(){
-        // Set the virtual camera
-  cam = new PeasyCam(this, 0, 0, -800, 800);
-  cam.setMinimumDistance(100);
-  cam.setMaximumDistance(5000);
-  cam.setActive(true);
+    // Set the virtual camera
+    cam = new PeasyCam(this, 0, 0, -800, 800);
+    cam.setMinimumDistance(100);
+    cam.setMaximumDistance(5000);
+    cam.setActive(true);
 }
-
-
 
 void draw(){
     //    println("Framerate " + frameRate);
@@ -174,18 +156,7 @@ void draw(){
 	cam.endHUD();
     }
 
-    ArrayList<TrackedDepthPoint> points;
-
-    //    points = touchDetections[currentCalib].getTouchPoints();
-    // if(is3D){
-    // 	points = touchInput.getTrackedDepthPoints3D();
-    // } else {
-    // 	points = touchInput.getTrackedDepthPoints2D();
-    // }
-
-    points = touchInput.getTouchDetectionSimple2D().getTouchPoints();
-    
-    println("Points found " + points.size());
+    ArrayList<TrackedDepthPoint>  points = touch2D.getTouchPoints();
 
     //    colorMode(RGB, 255);
     if(depthVisuType == 0){
@@ -270,7 +241,7 @@ void keyPressed() {
     if(depthCameraDevice.type() == Camera.Type.REALSENSE){
 	setRealSenseMode();
     }
- }
+}
 
 void setRealSenseMode(){
     RealSenseFrameGrabber rs = ((RealSense)depthCameraDevice).getMainCamera().getFrameGrabber();

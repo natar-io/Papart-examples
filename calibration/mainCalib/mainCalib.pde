@@ -18,7 +18,7 @@ import tech.lity.rea.colorconverter.*;
 
 float renderQuality = 1.0f;
 Papart papart;
-boolean useProjection = false;
+boolean useProjection = true;
 
 void settings(){
     if(useProjection){
@@ -35,11 +35,12 @@ void settings(){
      papart = Papart.seeThrough(this);
      }
      
-     papart.loadTouchInput();
+     papart.loadTouchInput().initHandDetection();
      //      papart.loadSketches();
      papart.startTracking();
 
-     MultiCalibrator.ZSHIFT = -9f;
+     MultiCalibrator.PAPER = "large.svg";
+     MultiCalibrator.ZSHIFT = -14f;
      MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }
 
