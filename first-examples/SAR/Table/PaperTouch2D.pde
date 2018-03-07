@@ -20,7 +20,7 @@ public class MyApp  extends MainScreen {
 	
 
 	for(StickerCluster sc : cluster){
-
+	    sc.analyse();
 	    PVector p = sc.center;
 	    float x = p.x; 
 	    float y = p.y; 
@@ -29,7 +29,32 @@ public class MyApp  extends MainScreen {
 	    // fill(f.attachedValue, 100, 50);
 	    // float x = f.getPosition().x;
 	    // float y = f.getPosition().
+	    stroke(1, 100, 100);
+	    strokeWeight(1);
+	    pushMatrix();
+	    translate(sc.center.x, sc.center.y);
 
+	    pushMatrix();
+	    applyMatrix(sc.mat);
+	    //	    rotate(sc.eigenVector.x);
+	    strokeWeight(2);
+	    line(0, 0,
+		 sc.eigenValue.x / sc.size(),
+		 0);
+	    strokeWeight(1);
+	    line(0, 0,
+		 0,
+		 sc.eigenValue.y / sc.size());
+
+	    popMatrix();
+
+	    // pushMatrix();
+	    // rotate(sc.eigenVector.y);
+	    // line(0, 0, sc.eigenValue.y / sc.size(), 0);
+	    // popMatrix();
+
+	    popMatrix();
+	    
 	    noFill();
 	    stroke(1, 100, 50);
 	    //	    ellipse(x - 4,y - 4, 8, 8);
@@ -47,14 +72,14 @@ public class MyApp  extends MainScreen {
 
 	}
 	noStroke();
-	// for(TrackedElement e : se){
 
-	//     fill(e.attachedValue, 100, 70);
-	//     float x = e.getPosition().x;
-	//     float y = e.getPosition().y;
+	for(TrackedElement e : se){
+	    fill(e.attachedValue, 100, 70);
+	    float x = e.getPosition().x;
+	    float y = e.getPosition().y;
 
-	//     ellipse(x ,y , 4, 4);
-	// }
+	    ellipse(x ,y , 4, 4);
+	}
 
 	}catch(Exception e){
 	    e.printStackTrace();
