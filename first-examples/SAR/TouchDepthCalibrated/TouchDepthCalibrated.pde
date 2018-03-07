@@ -16,7 +16,7 @@ void settings(){
 public void setup() {
     papart = Papart.projection(this);
     //    papart = Papart.seeThrough(this);
-    papart.loadTouchInput();
+    papart.loadTouchInput().initHandDetection();
     papart.loadSketches();
     papart.startTracking();
 }

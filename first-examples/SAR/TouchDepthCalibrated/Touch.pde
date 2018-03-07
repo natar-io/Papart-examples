@@ -28,15 +28,7 @@ public class MyApp extends PaperTouchScreen {
 
   void setup() {
     DepthCameraDevice depthCamera = papart.getDepthCameraDevice();
-    // depthCamExtrinsics = depthCamera.getDepthCamera().getExtrinsics().get();
     depthCamExtrinsics = depthCamera.getStereoCalibration();
-    
-    depthCamExtrinsics.print();
-    //depthCamExtrinsics.invert();
-    // Projector extrinsics
-    //PMatrix3D projExtrinsics = papart.loadCalibration(Papart.cameraProjExtrinsics);
-    //projExtrinsics.invert();
-    //depthCamExtrinsics.apply(projExtrinsics);
   }
 
   void drawAroundPaper() {
