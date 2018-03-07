@@ -20,6 +20,7 @@ void setup(){
     // arguments are 2D and 3D precision.
     papart.loadTouchInput();
     touchInput = (DepthTouchInput) papart.getTouchInput();
+    touchInput.initHandDetection();
     papart.startDepthCameraThread();
 }
 

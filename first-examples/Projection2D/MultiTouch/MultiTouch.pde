@@ -19,7 +19,7 @@ void setup(){
     // arguments are 2D and 3D precision.
     papart.loadTouchInput();
     touchInput = (DepthTouchInput) papart.getTouchInput();
-    
+    touchInput.initSimpleTouchDetection();
     papart.startDepthCameraThread();
     
     frameRate(60);
@@ -44,7 +44,7 @@ void draw(){
 
     colorMode(HSB, 30);
     // Get a copy, as the arrayList is constantly modified
-    ArrayList<TrackedDepthPoint> touchs2D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints2D());
+    ArrayList<TrackedDepthPoint> touchs2D = new ArrayList<TrackedDepthPoint>(touchInput.getSimpleDetection().getTouchPoints());
     for(TrackedDepthPoint tp : touchs2D){
 	fill(tp.getID(), 30, 30);
 	PVector pos = tp.getPosition();
