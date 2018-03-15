@@ -39,7 +39,7 @@ void settings(){
      //      papart.loadSketches();
      papart.startTracking();
 
-     MultiCalibrator.PAPER = "large.svg";
+     //     MultiCalibrator.PAPER = "large.svg";
      MultiCalibrator.ZSHIFT = -14f;
      MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }
