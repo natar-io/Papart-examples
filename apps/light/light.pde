@@ -24,8 +24,6 @@ void settings(){
 
  void setup(){
 
-
-     
      if(useDebug){
 	 papart = new Papart(this);
 	 papart.initDebug();
@@ -36,7 +34,8 @@ void settings(){
 	     papart = Papart.seeThrough(this, 1.0f);
 	 } else {
 	     papart = Papart.projection(this, 1.0f);
-	     papart.loadTouchInput().initHandDetection();
+	     // papart.loadTouchInput().initHandDetection();
+	     papart.loadTouchInput().initSimpleTouchDetection();
 	 }
 
 	 // papart.loadTouchInput();

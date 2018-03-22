@@ -1,7 +1,10 @@
 import fr.inria.papart.tracking.DetectedMarker;
+import java.util.Arrays;
 
-PVector modesZonePos = new PVector(-130, 140);
+PVector modesZonePos = new PVector(-130, 155);
 PVector modesZoneSize = new PVector(180, 40);
+
+PVector plateauPosition = new PVector(-350, -250);
 
 public class ModesZone  extends TableScreen {
 
@@ -14,9 +17,7 @@ public class ModesZone  extends TableScreen {
     }
 
     public void init() {
-
 	//	colorTracker = papart.initRedTracking(this, 1f);
-	
 	skatoloInside = new Skatolo(parent, this);
 	skatoloInside.setAutoDraw(false);
 	skatoloInside.getMousePointer().disable();
@@ -70,21 +71,11 @@ public class ModesZone  extends TableScreen {
       }
 
       skatoloInside.draw(getGraphics());
-      
-      // Main marker, with id 800 - 1000
-    // int id = getMainMarker(MARKER_WIDTH);
-    // if (id != -1) {
-    //   colorMode(HSB, 10, 100, 100); // change hue
-    //   background(id - 800, 100, 100);
-    // } else {
-    //   colorMode(RGB, 255); // default
-    //   background(id - 800, 240, 240);
-    // }
   }
 }
 
 
-PVector plateauPosition = new PVector(-350, -250);
+
 float MARKER_WIDTH = 44f;
 
 int red = 335;
@@ -95,6 +86,10 @@ int blue = 339;
 int yellow = 340;
 
 int filterPerColor = 3;
+int nbColors = 6;
+
+int lastColorSeen[] = new int[nbColors];
+boolean filtered[] = new boolean[nbColors];
 
 public boolean isColor(int id){
     return id >= red && id <= yellow;
@@ -132,7 +127,7 @@ public class Plateau extends TableScreen{
 
 	noFill();
 	stroke(200);
-	rect(0, 0, drawingSize.x, drawingSize.y);
+	rect(1, 1, drawingSize.x-1, drawingSize.y-1);
 
 	// TODO: skatolo to fix the positions ?!!
 	
@@ -149,6 +144,16 @@ public class Plateau extends TableScreen{
 	    blendMode(BLEND);
 	}
 	
+	updateMarkerPositions();
+	drawColors();
+	// updateTouch();
+	// drawTouch();
+    }
+
+    void updateMarkerPositions(){
+
+	Arrays.fill(filtered, false);
+	
 	DetectedMarker[] markers = papart.getMarkerList();
 	for(DetectedMarker marker: markers){
 	    if(isColor(marker.id)){
@@ -164,43 +169,72 @@ public class Plateau extends TableScreen{
 			pos.y = (float) filters2[(marker.id - red) * filterPerColor + 1].filter(pos.y);
 			pos.z = (float) filters2[(marker.id - red) * filterPerColor + 2].filter(pos.z);
 
+			lastColorSeen[marker.id - red] = millis();
+			filtered[marker.id - red] = true;
 		    } catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("OneEuro init Exception. Pay now." + e);
 		    }
-
-		    text(Integer.toString(marker.id), pos.x, pos.y);
-		    
-		    pushMatrix();
-			translate(pos.x, pos.y);
-			rotate(pos.z);
-			translate(50, 0);
-			if(marker.id == red){
-			    fill(255, 0, 0);
-			}
-			if(marker.id == blue){
-			    fill(0, 0, 255);
-			}
-			if(marker.id == green){
-			    fill(0, 255, 0);
-			}
-			if(marker.id == cyan){
-			    fill(0, 255, 255);
-			}
-			if(marker.id == magenta){
-			    fill(255, 0, 255);
-			}
-			if(marker.id == yellow){
-			    fill(255, 255, 0);
-			}
-			ellipse(0, 0, 70, 70);			
-			popMatrix();
-
+		    //		    text(Integer.toString(marker.id), pos.x, pos.y);
 		}
 	    }
 	}
+
+	for(int i = 0; i < nbColors; i++){
+	    if(!filtered[i]){
+		filters2[i + filterPerColor + 0].filter();
+		filters2[i + filterPerColor + 1].filter();
+		filters2[i + filterPerColor + 2].filter(); 
+	    }
+	}
 	
-	// updateTouch();
-	// drawTouch();
     }
+
+    int REMOVE_DUR = 1000;
+    
+    void drawColors(){
+
+	for(int i = 0; i < nbColors; i++){
+
+	    if(lastColorSeen[i] + REMOVE_DUR <  millis()){
+		continue;
+	    }
+	    
+	    PVector pos = new PVector();
+	    
+	    pos.x = (float) filters2[i * filterPerColor].lastValue();
+	    pos.y = (float) filters2[i * filterPerColor + 1].lastValue();
+	    pos.z = (float) filters2[i * filterPerColor + 2].lastValue();
+
+	    int id = i + red;
+	    
+	    pushMatrix();
+	    translate(pos.x, pos.y);
+	    rotate(pos.z);
+	    translate(50, 0);
+	    if(id == red){
+		fill(255, 0, 0);
+	    }
+	    if(id == blue){
+		fill(0, 0, 255);
+	    }
+	    if(id == green){
+		fill(0, 255, 0);
+	    }
+	    if(id == cyan){
+		fill(0, 255, 255);
+	    }
+	    if(id == magenta){
+		fill(255, 0, 255);
+	    }
+	    if(id == yellow){
+		fill(255, 255, 0);
+	    }
+	    ellipse(0, 0, 70, 70);			
+	    popMatrix();
+	    
+	}
+    }
+
+    
 }
