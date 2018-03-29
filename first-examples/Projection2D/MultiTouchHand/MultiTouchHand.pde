@@ -58,7 +58,6 @@ void draw(){
     }
 
 
-    fill(255, 0, 0);
     ArrayList<TrackedDepthPoint> armTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTouchPoints().clone();
     //    ArrayList<TrackedDepthPoint> armTouch = (ArrayList<TrackedDepthPoint>)handDetection.getTouchPoints().clone();
     for(TrackedDepthPoint tp : armTouch){
@@ -79,6 +78,9 @@ void draw(){
         ellipse(pos.x * width,
         	pos.y * height, 40, 40);
     }
+
+
+
 }
 
 void setColor(int rgb, float intens){
