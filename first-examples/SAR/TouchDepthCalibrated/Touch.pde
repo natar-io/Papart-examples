@@ -52,12 +52,12 @@ public class MyApp extends PaperTouchScreen {
     
     ArrayList<TrackedDepthPoint> armTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTouchPoints().clone();
     ArrayList<TrackedDepthPoint> armPointerTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTipPoints().clone();
-    fill(180);
-
-    ellipseSize = 3f;
-    drawDepthElements(armTouch);
+    fill(255);
 
     ellipseSize = 5f;
+    drawDepthElements(armTouch);
+
+    ellipseSize = 12f;
     fill(255, 0, 0);
     drawDepthElements(armPointerTouch);
   }
@@ -89,7 +89,7 @@ public class MyApp extends PaperTouchScreen {
 	pushMatrix();
 	ellipseMode(CENTER);
 	translate(pointPosDisplay.x, pointPosDisplay.y, pointPosDisplay.z );
-	ellipse(0, 0, ellipseSize, ellipseSize);
+	ellipse(-2, -2, ellipseSize, ellipseSize);
 	popMatrix();
     }
 }
