@@ -50,8 +50,8 @@ public class MyApp extends PaperTouchScreen {
     HandDetection handDetection = touchInput.getHandDetection();
     ArmDetection armDetection = touchInput.getArmDetection();
     
-    ArrayList<TrackedDepthPoint> armTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTouchPoints().clone();
-    ArrayList<TrackedDepthPoint> armPointerTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTipPoints().clone();
+    ArrayList<TrackedDepthPoint> armTouch = new ArrayList((ArrayList<TrackedDepthPoint>)armDetection.getTouchPoints());
+    ArrayList<TrackedDepthPoint> armPointerTouch = new ArrayList((ArrayList<TrackedDepthPoint>)armDetection.getTipPoints());
     fill(255);
 
     ellipseSize = 5f;
