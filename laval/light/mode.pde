@@ -52,26 +52,25 @@ public class ModesZone  extends TableScreen {
     
     boolean debug = false;
 
-
     
-  public void drawOnPaper() {
-      //      setLocation(0, drawingSize.y, 0);
-      background(80);
+    public void drawOnPaper() {
+	//      setLocation(0, drawingSize.y, 0);
+	background(80);
       
-      updateTouch();
-      // ArrayList<TrackedElement> te = colorTracker.findColor(millis());
-      // TouchList touchs = colorTracker.getTouchList();
+	updateTouch();
+	// ArrayList<TrackedElement> te = colorTracker.findColor(millis());
+	// TouchList touchs = colorTracker.getTouchList();
 
-      SkatoloLink.updateTouch(touchList, skatoloInside); 
+	SkatoloLink.updateTouch(touchList, skatoloInside); 
 
 
-      for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
-	  fill(0, 200, 0);
-	  rect(p.getX(), p.getY(), 3, 3);
-      }
+	for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
+	    fill(0, 200, 0);
+	    rect(p.getX(), p.getY(), 3, 3);
+	}
 
-      skatoloInside.draw(getGraphics());
-  }
+	skatoloInside.draw(getGraphics());
+    }
 }
 
 

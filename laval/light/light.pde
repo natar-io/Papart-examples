@@ -34,8 +34,8 @@ void settings(){
 	     papart = Papart.seeThrough(this, 1.0f);
 	 } else {
 	     papart = Papart.projection(this, 1.0f);
-	     // papart.loadTouchInput().initHandDetection();
-	     papart.loadTouchInput().initSimpleTouchDetection();
+	     papart.loadTouchInput().initHandDetection();
+	     // papart.loadTouchInput().initSimpleTouchDetection();
 	 }
 
 	 // papart.loadTouchInput();
@@ -52,18 +52,16 @@ void settings(){
      new Plateau();
      new InfoReader();
      new InfoShow();
-     
+
      // new ColorApp("vert.svg", 150, 150, color(0, 255, 0));
      // new ColorApp("rouge.svg", 100, 100, color(255, 0, 0));
      // new ColorApp("cyan.svg", 150, 200, color(0, 255, 255));
      // new ColorApp("jaune.svg", 250, 200, color(255, 255, 0));
      // new ColorApp("magenta.svg", 250, 200, color(255, 0, 255));     
      
-
      frameRate(60);
      papart.startTracking();
  }
-
 
 void draw(){
 
