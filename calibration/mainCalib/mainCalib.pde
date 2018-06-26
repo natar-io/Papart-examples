@@ -15,6 +15,7 @@ import tech.lity.rea.skatolo.Skatolo;
 
 import tech.lity.rea.colorconverter.*;
 
+import redis.clients.jedis.*;
 
 float renderQuality = 1.0f;
 Papart papart;
@@ -31,11 +32,11 @@ void settings(){
  void setup(){
      if(useProjection){
 	 papart = Papart.projection(this);
+	 papart.loadTouchInput().initHandDetection();
      }else{
-     papart = Papart.seeThrough(this);
+	 papart = Papart.seeThrough(this);
      }
-     
-     papart.loadTouchInput().initHandDetection();
+
      //      papart.loadSketches();
      papart.startTracking();
 
