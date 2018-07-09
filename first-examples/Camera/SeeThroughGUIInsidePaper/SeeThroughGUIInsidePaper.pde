@@ -19,11 +19,13 @@ void settings() {
     size(640, 480, P3D);
 }
 
+MyApp myApp;
+
 void setup() {
   // application only using a camera
   // screen rendering
   papart = Papart.seeThrough(this);
-  papart.loadSketches();
+  myApp = new MyApp();
   papart.startTracking();
 }
 

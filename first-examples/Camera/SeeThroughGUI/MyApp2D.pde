@@ -10,7 +10,7 @@ public class MyApp extends PaperScreen {
   }
 
   public void drawOnPaper() {
-      // setLocation(63, 45, 0);
+    // setLocation(63, 45, 0);
 
     // background of the sheet is blue
     colorMode(HSB, 10, 1, 1);
