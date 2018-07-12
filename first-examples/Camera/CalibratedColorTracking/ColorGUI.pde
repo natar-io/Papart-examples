@@ -21,11 +21,11 @@ public class MyApp extends PaperScreen {
   public void settings() {
     setDrawingSize(w, h);
     loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 
-      w, h);
+		    w, h);
   }
-
     
-    float capQuality = 1f;
+    
+  float capQuality = 1f;
 
   public void setup() {
 
@@ -87,15 +87,16 @@ public class MyApp extends PaperScreen {
       setLocation(new PVector(40, 40));
       // println("FrameRate" + frameRate);
       background(200, 100);
-      ArrayList<TrackedElement> te = colorTracker.findColor(millis());
-      TouchList touchs = colorTracker.getTouchList();
 
+      colorTracker.findColor(millis());
+      TouchList touchs = getTouchListFrom(colorTracker);
+      
       // Touch mouse = createTouchFromMouse();
       // touchs.add(mouse);
       noStroke();
 
       drawRawData();
-      drawTouchData(te);
+      drawTouchData(colorTracker.getTrackedElements());
 
       SkatoloLink.updateTouch(touchs, skatoloInside); 
 

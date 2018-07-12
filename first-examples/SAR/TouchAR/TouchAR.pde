@@ -1,5 +1,6 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
+import fr.inria.papart.multitouch.detection.*;
 import tech.lity.rea.svgextended.*;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
@@ -11,15 +12,19 @@ import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
 
+import redis.clients.jedis.*;
+
 Papart papart;
+TouchDetectionDepth fingerDetection;
 
 void settings(){
     fullScreen(P3D);
 }
  void setup(){
      papart = Papart.projection(this);
-     papart.loadTouchInput();
-     papart.loadSketches();
+     fingerDetection = papart.loadTouchInput().initHandDetection();
+     //     papart.loadTouchInput().initSimpleTouchDetection();
+     new MyApp();
      papart.startTracking();
 }
 
