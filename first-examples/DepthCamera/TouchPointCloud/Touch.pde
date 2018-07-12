@@ -44,7 +44,8 @@ public class MyApp extends PaperTouchScreen {
 	
         noStroke();
 
-	// updateTouch(fingerDetection);
+	// TODO: example with more elements: hand and arm.
+	
 	TouchList touchs = getTouchListFrom(fingerDetection);
 	
         for (Touch t : touchs) {
