@@ -22,10 +22,9 @@ public class MyApp  extends PaperTouchScreen {
 	fill(200, 100, 20);
 	rect(10, 10, 100, 30);
 
-	fill(255, 0, 20);
-	// updateTouch(fingerDetection);
 	TouchList touchs = getTouchListFrom(fingerDetection);
 
+	fill(255, 0, 20);
         for (Touch t : touchs) {
 	    PVector p = t.position;
 	    ellipse(p.x, p.y, 10, 10);
