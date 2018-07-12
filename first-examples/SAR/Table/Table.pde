@@ -12,25 +12,17 @@ import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
 
 Papart papart;
+TouchDetectionDepth fingerDetection;
 
 void settings(){
     fullScreen(P3D);
 }
  void setup(){
      papart = Papart.projection(this);
-     papart.loadTouchInput().initHandDetection();
-
+     fingerDetection = papart.loadTouchInput().initHandDetection();
      new MyApp();
      papart.startTracking();
 }
 
-
 void draw(){
-}
-
-boolean test = false;
-
-void keyPressed() {
-    if(key == 't')
-	test = !test;
 }
