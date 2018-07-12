@@ -11,11 +11,6 @@ import fr.inria.papart.multitouch.tracking.*;
 
 import tech.lity.rea.colorconverter.*;
 
-import java.util.ArrayList;
-import toxi.geom.Vec3D;
-
-
-
 public class MyApp  extends PaperTouchScreen {
 
     Skatolo skatolo;
@@ -39,7 +34,6 @@ public class MyApp  extends PaperTouchScreen {
 	// Marker tracker
 	initTouchListFromMarkers(335, 341, 44, false);
 
-	     
 	// GUI
 	skatolo = new Skatolo(this.parent, this);
 	skatolo.getMousePointer().disable();
@@ -75,13 +69,11 @@ public class MyApp  extends PaperTouchScreen {
 	// MOUSE
 	SkatoloLink.addMouseTo(allTouchs, skatolo, this); // comment to disable
 
-	try{
 	// Marker
 	TouchList markerTouchs = getTouchListFromMarkers();
-	allTouchs.addAll(markerTouchs);
-	}catch(Exception e){
-	    e.printStackTrace();
-	}
+	drawMarkers(markerTouchs);
+	allTouchs.addAll(markerTouchs);  // comment to disable
+
 
 	// STICKER
 	stickerTracker.findColor(millis());
@@ -129,4 +121,20 @@ public class MyApp  extends PaperTouchScreen {
 
     }
 
+    void drawMarkers(TouchList markerTouchs){
+	fill(255, 0, 20);
+	colorMode(HSB, 10, 100, 100);
+        for (Touch t : markerTouchs) {
+	    pushMatrix();
+	    translate(t.position.x, t.position.y);
+	    rotate(t.position.z);
+	    fill(t.id, 100, 100);
+	    rect(-10, -10, 20, 20);
+	    popMatrix();
+	}
+
+	colorMode(RGB, 255);
+    }
+
+    
 }
