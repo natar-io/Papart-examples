@@ -11,7 +11,8 @@ void settings(){
 
 void setup(){
     Papart papart = Papart.seeThrough(this);
-    papart.loadSketches() ;
+    new PaperScreen2D();
+    new PaperScreen3D();
     papart.startTracking() ;
 }
 
