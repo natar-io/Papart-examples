@@ -52,11 +52,15 @@ public class MyApp extends PaperTouchScreen {
     
     ArrayList<TrackedDepthPoint> armTouch = new ArrayList((ArrayList<TrackedDepthPoint>)armDetection.getTouchPoints());
     ArrayList<TrackedDepthPoint> armPointerTouch = new ArrayList((ArrayList<TrackedDepthPoint>)armDetection.getTipPoints());
+    ArrayList<TrackedDepthPoint> fingerTouch = new ArrayList((ArrayList<TrackedDepthPoint>)fingerDetection.getTouchPoints());
     fill(255);
 
     ellipseSize = 5f;
     drawDepthElements(armTouch);
 
+    ellipseSize = 2f;
+    drawDepthElements(fingerTouch);
+    
     ellipseSize = 12f;
     fill(255, 0, 0);
     drawDepthElements(armPointerTouch);
