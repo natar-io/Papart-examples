@@ -19,7 +19,8 @@ import toxi.geom.Vec3D;
 public class MyApp  extends PaperTouchScreen {
 
     Skatolo skatolo;
-   ColorTracker colorTracker;
+    ColorTracker colorTracker;
+    CalibratedStickerTracker stickerTracker;
     
     void settings() {
         setDrawingSize(297, 210);
@@ -29,9 +30,17 @@ public class MyApp  extends PaperTouchScreen {
 
     void setup() {
 
-		// colorTracker = papart.initRedTracking(this, 1f);
+	// Color Tracker
 	colorTracker = papart.initBlueTracking(this, 1f);
-	
+
+	// Sticker tracker 
+	stickerTracker = new CalibratedStickerTracker(this, 15);
+
+	// Marker tracker
+	initTouchListFromMarkers(335, 341, 44, false);
+
+	     
+	// GUI
 	skatolo = new Skatolo(this.parent, this);
 	skatolo.getMousePointer().disable();
 	skatolo.setAutoDraw(false);
@@ -60,28 +69,64 @@ public class MyApp  extends PaperTouchScreen {
     void drawOnPaper(){
 	// setLocation(63, 45, 0);
         background(10);
-	updateTouch();
 
-
-	// COLOR
-	ArrayList<TrackedElement> te = colorTracker.findColor(millis());
-	TouchList touchs = colorTracker.getTouchList();
-	SkatoloLink.updateTouch(touchs, skatolo); 
+	TouchList allTouchs = new TouchList();
 
 	// MOUSE
-	//	SkatoloLink.addMouseTo(touchList, skatolo, this);
+	SkatoloLink.addMouseTo(allTouchs, skatolo, this); // comment to disable
+
+	try{
+	// Marker
+	TouchList markerTouchs = getTouchListFromMarkers();
+	allTouchs.addAll(markerTouchs);
+	}catch(Exception e){
+	    e.printStackTrace();
+	}
+
+	// STICKER
+	stickerTracker.findColor(millis());
+	TouchList stickerTouchs = getTouchListFrom(stickerTracker);
+	allTouchs.addAll(stickerTouchs);   // comment to disable
+	
+	// COLOR
+	colorTracker.findColor(millis());
+	TouchList colorTouchs = getTouchListFrom(colorTracker);
+	allTouchs.addAll(colorTouchs);   // comment to disable
 
 	// FINGERS
-	//	SkatoloLink.updateTouch(touchList, skatolo);
+	TouchList fingerTouchs = getTouchListFrom(fingerDetection);
+	allTouchs.addAll(fingerTouchs);   // comment to disable
 
-	//        drawTouch();
+	// Feed the touchs to Skatolo to activate buttons. 
+	SkatoloLink.updateTouch(allTouchs, skatolo);
+	// Draw the interface
 	skatolo.draw(getGraphics());
 
+
+	// Draw the pointers. (debug)
+	drawPointers();
+	drawTouch(fingerTouchs);
+	
 	if(toggle){
 	    fill(rectColor);
 	    rect(70, 70, 20, 20);
 	}
-	
+    }
+
+    void drawPointers(){
+	for (tech.lity.rea.skatolo.gui.Pointer p : skatolo.getPointerList()) {
+	    fill(0, 200, 0);
+	    rect(p.getX(), p.getY(), 3, 3);
+	}
+    }
+
+    void drawTouch(TouchList fingerTouchs){
+	fill(255, 0, 20);
+        for (Touch t : fingerTouchs) {
+	    PVector p = t.position;
+	    ellipse(p.x, p.y, 10, 10);
+	}
+
     }
 
 }
