@@ -18,8 +18,6 @@ void settings(){
 }
  void setup(){
      papart = Papart.projection(this);
-     //      papart.loadTouchInput().initHandDetection();
-
      new InfoReader();
      new IDShow();
      papart.startTracking();
