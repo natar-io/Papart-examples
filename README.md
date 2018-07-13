@@ -2,7 +2,8 @@
 
 Here are the Papart examples, to show atomic features.
 Papart stands for PAPer Augmented Reality Toolkit. The core library is 
-available on this [repository](https://github.com/poqudrof/papart).
+available on this [repository](https://github.com/poqudrof/papart). The development and latest versions are available on 
+the new [gitlab from pole-aquinetic](https://forge.pole-aquinetic.net/RealityTech/PapARt).
 
 ## PapARt 1.4 - Release Candidate.
 
