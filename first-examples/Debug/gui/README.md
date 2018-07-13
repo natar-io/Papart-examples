@@ -8,5 +8,5 @@ The PaperScreens are displayed like small windows inside the Processing window.
 
 ```
 java -jar TuioSimulator.jar 
-java -jar TuioSimulator.jar -p 3334
+java -jar TuioSimulator.jar -port 3334
 ```
