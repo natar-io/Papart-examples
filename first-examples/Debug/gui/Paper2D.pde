@@ -30,6 +30,8 @@ public class MyApp  extends PaperTouchScreen {
 	    .setSize(60, 60)
 	    ;
 
+	// Local Touch - Warning 3334 instead of 3333
+	connectLocalTUIO(3334);
     }
 
     boolean toggle = false;
@@ -46,22 +48,34 @@ public class MyApp  extends PaperTouchScreen {
 	    setLocation(mouseX, mouseY,0 );
 	}
 
+	
 	colorMode(RGB, 255);
 	background(180, 200);
 
 	fill(200, 100, 20);
 	rect(10, 10, 100, 30);
-	TouchList touchList =  new TouchList();
-	SkatoloLink.addMouseTo(touchList, skatolo, this);
-	SkatoloLink.updateTouch(touchList, skatolo);
+
+	TouchList tuioTouch = getLocalTUIOTouchList();
+	TouchList tuioTouch2 = getTouchList(touchInputTuio);
+
+	tuioTouch.addAll(tuioTouch2);
+	
+	SkatoloLink.addMouseTo(tuioTouch, skatolo, this);
+	SkatoloLink.updateTouch(tuioTouch, skatolo);
 	skatolo.draw(getGraphics());
 
-	drawFullTouch(10);
 	colorMode(HSB, 20, 100, 100);
-	for(Touch touch : touchList){
+	for(Touch touch : tuioTouch){
+
+
+	    int size = 10;
+	    if(tuioTouch2.contains(touch)){
+		size= 15;
+	    }
 	    fill(touch.id, 100, 100);
+	    stroke(255);
 	    ellipse(touch.position.x,
-		    touch.position.y, 5, 5);
+		    touch.position.y, size, size);
 	}
 
 	if(toggle){
