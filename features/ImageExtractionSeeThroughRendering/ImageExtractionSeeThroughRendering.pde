@@ -12,7 +12,7 @@ void settings(){
 
 public void setup(){
     Papart papart = Papart.seeThrough(this);
-    papart.loadSketches();
+    new MyApp();
     papart.startTracking();
 }
 

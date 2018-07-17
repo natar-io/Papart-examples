@@ -1,14 +1,16 @@
 import fr.inria.papart.procam.camera.*;
+import redis.clients.jedis.Jedis;
 
 public class MyApp  extends PaperScreen {
 
     TrackedView boardView;
 
     // 5cm
-    PVector captureSize = new PVector(50, 50);
+    PVector captureSize = new PVector(400, 400);
     PVector origin = new PVector(40, 40);
-    int picSize = 64; // Works better with power  of 2
+    int picSize = 800; // Works better with power  of 2
 
+    Jedis redis;
     void settings(){
 	setDrawingSize(297, 210);
 	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
@@ -27,6 +29,8 @@ public class MyApp  extends PaperScreen {
         boardView.setTopLeftCorner(origin);
 
 	boardView.init();
+	redis = new Jedis("localhost",6379);
+ 
     }
 
     // Same with drawAroundPaper().
@@ -43,7 +47,7 @@ public class MyApp  extends PaperScreen {
              (int) captureSize.x, (int)captureSize.y);
 
         PImage out = boardView.getViewOf(cameraTracking);
-
+	boardView.sendImage(getCameraTracking(), redis, "camera0:view1", true, true);
 	if(out != null){
 	    image(out, 120, 40, picSize, picSize);
 	}
