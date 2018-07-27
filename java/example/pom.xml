@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.lity.rea</groupId>
     <artifactId>example</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>fr.inria</groupId>
             <artifactId>papart</artifactId>
-            <version>1.1</version>
+            <version>1.4.0-SNAPSHOT</version>
         </dependency>        
         <!--We distribute with PapARt-->
         <dependency>
