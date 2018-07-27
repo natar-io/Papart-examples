@@ -28,6 +28,7 @@ void settings(){
 	size(640, 480, P3D);
     }
 }
+// NECTAR:  ./chilitags-server -i projector0 -o projector0:markers -s -v --camera-parameters projector0
 
  void setup(){
      if(useProjection){
@@ -40,9 +41,10 @@ void settings(){
      //      papart.loadSketches();
      papart.startTracking();
 
-     //     MultiCalibrator.PAPER = "large.svg";
-     MultiCalibrator.ZSHIFT = -15f;
-     MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
+
+     MultiCalibrator.PAPER = "chili1.svg";
+     MultiCalibrator.ZSHIFT = -10f;
+     // MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }
 
 
@@ -56,8 +58,10 @@ void keyPressed() {
     if(key == 't')
 	test = !test;
 
-    if(key == 'c')
+    if(key == 'c'){
         papart.multiCalibration();
+	papart.multiCalibrator.disableColor();
+    }
 
     // TEST
     // save the touch calibration 
