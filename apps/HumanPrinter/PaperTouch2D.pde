@@ -6,9 +6,9 @@ public class MyApp  extends PaperTouchScreen {
     
     public void settings(){
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
+        loadMarkerBoard(Papart.markerFolder + "A4-default-aruco.svg", 297, 210);
         setDrawOnPaper();
-	setDrawingFilter(0);
+	// setDrawingFilter(0);
     }
 
     public void setup() {

@@ -20,8 +20,7 @@ void settings(){
 
  void setup(){
      papart = Papart.projection(this);
-     papart.loadTouchInput();
-     papart.loadSketches();
+     new MyApp();
      papart.startTracking();
 }
 
