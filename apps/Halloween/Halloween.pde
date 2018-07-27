@@ -24,7 +24,7 @@ void settings(){
 void setup(){
 
     Papart papart = Papart.projection2D(this);
-    papart.loadTouchInput();
+    papart.loadTouchInput().initHandDetection();
     touchInput = (DepthTouchInput) papart.getTouchInput();
     papart.startDepthCameraThread();
 
