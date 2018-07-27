@@ -11,15 +11,16 @@ import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
 
+float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
     fullScreen(P3D);
 }
+
  void setup(){
      papart = Papart.projection(this);
-     papart.loadTouchInput();
-     papart.loadSketches();
+     new MyApp();
      papart.startTracking();
 }
 
@@ -32,4 +33,5 @@ boolean test = false;
 void keyPressed() {
     if(key == 't')
 	test = !test;
+
 }
