@@ -97,34 +97,20 @@ public boolean isColor(int id){
 
 public class Plateau extends TableScreen{
 
-    int nbColors = 6;
-    OneEuroFilter[] filters = new OneEuroFilter[filterPerColor * nbColors];
-    LowPassFilter[] filters2 = new LowPassFilter[filterPerColor * nbColors];
-    float filterFreq = 30f;
-    float filterCut = 0.04f;
-    float filterBeta = 0.2000f;
-    
     Skatolo skatolo;
 
     public Plateau(){
 	// Initial location,  width, height.
 	super(plateauPosition, 650, 400);
-
-	try{
-	    for(int i = 0; i < filters.length; i++){
-		filters[i] = new OneEuroFilter(filterFreq, filterCut, filterBeta, 0.5f);
-		filters2[i] = new LowPassFilter(0.1f);
-	    }
-	    
-	}catch(Exception e){
-	    println("Filter error");
-	}
-
+	initTouchListFromMarkers(red, yellow, 25, true);
     }
 
     public void drawOnPaper() {
 	background(0);
+	// Marker tracker
 
+
+	
 	noFill();
 	stroke(200);
 	rect(1, 1, drawingSize.x-1, drawingSize.y-1);
@@ -144,74 +130,26 @@ public class Plateau extends TableScreen{
 	    blendMode(BLEND);
 	}
 	
-	updateMarkerPositions();
 	drawColors();
-	// updateTouch();
-	// drawTouch();
-    }
-
-    void updateMarkerPositions(){
-
-	Arrays.fill(filtered, false);
-	
-	DetectedMarker[] markers = papart.getMarkerList();
-	for(DetectedMarker marker: markers){
-	    if(isColor(marker.id)){
-		PMatrix3D mat = papart.getMarkerMatrix(marker.id, MARKER_WIDTH);
-		if(mat != null){
-		    PVector pos = papart.projectPositionTo(mat, this);
-		    try{
-			// pos.x = (float) filters[(marker.id - red) * filterPerColor].filter(pos.x);
-			// pos.y = (float) filters[(marker.id - red) * filterPerColor + 1].filter(pos.y);
-			// pos.z = (float) filters[(marker.id - red) * filterPerColor + 2].filter(pos.z);
-
-			pos.x = (float) filters2[(marker.id - red) * filterPerColor].filter(pos.x);
-			pos.y = (float) filters2[(marker.id - red) * filterPerColor + 1].filter(pos.y);
-			pos.z = (float) filters2[(marker.id - red) * filterPerColor + 2].filter(pos.z);
-
-			lastColorSeen[marker.id - red] = millis();
-			filtered[marker.id - red] = true;
-		    } catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("OneEuro init Exception. Pay now." + e);
-		    }
-		    //		    text(Integer.toString(marker.id), pos.x, pos.y);
-		}
-	    }
-	}
-
-	for(int i = 0; i < nbColors; i++){
-	    if(!filtered[i]){
-		filters2[i + filterPerColor + 0].filter();
-		filters2[i + filterPerColor + 1].filter();
-		filters2[i + filterPerColor + 2].filter(); 
-	    }
-	}
-	
     }
 
     int REMOVE_DUR = 1000;
     
     void drawColors(){
 
-	for(int i = 0; i < nbColors; i++){
+	TouchList markerTouchs = getTouchListFromMarkers();
+	//	drawMarkers(markerTouchs);
+	// allTouchs.addAll(markerTouchs);  // comment to disable
 
-	    if(lastColorSeen[i] + REMOVE_DUR <  millis()){
-		continue;
-	    }
-	    
-	    PVector pos = new PVector();
-	    
-	    pos.x = (float) filters2[i * filterPerColor].lastValue();
-	    pos.y = (float) filters2[i * filterPerColor + 1].lastValue();
-	    pos.z = (float) filters2[i * filterPerColor + 2].lastValue();
+	for(Touch t : markerTouchs){
 
-	    int id = i + red;
+	    PVector pos = t.position;
+	    int id = t.id;
 	    
 	    pushMatrix();
 	    translate(pos.x, pos.y);
 	    rotate(pos.z);
-	    translate(50, 0);
+	    translate(60, 20);
 	    if(id == red){
 		fill(255, 0, 0);
 	    }

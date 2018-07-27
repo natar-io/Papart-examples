@@ -5,9 +5,9 @@ import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.multitouch.detection.*;
 import tech.lity.rea.colorconverter.ColorConverter;
 
-
 import fr.inria.guimodes.Mode;
 
+float shapeSize = 150;
 public class BlueApp  extends PaperScreen {
 
     public void settings(){

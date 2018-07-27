@@ -1,8 +1,10 @@
 import fr.inria.papart.procam.camera.*;
+import fr.inria.papart.multitouch.detection.*;
+import fr.inria.papart.multitouch.tracking.*;
 
-PVector cardSize = new PVector(56, 40);
+PVector cardSize = new PVector(60, 40);
 
-PVector infoReaderPosition = new PVector(210, 170);
+PVector infoReaderPosition = new PVector(250, 20, -3);
 PVector infoShowPosition = new PVector(infoReaderPosition.x - 210,
 				       infoReaderPosition.y - 145);
 
@@ -14,55 +16,38 @@ static final int INVALID = -1;
 int currentCandidate = INVALID;
 
 float zeroImg = 0;
-float maxZero = 35;
-float maxFound = 35;
+float maxZero = 15;
+float maxFound = 15;
    
 public class InfoReader  extends TableScreen{
 
     CalibratedStickerTracker stickerTracker;
+    ArrayList<LineCluster> lineClusters = new ArrayList();
     
     public InfoReader(){
 	// Initial location,  width, height.
 	super(infoReaderPosition, cardSize.x, cardSize.y);
 	setQuality(2f);
+	stickerTracker = new CalibratedStickerTracker(this, 8f);
     }
+
     
+
     public void drawOnPaper() {
-	if(stickerTracker == null){
-	    stickerTracker = new CalibratedStickerTracker(this, 7f);
-	}
-	background(70);
+
+	background(120);
 	ArrayList<TrackedElement> stickers = stickerTracker.findColor(millis());
 	fill(255);
 	noFill();
 	stroke(180);
-	int size = 12;
-	translate(0, 0, 4); // 3mm up.
 
-
-	int[] foundIDs = new int[5]; // init 0 by default in java.
 
 	boolean noSticker = true;
 
-	int border = 4;
+
 	for(TrackedElement s : stickers){
-
-	    if(s.getPosition().x < border
-	       || s.getPosition().y < border
-	       || s.getPosition().x > drawingSize.x - border
-	       || s.getPosition().y > drawingSize.y - border 
-	       ){
-		continue;
-	    }
-	    // rect(s.getPosition().x - size/2 ,
-	    // 	 s.getPosition().y -size/2,
-	    // 	 size, size);
-	    // text(Integer.toString(s.attachedValue),
-	    // 	 s.getPosition().x,
-	    // 	 s.getPosition().y - 20);
-
+	    drawSticker(s);
 	    noSticker = false;
-	    foundIDs[s.attachedValue]++;
 	}
 
 	if(noSticker){
@@ -72,66 +57,20 @@ public class InfoReader  extends TableScreen{
 	    candidateFound = 0;
 	    zeroImg = 0;
 	    currentCandidate = INVALID;
-	    println("current candidate 0");
+	    // println("current candidate 0");
 	}
 	
 
-	checkIds(foundIDs);
-	
+	ArrayList<LineCluster> lines = stickerTracker.createLineClusters(50);
+	// Tracking & filtering
+	TouchPointTracker.trackPoints(lineClusters, lines, millis());
+	TouchPointTracker.filterPositions(lineClusters, millis());
 
-	float amt = constrain(candidateFound / maxFound, 0, 1);
-	rect(0, 0,
-	     drawingSize.x * amt, 3);
-	//        drawTouch(15);
-    }
-
-    // RED: 1
-    // BLUE: 2
-    // Green: 3
-
-    int R = 1;
-    int B = 2;
-    int G = 3;
-   
-    void checkIds(int[] foundIDs){
-	// Two red, one blue - p1
-	if(foundIDs[R] == 0 && foundIDs[B] == 3){
-	    candidatesFound[0]++;
-
-	    candidateFound++;
-	    zeroImg = 0;
-	}
-
-	// Two red, one blue - p2
-	if(foundIDs[R] == 1 && foundIDs[B] == 2){
-	    candidatesFound[1]++;
-	    
-	    candidateFound++;
-	    zeroImg = 0;
-	}
-	
-	// Two red, one blue - p3
-	if(foundIDs[R] == 2 && foundIDs[B] == 1){
-	    candidatesFound[2]++;
-
-	    candidateFound++;
-	    zeroImg = 0;
-	}
-
-	// three red, no blue  - p4
-	if(foundIDs[R] == 3 && foundIDs[B] == 0){
-	    candidatesFound[3]++;
-	    
-	    candidateFound++;
-	    zeroImg = 0;
-	}
-	
-	//  Two greens, one red card !
-	if(foundIDs[R] == 1 && foundIDs[G] == 2){
-	    candidatesFound[4]++;
-	    
-	    candidateFound++;
-	    zeroImg = 0;
+	for(LineCluster line : lines){
+	    checkCode(line, "BBB", 0);
+	    checkCode(line, "RBB", 1);
+	    checkCode(line, "RRB", 2);
+	    checkCode(line, "RRR", 3);
 	}
 
 	for(int i = 0; i < candidatesFound.length; i++){
@@ -139,8 +78,40 @@ public class InfoReader  extends TableScreen{
 		selectId(i);
 	    }
 	}
+	
+	float amt = constrain(candidateFound / maxFound, 0, 1);
+	rect(0, 0,
+	     drawingSize.x * amt, 3);
+	//        drawTouch(15);
+    }
+
+    void drawSticker(TrackedElement s){
+	int border = 4;
+	int size = 12;
+	if(s.getPosition().x < border
+	   || s.getPosition().y < border
+	   || s.getPosition().x > drawingSize.x - border
+	   || s.getPosition().y > drawingSize.y - border 
+	   ){
+	    return;
+	}
+	rect(s.getPosition().x - size/2 ,
+	     s.getPosition().y -size/2,
+	     size, size);
+	text(Integer.toString(s.attachedValue),
+	     s.getPosition().x,
+	     s.getPosition().y - 20);
     }
     
+
+    void checkCode(LineCluster line, String code, int id){
+	if(line.isCode(code)){
+	    candidatesFound[id]++;
+	    candidateFound++;
+	    zeroImg = 0;
+	}
+    }
+
     void selectId(int id){
 	currentCandidate = id;
 	resetIds();
@@ -152,9 +123,7 @@ public class InfoReader  extends TableScreen{
 	}
     }
     
-    
 }
-
 
 
 public class InfoShow  extends TableScreen{
@@ -184,6 +153,7 @@ public class InfoShow  extends TableScreen{
 	    video = CameraFactory.createCamera(Camera.Type.FFMPEG,
 					       sketchPath() + "/data/rt1.webm");
 	    video.setParent(parent);
+// video.setFrameRate(30);
 	    ((CameraFFMPEG)video).startVideo();
 	} catch(CannotCreateCameraException cce){
 	    println("Cannot load the camera: " + cce);
@@ -191,7 +161,8 @@ public class InfoShow  extends TableScreen{
     }
 
     public void drawOnPaper() {
-	setLocation(0, 0, -2);
+	//	setLocation(0, 0, -2);
+
 
 	if(currentCandidate != INVALID){
 
@@ -216,6 +187,7 @@ public class InfoShow  extends TableScreen{
 	     background(0, 0);
 	}
 
+// drawPage4();
 	// updateTouch();
 	// drawTouch();
     }
@@ -228,7 +200,6 @@ public class InfoShow  extends TableScreen{
     void drawPage4(){
 	background(0);
 	image(commande, 0, 0, drawingSize.x, drawingSize.y);
-	//	drawTouch();
     }
 
     
@@ -254,8 +225,8 @@ public class InfoShow  extends TableScreen{
 	popMatrix();
 
 	imageMode(CORNER);
-
 	ellipseMode(CENTER);
+
 	for(Touch t : touchList){
 
 	    if(t.is3D){
@@ -268,9 +239,9 @@ public class InfoShow  extends TableScreen{
 	}
 
 	DepthTouchInput touchInput = (DepthTouchInput) getTouchInput();
-	touchInput.projectOutsiders(true);
+//	touchInput.projectOutsiders(true);
 	ArmDetection armDetection = touchInput.getArmDetection();
-	ArrayList<TrackedDepthPoint> armPointerTouch = (ArrayList<TrackedDepthPoint>)armDetection.getTipPoints().clone();
+	ArrayList<TrackedDepthPoint> armPointerTouch = new ArrayList((ArrayList<TrackedDepthPoint>)armDetection.getTipPoints());
 	
 	if(armPointerTouch.size() > 0){
 	    Touch t = projectTouch(armPointerTouch.get(0));
@@ -301,7 +272,7 @@ public class InfoShow  extends TableScreen{
 	image(scrollSite, 30, ypos, 375.5f , 1151f); 
 	popMatrix();
 	
-	updateTouch();
+	updateTouch(true);
 
 	for(Touch t : touchList){
 	    if(!t.is3D && t.speed != null){
@@ -317,17 +288,22 @@ public class InfoShow  extends TableScreen{
 	scale = constrain(scale, minScale, maxScale);
 	ypos = constrain(ypos, -1000, 60);
 	
-	//	drawTouch();
+		drawTouch();
 	
     }
     
 
     PImage videoImage = null;
     void drawPage1(){
+      background(0);
 	image(titre, 0, 0, drawingSize.x, drawingSize.y);
+  PImage newImage = null;
+  while(newImage == null){
+    
 	video.grab();
-	PImage newImage = video.getPImage();
-	if (newImage != null) {
+ newImage = video.getPImage();
+	}
+if (newImage != null) {
 	    videoImage = newImage;
 	}
 	if(videoImage!= null){
@@ -338,7 +314,7 @@ public class InfoShow  extends TableScreen{
 	    float w = 280f;
 	    float h = 210f;
 
-	    imageMode(CENTER);
+	    imageMode(CORNER);
 	    image(videoImage, x + border,
 		  drawingSize.y - h - y + border,
 		  w - border*2, h - border*2);
