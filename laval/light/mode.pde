@@ -56,8 +56,10 @@ public class ModesZone  extends TableScreen {
     public void drawOnPaper() {
 	//      setLocation(0, drawingSize.y, 0);
 	background(80);
-      
-	updateTouch();
+
+	TouchList touchList = getTouchListFrom(fingerDetection);
+
+	// updateTouch();
 	// ArrayList<TrackedElement> te = colorTracker.findColor(millis());
 	// TouchList touchs = colorTracker.getTouchList();
 
@@ -109,8 +111,6 @@ public class Plateau extends TableScreen{
 	background(0);
 	// Marker tracker
 
-
-	
 	noFill();
 	stroke(200);
 	rect(1, 1, drawingSize.x-1, drawingSize.y-1);

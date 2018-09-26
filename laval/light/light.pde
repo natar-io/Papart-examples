@@ -21,6 +21,7 @@ void settings(){
     // size(640,480, P3D);
 }
      Papart papart;
+TouchDetectionDepth fingerDetection;
 
  void setup(){
 
@@ -34,7 +35,7 @@ void settings(){
 	     papart = Papart.seeThrough(this, 1.0f);
 	 } else {
 	     papart = Papart.projection(this, 0.8f);
-	     papart.loadTouchInput().initHandDetection();
+	     fingerDetection = papart.loadTouchInput().initHandDetection();
 	     // papart.loadTouchInput().initSimpleTouchDetection();
 	 }
 

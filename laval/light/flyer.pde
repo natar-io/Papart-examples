@@ -2,6 +2,8 @@ import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.multitouch.tracking.*;
 
+import redis.clients.jedis.*;
+
 PVector cardSize = new PVector(60, 40);
 
 PVector infoReaderPosition = new PVector(250, 20, -3);
