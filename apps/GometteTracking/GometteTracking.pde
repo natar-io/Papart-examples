@@ -21,6 +21,7 @@ void settings(){
  void setup(){
      papart = Papart.projection(this);
      new MyApp();
+     // new SimplePrinter();
      papart.startTracking();
 }
 
@@ -31,7 +32,9 @@ void draw(){
 boolean test = false;
 
 void keyPressed() {
-    if(key == 't')
+    if(key == 't'){
 	test = !test;
+	new MyApp();
+    }
 
 }
