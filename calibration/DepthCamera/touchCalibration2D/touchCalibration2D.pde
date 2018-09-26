@@ -26,6 +26,7 @@ import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 import tech.lity.rea.skatolo.gui.group.*;
 
+import redis.clients.jedis.*;
 import org.openni.*;
 
 import peasy.*;
@@ -72,9 +73,21 @@ void setup(){
     cameraDepth = depthCameraDevice.getDepthCamera();
 
     try{
-	planeProjCalibration = new  PlaneAndProjectionCalibration();
-	planeProjCalibration.loadFrom(this, Papart.planeAndProjectionCalib);
-	planeCalibration = planeProjCalibration.getPlaneCalibration();
+
+
+        planeProjCalibration = new PlaneAndProjectionCalibration();
+//        calibration.loadFrom(this.applet, planeAndProjectionCalib);
+
+        HomographyCalibration hc = new HomographyCalibration();
+        hc.loadFrom(this, Papart.homographyCalib);
+        
+        PlaneCalibration pc = new PlaneCalibration();
+        pc.loadFrom(this, Papart.planeCalib);
+        planeProjCalibration.setPlane(pc);
+        planeProjCalibration.setHomography(hc);
+
+	planeCalibration = pc;
+
     }catch(NullPointerException e){
 	die("Impossible to load the plane calibration...");
     }
@@ -156,7 +169,7 @@ void draw(){
 	cam.endHUD();
     }
 
-    ArrayList<TrackedDepthPoint>  points = touch2D.getTouchPoints();
+    ArrayList<TrackedDepthPoint>  points = new ArrayList<TrackedDepthPoint>(touch2D.getTouchPoints());
 
     //    colorMode(RGB, 255);
     if(depthVisuType == 0){

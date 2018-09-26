@@ -22,6 +22,7 @@ import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;
 import toxi.geom.*;
+import redis.clients.jedis.*;
 
 import org.openni.*;
 
