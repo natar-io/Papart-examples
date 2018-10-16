@@ -2,6 +2,8 @@ import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.multitouch.detection.*;
 import tech.lity.rea.colorconverter.ColorConverter;
 
+
+
 // The table Screen is a PaperTouchScreen that has a position
 // relative to the table location.
 // The table location is saved when the first pose is saved
@@ -10,7 +12,7 @@ public class MyApp  extends TableScreen{
 
     public MyApp(){
 	// Initial location,  width, height.
-	super(0, 0, 200f, 120f);
+	super(-250, -250, 500, 500);
     }
     
     public void drawOnPaper() {

@@ -1,14 +1,21 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.multitouch.*;
+import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.multitouch.tracking.*;
 
 import org.bytedeco.javacv.*;
 import toxi.geom.*;
 import peasy.*;
 import org.openni.*;
-DepthTouchInput touchInput;
 
+import redis.clients.jedis.*;
+
+DepthTouchInput touchInput;
+TouchDetectionDepth fingerDetection;
+ArmDetection armDetection;
+HandDetection handDetection;
+    
 void settings(){
     fullScreen(P3D);
 }
@@ -17,8 +24,14 @@ void setup(){
 
     Papart papart = Papart.projection2D(this);
     // arguments are 2D and 3D precision.
-    papart.loadTouchInput().initHandDetection();
+
+    fingerDetection = papart.loadTouchInput().initHandDetection();
     touchInput = (DepthTouchInput) papart.getTouchInput();
+
+    // Hand and arm are initialized for the fingerDetection
+    armDetection = touchInput.getArmDetection();
+    handDetection = touchInput.getHandDetection();
+    
     papart.startDepthCameraThread();
 }
 
@@ -32,14 +45,21 @@ void draw(){
     if(!touchInput.isReady()){
 	return;
     }
-    
-    // Get a copy, as the arrayList is constantly modified
-    ArrayList<TrackedDepthPoint> touchs2D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints2D());
-    for(TrackedDepthPoint tp : touchs2D){
 
-        ArrayList<DepthDataElementProjected> depthDataElements = tp.getDepthDataElements();
+
+
+    // Get a copy, as the arrayList is constantly modified
+    ArrayList<TrackedDepthPoint> fingers = new ArrayList<TrackedDepthPoint>(fingerDetection.getTouchPoints());
+
+    for(TrackedDepthPoint finger : fingers){
+
+	colorMode(RGB, 255);
+
+        ArrayList<DepthDataElementProjected> depthDataElements = finger.getDepthDataElements();
         for(DepthDataElementProjected dde : depthDataElements){
-            Vec3D v = dde.projectedPoint;
+
+	    // Projected Point are the points projected in the projector Screen space, on the table.
+	    Vec3D v = dde.projectedPoint;
             noStroke();
             setColor(dde.pointColor, 255);
             ellipse(v.x * width,
@@ -47,33 +67,18 @@ void draw(){
         	    10, 10);
         }
 
-        fill(50, 50, 255);
-        PVector pos = tp.getPosition();
+	// Debug IDs
+	colorMode(HSB, 30, 100, 100);
+	fill(finger.getID(), 80, 80);
+
+	//        fill(50, 50, 255);
+        PVector pos = finger.getPosition();
         ellipse(pos.x * width,
         	pos.y * height, 20, 20);
     }
 
+    colorMode(RGB, 255);
 
-    fill(255, 0, 0);
-    ArrayList<TrackedDepthPoint> touchs3D = new ArrayList<TrackedDepthPoint>(touchInput.getTrackedDepthPoints3D());
-    for(TrackedDepthPoint tp : touchs3D){
-
-        ArrayList<DepthDataElementProjected> depthDataElements = tp.getDepthDataElements();
-
-        for(DepthDataElementProjected dde : depthDataElements){
-            Vec3D v = dde.projectedPoint;
-            noStroke();
-            setColor(dde.pointColor, 100);
-
-            ellipse(v.x * width,
-        	    v.y * height,
-        	    10, 10);
-        }
-
-        PVector pos = tp.getPosition();
-        ellipse(pos.x * width,
-        	pos.y * height, 40, 40);
-    }
 }
 
 void setColor(int rgb, float intens){

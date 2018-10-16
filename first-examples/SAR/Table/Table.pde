@@ -10,6 +10,7 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
+import redis.clients.jedis.*;
 
 Papart papart;
 TouchDetectionDepth fingerDetection;

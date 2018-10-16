@@ -40,9 +40,10 @@ void settings(){
      //      papart.loadSketches();
      papart.startTracking();
 
-     //     MultiCalibrator.PAPER = "large.svg";
-     MultiCalibrator.ZSHIFT = -15f;
-     MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
+
+     MultiCalibrator.PAPER = "calib1.svg";// "chili1.svg";
+     MultiCalibrator.ZSHIFT = -10f;
+     // MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }
 
 
@@ -58,6 +59,8 @@ void keyPressed() {
 
     if(key == 'c')
         papart.multiCalibration();
+	 // papart.multiCalibrator.disableColor();
+    }
 
     // TEST
     // save the touch calibration 

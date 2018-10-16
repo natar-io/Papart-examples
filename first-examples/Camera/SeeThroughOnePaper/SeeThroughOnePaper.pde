@@ -11,6 +11,7 @@ import org.bytedeco.javacv.*;
 import org.openni.*;
 // Processing video for webcams
 import processing.video.*;
+import redis.clients.jedis.*;
 
 Papart papart;
 

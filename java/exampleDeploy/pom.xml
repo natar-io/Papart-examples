@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tech.lity.rea</groupId>
+    <artifactId>exampleDeployMaven</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    
+    <repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        
+        <repository>
+            <id>realitytech</id>
+            <url>http://repository.rea.lity.tech/</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+           
+        <repository>
+            <id>lib</id>
+            <name>lib</name>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>file://${project.basedir}/lib/repo/</url>
+        </repository>
+        
+    </repositories>
+    
+    
+    <dependencies>
+        <dependency>
+            <groupId>fr.inria</groupId>
+            <artifactId>papart</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openni</groupId>
+            <artifactId>OpenNI</artifactId>
+            <version>2.3</version>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl</artifactId>
+            <version>2.3.2</version>
+            <classifier>natives-linux-amd64</classifier>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>2.3.2</version>
+            <classifier>natives-linux-amd64</classifier>
+        </dependency>
+         
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <classifier>natives-linux-amd64</classifier>
+            <version>2.3.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>newt</artifactId>
+            <version>2.3.2</version>
+            <classifier>natives-linux-amd64</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>nativewindow</artifactId>
+            <version>2.3.2</version>
+            <classifier>natives-linux-amd64</classifier>
+        </dependency>
+        
+        <!-- Processing libraries -->
+        
+        <!--We package and distribute--> 
+        <dependency>
+            <groupId>tech.lity.rea</groupId>
+            <artifactId>SVGExtended</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+        
+        <!--We package and distribute--> 
+        <dependency>
+            <groupId>fr.inria.potioc</groupId>
+            <artifactId>ProcessingTUIO</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        
+        <!--We package and distribute--> 
+        <dependency>
+            <groupId>org.clojars.frederikdb</groupId>
+            <artifactId>oscp5</artifactId>
+            <version>0.9.8-SNAPSHOT</version>
+        </dependency>
+        
+        <!--Toxiclibs already packaged, we distribute -->
+        <dependency>
+            <groupId>org.clojars.hozumi</groupId>
+            <artifactId>toxiclibscore</artifactId>
+            <version>0022</version>
+        </dependency>
+        
+        <!--We package and distribute--> 
+        <dependency>
+            <groupId>tech.lity.rea</groupId>
+            <artifactId>skatolo</artifactId>
+            <version>1.1</version>
+        </dependency>
+        
+
+        <!--JavaCPP-presets et JavaCV -->
+        <!--We package and distribute--> 
+        
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.4</version>
+            <!--<version>1.3.3</version>-->
+        </dependency>
+        
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacpp</artifactId>
+            <version>${javacpp.version}</version>
+        </dependency>
+    
+        <!-- Inport code taken from JavaCV-->
+
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv</artifactId>
+            <version>3.4.0-${javacpp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>ffmpeg-platform</artifactId>
+            <version>3.4.1-1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>flycapture-platform</artifactId>
+            <version>2.11.3.121-1.4</version>
+        </dependency>
+        <!--        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>libdc1394</artifactId>
+            <version>2.2.4-${javacpp.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>libfreenect</artifactId>   
+            <version>0.5.3-1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>libfreenect2</artifactId>
+            <version>0.2.0-${javacpp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>librealsense</artifactId>
+            <version>1.12.1-1.4.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>videoinput</artifactId>
+            <version>0.200-${javacpp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>artoolkitplus</artifactId>
+            <version>2.3.1-${javacpp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>flandmark</artifactId>
+            <version>1.07-${javacpp.version}</version>
+        </dependency>
+
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
+        <!-- DEFAULT RASPBERRY PI PROPERTIES -->
+        <pi.host>papart-machine1</pi.host>
+        <pi.port>22</pi.port>
+        <pi.user>real</pi.user>
+        <pi.password></pi.password>
+        <pi.keyfile>/home/realitytech/tmp/id_rsa</pi.keyfile>
+        <pi.deployDirectory>/home/real/artifacts</pi.deployDirectory>
+        <pi.main.class>tech.lity.rea.exampledeploy.SeeThrough</pi.main.class>
+        <javacpp.version>1.4</javacpp.version>
+    </properties>
+    
+    <build>
+        <plugins>
+
+            <!-- This plugin will generate JAR MANIFEST file inside the JAR in order to make our applicationeasily runnable -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${pi.main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-my-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--This plugin will Transfer the executable JAR file to the Pi and runs it -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <!-- ensure the target directory exists on the Raspberry Pi -->
+                                <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}" 
+                                         keyfile="${pi.keyfile}" trust="true" failonerror="false" verbose="true" 
+                                         command="mkdir --parents ${pi.deployDirectory}"/>
+
+                                <!-- copy the JAR file to the Raspberry Pi -->
+                                <scp
+                                    file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"
+                                    todir="${pi.user}@${pi.host}:${pi.deployDirectory}" keyfile="${pi.keyfile}"
+                                    port="${pi.port}" trust="true" verbose="true" failonerror="true">
+                                </scp> 
+
+                                <!-- run the JAR file on the Raspberry Pi -->
+                                <sshexec host="${pi.host}" port="${pi.port}" username="${pi.user}"
+                                         keyfile="${pi.keyfile}" trust="true" failonerror="false"
+                                         verbose="true" 
+                                         command="export DISPLAY=:0.0; export SKETCHBOOK=$HOME/sketchbook; java -jar ${pi.deployDirectory}/${project.build.finalName}-jar-with-dependencies.jar"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-jsch</artifactId>
+                        <version>1.9.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

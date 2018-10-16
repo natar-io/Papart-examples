@@ -1,27 +1,36 @@
 import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.multitouch.detection.*;
 import tech.lity.rea.colorconverter.ColorConverter;
-
+import redis.clients.jedis.Jedis;
 
 public class MyApp  extends PaperTouchScreen {
     CalibratedStickerTracker stickerTracker;
+    Jedis redis;
     
     public void settings(){
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
+        loadMarkerBoard(Papart.markerFolder + "chili1.svg", 297, 210);
+	// loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
         setDrawOnPaper();
     }
     
     public void setup() {
-
 	// Uses Papart.colorZoneCalib for tracking parameters. 
 	stickerTracker = new CalibratedStickerTracker(this, 15);
+
+	redis = new Jedis("localhost",6379);
     }
 
     public void drawOnPaper() {
         background(150, 40);
 
+
+	// send the trackedView to redis.
+	stickerTracker.getTrackedView().sendImage(getCameraTracking(), redis, "camera0:A4-default", true, true);
+
 	ArrayList<TrackedElement> stickers = stickerTracker.findColor(millis());
+
+	
 	fill(255);
 	noFill();
 	stroke(255);
@@ -54,23 +63,33 @@ public class MyApp  extends PaperTouchScreen {
 	    foundIDs[s.attachedValue]++;
 	}
 
-	// drawLines();
-	drawClusters();
+	drawLines();
+	// drawClusters();
     }
 
-
+    ArrayList<LineCluster> lineClusters = new ArrayList();
 
     void drawLines(){
 	// Create line clusters.
-	ArrayList<LineCluster> lines = stickerTracker.createLineClusters(40);
+	ArrayList<LineCluster> lines = stickerTracker.createLineClusters(50);
+
+	// Tracking & filtering
+	TouchPointTracker.trackPoints(lineClusters, lines, millis());
+	TouchPointTracker.filterPositions(lineClusters, millis());
+
 	noFill();
 	colorMode(HSB, lines.size(), 100, 100);
 	int k = 0;
-	for(LineCluster line : lines){
+	for(LineCluster line : lineClusters){
 	    stroke(k++, 100, 100);
+	    println("Line Size " + line.size());
+	    for(TrackedElement te : line){
+		println("Line " + te.getPosition());
+	    }
+	    
 	    drawLineBorders(line);	    
-	    // drawEachLineComponent(line);
-	    // drawOrientation(line);
+	     drawEachLineComponent(line);
+	    drawOrientation(line);
 	}
 	colorMode(RGB, 255);
     }
@@ -87,11 +106,15 @@ public class MyApp  extends PaperTouchScreen {
     // Use rotation and translation.
     void drawOrientation(LineCluster line){
 	float a = (float) line.angle();
-	PVector p = line.position();
+	PVector p = line.getPosition();
+
+	println("p: " + p  + " angle: " + a );
+	
 	pushMatrix();
 	translate(p.x, p.y);
 	rotate(a);
-	rect(0, 0, 40, 2);
+	fill(255, 0, 0, 190);
+	rect(0, 0, 40, 10);
 	popMatrix();
     }
 

@@ -1,3 +1,5 @@
+
+import redis.clients.jedis.*;
 PaperTouchScreen app;
 
 public class MyApp  extends PaperTouchScreen {
@@ -6,7 +8,8 @@ public class MyApp  extends PaperTouchScreen {
     
     public void settings(){
         setDrawingSize(297, 210);
-        loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
+    //    loadMarkerBoard(Papart.markerFolder + "A4-default-aruco.svg", 297, 210);
+	 loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
         setDrawOnPaper();
 	setDrawingFilter(0);
     }
@@ -19,7 +22,7 @@ public class MyApp  extends PaperTouchScreen {
 
     public void drawOnPaper() {
         background(40, 40, 40);
-	setLocation(0, -10, 0);
+	setLocation(0, 0, 0);
 	image(imageToPrint,
 	      0, 0,
 	      drawingSize.x, drawingSize.y);

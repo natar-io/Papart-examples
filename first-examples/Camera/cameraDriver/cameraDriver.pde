@@ -21,9 +21,9 @@ void setup() {
   // screen rendering
   papart = new Papart(this);
 
-  initDefaultCamera();
+  // initDefaultCamera();
   // or 
-  // initSpecificCamera();
+  initSpecificCamera();
   papart.startCameraThread();
   camera = papart.getCameraTracking();
 }
@@ -52,7 +52,7 @@ void initDefaultCamera() {
 
 void initSpecificCamera() {
   try {
-    papart.initCamera("0", Camera.Type.OPENCV, "");
+    papart.initCamera("0", Camera.Type.OPENNI2, "rgb");
   }
   catch(CannotCreateCameraException cce) {
     println("Cannot start the camera: " + cce);

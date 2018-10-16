@@ -14,9 +14,9 @@ void settings() {
 
 void setup() {
     try{
-	video = CameraFactory.createCamera(Camera.Type.FFMPEG, "/home/ditrop/Documents/chat-fr.mp4");
+	video = CameraFactory.createCamera(Camera.Type.FFMPEG, "/home/ditrop/Documents/chat-fr.mp4", "video");
 	video.setParent(this);
-	((CameraFFMPEG)video).startVideo();
+	video.start();
     } catch(CannotCreateCameraException cce){
 	println("Cannot load the camera: " + cce);
     }

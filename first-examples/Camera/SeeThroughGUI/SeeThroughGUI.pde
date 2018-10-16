@@ -12,6 +12,8 @@ import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 
+import redis.clients.jedis.*;
+
 Papart papart;
 Skatolo skatolo;
 ARDisplay display;

@@ -13,6 +13,7 @@ import toxi.geom.*;
 import org.openni.*;
 import peasy.*;
 
+import redis.clients.jedis.*;
 
 PeasyCam cam;
 PointCloudForDepthAnalysis pointCloud;
@@ -23,7 +24,7 @@ CameraRealSense camRS = null;
 
 // Quality of depth is divided by skip in X and Y axes. 
 // Warning non-even skip value can cause a crashes.
-int skip = 2;
+int skip = 1;
 
 void settings() {
     size(640, 480, P3D);
