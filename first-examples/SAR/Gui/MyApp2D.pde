@@ -9,7 +9,10 @@ import fr.inria.papart.multitouch.*;
 import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.multitouch.tracking.*;
 
+import redis.clients.jedis.*;
+
 import tech.lity.rea.colorconverter.*;
+
 
 public class MyApp  extends PaperTouchScreen {
 
@@ -19,7 +22,7 @@ public class MyApp  extends PaperTouchScreen {
     
     void settings() {
         setDrawingSize(297, 210);
-	loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
+	loadMarkerBoard(Papart.markerFolder + "A4-default-aruco.svg", 297, 210);
 	//        setQuality(1f);
     }
 
@@ -32,8 +35,8 @@ public class MyApp  extends PaperTouchScreen {
 	stickerTracker = new CalibratedStickerTracker(this, 15);
 
 	// Marker tracker
-	initTouchListFromMarkers(335, 341, 44, false);
-
+	initTouchListFromMarkers(333, 345, 24, true);
+	// 	initTouchListFromMarkers(335, 341, 45, true);
 	// GUI
 	skatolo = new Skatolo(this.parent, this);
 	skatolo.getMousePointer().disable();
@@ -49,6 +52,12 @@ public class MyApp  extends PaperTouchScreen {
 	    .setSize(60, 60)
 	    ;
 
+	skatolo.addHoverKnob("knob")
+	    .setRange(0,255)
+	    .setValue(50)
+	    .setPosition(200,70)
+	    .setRadius(50)
+	    ;
     }
 
     boolean toggle = false;
@@ -73,13 +82,23 @@ public class MyApp  extends PaperTouchScreen {
 	TouchList markerTouchs = getTouchListFromMarkers();
 	drawMarkers(markerTouchs);
 	allTouchs.addAll(markerTouchs);  // comment to disable
+	// println("Markers: ");
+	// for(Touch t : markerTouchs){
+	//     t.id = 3
+	//     println("t: " + t.position);
+	// }
 
 
 	// STICKER
 	stickerTracker.findColor(millis());
 	TouchList stickerTouchs = getTouchListFrom(stickerTracker);
+	for(Touch t : stickerTouchs){
+	    t.id = 3;
+	}
+
+
 	allTouchs.addAll(stickerTouchs);   // comment to disable
-	
+
 	// COLOR
 	colorTracker.findColor(millis());
 	TouchList colorTouchs = getTouchListFrom(colorTracker);
@@ -87,6 +106,9 @@ public class MyApp  extends PaperTouchScreen {
 
 	// FINGERS
 	TouchList fingerTouchs = getTouchListFrom(fingerDetection);
+	for(Touch t : fingerTouchs){
+	    //	    t.id = 2;
+	}
 	allTouchs.addAll(fingerTouchs);   // comment to disable
 
 	// Feed the touchs to Skatolo to activate buttons. 
@@ -108,7 +130,7 @@ public class MyApp  extends PaperTouchScreen {
     void drawPointers(){
 	for (tech.lity.rea.skatolo.gui.Pointer p : skatolo.getPointerList()) {
 	    fill(0, 200, 0);
-	    rect(p.getX(), p.getY(), 3, 3);
+	    rect(p.getX(), p.getY(), 3,3);
 	}
     }
 

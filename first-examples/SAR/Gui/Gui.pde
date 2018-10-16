@@ -15,6 +15,7 @@ void settings(){
 }
 
 public void setup() {
+    //     papart = Papart.seeThrough(this);
     papart = Papart.projection(this);
     fingerDetection = papart.loadTouchInput().initHandDetection();
     new MyApp();
