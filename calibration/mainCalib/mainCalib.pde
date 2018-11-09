@@ -8,7 +8,7 @@ import processing.video.*;
 
 import org.openni.*;
 
-import toxi.geom.*;
+import toxi.geom.*;$
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
@@ -41,8 +41,8 @@ void settings(){
      //      papart.loadSketches();
      papart.startTracking();
 
-
-     MultiCalibrator.PAPER = "chili1.svg";
+     MultiCalibrator.PAPER = "calib1.svg";
+     //     MultiCalibrator.PAPER = "chili1.svg";
      MultiCalibrator.ZSHIFT = -10f;
      // MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
  }

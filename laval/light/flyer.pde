@@ -37,7 +37,7 @@ public class InfoReader  extends TableScreen{
 
     public void drawOnPaper() {
 
-	background(120);
+	background(20);
 	ArrayList<TrackedElement> stickers = stickerTracker.findColor(millis());
 	fill(255);
 	noFill();

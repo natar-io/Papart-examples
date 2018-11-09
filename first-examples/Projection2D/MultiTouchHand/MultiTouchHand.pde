@@ -8,6 +8,9 @@ import org.bytedeco.javacv.*;
 import toxi.geom.*;
 import peasy.*;
 import org.openni.*;
+import redis.clients.jedis.*;
+
+
 DepthTouchInput touchInput;
 
 void settings(){
