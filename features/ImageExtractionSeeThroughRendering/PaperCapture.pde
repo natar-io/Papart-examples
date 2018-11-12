@@ -4,16 +4,15 @@ import redis.clients.jedis.Jedis;
 public class MyApp  extends TableScreen {
 
     public MyApp(){
-	super(new PVector(-250, -250), 500, 500);
-	
+	super(new PVector(-800/2, -550/2), 800, 550);
     }
     
     TrackedView boardView;
 
     // 5cm
-    PVector captureSize = new PVector(500, 500);
+    PVector captureSize = new PVector(800, 550);
     PVector origin = new PVector(0, 0);
-    int picSize = 800; // Works better with power  of 2
+    int picSize = 400; // Works better with power  of 2
 
     Jedis redis;
     // void settings(){
@@ -28,15 +27,16 @@ public class MyApp  extends TableScreen {
 	boardView = new TrackedView(this);
 	boardView.setCaptureSizeMM(captureSize);
 
-	boardView.setImageWidthPx(picSize);
-	boardView.setImageHeightPx(picSize);
+	boardView.setImageWidthPx(800);
+	boardView.setImageHeightPx(550);
 
 	//	boardView.setTopLeftCorner(origin);
 	// boardView.setBottomLeftCorner(origin);
 
 	boardView.init();
-	redis = new Jedis("localhost",6379);
- 
+
+	// redis = new Jedis("localhost",6379);
+	redis = new Jedis("oj.lity.tech",6389);
     }
 
     // Same with drawAroundPaper().

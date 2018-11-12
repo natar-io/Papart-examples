@@ -12,6 +12,9 @@ void settings(){
 
 public void setup(){
     Papart papart = Papart.seeThrough(this);
+    CameraNectar cam = (CameraNectar) papart.getCameraTracking();
+    cam.DEFAULT_REDIS_HOST = "oj.lity.tech";
+    cam.DEFAULT_REDIS_PORT = 6389;
     new MyApp();
     papart.startTracking();
 }
