@@ -55,7 +55,7 @@ public class ModesZone  extends TableScreen {
     
     public void drawOnPaper() {
 	//      setLocation(0, drawingSize.y, 0);
-	background(80);
+	background(20);
 
 	TouchList touchList = getTouchListFrom(fingerDetection);
 

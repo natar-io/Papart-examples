@@ -1,4 +1,4 @@
-float shapeSize = 150;
+//float shapeSize = 150;
 
 public class ColorApp extends PaperScreen{
 
