@@ -10,6 +10,7 @@ import fr.inria.papart.multitouch.detection.*;
 import fr.inria.papart.multitouch.tracking.*;
 
 import tech.lity.rea.colorconverter.*;
+import redis.clients.jedis.Jedis;
 
 // TODO: same with tableScreen instead...
 
@@ -18,7 +19,8 @@ public class MyApp  extends TableScreen {
     Skatolo skatolo;
     ColorTracker colorTracker;
     CalibratedStickerTracker stickerTracker;
-
+    Jedis redis;
+       
     public MyApp(){
 	super(-200, -200, 400, 400);
     }
@@ -26,6 +28,9 @@ public class MyApp  extends TableScreen {
 
     void setup() {
 
+	// redis = new Jedis("oj.lity.tech", 8089);
+	redis = new Jedis("127.0.0.1", 6379);
+	
 	// Color Tracker
 	colorTracker = papart.initBlueTracking(this, 1f);
 
@@ -83,6 +88,8 @@ public class MyApp  extends TableScreen {
 	stickerTracker.findColor(millis());
 	TouchList stickerTouchs = getTouchListFrom(stickerTracker);
 	allTouchs.addAll(stickerTouchs);   // comment to disable
+
+ 	// redis.set(output + ":depth:width", Integer.toString(cam.width()));
 	
 	// COLOR
 	colorTracker.findColor(millis());
@@ -107,6 +114,29 @@ public class MyApp  extends TableScreen {
 	    fill(rectColor);
 	    rect(70, 70, 20, 20);
 	}
+    }
+
+    public void setTouchListToRedis(Jedis connection, String key, TouchList list, String listType){
+
+	JSONArray touchListJSON = new JSONArray();
+        int k = 0;
+
+	for(Touch t : list){
+	    JSONObject touch = new JSONObject();
+
+	    touch.setString("type", listType);
+	    
+	    touch.setFloat("x", t.position.x);
+	    touch.setFloat("y", t.position.y);
+	    touch.setFloat("z", t.position.z); // Z can be height (mm) , or orientation (Radians)
+
+	    touch.setFloat("px", t.pposition.x);
+	    touch.setFloat("py", t.pposition.y);
+	    touch.setFloat("pz", t.pposition.z); // Z can be height (mm) , or orientation (Radians)
+
+	    touchListJSON.setJSONObject(k++, touch);
+	}
+	connection.set(key + ":" + listType, touchListJSON.toString());
     }
 
     void drawPointers(){
