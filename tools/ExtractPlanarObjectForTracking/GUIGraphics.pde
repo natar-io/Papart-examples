@@ -16,8 +16,8 @@ private void drawRectAroundCorner(int offset) {
   }
 
   pushMatrix();
-  translate(corners(offset).x, 
-    corners(offset).y);
+  translate(corners(offset).x * width, 
+    corners(offset).y * height);
   rect(0, 0, 15, 15);
   popMatrix();
 
@@ -86,10 +86,10 @@ public void drawCorners(PGraphicsOpenGL graphics) {
     0, 0, width, height);
 
   fill(255, 100);
-  quad(image[0].x, image[0].y, 
-    image[1].x, image[1].y, 
-    image[2].x, image[2].y, 
-    image[3].x, image[3].y);
+  quad(image[0].x * width, image[0].y * height, 
+    image[1].x * width, image[1].y * height, 
+    image[2].x * width, image[2].y * height, 
+    image[3].x * width, image[3].y * height);
 
   drawAxis();
 
@@ -132,9 +132,11 @@ public void drawAxis() {
 
   // x Axis
   stroke(orange);
-  line(image[0].x, image[0].y, image[1].x, image[1].y);
+  line(image[0].x * width, image[0].y * height,
+       image[1].x * width, image[1].y * height);
 
   // y Axis
   stroke(blue);
-  line(image[0].x, image[0].y, image[3].x, image[3].y);
+  line(image[0].x * width, image[0].y * height,
+       image[3].x * width, image[3].y * height);
 }

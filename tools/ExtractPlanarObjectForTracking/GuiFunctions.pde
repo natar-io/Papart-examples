@@ -9,8 +9,13 @@ public int currentCorner() {
 }
 
 void mouseDragged() {
-  if (Mode.is("corners"))
-    image[currentPt] = new PVector(mouseX, mouseY);
+    if(locked){
+	return;
+    }
+    if (Mode.is("corners")){
+	image[currentPt] = new PVector((float) mouseX / (float) width,
+				       (float) mouseY / (float) height);
+    }
 }
 
 int currentPt = 0;
@@ -23,8 +28,22 @@ public void moveCornerLeft(boolean isLeft, float amount) {
   image[currentPt].x += isLeft ? -amount : amount;
 }
 
+boolean locked = false;
+
 void keyPressed() {
 
+    if (key == ESC){
+	key = 0;
+    }
+ 
+    if(key == 'l'){
+	locked = !locked;
+    }
+    
+    if(locked){
+	return;
+    }
+    
   if (Mode.is("corners")) {
     if (key == '1')
       currentPt = 0;
@@ -39,18 +58,21 @@ void keyPressed() {
       currentPt = 3;
   }
 
+  float moveSpeed = 0.005f;
+  
   if (key == CODED) {
     if (keyCode == UP) 
-      moveCornerUp(true, 1);
+	moveCornerUp(true, moveSpeed);
 
     if (keyCode == DOWN) 
-      moveCornerUp(false, 1);
+	moveCornerUp(false, moveSpeed);
 
     if (keyCode == LEFT) 
-      moveCornerLeft(true, 1);
+	moveCornerLeft(true, moveSpeed);
 
     if (keyCode == RIGHT) 
-      moveCornerLeft(false, 1);
+	moveCornerLeft(false, moveSpeed);
+    
   }
 }
 
@@ -86,9 +108,24 @@ public void oppositeY() {
 
 public void save() {
 
-  boardView.setCorners(image);
-  view = boardView.getViewOf(camera);
-  view.save(sketchPath("ExtractedView.bmp"));
+    // TODO: mult all this by scale...
+    
+    boardView.setCorners(image);
+
+    PVector[] resized = new PVector[4];
+
+    for(int i = 0; i < 4; i++){
+	resized[i] = new PVector(image[i].x  *  camWidth,
+				 image[i].y * camHeight);
+    }
+    boardView.setCorners(resized);
+
+    view = boardView.getViewOf(camera);
+    //  view.save(sketchPath("ExtractedView.bmp"));
+  view.save("/home/ditrop/OpenJobs/photo.jpg");
+
+  // Runtime.getRuntime().exec("/home/ditrophost -t a " + domain);
+  
   println("Saved");
   saved = true;
 }

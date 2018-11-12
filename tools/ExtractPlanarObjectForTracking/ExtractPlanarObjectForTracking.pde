@@ -34,13 +34,17 @@ PVector image[];
 
 TrackedView boardView;
 
-int outputImageWidth = 640;
-int outputImageHeight = 640;
+int outputImageWidth = 800;
+int outputImageHeight = (int) (outputImageWidth * 297.0/210.0);
 
 PImage view = null;
 
+int camWidth = 1920;
+int camHeight = 1080;
+
 void settings() {
-  size(640, 480, P3D);
+    float s = 0.5f; // not working
+    size((int) (1920 * s), (int) (1080 * s), P3D);
 }
 
 public void setup() {
@@ -52,13 +56,17 @@ public void setup() {
     camera = papart.getCameraTracking();
     camera.start();
     camera.setThread();
+
+    camWidth = camera.getWidth();
+    camHeight = camera.getHeight();
+
     
   image = new PVector[4];
 
-  image[0] = new PVector(250, 250);
-  image[1] = new PVector(350, 250);
-  image[2] = new PVector(350, 350);
-  image[3] = new PVector(250, 350);
+  image[0] = new PVector(0.250, 0.250);
+  image[1] = new PVector(0.350, 0.250);
+  image[2] = new PVector(0.350, 0.350);
+  image[3] = new PVector(0.250, 0.350);
 
   boardView = new TrackedView();
   boardView.setImageWidthPx(outputImageWidth);
@@ -72,18 +80,18 @@ public void setup() {
   titre = skatolo.addTextarea("titre")
     .setPosition(270, 30);
 
-  buttonOppositeX = skatolo.addButton("oppositeX")
-    .setColorBackground(color(255, 142, 2))
-    .setColorActive(color(224, 125, 18))
-    .setPosition(20, 140)
-    .setSize(90, 30)
-    .setLabel("change X Axis");
+  // buttonOppositeX = skatolo.addButton("oppositeX")
+  //   .setColorBackground(color(255, 142, 2))
+  //   .setColorActive(color(224, 125, 18))
+  //   .setPosition(20, 140)
+  //   .setSize(90, 30)
+  //   .setLabel("change X Axis");
 
-  buttonOppositeY = skatolo.addButton("oppositeY")
-    .setColorBackground(color(7, 189, 255))
-    .setPosition(20, 180)
-    .setSize(90, 30)
-    .setLabel("change Y Axis");
+  // buttonOppositeY = skatolo.addButton("oppositeY")
+  //   .setColorBackground(color(7, 189, 255))
+  //   .setPosition(20, 180)
+  //   .setSize(90, 30)
+  //   .setLabel("change Y Axis");
 
   saveButton = skatolo.addButton("save")
     .setColorBackground(color(7, 189, 255))
@@ -91,7 +99,7 @@ public void setup() {
     .setSize(90, 30);
 
   labelX = skatolo.addTextlabel("maxXValue");
-  labelY = skatolo.addTextlabel("maxYValue");
+  labelY = skatolo.addTextlabel("maxYVmralue");
   zero = skatolo.addTextlabel("zero").setText("0,0");
 
   Mode.add("corners");
@@ -107,3 +115,4 @@ public void draw() {
 
   skatolo.draw();
 }
+
