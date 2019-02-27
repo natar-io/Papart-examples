@@ -15,13 +15,15 @@ float renderQuality = 1.5f;
 Papart papart;
 
 void settings(){
-    fullScreen(P3D);
+    // fullScreen(P3D);
+    size(640 * 2, 480 * 2, P3D);
 }
 
  void setup(){
-     papart = Papart.projection(this);
-     new MyApp();
-     // new SimplePrinter();
+     //     papart = Papart.projection(this);
+     papart = Papart.seeThrough(this);
+     new MultiStickerTracker();
+     new StickerIdentification();
      papart.startTracking();
 }
 
@@ -34,7 +36,6 @@ boolean test = false;
 void keyPressed() {
     if(key == 't'){
 	test = !test;
-	new MyApp();
     }
 
 }
