@@ -7,6 +7,8 @@ import org.reflections.*;
 import toxi.geom.*;
 import org.openni.*;
 
+import redis.clients.jedis.*;
+
 Papart papart;
 
 void settings(){

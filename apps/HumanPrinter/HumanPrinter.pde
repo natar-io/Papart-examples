@@ -10,6 +10,7 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
+import redis.clients.jedis.*;
 
 float renderQuality = 1.5f;
 Papart papart;
@@ -22,10 +23,12 @@ void settings(){
      papart = Papart.projection(this);
      new MyApp();
      papart.startTracking();
+ 
 }
 
 
 void draw(){
+  println("FrameRate " + frameRate);
 }
 
 boolean test = false;
