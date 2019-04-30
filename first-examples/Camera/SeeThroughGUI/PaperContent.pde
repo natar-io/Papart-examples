@@ -1,4 +1,4 @@
-public class MyApp extends PaperScreen {
+public class PaperContent extends PaperScreen {
 
   public void settings() {
     setDrawingSize(297, 210);
@@ -10,12 +10,10 @@ public class MyApp extends PaperScreen {
   }
 
   public void drawOnPaper() {
-    // setLocation(63, 45, 0);
-
-    // background of the sheet is blue
-    colorMode(HSB, 10, 1, 1);
     clear();
-    background(backgroundColor, 1, 1);
+
+    colorMode(HSB, 10, 1, 1);
+    background(paperBackgroundColor, 1, 1);
 
     fill(2, 0.2f, 0.5f);
     rect(10, 20, 100, 75);

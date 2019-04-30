@@ -12,26 +12,15 @@ import tech.lity.rea.skatolo.Skatolo;
 import org.openni.*;
 
 Papart papart;
+StickerView sView;
 
-void settings(){
-    //    fullScreen(P3D);
-    size(640, 480, P3D);
+void settings() {
+  size(640, 480, P3D);
 }
- void setup(){
-     papart = Papart.seeThrough(this);
-     //     papart = Papart.projection(this);
-     //     papart.loadTouchInput();
-     new MyApp();
-     papart.startTracking();
+void setup() {
+  papart = Papart.seeThrough(this);
+  sView = new StickerView();
+  papart.startTracking();
 }
 
-
-void draw(){
-}
-
-boolean test = false;
-
-void keyPressed() {
-    if(key == 't')
-	test = !test;
-}
+void draw() {}

@@ -2,8 +2,9 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
-import org.bytedeco.javacpp.opencv_core;  
+import org.bytedeco.javacpp.opencv_core;
 import toxi.geom.*;
+import processing.video.*;
 import org.openni.*;
 
 
@@ -15,34 +16,33 @@ void settings() {
   size(640, 480, P3D);
 }
 
-
 void setup() {
   // application only using a camera
   // screen rendering
   papart = new Papart(this);
 
   initDefaultCamera();
-  // or 
+  // or
   // initSpecificCamera();
   papart.startCameraThread();
   camera = papart.getCameraTracking();
 }
 
-
 void draw() {
-
   // draw the camera image
-  if (camera != null && camera.getPImage() != null) {
-    image(camera.getPImage(), 0, 0, width, height);
+  if (camera != null) {
+    PImage img = camera.getPImage();
+    if (img != null) {
+      image(img, 0, 0, img.width, img.height);
+    }
   }
 
   // You must get a copy of it to maniplate pixels via loadpixels (with OpenCV and FFMPEG)
   //PImage copy =  camera.getPImageCopy();
 }
 
-
 void initDefaultCamera() {
-  try {  
+  try {
     papart.initCamera();
   }
   catch(CannotCreateCameraException cce) {

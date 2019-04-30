@@ -8,15 +8,20 @@ import org.reflections.*;
 import toxi.geom.*;
 import org.openni.*;
 
+// GUI
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
 
 Papart papart;
-Skatolo skatolo;
 ARDisplay display;
 Camera camera;
-PaperScreen myApp;
+
+Skatolo skatolo;
+
+PaperContent paperContent;
+
+int paperBackgroundColor = 0;
 
 void settings() {
   size(640, 480, P3D);
@@ -26,9 +31,6 @@ void setup() {
   // application only using a camera
   // screen rendering
   papart = Papart.seeThrough(this);
-  myApp = new MyApp();
-
-  papart.startTracking();
 
   // Get the AR rendering display.
   display = papart.getARDisplay();
@@ -37,37 +39,38 @@ void setup() {
 
   camera = display.getCamera();
 
+  paperContent = new PaperContent();
+
+  papart.startTracking();
+
   // Create the Graphical interface
   skatolo = new Skatolo(this);
-  Button b = skatolo.addButton("toggleBox", 1, 20, 20, 100, 20);
-  b.setLabel("Toggle Box");
+  Button tBox = skatolo.addButton("onTBoxClick")
+                        .setPosition(20, 20)
+                        .setSize(150, 20)
+                        .setCaptionLabel("Change paper background");
 }
 
-int backgroundColor = 0;
-
-void toggleBox() {
-  backgroundColor += 1;
-  if (backgroundColor > 10)
-    backgroundColor = 0;
+void onTBoxClick() {
+  paperBackgroundColor += 1;
+  if (paperBackgroundColor == 10) {
+    paperBackgroundColor = 0;
+  }
 }
-
 
 void draw() {
-
   // Ask the Display to be rendered offscreen.
   // Nothing is drawn directly here.
   display.drawScreens();
 
   noStroke();
-
   // draw the camera image
   if (camera != null && camera.getPImage() != null) {
     image(camera.getPImage(), 0, 0, width, height);
   }
 
   // draw the AR
-  display.drawImage((PGraphicsOpenGL) g, display.render(), 
-    0, 0, width, height);
+  display.drawImage((PGraphicsOpenGL) g, display.render(), 0, 0, width, height);
 
   // Draw the GUI
   hint(ENABLE_DEPTH_TEST);

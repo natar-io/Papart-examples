@@ -7,68 +7,66 @@ import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.calibration.*;
 import fr.inria.papart.calibration.files.*;
 
+import tech.lity.rea.skatolo.gui.Pointer;
+
 import java.util.Arrays;
 
 public class GUIWithColorExample extends PaperScreen {
 
-  ColorTracker colorTracker;
-  Skatolo skatoloInside;
+  ColorTracker redTracker, blueTracker;
+  Skatolo skatolo;
 
   public void settings() {
-    setDrawingSize(256, 256);
-    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 280, 210);
+    setDrawingSize(297, 210);
+    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
   }
 
   public void setup() {
 
-    // colorTracker = papart.initRedTracking(this, 1f);
-    colorTracker = papart.initBlueTracking(this, 1f);
+    redTracker = papart.initRedTracking(this, 1f);
+    blueTracker = papart.initBlueTracking(this, 1f);
 
-    skatoloInside = new Skatolo(parent, this);
-    skatoloInside.setAutoDraw(false);
-    skatoloInside.getMousePointer().disable();
+    skatolo = new Skatolo(parent, this);
+    skatolo.setAutoDraw(false);
+    skatolo.getMousePointer().disable();
 
-    skatoloInside.addHoverButton("hover")
-      .setPosition(120, 120)
-      .setSize(30, 30);
+    skatolo.addHoverButton("onStickerHover")
+          .setPosition(123.5, 95)
+          .setSize(50, 20)
+          .setCaptionLabel("Hover me");
   }
 
-  void hover() {
-    println("Hover activ");
+  void onStickerHover() {
+    //Do stuff on hover
   }
 
   public void drawOnPaper() {
+    clear();
     background(200, 100);
-try{
-    ArrayList<TrackedElement> te = colorTracker.findColor(millis());
-    TouchList touchs = colorTracker.getTouchList();
+
+    blueTracker.findColor(millis());
+    redTracker.findColor(millis());
+
+    TouchList allTouchs = new TouchList();
+    allTouchs.addAll(blueTracker.getTouchList());
+    allTouchs.addAll(redTracker.getTouchList());
 
     Touch mouse = createTouchFromMouse();
-    //touchs.add(mouse);
-    SkatoloLink.updateTouch(touchs, skatoloInside); 
+    allTouchs.add(mouse);
 
-    // drawRawDetection();
+    SkatoloLink.updateTouch(allTouchs, skatolo);
 
-    // for(Touch t : touchs){
-    //     ellipse(t.position.x, t.position.y, 10, 10);
-    // }
-
-    // Draw the pointers. (debug)
-    for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
-      fill(0, 200, 0);
-      rect(p.getX(), p.getY(), 3, 3);
+    rectMode(CENTER);
+    for (Pointer p : skatolo.getPointerList()) {
+      fill(0, 255, 0);
+      rect(p.getX(), p.getY(), 5, 5);
     }
 
-    // draw the GUI.
-    skatoloInside.draw(getGraphics());
-    
-}catch(Exception e){
-   e.printStackTrace(); 
-}
+    skatolo.draw();
   }
 
-  void drawRawDetection() {
-    byte[] found = colorTracker.getColorFoundArray();
+  void drawRawDetection(ColorTracker tracker) {
+    byte[] found = tracker.getColorFoundArray();
     pushMatrix();
     float sc = 1;
     for (int j = 0; j < drawingSize.y / sc; j++) {

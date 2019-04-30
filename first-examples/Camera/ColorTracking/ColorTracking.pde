@@ -13,8 +13,9 @@ import tech.lity.rea.colorconverter.*;
 
 Papart papart;
 GUIWithColorExample paperScreen;
+
 void settings() {
-    size(640, 480, P3D);
+  size(640, 480, P3D);
 }
 void setup() {
   papart = Papart.seeThrough(this);

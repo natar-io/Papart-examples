@@ -15,19 +15,21 @@ Papart papart;
 ARDisplay display;
 Camera camera;
 
-void settings() {
-    size(640, 480, P3D);
-}
+PaperScreen paperContent;
 
-MyApp myApp;
+void settings() {
+  size(640, 480, P3D);
+}
 
 void setup() {
   // application only using a camera
   // screen rendering
   papart = Papart.seeThrough(this);
-  myApp = new MyApp();
+
+  paperContent = new PaperContent();
+
   papart.startTracking();
+
 }
 
-void draw() {
-}
+void draw() {}

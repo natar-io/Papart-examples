@@ -16,8 +16,8 @@ import tech.lity.rea.skatolo.gui.controllers.*;
 Papart papart;
 
 void settings() {
-     size(640, 480, P3D);
- //  fullScreen(P3D);
+  size(640, 480, P3D);
+  //  fullScreen(P3D);
 }
 void setup() {
   // papart = Papart.projection(this);
