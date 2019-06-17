@@ -1,0 +1,59 @@
+
+import fr.inria.papart.procam.camera.*;
+import redis.clients.jedis.Jedis;
+
+public class MyApp  extends PaperScreen {
+
+    TrackedView boardView;
+
+    // 5cm
+    PVector captureSize = new PVector(700, 500);
+    PVector origin = new PVector(-700/2, 0);
+    int picSize = 100; // Works better with power  of 2
+
+    Jedis redis;
+    void settings(){
+	setDrawingSize(297, 210);
+	loadMarkerBoard(Papart.markerFolder + "calib1.svg", 297, 210);
+
+	// same with setDrawAroundPaper();
+	setDrawOnPaper();
+    }
+
+    void setup() {
+	boardView = new TrackedView(this);
+	boardView.setCaptureSizeMM(captureSize);
+
+	boardView.setImageWidthPx(700);
+	boardView.setImageHeightPx(500);
+
+        // boardView.setBottomLeftCorner(origin);
+	boardView.setTopLeftCorner(origin);
+
+	boardView.init();
+	redis = new Jedis("localhost",6379);
+
+
+    }
+
+    // Same with drawAroundPaper().
+    void drawOnPaper() {
+        clear();
+	useManualLocation(true, Papart.getPapart().getTableLocation());
+	//        setLocation(63, 45, 0);
+
+        stroke(100);
+        noFill();
+        strokeWeight(2);
+
+	line(0, 0, origin.x, origin.y);
+	rect((int) origin.x, (int) origin.y,
+             (int) captureSize.x , (int)captureSize.y);
+
+        PImage out = boardView.getViewOf(cameraTracking);
+	boardView.sendImage(getCameraTracking(), redis, "camera0:view1", true, true);
+	if(out != null){
+	    image(out, 0, 0, 100, 100);
+	}
+    }
+}
