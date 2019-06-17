@@ -56,9 +56,7 @@ void settings(){
      // new ColorApp("cyan.svg", 150, 200, color(0, 255, 255));
      // new ColorApp("jaune.svg", 250, 200, color(255, 255, 0));
      // new ColorApp("magenta.svg", 250, 200, color(255, 0, 255));     
-     
-
-     frameRate(60);
+     frameRate(22);
      papart.startTracking();
  }
 

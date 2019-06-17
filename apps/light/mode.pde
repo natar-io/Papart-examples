@@ -57,8 +57,13 @@ public class ModesZone  extends TableScreen {
   public void drawOnPaper() {
       //      setLocation(0, drawingSize.y, 0);
       background(80);
-      
+
+      try{
       updateTouch();
+
+      } catch(Exception e){
+	  e.printStackTrace();
+      }
       // ArrayList<TrackedElement> te = colorTracker.findColor(millis());
       // TouchList touchs = colorTracker.getTouchList();
 
@@ -76,7 +81,8 @@ public class ModesZone  extends TableScreen {
 
 
 
-float MARKER_WIDTH = 44f;
+//float MARKER_WIDTH = 44f;
+float MARKER_WIDTH = 25f;
 
 int red = 335;
 int cyan = 336;
