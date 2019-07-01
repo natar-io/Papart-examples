@@ -8,7 +8,7 @@ import processing.video.*;
 
 import org.openni.*;
 
-import toxi.geom.*;$
+import toxi.geom.*;
 import fr.inria.papart.depthcam.*;
 import fr.inria.papart.procam.display.*;
 import tech.lity.rea.skatolo.Skatolo;
