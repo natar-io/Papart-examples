@@ -1,0 +1,48 @@
+# Maintainer: Jeremy Laviole <jiii@jiii-mi>
+pkgname=papart-examples
+pkgver=r698.8164439
+pkgrel=1
+epoch=
+pkgdesc="Examples and calibration tools for PapARt."
+arch=('i686' 'x86_64')
+url=""
+license=('GPL')
+groups=()
+depends=()
+#depends=('processing' 'papart' 'PapARt-dependencies')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("${pkgname%-git}::git+ssh://git@forge.pole-aquinetic.net/RealityTech/Papart-exemples.git#branch=1.5")
+md5sums=('SKIP')
+noextract=()
+
+pkgver() {
+	cd "$srcdir/${pkgname%-git}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+
+package() {
+  cd "$srcdir/${pkgname%-git}/"
+
+  mkdir -p $pkgdir/usr/share/processing/modes/java/libraries/PapARt/examples
+  out_dir=$pkgdir/usr/share/processing/modes/java/libraries/PapARt/examples
+
+  cp -r first-examples $out_dir/
+  cp -r calibration $out_dir/
+  cp -r apps $out_dir/
+  cp -r ressources $out_dir/
+  cp -r features $out_dir/
+  cp -r java $out_dir/
+  cp -r tools $out_dir/
+}
+
+# vim:set ts=2 sw=2 et:
