@@ -1,3 +1,7 @@
+// Natar
+import tech.lity.rea.nectar.camera.*;
+import tech.lity.rea.nectar.depthcam.*;
+
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.camera.*;
 import fr.inria.papart.depthcam.*;
@@ -23,7 +27,7 @@ CameraRealSense camRS = null;
 
 // Quality of depth is divided by skip in X and Y axes.
 // Warning non-even skip value can cause a crashes.
-int skip = 1;
+int skip = 4;
 
 void settings() {
   size(640, 480, P3D);

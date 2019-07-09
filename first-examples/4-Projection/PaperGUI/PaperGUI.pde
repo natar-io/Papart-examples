@@ -18,8 +18,10 @@ void settings(){
 public void setup() {
   papart = Papart.projection(this);
   fingerDetection = papart.loadTouchInput().initHandDetection();
+
+  // papart.setDistantCamera("192.168.2.1", 6379);
   paperContent = new PaperContent();
-  papart.startTracking();
+   papart.startTracking();
 }
 
-void draw() {}
+ void draw() {}

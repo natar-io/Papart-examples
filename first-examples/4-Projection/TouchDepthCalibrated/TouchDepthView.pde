@@ -19,7 +19,7 @@ public class TouchDepthView extends PaperTouchScreen {
   void settings() {
     setDrawAroundPaper();
     setDrawingSize(297, 210);
-    loadMarkerBoard(Papart.markerFolder + "A4-default.svg", 297, 210);
+    loadMarkerBoard("a4-default", 297, 210);
   }
 
   void setup() {

@@ -28,8 +28,8 @@ void settings(){
      papart = Papart.seeThrough(this);
      papart.startTracking();
 
-     //     MultiCalibrator.PAPER = "large.svg";
-     MultiCalibrator.SCALE_FACTOR = 238.5f / 240.2f;
+     MultiCalibrator.PAPER = "calib2";
+     MultiCalibrator.SCALE_FACTOR = 229.5f / 240.0f;
  }
 
 

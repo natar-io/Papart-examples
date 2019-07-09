@@ -14,7 +14,7 @@ import tech.lity.rea.colorconverter.*;
 public class PaperContent  extends PaperTouchScreen {
 
   Skatolo skatolo;
-  HoverKnob colorKnob;
+    //  HoverKnob colorKnob;
 
   boolean toggle = true;
   int rectColor = 30;
@@ -49,11 +49,11 @@ public class PaperContent  extends PaperTouchScreen {
               .setSize(60, 60);
 
 
-    colorKnob = new HoverKnob(skatolo, "knob");
-    colorKnob.setRange(0, 255)
-              .setPosition(180, 40)
-              .setRadius(50)
-              .setValue(30);
+    // colorKnob = new HoverKnob(skatolo, "knob");
+    // colorKnob.setRange(0, 255)
+    //           .setPosition(180, 40)
+    //           .setRadius(50)
+    //           .setValue(30);
   }
 
   void button() {
@@ -63,15 +63,16 @@ public class PaperContent  extends PaperTouchScreen {
   }
 
   void knob() {
-    rectColor = (int)colorKnob.getValue();
+      //    rectColor = (int)colorKnob.getValue();
   }
 
 
   void drawOnPaper() {
-    background(10);
+    background(100);
 
     TouchList allTouchs = new TouchList();
 
+    try{
     /* Getting touchs from multiple sources
     * Comment one to disable it.
     */
@@ -101,6 +102,11 @@ public class PaperContent  extends PaperTouchScreen {
     drawPointers();
     // Draw the touch pointers. (debug)
     drawTouch(fingerTouchs);
+
+    } catch(Exception e){
+	e.printStackTrace();
+
+    }
 
     if (toggle) {
       fill(rectColor);

@@ -66,7 +66,7 @@ public class TableContent  extends TableScreen {
   }
 
   void drawOnPaper() {
-    background(10);
+    background(200);
 
     TouchList allTouchs = new TouchList();
 

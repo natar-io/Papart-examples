@@ -1,3 +1,6 @@
+import tech.lity.rea.nectar.camera.*;
+import tech.lity.rea.nectar.depthcam.*;
+
 import fr.inria.papart.procam.*;
 import fr.inria.papart.multitouch.*;
 import tech.lity.rea.svgextended.*;
@@ -20,9 +23,13 @@ void settings(){
 
 public void setup() {
     papart = Papart.projection(this);
+    try{
     papart.loadTouchInput().initHandDetection();
     touchDepthView = new TouchDepthView();
     papart.startTracking();
+    }catch(Exception e){
+	e.printStackTrace();
+    }
 }
 
 void draw() {}

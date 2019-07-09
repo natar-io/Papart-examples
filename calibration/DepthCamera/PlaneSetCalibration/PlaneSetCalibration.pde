@@ -1,3 +1,8 @@
+import tech.lity.rea.nectar.camera.*;
+import tech.lity.rea.nectar.calibration.*;
+import tech.lity.rea.nectar.depthcam.*;
+import tech.lity.rea.nectar.tracking.*;
+
 import fr.inria.papart.multitouch.*;
 import fr.inria.papart.calibration.*;
 import fr.inria.papart.tracking.*;
@@ -73,7 +78,10 @@ void setup(){
     depthCameraDevice.getMainCamera().setThread();
     depthCameraDevice.loadDataFromDevice();
 
-    initTouch();
+    depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+    // papart.loadDepthTouchInput(depthAnalysis);
+    // touchInput = (DepthTouchInput) papart.getTouchInput();
+    //    depthCameraDevice.setTouchInput(null);
 
     cameraDisplay = papart.getARDisplay();
     cameraDisplay.reloadCalibration();
@@ -90,7 +98,7 @@ void setup(){
     app = new MyApp();
 
     calibrator = new ExtrinsicCalibrator(this);
-    calibrator.setDefaultDepthCamera();
+    calibrator.setDepthCamera(depthCameraDevice);
 
     papart.startTrackingWithoutThread();
     initGUI();
@@ -112,7 +120,7 @@ void useAR(boolean value){
 }
 
 
-
+/*
 void initTouch(){
     // RGB already started by initKinectCamera()
     // UPDATE: no more thread for nothing ?
@@ -129,6 +137,8 @@ void initTouch(){
     PlaneAndProjectionCalibration calibration = new PlaneAndProjectionCalibration();
     calibration.loadFrom(this, Papart.planeAndProjectionCalib);
 
+    
+    
     // initialize the touchInput
     touchInput = new DepthTouchInput(this,
                                       depthCameraDevice,
@@ -152,7 +162,7 @@ void initTouch(){
     // set the rawDepth tag, to specify that there is no projector.
     touchInput.useRawDepth();
 }
-
+*/
 
 
 void draw(){
@@ -219,14 +229,16 @@ void save(PlaneCalibration planeCalib, HomographyCalibration homography){
     planeCalib.moveAlongNormal(planeUp);
 
     println("SAVE PLANE ONLY");
-    planeCalib.saveTo(this, Papart.planeCalib);
+    //    planeCalib.saveTo(this, Papart.planeCalib);
+    RedisClient rc = RedisClientImpl.getMainConnection();
+    planeCalib.saveToXML(rc, camera.getCameraDescription() + ":plane");
     
-    PlaneAndProjectionCalibration planeProjCalib = new PlaneAndProjectionCalibration();
-    planeProjCalib.setPlane(planeCalib);
-    planeProjCalib.setHomography(homography);
-    // planeProjCalib.saveTo(this, Papart.planeAndProjectionCalib);
+    // PlaneAndProjectionCalibration planeProjCalib = new PlaneAndProjectionCalibration();à
+    // planeProjCalib.setPlane(planeCalib);
+    // planeProjCalib.setHomography(homography);
+    // // planeProjCalib.saveTo(this, Papart.planeAndProjectionCalib);
 
-    touchInput.setPlaneAndProjCalibration(planeProjCalib);
+    // touchInput.setPlaneAndProjCalibration(planeProjCalib);
     toSave = false;
 }
 

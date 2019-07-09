@@ -1,3 +1,7 @@
+// Natar
+import tech.lity.rea.nectar.camera.*;
+// import tech.lity.rea.javacvprocessing.*;
+
 // PapARt library
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
@@ -8,6 +12,7 @@ import org.reflections.*;
 import toxi.geom.*;
 import org.openni.*;
 
+import tech.lity.rea.nectar.tracking.MarkerBoardFactory;
 // GUI
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
@@ -32,28 +37,29 @@ VideoEmitter emitter;
 void setup() {
   // application only using a camera
   // screen rendering
+    try{
   papart = Papart.seeThrough(this);
-
+  
   // Get the AR rendering display.
   display = papart.getARDisplay();
   // Do not draw automatically.
   display.manualMode();
-
+  
   camera = display.getCamera();
-
+  
   paperContent = new PaperContent();
-
-  frameRate(2);
+  
+  //  frameRate(2);
   //  papart.setDistantCamera("10.42.0.169", 6379);
-  papart.setDistantCamera("localhost", 6379);
+  //  papart.setDistantCamera("192.168.2.1", 6379);
 
   // Method #1 Stream the AR PART
-  // papart.streamOutput("192.168.1.33", 6379, "", "display0");
+  //  papart.streamOutput("192.168.2.1", 6379, "", "display0");
 
   // Method #2 Stream custom image
-  emitter = new VideoEmitter("localhost", 6379, "", "display0");
-
-  
+  // emitter = new VideoEmitter("192.168.2.1", 6379, "", "display0");
+  MarkerBoardFactory.USE_JSON = false;
+    
   papart.startTracking();
 
   // Create the Graphical interface
@@ -62,6 +68,10 @@ void setup() {
             .setPosition(20, 20)
             .setSize(150, 20)
             .setCaptionLabel("Change paper background");
+
+    }catch(Exception e){
+	e.printStackTrace();
+    }
 }
 
 void onTBoxClick() {
@@ -79,21 +89,21 @@ void draw() {
   noStroke();
   // draw the camera image
   if (camera != null && camera.getPImage() != null) {
-    image(camera.getPImage(), 0, 0, width, height);
+       image(camera.getPImage(), 0, 0, width, height);
   }
 
   // draw the AR
   display.drawImage((PGraphicsOpenGL) g, display.render(), 0, 0, width, height);
 
-
-  // Method #1  (necessary only when draw() is overridden)
-  // display.tryToEmitVideo();
   
   // Draw the GUI
   hint(ENABLE_DEPTH_TEST);
   skatolo.draw();
   hint(DISABLE_DEPTH_TEST);
 
+  // Method #1  (necessary only when draw() is overridden)
+  // display.tryToEmitVideo();
+
   // Method #2
-  emitter.sendImage((PImage) this.g, millis());
+  // emitter.sendImage((PImage) this.g, millis());
 }
