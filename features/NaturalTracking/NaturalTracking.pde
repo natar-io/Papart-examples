@@ -13,7 +13,7 @@ import tech.lity.rea.skatolo.Skatolo;
 
 float renderQuality = 1.5f;
 Papart papart;
-boolean useProjector = false;
+boolean useProjector = true;
 
 void settings(){
     if(useProjector)

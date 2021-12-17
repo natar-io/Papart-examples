@@ -1,4 +1,4 @@
-float xOffset;
+float xOffset, yOffset;
 Skatolo skatolo;
 
 void initGUI(){
@@ -19,6 +19,12 @@ void initGUI(){
         .setSize(6* range,20)
         .setRange(-range, range)
         .setValue(stereoCalib.m03)
+        ;
+    skatolo.addSlider("yOffset")
+        .setPosition(0,20)
+        .setSize(6* range,20)
+        .setRange(-range, range)
+        .setValue(stereoCalib.m13)
         ;
 }
 

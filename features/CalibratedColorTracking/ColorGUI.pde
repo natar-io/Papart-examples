@@ -7,6 +7,8 @@ import fr.inria.papart.multitouch.tracking.*;
 import fr.inria.papart.calibration.*;
 import fr.inria.papart.calibration.files.*;
 
+import tech.lity.rea.colorconverter.*;
+
 import org.openni.*;
 
 import java.util.Arrays;
@@ -19,8 +21,8 @@ public class MyApp extends PaperScreen {
     CalibratedColorTracker calibratedColorTracker;
     Skatolo skatoloInside;
 
-    int w = 256;
-    int h = 256;
+    int w = 128;
+    int h = 128;
     public void settings() {
 	setDrawingSize(w, h);
 	loadMarkerBoard(Papart.markerFolder + "A4-default.svg",
@@ -30,7 +32,7 @@ public class MyApp extends PaperScreen {
     float sc = 1f;
     
     public void setup() {
-		calibratedColorTracker = papart.initAllTracking(this, 1f/sc);
+	calibratedColorTracker = papart.initAllTracking(this, sc);
 
 	// colorTracker = papart.initRedTracking(this, 1/sc); //0.5f);
 	// colorTracker = papart.initBlueTracking(this, 0.5f);
@@ -45,36 +47,52 @@ public class MyApp extends PaperScreen {
 	    .setSize(30, 30);
     }
     
-    void hover() {
+    void hover(){ 
 	println("Hover activ");
     }
     
     public void drawOnPaper() {
 	try{
-	// println("FrameRate" + frameRate);
+
+	    setLocation(new PVector(40, 40));
+	    // println("FrameRate" + frameRate);
 	background(200, 100);
 
 	ArrayList<TrackedElement> te = calibratedColorTracker.findColor(millis());
+	// 	ArrayList<TrackedElement> te2 = calibratedColorTracker.smallElements();
 	TouchList touchs = calibratedColorTracker.getTouchList();
-	byte[] found = calibratedColorTracker.getColorFoundArray();
+
+	//byte[] found = calibratedColorTracker.getColorFoundArray();
 	
 	// ArrayList<TrackedElement> te = colorTracker.findColor(millis());
 	// TouchList touchs = colorTracker.getTouchList();
 	// byte[] found = colorTracker.getColorFoundArray();
 
-
-	
 	// Touch mouse = createTouchFromMouse();
 	// touchs.add(mouse);
+
+	byte[] found = calibratedColorTracker.lastFound;
+	if(found!= null){
+	
 	noStroke();
 
+	println("Ref0:" +calibratedColorTracker.getReferenceColor(0));
+	println("Ref1:"+ calibratedColorTracker.getReferenceColor(1));
+	println("Ref2:"+ calibratedColorTracker.getReferenceColor(2));
+	println("Ref3:" +calibratedColorTracker.getReferenceColor(3));
+	
 	int k = 0;
 	pushMatrix();
 	fill(20, 255, 10, 180);
+
+	colorMode(RGB, 255);
 	scale(sc);
-	
-	for(int j = 0; j < drawingSize.y / sc; j++){
-	    for(int i = 0; i < drawingSize.x / sc; i++){
+	// 	colorMode(HSB, 4, 100, 100);
+
+	//	colorMode(RGB, 255);
+	for(int j = 0; j < drawingSize.y ; j++){
+
+	    for(int i = 0; i < drawingSize.x; i++){
 
 		int offset = j * (int) drawingSize.y + i;
 		// if(k >= found.length){
@@ -83,7 +101,9 @@ public class MyApp extends PaperScreen {
 		// int v = found[k++];
 		int v = found[offset];
 		if(v != -1){
-		    fill(calibratedColorTracker.getReferenceColor(v));
+		    //		    fill(v, 100, 100);
+		    int c = calibratedColorTracker.getReferenceColor(v);
+		    fill(r(c), g(c), b(c));
 		    rect(i, j, 2, 2);
 		    k++;
 		}
@@ -96,25 +116,35 @@ public class MyApp extends PaperScreen {
 	}
 	popMatrix();
 
+	}
+	// for(TrackedElement t : te){
+	//     fill(200, 150);
+	//     PVector p = t.getPosition();
+	//     println("Tracked Element " + p);
+	//     ellipse(p.x, p.y, 50, 50);
+	// }
+
+	colorMode(HSB, 8, 1, 1);
 	for(TrackedElement t : te){
-	    fill(t.attachedValue, 100, 100);
+	    fill(t.attachedValue, 1, 1);
 	    PVector p = t.getPosition();
+	    //	    println("Tracked Element2 " + p);
 	    ellipse(p.x, p.y, 5, 5);
 	}
-	
-	SkatoloLink.updateTouch(touchs, skatoloInside); 
 
-	colorMode(RGB, 255);
-	
-	// println("Number of touchs: " + te.size());
-	// Draw the pointers. (debug)
-	for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
-	    // fill(200, 0, 0, 140);
-	    // rect(p.getX(), p.getY(), 20, 20);
-	}
+	// SkatoloLink.updateTouch(touchs, skatoloInside); 
 
-	// draw the GUI.
-	skatoloInside.draw(getGraphics());
+	// colorMode(RGB, 255);
+	
+	// // println("Number of touchs: " + te.size());
+	// // Draw the pointers. (debug)
+	// for (tech.lity.rea.skatolo.gui.Pointer p : skatoloInside.getPointerList()) {
+	//     // fill(200, 0, 0, 140);
+	//     // rect(p.getX(), p.getY(), 20, 20);
+	// }
+
+	// // draw the GUI.
+	// skatoloInside.draw(getGraphics());
 
 	}
 	catch(Exception e){
@@ -124,3 +154,17 @@ public class MyApp extends PaperScreen {
 	}
     
 }
+
+
+
+    int r(int v) {
+        return (v >> 16) & 0xFF;
+    }
+
+    int g(int v) {
+        return (v >> 8) & 0xFF;
+    }
+
+int b(int v) {
+        return v & 0xFF;
+    }

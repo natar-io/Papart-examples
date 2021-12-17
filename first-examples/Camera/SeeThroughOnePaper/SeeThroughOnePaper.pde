@@ -18,7 +18,7 @@ public void setup() {
   // application only using a camera
   // screen rendering
   papart = Papart.seeThrough(this);
-  papart.loadSketches();
+  new MyApp();
   papart.startTracking();
 }
 

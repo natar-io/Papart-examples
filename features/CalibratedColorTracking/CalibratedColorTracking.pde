@@ -16,11 +16,23 @@ import tech.lity.rea.skatolo.gui.controllers.*;
 Papart papart;
 
 void settings() {
-    size(640, 480, P3D);
+<<<<<<< HEAD
+     size(640, 480, P3D);
+ //  fullScreen(P3D);
 }
 void setup() {
+  // papart = Papart.projection(this);
   papart = Papart.seeThrough(this);
+  new MyApp();
+=======
+    //    size(640, 480, P3D);
+    fullScreen(P3D);
+}
+void setup() {
+  papart = Papart.projection(this);
+  //    papart = Papart.seeThrough(this);
   papart.loadSketches() ;
+>>>>>>> origin/latest
   papart.startTracking() ;
 }
 

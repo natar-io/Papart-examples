@@ -14,27 +14,28 @@ import fr.inria.guimodes.Mode;
 import org.openni.*; 
 
 boolean useDebug = false;
-boolean useCam = true;
+boolean useCam = false;
 
 void settings(){
-   //    fullScreen(P3D);
-     size(640,480, P3D);
+    fullScreen(P3D);
+    // size(640,480, P3D);
 }
+     Papart papart;
 
  void setup(){
 
-     Papart papart;
-     
      if(useDebug){
 	 papart = new Papart(this);
 	 papart.initDebug();
-	 papart.loadTouchInputTUIO();
+	 //	 papart.loadTouchInputTUIO();
      } else {
 
 	 if(useCam){
 	     papart = Papart.seeThrough(this, 1.0f);
 	 } else {
 	     papart = Papart.projection(this, 1.0f);
+	     // papart.loadTouchInput().initHandDetection();
+	     papart.loadTouchInput().initSimpleTouchDetection();
 	 }
 
 	 // papart.loadTouchInput();
@@ -47,16 +48,14 @@ void settings(){
 
      // fist to draw.
      new BlueApp();
-
-     new ColorApp("vert.svg", 150, 150, color(0, 255, 0));
-     new ColorApp("rouge.svg", 100, 100, color(255, 0, 0));
-
-     new ColorApp("cyan.svg", 150, 200, color(0, 255, 255));
-     new ColorApp("jaune.svg", 250, 200, color(255, 255, 0));
-     new ColorApp("magenta.svg", 250, 200, color(255, 0, 255));     
+     new ModesZone();
+     new Plateau();
      
-     new AddApp();
-     new SubApp();
+     // new ColorApp("vert.svg", 150, 150, color(0, 255, 0));
+     // new ColorApp("rouge.svg", 100, 100, color(255, 0, 0));
+     // new ColorApp("cyan.svg", 150, 200, color(0, 255, 255));
+     // new ColorApp("jaune.svg", 250, 200, color(255, 255, 0));
+     // new ColorApp("magenta.svg", 250, 200, color(255, 0, 255));     
      
 
      frameRate(60);
@@ -65,30 +64,8 @@ void settings(){
 
 
 void draw(){
-    checkMode();
-}
-
-void checkMode(){
-    if(addSeen){
-	Mode.set("add");
-	//	println("Switch to ADD mode");
-	if(subSeen){
-	    Mode.set("normal");
-	    //	    println("Switch to NORMAL (both) mode");
-	}
-    } else {
-	if(subSeen){
-	    Mode.set("subtract");
-	    // println("Switch to SUB mode");
-	} else {
-	    Mode.set("normal");
-	    //	    println("Switch to NORMAL (none) mode");
-	}
-    }
-
 
 }
-
 
 boolean additive = true;
 
@@ -101,7 +78,4 @@ void keyPressed() {
 
     if(key == 'n')
 	Mode.set("normal");
-
-    if(key == 's')
-	saveLocation = true;
 }

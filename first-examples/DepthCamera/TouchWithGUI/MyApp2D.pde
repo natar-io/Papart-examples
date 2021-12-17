@@ -4,7 +4,7 @@ import tech.lity.rea.skatolo.gui.controllers.*;
 import java.util.ArrayList;
 import toxi.geom.Vec3D;
 import fr.inria.papart.multitouch.*;
-
+import fr.inria.papart.multitouch.detection.*;
 
 public class MyApp  extends PaperTouchScreen {
 
@@ -20,11 +20,6 @@ public class MyApp  extends PaperTouchScreen {
 	skatolo = new Skatolo(this.parent, this);
 	skatolo.getMousePointer().disable();
 	skatolo.setAutoDraw(false);
-
-	// skatolo.addSlider("Sliiiide")
-	//     .setPosition(0, 0)
-	//     .setSize(130, 10)
-	//     ;
 
 	skatolo.addHoverButton("button")
 	    .setPosition(0, 0)
@@ -45,9 +40,25 @@ public class MyApp  extends PaperTouchScreen {
 
     void drawOnPaper(){
         background(100, 100);
-        drawTouch();
-        SkatoloLink.updateTouch(touchList.get2DTouchs(), skatolo);
+
+	TouchList fingerTouchs = getTouchListFrom(fingerDetection);
+	drawTouch(fingerTouchs);
+
+	// MOUSE
+	SkatoloLink.addMouseTo(fingerTouchs, skatolo, this); // comment to disable
+
+        SkatoloLink.updateTouch(fingerTouchs, skatolo);
         skatolo.draw(getGraphics());
     }
+    
+    void drawTouch(TouchList fingerTouchs){
+	fill(255, 0, 20);
+        for (Touch t : fingerTouchs) {
+	    PVector p = t.position;
+	    ellipse(p.x, p.y, 10, 10);
+	}
+
+    }
+    
 
 }

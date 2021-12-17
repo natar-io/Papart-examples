@@ -4,6 +4,7 @@ import fr.inria.papart.depthcam.*;
 import fr.inria.papart.depthcam.devices.*;
 import fr.inria.papart.depthcam.analysis.*;
 
+import tech.lity.rea.pointcloud.*;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacpp.opencv_core.*;
 import org.bytedeco.javacpp.freenect;
@@ -42,7 +43,6 @@ void setup() {
       println("Cannot start the DepthCamera: " + e );
       e.printStackTrace();
   }
-
   depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   pointCloud = new PointCloudForDepthAnalysis(this, depthAnalysis, skip);
 
@@ -53,6 +53,7 @@ void setup() {
   cam.setActive(true);
 }
 
+boolean first = true;
 
 void draw() {
   background(100);
@@ -67,8 +68,12 @@ void draw() {
       println("No depth Image");
       return;
   }
-
-
+  if(first){
+      depthAnalysis.initWithCalibrations(depthCameraDevice);
+      first = !first;
+  }
+  //      if(!depthAnalysis.isReady()){
+  //      }
   depthAnalysis.update(depthImg, colorImg, skip);
   
   pointCloud.updateWith(depthAnalysis);

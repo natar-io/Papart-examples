@@ -14,6 +14,7 @@ import toxi.geom.*;
 import peasy.*;
 
 import org.openni.*;
+import tech.lity.rea.pointcloud.*;
 
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
@@ -32,68 +33,67 @@ DepthCameraDevice depthCameraDevice;
 CameraRealSense camRS = null;
 
 // Warning non-even skip value causes a crash.
-int skip = 2;
+int skip = 1;
 
 
 boolean toSave = false;
 PMatrix3D stereoCalib;
 
 void settings() {
-    size(640, 480, P3D);
+  size(800, 600, P3D);
 }
 
 void setup() {
 
   Papart papart = new Papart(this);
   // load the depth camera
-  try{
-      depthCameraDevice = papart.loadDefaultDepthCamera();
-      // depthCameraDevice.getMainCamera().setUseColor(true);  // enabled by default
-      depthCameraDevice.getMainCamera().start();
+  try {
+    depthCameraDevice = papart.loadDefaultDepthCamera();
+    // depthCameraDevice.getMainCamera().setUseColor(true);  // enabled by default
+    depthCameraDevice.getMainCamera().start();
 
 
-  kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
-  pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
-  
+    kinectAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
+    pointCloud = new PointCloudForDepthAnalysis(this, kinectAnalysis, skip);
 
-  //  Set the virtual camera
-  cam = new PeasyCam(this, 0, 0, -800, 800);
-  cam.setMinimumDistance(0);
-  cam.setMaximumDistance(1200);
-  cam.setActive(true);
 
-  stereoCalib = HomographyCalibration.getMatFrom(this, Papart.kinectStereoCalib);
+    //  Set the virtual camera
+    cam = new PeasyCam(this, 0, 0, -800, 800);
+    cam.setMinimumDistance(0);
+    cam.setMaximumDistance(1200);
+    cam.setActive(true);
 
-    }catch (Exception e){
-      println("Cannot start the DepthCamera: " + e );
-      e.printStackTrace();
+    stereoCalib = HomographyCalibration.getMatFrom(this, Papart.AstraSStereoCalib);
+  }
+  catch (Exception e) {
+    println("Cannot start the DepthCamera: " + e );
+    e.printStackTrace();
   }
 
   initGUI();
-  
 }
 
 
-boolean once = false;
+boolean first = true;
 
 void draw() {
   background(100);
-  
+
   // retreive the camera image.
   depthCameraDevice.getMainCamera().grab();
 
-  if( !once){
-      //    kinectAnalysis.updateCalibrations(depthCameraDevice);
-      once = true;
+  if(first){
+      kinectAnalysis.initWithCalibrations(depthCameraDevice);
+      first = !first;
   }
 
-  
+
   IplImage colorImg = depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
-  
-  if (depthImg == null || colorImg == null){
-      println("No depth Image");
-      return;
+
+  if (depthImg == null || colorImg == null) {
+    println("No depth Image");
+    return;
   }
 
   // TODO: color image refresh is very weird: to check. 
@@ -101,36 +101,40 @@ void draw() {
   // image(colImg, 0, 0, width, height);
 
   stereoCalib.m03 = xOffset;
-  depthCameraDevice.setStereoCalibration(stereoCalib);
+  stereoCalib.m13 = yOffset;
+  // depthCameraDevice.setStereoCalibration(stereoCalib);
   depthCameraDevice.getDepthCamera().setExtrinsics(depthCameraDevice.getStereoCalibration());
 
   try
-      {      kinectAnalysis.update(depthImg, colorImg, skip);}
-  catch (Exception e) {e.printStackTrace();}
-  
+  {      
+    kinectAnalysis.update(depthImg, colorImg, skip);
+  }
+  catch (Exception e) {
+    e.printStackTrace();
+  }
+
   pointCloud.updateWith(kinectAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
 
   drawGUI();
-  if(toSave){
-      save();
+  if (toSave) {
+    save();
   }
 }
 
-void save(){
-    println("Saving...");
-    HomographyCalibration.saveMatTo(this, stereoCalib, Papart.kinectStereoCalib);
+void save() {
+  println("Saving...");
+  HomographyCalibration.saveMatTo(this, stereoCalib, Papart.AstraSStereoCalib);
 }
 
 
-void keyPressed(){
-
+void keyPressed() {
 }
 
 void close() {
-    try {
-	depthCameraDevice.close();
-    }
-    catch(Exception e) {
-    }
+  try {
+    depthCameraDevice.close();
+  }
+  catch(Exception e) {
+  }
 }

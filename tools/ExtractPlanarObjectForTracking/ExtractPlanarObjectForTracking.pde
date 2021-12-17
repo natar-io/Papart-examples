@@ -11,6 +11,8 @@ import org.bytedeco.javacpp.*;
 import toxi.geom.*;
 import fr.inria.papart.calibration.*;
 
+import org.openni.*;
+
 Papart papart;
 ARDisplay cameraDisplay;
 Camera camera;

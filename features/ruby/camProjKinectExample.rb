@@ -8,7 +8,7 @@ require 'jruby/core_ext'
 
 if not defined? Processing::App::SKETCH_PATH 
   Processing::App::SKETCH_PATH = __FILE__  
-  Processing::App::load_library :PapARt, :javacv, :toxiclibscore, :SVGExtended
+  Processing::App::load_library :PapARt, :javacv, :toxiclibscore, :SVGExtended, :OpenNI
 end
   
 module Papartlib
@@ -25,13 +25,13 @@ class Sketch < Processing::App
   attr_reader :camera_tracking, :display, :papart, :moon
 
   def settings
-    fullScreen Processing::App::P3D
+    size 800,600, Processing::App::P3D
 #    size 200, 200, Processing::App::P3D
   end
 
   def setup
 
-    @debug = true
+    @debug = false
 
     if @debug
       @papart = Papartlib::Papart.new(self)
@@ -67,7 +67,7 @@ class PaperTouch < Papartlib::PaperScreen
   def drawOnPaper
     # @r = 100
     setLocation(0, 0, 0)
-    background 10
+    background 200
 
   end
 

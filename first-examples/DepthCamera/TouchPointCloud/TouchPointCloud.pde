@@ -7,6 +7,7 @@ import toxi.geom.*;
 import org.openni.*;
 
 Papart papart;
+TouchDetectionDepth fingerDetection;
 
 void settings(){
     size(640, 480, P3D);
@@ -14,8 +15,8 @@ void settings(){
 
 public void setup() {
     papart = Papart.seeThrough(this);
-    papart.loadTouchInput();
-    papart.loadSketches();
+    fingerDetection = papart.loadTouchInput().initHandDetection();
+    new MyApp();
     papart.startTracking();
 }
 

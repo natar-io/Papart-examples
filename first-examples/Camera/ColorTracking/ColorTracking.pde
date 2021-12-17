@@ -9,15 +9,16 @@ import org.openni.*;
 import tech.lity.rea.skatolo.*;
 import tech.lity.rea.skatolo.events.*;
 import tech.lity.rea.skatolo.gui.controllers.*;
+import tech.lity.rea.colorconverter.*;
 
 Papart papart;
-
+GUIWithColorExample paperScreen;
 void settings() {
     size(640, 480, P3D);
 }
 void setup() {
   papart = Papart.seeThrough(this);
-  papart.loadSketches() ;
+  paperScreen = new GUIWithColorExample();
   papart.startTracking() ;
 }
 

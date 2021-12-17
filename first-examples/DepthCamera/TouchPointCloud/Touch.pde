@@ -43,7 +43,12 @@ public class MyApp extends PaperTouchScreen {
 	scale(1, -1, 1);
 	
         noStroke();
-        for (Touch t : touchList) {
+
+	// TODO: example with more elements: hand and arm.
+	
+	TouchList touchs = getTouchListFrom(fingerDetection);
+	
+        for (Touch t : touchs) {
 
 	    PVector p = t.position;
 	    if(t.trackedSource == null || !(t.trackedSource instanceof TrackedDepthPoint)){
