@@ -5,7 +5,7 @@ import fr.inria.papart.procam.camera.*;
 import org.bytedeco.javacpp.opencv_core;  
 import toxi.geom.*;
 import org.openni.*;
-
+import processing.video.*;
 
 Papart papart;
 ARDisplay display;
@@ -21,9 +21,9 @@ void setup() {
   // screen rendering
   papart = new Papart(this);
 
-  initDefaultCamera();
+  // initDefaultCamera();
   // or 
-  // initSpecificCamera();
+  initSpecificCamera();
   papart.startCameraThread();
   camera = papart.getCameraTracking();
 }
@@ -52,7 +52,7 @@ void initDefaultCamera() {
 
 void initSpecificCamera() {
   try {
-    papart.initCamera("0", Camera.Type.OPENCV, "");
+    papart.initCamera("0", Camera.Type.OPENCV, "rgb", "");
   }
   catch(CannotCreateCameraException cce) {
     println("Cannot start the camera: " + cce);
