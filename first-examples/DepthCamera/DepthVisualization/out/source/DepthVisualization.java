@@ -1,17 +1,44 @@
-import fr.inria.papart.procam.*;
-import fr.inria.papart.procam.camera.*;
-import fr.inria.papart.depthcam.*;
-import fr.inria.papart.depthcam.devices.*;
-import fr.inria.papart.depthcam.analysis.*;
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
 
-import tech.lity.rea.pointcloud.*;
-import org.bytedeco.javacv.*;
-import org.bytedeco.opencv.opencv_core.*;
+import fr.inria.papart.procam.*; 
+import fr.inria.papart.procam.camera.*; 
+import fr.inria.papart.depthcam.*; 
+import fr.inria.papart.depthcam.devices.*; 
+import fr.inria.papart.depthcam.analysis.*; 
+import tech.lity.rea.pointcloud.*; 
+import org.bytedeco.javacv.*; 
+import org.bytedeco.opencv.opencv_core.*; 
+import toxi.geom.*; 
+import peasy.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class DepthVisualization extends PApplet {
+
+
+
+
+
+
+
+
+
+
 // import org.bytedeco.javacpp.freenect;
 // import org.bytedeco.javacv.RealSenseFrameGrabber;
 // import org.openni.*;
-import toxi.geom.*;
-import peasy.*;
+
+
 
 
 PeasyCam cam;
@@ -25,11 +52,11 @@ CameraRealSense camRS = null;
 // Warning non-even skip value can cause a crashes.
 int skip = 2;
 
-void settings() {
+public void settings() {
     size(640, 480, P3D);
 }
 
-void setup() {
+public void setup() {
 
   Papart papart = new Papart(this);
   // load the depth camera
@@ -55,7 +82,7 @@ void setup() {
 
 boolean first = true;
 
-void draw() {
+public void draw() {
   background(100);
 
   // retreive the camera image.
@@ -82,13 +109,13 @@ void draw() {
 
 
 
-void keyPressed(){
+public void keyPressed(){
     if(depthCameraDevice.type() == Camera.Type.REALSENSE){
 	setRealSenseMode();
     }
 }
 
-void setRealSenseMode(){
+public void setRealSenseMode(){
     RealSenseFrameGrabber rs = ((RealSense)depthCameraDevice).getMainCamera().getFrameGrabber();
 	
     if(key == '1')
@@ -113,10 +140,19 @@ void setRealSenseMode(){
 	rs.setPreset(0);
 }
 
-void close() {
+public void close() {
     try {
 	depthCameraDevice.close();
     }
     catch(Exception e) {
     }
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "DepthVisualization" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }

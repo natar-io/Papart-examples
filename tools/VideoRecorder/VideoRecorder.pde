@@ -2,7 +2,7 @@
 import fr.inria.papart.procam.*;
 import fr.inria.papart.procam.display.*;
 import fr.inria.papart.procam.camera.*;
-import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.opencv.opencv_core.*;
 import org.reflections.*;
 import toxi.geom.*;
 import tech.lity.rea.skatolo.*;
