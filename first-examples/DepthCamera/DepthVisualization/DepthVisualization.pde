@@ -16,6 +16,7 @@ import peasy.*;
 
 PeasyCam cam;
 PointCloudForDepthAnalysis pointCloud;
+// DepthAnalysisPImageView depthAnalysis;
 DepthAnalysisPImageView depthAnalysis;
 DepthCameraDevice depthCameraDevice;
 
@@ -23,34 +24,51 @@ CameraRealSense camRS = null;
 
 // Quality of depth is divided by skip in X and Y axes. 
 // Warning non-even skip value can cause a crashes.
-int skip = 2;
+int skip = 16;
 
 void settings() {
     size(640, 480, P3D);
 }
+
+
+PImage colorImage; 
+Camera mainCamera;
 
 void setup() {
 
   Papart papart = new Papart(this);
   // load the depth camera
   try{
-      depthCameraDevice = papart.loadDefaultDepthCamera();
-      depthCameraDevice.getMainCamera().start();
 
+      papart.initCamera();
+      mainCamera = papart.getCameraTracking();
+      //  mainCamera.start();
+
+      depthCameraDevice = papart.loadDefaultDepthCamera();
+      // papart.startCameraThread();
+
+      // WARNING: Starts both cameras. 
+      depthCameraDevice.getMainCamera().start();
+      //depthCameraDevice.getMainCamera().start();
+      // depthCameraDevice.getMainCamera().setThread();
+      
       // load the stereo extrinsics.
       depthCameraDevice.loadDataFromDevice();
   }catch (Exception e){
       println("Cannot start the DepthCamera: " + e );
       e.printStackTrace();
   }
+  // depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
-  pointCloud = new PointCloudForDepthAnalysis(this, depthAnalysis, skip);
+  pointCloud = new PointCloudForDepthAnalysis(this, (DepthAnalysisImpl) depthAnalysis, skip);
 
   //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
   cam.setMinimumDistance(0);
   cam.setMaximumDistance(1200);
   cam.setActive(true);
+
+  colorImage = createImage(640, 480, RGB);
 }
 
 boolean first = true;
@@ -58,23 +76,34 @@ boolean first = true;
 void draw() {
   background(100);
 
+
+  // WARNING: grabs both cameras. 
   // retreive the camera image.
   depthCameraDevice.getMainCamera().grab();
+  // mainCamera.grab();
 
-  IplImage colorImg = null; //  depthCameraDevice.getColorCamera().getIplImage();
+  IplImage colorImg = mainCamera.getIplImage(); //  depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
   
-  if (depthImg == null || colorImg == null){
-      println("No depth Image");
-      return;
-  }
-  if(first){
-      depthAnalysis.initWithCalibrations(depthCameraDevice);
-      first = !first;
-  }
+  println("Camera Color image: " + colorImg);
+  if (depthImg == null) { 
+    println("No depth Image");
+    return;
+  }  // || colorImg == null){
+  //     println("No depth Image");
+  //     return;
+  // }
+  //if(first){
+  //    depthAnalysis.initWithCalibrations(depthCameraDevice);
+  //    first = !first;
+  // }
   //      if(!depthAnalysis.isReady()){
   //      }
-  depthAnalysis.update(depthImg, colorImg, skip);
+//  update(IplImage depth, IplImage color, int skip) 
+
+  println("D: " + depthAnalysis);
+
+  depthAnalysis.update(depthImg, colorImg, skip); // colorImage, skip);
   
   pointCloud.updateWith(depthAnalysis);
   pointCloud.drawSelf((PGraphicsOpenGL) g);
