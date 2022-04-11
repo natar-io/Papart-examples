@@ -11,6 +11,7 @@ import fr.inria.papart.depthcam.analysis.*;
 import tech.lity.rea.pointcloud.*; 
 import org.bytedeco.javacv.*; 
 import org.bytedeco.opencv.opencv_core.*; 
+import org.openni.*; 
 import toxi.geom.*; 
 import peasy.*; 
 
@@ -36,7 +37,6 @@ public class DepthVisualization extends PApplet {
 
 // import org.bytedeco.javacpp.freenect;
 // import org.bytedeco.javacv.RealSenseFrameGrabber;
-// import org.openni.*;
 
 
 
@@ -50,10 +50,10 @@ CameraRealSense camRS = null;
 
 // Quality of depth is divided by skip in X and Y axes. 
 // Warning non-even skip value can cause a crashes.
-int skip = 2;
+int skip = 1;
 
 public void settings() {
-    size(640, 480, P3D);
+    size(640 * 4, 480 * 4, P3D);
 }
 
 public void setup() {
@@ -88,9 +88,11 @@ public void draw() {
   // retreive the camera image.
   depthCameraDevice.getMainCamera().grab();
 
-  IplImage colorImg = null; //  depthCameraDevice.getColorCamera().getIplImage();
+  IplImage colorImg = depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
   
+
+
   if (depthImg == null || colorImg == null){
       println("No depth Image");
       return;

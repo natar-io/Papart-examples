@@ -17,7 +17,7 @@ import tech.lity.rea.skatolo.gui.widgets.*;
 
 import fr.inria.guimodes.Mode;
 
-import org.bytedeco.javacpp.opencv_core.IplImage;
+import org.bytedeco.opencv.opencv_core.IplImage;
 import org.bytedeco.javacpp.*;
 import org.reflections.*;
 import TUIO.*;

@@ -11,25 +11,9 @@ import org.bytedeco.opencv.*;
 import org.bytedeco.opencv.opencv_core.IplImage;
 // import org.bytedeco.javacpp.freenect;
 // import org.bytedeco.javacv.RealSenseFrameGrabber;
-// import org.openni.*;
+import org.openni.*;
 import toxi.geom.*;
 import peasy.*;
-
-
-import org.bytedeco.javacv.*;
-import org.bytedeco.javacpp.*;
-import org.bytedeco.javacpp.indexer.*;
-import org.bytedeco.opencv.opencv_core.*;
-import org.bytedeco.opencv.opencv_imgproc.*;
-import org.bytedeco.opencv.opencv_calib3d.*;
-import org.bytedeco.opencv.opencv_objdetect.*;
-
-import org.opencv.core.*;
-
-import static org.bytedeco.opencv.global.opencv_core.*;
-import static org.bytedeco.opencv.global.opencv_imgproc.*;
-import static org.bytedeco.opencv.global.opencv_calib3d.*;
-import static org.bytedeco.opencv.global.opencv_objdetect.*;
 
 PeasyCam cam;
 PointCloudForDepthAnalysis pointCloud;
@@ -44,12 +28,8 @@ CameraRealSense camRS = null;
 int skip = 1;
 
 void settings() {
-    size(640 * 4 , 480 *4 , P3D);
+    size(640 * 4, 480 * 4, P3D);
 }
-
-
-PImage colorImage; 
-Camera mainCamera;
 
 void setup() {
 
@@ -105,34 +85,22 @@ void draw() {
   background(100);
 
 
-  // WARNING: grabs both cameras. 
   // retreive the camera image.
-  println("Grab depth image...");
   depthCameraDevice.getMainCamera().grab();
-  // mainCamera.grab();
-  println("Grab Color image...");
-  mainCamera.grab();
 
-  IplImage colorImg = mainCamera.getIplImage(); //  depthCameraDevice.getColorCamera().getIplImage();
+  IplImage colorImg = depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
+  
 
-  //image(depthCameraDevice.getColorCamera().getImage(), 0, 0, 640 *2 , 480 *2 );
-  //image(depthCameraDevice.getDepthCamera().getImage(), 640*2, 0, 640 *2 , 480 *2 );
 
-  //println("Camera Color image: " + colorImg);
-  //println("Camera Depth image: " + depthImg);
-
-  if (depthImg == null) { 
-    println("No depth Image");
-    return;
-  }  // || colorImg == null){
-  //     println("No depth Image");
-  //     return;
-  // }
-  //if(first){
-  //    depthAnalysis.initWithCalibrations(depthCameraDevice);
-  //    first = !first;
-  // }
+  if (depthImg == null || colorImg == null){
+      println("No depth Image");
+      return;
+  }
+  if(first){
+      depthAnalysis.initWithCalibrations(depthCameraDevice);
+      first = !first;
+  }
   //      if(!depthAnalysis.isReady()){
   //      }
 //  update(IplImage depth, IplImage color, int skip) 
