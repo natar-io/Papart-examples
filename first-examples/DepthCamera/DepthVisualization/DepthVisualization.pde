@@ -7,12 +7,29 @@ import fr.inria.papart.depthcam.analysis.*;
 import tech.lity.rea.pointcloud.*;
 import org.bytedeco.javacv.*;
 import org.bytedeco.opencv.opencv_core.*;
+import org.bytedeco.opencv.*; 
+import org.bytedeco.opencv.opencv_core.IplImage;
 // import org.bytedeco.javacpp.freenect;
 // import org.bytedeco.javacv.RealSenseFrameGrabber;
 // import org.openni.*;
 import toxi.geom.*;
 import peasy.*;
 
+
+import org.bytedeco.javacv.*;
+import org.bytedeco.javacpp.*;
+import org.bytedeco.javacpp.indexer.*;
+import org.bytedeco.opencv.opencv_core.*;
+import org.bytedeco.opencv.opencv_imgproc.*;
+import org.bytedeco.opencv.opencv_calib3d.*;
+import org.bytedeco.opencv.opencv_objdetect.*;
+
+import org.opencv.core.*;
+
+import static org.bytedeco.opencv.global.opencv_core.*;
+import static org.bytedeco.opencv.global.opencv_imgproc.*;
+import static org.bytedeco.opencv.global.opencv_calib3d.*;
+import static org.bytedeco.opencv.global.opencv_objdetect.*;
 
 PeasyCam cam;
 PointCloudForDepthAnalysis pointCloud;
@@ -24,10 +41,10 @@ CameraRealSense camRS = null;
 
 // Quality of depth is divided by skip in X and Y axes. 
 // Warning non-even skip value can cause a crashes.
-int skip = 16;
+int skip = 1;
 
 void settings() {
-    size(640, 480, P3D);
+    size(640 * 4 , 480 *4 , P3D);
 }
 
 
@@ -36,22 +53,33 @@ Camera mainCamera;
 
 void setup() {
 
+  // String libraryPath = System.getProperty("opencv.path");
+   // System.load(libraryPath);
+
   Papart papart = new Papart(this);
   // load the depth camera
   try{
 
+      println("Init camera !");
+    //  mainCamera.start();
+
       papart.initCamera();
       mainCamera = papart.getCameraTracking();
-      //  mainCamera.start();
+      // mainCamera.start(); 
 
+      println("Init Depth camera !");
       depthCameraDevice = papart.loadDefaultDepthCamera();
       // papart.startCameraThread();
 
       // WARNING: Starts both cameras. 
+       println("Start both cameras !");
+      println("Main cam " + depthCameraDevice.getMainCamera());
       depthCameraDevice.getMainCamera().start();
+
+
       //depthCameraDevice.getMainCamera().start();
       // depthCameraDevice.getMainCamera().setThread();
-      
+      println("Loading OK");
       // load the stereo extrinsics.
       depthCameraDevice.loadDataFromDevice();
   }catch (Exception e){
@@ -62,7 +90,7 @@ void setup() {
   depthAnalysis = new DepthAnalysisPImageView(this, depthCameraDevice);
   pointCloud = new PointCloudForDepthAnalysis(this, (DepthAnalysisImpl) depthAnalysis, skip);
 
-  //  Set the virtual camera
+  // //  Set the virtual camera
   cam = new PeasyCam(this, 0, 0, -800, 800);
   cam.setMinimumDistance(0);
   cam.setMaximumDistance(1200);
@@ -79,13 +107,21 @@ void draw() {
 
   // WARNING: grabs both cameras. 
   // retreive the camera image.
+  println("Grab depth image...");
   depthCameraDevice.getMainCamera().grab();
   // mainCamera.grab();
+  println("Grab Color image...");
+  mainCamera.grab();
 
   IplImage colorImg = mainCamera.getIplImage(); //  depthCameraDevice.getColorCamera().getIplImage();
   IplImage depthImg = depthCameraDevice.getDepthCamera().getIplImage();
-  
-  println("Camera Color image: " + colorImg);
+
+  //image(depthCameraDevice.getColorCamera().getImage(), 0, 0, 640 *2 , 480 *2 );
+  //image(depthCameraDevice.getDepthCamera().getImage(), 640*2, 0, 640 *2 , 480 *2 );
+
+  //println("Camera Color image: " + colorImg);
+  //println("Camera Depth image: " + depthImg);
+
   if (depthImg == null) { 
     println("No depth Image");
     return;
@@ -101,7 +137,6 @@ void draw() {
   //      }
 //  update(IplImage depth, IplImage color, int skip) 
 
-  println("D: " + depthAnalysis);
 
   depthAnalysis.update(depthImg, colorImg, skip); // colorImage, skip);
   
