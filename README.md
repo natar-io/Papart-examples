@@ -2,9 +2,13 @@
 
 Here are the Papart examples, to show atomic features.
 Papart stands for PAPer Augmented Reality Toolkit. The core library is 
-available on this [repository](https://github.com/poqudrof/papart).
+available on this [repository](https://github.com/natar-io/PapARt).
 
-## PapARt 1.4 - Release Candidate.
+## PapARt 1.6 - Back to monolith, and compability updates. 
+
+See update description in [PapARt repository](https://github.com/natar-io/PapARt).
+
+## PapARt 1.4 - Circle tracker and Natar preparation
 
 This new release brings many new features. It is now easier to place PaperScreen on the table with 
 the new TableScreen class. 
@@ -58,34 +62,23 @@ TouchList fingerTouchs = getTouchListFrom(fingerDetection);
 
 ## Guides and support
 
-
-- The community and commercial support are now availble on the [forum](http://forum.rea.lity.tech). 
-- The examples now have two versions, one for “classical” AR and one for Spatial Augmented Reality (with projectors). They share most of the examples, we removed the SAR examples from master. You can still check them out in the [branch 1.2](https://github.com/poqudrof/Papart-examples/tree/1.2/). 
-
-The [quick start guide](http://forum.rea.lity.tech/t/quick-start-with-a-webcam/18) is nearly ready. [Tutorials](http://forum.rea.lity.tech/c/papart-tutorials) are also in progress. 
-
+To be updated. 
 
 ### Video:
 [![](https://github.com/poqudrof/PapARt/blob/master/video_screenshot.png?raw=true)](https://youtu.be/bMwKVOuZ9EA)
 
-## Research project
+## Research project (2010~2016)
 
 This library and examples are the result of research projects from Inria and Bordeaux University. 
-
 * Inria project : [website](https://project.inria.fr/papart/fr/)
 
 Video from the research project:
-
 [![](https://github.com/potioc/Papart-examples/blob/master/screenshot2.png?raw=true)](https://youtu.be/ZBndzLAM5I8)
 
 
 ## What are the branches ?
 
-* **master**: stable version, with latest patches. It is compatible with 1.1, and 1.2. Examples are configured for “best use”, so some are switched for SAR.
-* **1.1**: stable version for see-through augmented reality. Distributed with the PapARt community library.  
-* **1.2**: stable version for Spatial Augmented Reality. Distributed with PapARt for RealityTech hardware.
-* **Delevop**, **feature-abc***, **contrib-toto** : development branches.
-
+* Master / main is the only current branch. 
 ## Copyright
 
-This code is propriety of RealityTech, Inria, and Bordeaux University.
+This code is propriety of CATIE, Jérémy Laviole, Inria, and Bordeaux University.
